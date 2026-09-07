@@ -1,0 +1,154 @@
+@import "tailwindcss";
+
+:root {
+  --color-navy: #062b3a;
+  --color-teal: #073342;
+  --color-green: #4caf1b;
+  --color-green-dark: #378a16;
+  --color-blue: #1688b5;
+  --color-charcoal: #1f2323;
+  --color-slate: #334155;
+  --color-soft-gray: #f4f7f8;
+  --color-border: #dde5e8;
+  --color-white: #ffffff;
+
+  --background: var(--color-white);
+  --foreground: var(--color-charcoal);
+}
+
+@theme inline {
+  --color-navy: var(--color-navy);
+  --color-teal: var(--color-teal);
+  --color-brand-green: var(--color-green);
+  --color-brand-green-dark: var(--color-green-dark);
+  --color-brand-blue: var(--color-blue);
+  --color-charcoal: var(--color-charcoal);
+  --color-slate: var(--color-slate);
+  --color-soft-gray: var(--color-soft-gray);
+  --color-border: var(--color-border);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --font-sans: var(--font-quicksand), Montserrat, Inter, Poppins, ui-sans-serif, system-ui, sans-serif;
+
+  --container-page: 1220px;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.container-page {
+  width: 100%;
+  max-width: var(--container-page);
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+}
+
+@media (min-width: 768px) {
+  .container-page {
+    padding-inline: 2rem;
+  }
+}
+
+/*
+  The header needs more room than the 1220px reading-width container: logo +
+  7 nav links + CTA button don't fit inside it, which was forcing labels like
+  "ABOUT US" and "PROCESS & QUALITY" to wrap onto a second line. Headers are
+  conventionally allowed to run wider than body copy, so give it its own,
+  wider max-width instead of shrinking the nav to fit the content container.
+*/
+.container-header {
+  width: 100%;
+  max-width: 1440px;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+}
+
+@media (min-width: 768px) {
+  .container-header {
+    padding-inline: 2rem;
+  }
+}
+
+.section-y {
+  padding-block: 2.75rem;
+}
+
+@media (min-width: 768px) {
+  .section-y {
+    padding-block: 4rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-y {
+    padding-block: 6rem;
+  }
+}
+
+.scrollbar-thin {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-border) transparent;
+}
+
+.scrollbar-thin::-webkit-scrollbar {
+  width: 6px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background-color: var(--color-border);
+  border-radius: 9999px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-brand-blue);
+}
+
+/* Fully hides the scrollbar while keeping the element scrollable (mouse
+   drag, touch swipe, and programmatic scrollLeft all still work). */
+.scrollbar-none {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+@keyframes partners-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    /* Exactly half the track's own width — since the track is the item
+       list duplicated once, this lands precisely on the start of the
+       second copy regardless of item widths or gap count. */
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes float-nudge {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+.animate-float {
+  animation: float-nudge 2.2s ease-in-out infinite;
+}
