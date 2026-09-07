@@ -21,7 +21,7 @@ export default function PageHero({
   title,
   titleAccent,
   description,
-  image = "/images/aboutUs.png",
+  image = "/images/aboutUs.jpg",
   imageAlt,
   cta,
   extra,

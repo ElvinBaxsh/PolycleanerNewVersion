@@ -53,7 +53,7 @@ export default function CapabilitiesAndQuality() {
           </ul>
           <div className="relative mt-5 aspect-[16/9] w-full overflow-hidden rounded-2xl border border-border">
             <Image
-              src="/images/closeUpViewLast.png"
+              src="/images/closeUpViewLast.jpg"
               alt="Lab / quality control testing"
               fill
               className="object-cover"

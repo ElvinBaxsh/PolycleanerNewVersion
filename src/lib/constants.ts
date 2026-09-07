@@ -110,21 +110,21 @@ export const PRODUCT_GRADES = [
     name: "Light Blue",
     description: "For sheet, strapping, thermoforming.",
     swatch: "#bfe1ea",
-    image: "/images/lightBlue.png",
+    image: "/images/lightBlue.jpg",
   },
   {
     slug: "green",
     name: "Green",
     description: "For strap, sheet, general applications.",
     swatch: "#4caf1b",
-    image: "/images/green.png",
+    image: "/images/green.jpg",
   },
   {
     slug: "mixed-colors",
     name: "Mixed Colors",
     description: "For fiber, non-food packaging, others.",
     swatch: "#9aa7ad",
-    image: "/images/mixedColors.png",
+    image: "/images/mixedColors.jpg",
   },
 ];
 

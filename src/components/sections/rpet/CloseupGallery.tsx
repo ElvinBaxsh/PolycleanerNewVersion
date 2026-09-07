@@ -5,10 +5,10 @@ import { RevealGroup, RevealItem } from "@/components/ui/RevealGroup";
 
 const CLOSEUPS = [
   { label: "Transparent flakes close-up", image: "/images/transparent.jpg" },
-  { label: "Light Blue flakes close-up", image: "/images/lightBlue.png" },
-  { label: "Green flakes close-up", image: "/images/green.png" },
-  { label: "Mixed Colors flakes close-up", image: "/images/mixedColors.png" },
-  { label: "Flakes in hand", image: "/images/closeUpViewLast.png" },
+  { label: "Light Blue flakes close-up", image: "/images/lightBlue.jpg" },
+  { label: "Green flakes close-up", image: "/images/green.jpg" },
+  { label: "Mixed Colors flakes close-up", image: "/images/mixedColors.jpg" },
+  { label: "Flakes in hand", image: "/images/closeUpViewLast.jpg" },
 ];
 
 export default function CloseupGallery() {

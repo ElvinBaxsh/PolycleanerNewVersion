@@ -14,7 +14,7 @@ export default function ContactHero() {
   return (
     <section className="relative min-h-[420px] overflow-hidden bg-navy pb-14 pt-8 sm:pt-10 lg:min-h-[480px]">
       <div className="absolute inset-0 z-0">
-        <Image src="/images/aboutUs.png" alt="Poly Cleaner facility" fill priority className="object-cover object-center" />
+        <Image src="/images/aboutUs.jpg" alt="Poly Cleaner facility" fill priority className="object-cover object-center" />
         <div className="absolute inset-0 bg-gradient-to-r from-navy/95 via-navy/80 to-navy/30 lg:from-navy/95 lg:via-navy/80 lg:to-navy/10" />
       </div>
       <Container className="relative z-10">

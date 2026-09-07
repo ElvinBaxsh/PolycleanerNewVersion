@@ -9,25 +9,25 @@ const ITEMS: { title: string; description: string; icon: LucideIcon; photo: stri
     title: "Circular Economy",
     description: "We close the loop by turning post-consumer PET waste into valuable raw material for new products.",
     icon: Recycle,
-    photo: "/images/closeUpViewLast.png",
+    photo: "/images/closeUpViewLast.jpg",
   },
   {
     title: "Waste Reduction",
     description: "Our process diverts plastic waste from landfills and oceans, reducing environmental footprint.",
     icon: Trash2,
-    photo: "/images/mixedColors.png",
+    photo: "/images/mixedColors.jpg",
   },
   {
     title: "Responsible Operations",
     description: "Energy-efficient technologies, strict quality controls, and safe working conditions guide our daily operations.",
     icon: ShieldCheck,
-    photo: "/images/aboutUs.png",
+    photo: "/images/aboutUs.jpg",
   },
   {
     title: "Long-Term Impact",
     description: "We invest in partnerships and innovation to create lasting social, environmental, and economic value.",
     icon: Sprout,
-    photo: "/images/green.png",
+    photo: "/images/green.jpg",
   },
 ];
 

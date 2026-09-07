@@ -17,7 +17,7 @@ export default function CompanyOverview() {
         <Reveal className="lg:col-span-5 w-full h-full">
           <div className="relative aspect-[4/3] w-full h-full min-h-[380px] overflow-hidden rounded-2xl shadow-xs">
             <Image
-              src="/images/icons/aboutImg.png"
+              src="/images/aboutImg.jpg"
               alt="Poly Cleaner facility, Balakhani Industrial Park"
               fill
               className="object-cover"
