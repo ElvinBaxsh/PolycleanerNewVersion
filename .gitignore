@@ -15,7 +15,9 @@
 
 # next.js
 /.next/
+/.next-static/
 /out/
+/.api-backup-tmp/
 
 # production
 /build

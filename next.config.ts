@@ -18,6 +18,10 @@ const nextConfig: NextConfig = {
         basePath: repoBasePath,
         assetPrefix: repoBasePath,
         images: { unoptimized: true },
+        // A separate build folder so this can run alongside a live `next
+        // dev` server without fighting it over `.next` (dev holds files
+        // in there open, which makes clearing/rebuilding it fail).
+        distDir: ".next-static",
       }
     : {}),
 };

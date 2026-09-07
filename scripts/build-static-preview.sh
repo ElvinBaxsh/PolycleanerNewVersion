@@ -23,14 +23,28 @@ cleanup() {
 trap cleanup EXIT
 
 if [ -d "$API_DIR" ]; then
-  mv "$API_DIR" "$API_BACKUP"
+  # A copy+delete (rather than `mv`) survives a running dev server holding
+  # a file watcher/handle open inside src/app/api, which on Windows makes
+  # a plain directory `mv` fail with "Permission denied".
+  cp -r "$API_DIR" "$API_BACKUP"
+  rm -rf "$API_DIR"
 fi
 
-# Clear any cached build/type info from a previous (non-static) build —
-# it can reference the now-moved-aside /api routes and fail type checking.
-rm -rf .next
+# Clear any stale static-preview build/type info from a previous run — it
+# can reference the now-moved-aside /api routes and fail type checking.
+# (.next itself, the normal dev/build folder, is left untouched — a live
+# `next dev` server may have it open, and this build uses .next-static
+# instead specifically to avoid that conflict.)
+rm -rf .next-static
 
 STATIC_EXPORT=1 npx next build
+
+# With a custom distDir, `output: "export"` writes the site straight into
+# it (.next-static/) rather than into a nested out/ subfolder — copy it to
+# the conventional ./out so the rest of this script (and the deploy step)
+# doesn't need to know about that.
+rm -rf out
+cp -r .next-static out
 
 # next/image's automatic basePath-prefixing runs through its image-
 # optimization loader — but images.unoptimized (required here, since
