@@ -39,14 +39,14 @@ const en = {
 
   footer: {
     tagline:
-      "Poly Cleaner MMC is a trusted producer of high quality rPET flakes from Azerbaijan. We turn used bottles into valuable raw materials for a sustainable future.",
+      "Poly Cleaner is a trusted producer of high quality rPET flakes from Azerbaijan. We turn used bottles into valuable raw materials for a sustainable future.",
     quickLinks: "Quick Links",
     products: "Products",
     information: "Information",
     contactUs: "Contact Us",
     followUs: "Follow Us",
     website: "polycleaner.az",
-    copyright: (year: number) => `© ${year} Poly Cleaner MMC. All rights reserved.`,
+    copyright: (year: number) => `© ${year} Poly Cleaner. All rights reserved.`,
     privacyPolicy: "Privacy Policy",
     termsOfUse: "Terms of Use",
     productLinks: ["Transparent", "Light Blue", "Green", "Mixed Colors", "Custom Specifications"],
@@ -60,7 +60,7 @@ const en = {
     heroTitleLine2: "Supplier",
     heroTitleLine3: "from Azerbaijan",
     heroDescription:
-      "Poly Cleaner MMC supplies consistently processed and fully documented rPET flakes for sheet, strap, fiber and non-food packaging applications.",
+      "Poly Cleaner supplies consistently processed and fully documented rPET flakes for sheet, strap, fiber and non-food packaging applications.",
     taropakMeetUs: (name: string) => `Meet us at ${name}`,
     taropakBannerTagline: "Discover our rPET flakes and build your next sustainable solution with us.",
     trustBar: [
@@ -177,11 +177,11 @@ const en = {
     heroTitle: "About",
     heroTitleAccent: "Poly Cleaner",
     heroDescription:
-      "Poly Cleaner MMC is an Azerbaijan-based producer of high quality hot washed rPET flakes. We transform post-consumer PET waste into consistent, clean and traceable recycled raw material for global recyclers and manufacturers.",
+      "Poly Cleaner is an Azerbaijan-based producer of high quality hot washed rPET flakes. We transform post-consumer PET waste into consistent, clean and traceable recycled raw material for global recyclers and manufacturers.",
     overviewEyebrow: "COMPANY OVERVIEW",
     overviewTitle: "Azerbaijan-based. Quality-driven. Export-ready.",
     overviewParagraph1:
-      "Poly Cleaner MMC operates in the Balakhani Industrial Park, Baku, Azerbaijan, with a purpose-built facility designed for efficient and sustainable rPET flakes production. Our advanced hot wash technology, strict quality control and responsible operations enable us to deliver consistent products that meet international standards.",
+      "Poly Cleaner operates in the Balakhani Industrial Park, Baku, Azerbaijan, with a purpose-built facility designed for efficient and sustainable rPET flakes production. Our advanced hot wash technology, strict quality control and responsible operations enable us to deliver consistent products that meet international standards.",
     overviewParagraph2:
       "We are committed to long-term partnerships, transparent communication and creating value from waste — for our customers, our community and the planet.",
     factsLocation: "Location",
@@ -285,7 +285,7 @@ const en = {
     heroTitle: "Process &",
     heroTitleAccent: "Quality",
     heroDescription:
-      "At Poly Cleaner MMC, our integrated process and quality systems ensure high quality rPET flakes with consistent specifications, full traceability and reliable export documentation.",
+      "At Poly Cleaner, our integrated process and quality systems ensure high quality rPET flakes with consistent specifications, full traceability and reliable export documentation.",
     ctaRequestInfo: "Request Product Information",
     ctaSpeakWithSales: "Speak with Sales",
     capabilitiesTitle: "Process Capabilities",
@@ -626,15 +626,15 @@ const en = {
   legal: {
     privacyTitle: "Privacy Policy",
     privacyParagraph1:
-      "Poly Cleaner MMC (“we”, “us”) respects your privacy. Information submitted through our contact and inquiry forms (name, company, email, phone, and message) is used solely to respond to your request and is not sold or shared with third parties for marketing purposes.",
+      "Poly Cleaner (“we”, “us”) respects your privacy. Information submitted through our contact and inquiry forms (name, company, email, phone, and message) is used solely to respond to your request and is not sold or shared with third parties for marketing purposes.",
     privacyParagraph2:
       "We use essential cookies to operate this website and, where enabled, analytics cookies to understand site usage. You can control cookie preferences through your browser settings.",
     privacyContactPrefix: "For any questions about how your data is handled, contact us at",
     termsTitle: "Terms of Use",
     termsParagraph1:
-      "By accessing this website, you agree to use it for lawful purposes only. Content, specifications and pricing displayed are for informational purposes and are subject to confirmation in a formal offer or contract with Poly Cleaner MMC.",
+      "By accessing this website, you agree to use it for lawful purposes only. Content, specifications and pricing displayed are for informational purposes and are subject to confirmation in a formal offer or contract with Poly Cleaner.",
     termsParagraph2:
-      "All trademarks, logos and content on this site are the property of Poly Cleaner MMC unless otherwise stated, and may not be reproduced without prior written consent.",
+      "All trademarks, logos and content on this site are the property of Poly Cleaner unless otherwise stated, and may not be reproduced without prior written consent.",
     termsContactPrefix: "For questions regarding these terms, contact us at",
   },
 };
@@ -671,14 +671,14 @@ const az = {
 
   footer: {
     tagline:
-      "Poly Cleaner MMC Azərbaycandan yüksək keyfiyyətli rPET fleks-in etibarlı istehsalçısıdır. Biz istifadə olunmuş şüşələri dayanıqlı gələcək üçün dəyərli xammala çeviririk.",
+      "Poly Cleaner Azərbaycandan yüksək keyfiyyətli rPET fleks-in etibarlı istehsalçısıdır. Biz istifadə olunmuş şüşələri dayanıqlı gələcək üçün dəyərli xammala çeviririk.",
     quickLinks: "Sürətli Linklər",
     products: "Məhsullar",
     information: "Məlumat",
     contactUs: "Əlaqə",
     followUs: "Bizi İzlə",
     website: "polycleaner.az",
-    copyright: (year: number) => `© ${year} Poly Cleaner MMC. Bütün hüquqlar qorunur.`,
+    copyright: (year: number) => `© ${year} Poly Cleaner. Bütün hüquqlar qorunur.`,
     privacyPolicy: "Məxfilik Siyasəti",
     termsOfUse: "İstifadə Şərtləri",
     productLinks: ["Transparent", "Açıq Mavi", "Yaşıl", "Qarışıq Rənglər", "Xüsusi Spesifikasiyalar"],
@@ -692,7 +692,7 @@ const az = {
     heroTitleLine2: "Təchizatçısı",
     heroTitleLine3: "Azərbaycandan",
     heroDescription:
-      "Poly Cleaner MMC sheet, strap, fiber və non-food packaging tətbiqləri üçün sabit emal olunmuş və tam sənədləşdirilmiş rPET fleks təchiz edir.",
+      "Poly Cleaner sheet, strap, fiber və non-food packaging tətbiqləri üçün sabit emal olunmuş və tam sənədləşdirilmiş rPET fleks təchiz edir.",
     taropakMeetUs: (name: string) => `${name}-də bizimlə görüşün`,
     taropakBannerTagline: "rPET fleks-lərimizi kəşf edin və növbəti dayanıqlı həllinizi bizimlə quraq.",
     trustBar: [
@@ -809,11 +809,11 @@ const az = {
     heroTitle: "Poly Cleaner",
     heroTitleAccent: "haqqında",
     heroDescription:
-      "Poly Cleaner MMC Azərbaycanda yerləşən yüksək keyfiyyətli hot washed rPET fleks istehsalçısıdır. Biz post-consumer PET tullantılarını sabit, təmiz və izlənə bilən təkrar emal xammalına çevirərək beynəlxalq recycler və istehsalçılara təqdim edirik.",
+      "Poly Cleaner Azərbaycanda yerləşən yüksək keyfiyyətli hot washed rPET fleks istehsalçısıdır. Biz post-consumer PET tullantılarını sabit, təmiz və izlənə bilən təkrar emal xammalına çevirərək beynəlxalq recycler və istehsalçılara təqdim edirik.",
     overviewEyebrow: "ŞİRKƏT İCMALI",
     overviewTitle: "Azərbaycanda yerləşən. Keyfiyyət yönümlü. İxraca hazır.",
     overviewParagraph1:
-      "Poly Cleaner MMC Bakı şəhərində, Balaxanı Sənaye Parkında fəaliyyət göstərir. Müəssisəmiz effektiv və dayanıqlı rPET fleks istehsalı üçün qurulmuşdur. Hot washing texnologiyası, keyfiyyətə nəzarət və məsuliyyətli əməliyyat yanaşması beynəlxalq müştərilər üçün sabit məhsul təqdim etməyimizə imkan yaradır.",
+      "Poly Cleaner Bakı şəhərində, Balaxanı Sənaye Parkında fəaliyyət göstərir. Müəssisəmiz effektiv və dayanıqlı rPET fleks istehsalı üçün qurulmuşdur. Hot washing texnologiyası, keyfiyyətə nəzarət və məsuliyyətli əməliyyat yanaşması beynəlxalq müştərilər üçün sabit məhsul təqdim etməyimizə imkan yaradır.",
     overviewParagraph2:
       "Biz uzunmüddətli tərəfdaşlığa, şəffaf kommunikasiyaya və tullantıdan dəyər yaratmağa — müştərilərimiz, cəmiyyət və planet üçün faydalı nəticələrə inanırıq.",
     factsLocation: "Yerləşmə",
@@ -917,7 +917,7 @@ const az = {
     heroTitle: "Proses və",
     heroTitleAccent: "Keyfiyyət",
     heroDescription:
-      "Poly Cleaner MMC-də inteqrasiya olunmuş proses və keyfiyyət sistemimiz sabit spesifikasiyalı, tam izlənə bilən və etibarlı ixrac sənədləri ilə dəstəklənən yüksək keyfiyyətli rPET fleks təmin edir.",
+      "Poly Cleaner-də inteqrasiya olunmuş proses və keyfiyyət sistemimiz sabit spesifikasiyalı, tam izlənə bilən və etibarlı ixrac sənədləri ilə dəstəklənən yüksək keyfiyyətli rPET fleks təmin edir.",
     ctaRequestInfo: "Məhsul Məlumatı İstə",
     ctaSpeakWithSales: "Satış Komandası ilə Danış",
     capabilitiesTitle: "Proses İmkanları",
@@ -1258,15 +1258,15 @@ const az = {
   legal: {
     privacyTitle: "Məxfilik Siyasəti",
     privacyParagraph1:
-      "Poly Cleaner MMC (\"biz\") sizin məxfiliyinizə hörmət edir. Əlaqə və sorğu formaları vasitəsilə təqdim olunan məlumatlar (ad, şirkət, email, telefon və mesaj) yalnız sorğunuza cavab vermək üçün istifadə olunur və marketinq məqsədilə üçüncü tərəflərə satılmır və ya paylaşılmır.",
+      "Poly Cleaner (\"biz\") sizin məxfiliyinizə hörmət edir. Əlaqə və sorğu formaları vasitəsilə təqdim olunan məlumatlar (ad, şirkət, email, telefon və mesaj) yalnız sorğunuza cavab vermək üçün istifadə olunur və marketinq məqsədilə üçüncü tərəflərə satılmır və ya paylaşılmır.",
     privacyParagraph2:
       "Bu saytı işlətmək üçün zəruri cookie-lərdən, aktiv olduqda isə sayt istifadəsini anlamaq üçün analitik cookie-lərdən istifadə edirik. Cookie tərcihlərinizi brauzer parametrləriniz vasitəsilə idarə edə bilərsiniz.",
     privacyContactPrefix: "Məlumatlarınızın necə idarə olunduğu barədə suallarınız varsa, bizimlə əlaqə saxlayın:",
     termsTitle: "İstifadə Şərtləri",
     termsParagraph1:
-      "Bu saytdan istifadə edərək, onu yalnız qanuni məqsədlər üçün istifadə etməyə razılıq verirsiniz. Göstərilən məzmun, spesifikasiyalar və qiymətlər məlumat xarakterlidir və Poly Cleaner MMC ilə rəsmi təklif və ya müqavilədə təsdiqlənməlidir.",
+      "Bu saytdan istifadə edərək, onu yalnız qanuni məqsədlər üçün istifadə etməyə razılıq verirsiniz. Göstərilən məzmun, spesifikasiyalar və qiymətlər məlumat xarakterlidir və Poly Cleaner ilə rəsmi təklif və ya müqavilədə təsdiqlənməlidir.",
     termsParagraph2:
-      "Bu saytdakı bütün ticarət nişanları, loqolar və məzmun, əks halda qeyd olunmayıbsa, Poly Cleaner MMC-nin mülkiyyətidir və əvvəlcədən yazılı razılıq olmadan çoxaldıla bilməz.",
+      "Bu saytdakı bütün ticarət nişanları, loqolar və məzmun, əks halda qeyd olunmayıbsa, Poly Cleaner-nin mülkiyyətidir və əvvəlcədən yazılı razılıq olmadan çoxaldıla bilməz.",
     termsContactPrefix: "Bu şərtlərlə bağlı suallarınız üçün bizimlə əlaqə saxlayın:",
   },
 } satisfies typeof en;

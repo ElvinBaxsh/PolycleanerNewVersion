@@ -14,9 +14,8 @@ export function organizationJsonLd() {
     "@type": ["Organization", "LocalBusiness"],
     "@id": `${SITE_URL}/#organization`,
     name: SITE_NAME,
-    alternateName: "Poly Cleaner",
     description:
-      "Poly Cleaner MMC supplies consistently processed, fully documented hot washed rPET flakes for sheet, strap, fiber and non-food packaging applications, exported worldwide from Azerbaijan.",
+      "Poly Cleaner supplies consistently processed, fully documented hot washed rPET flakes for sheet, strap, fiber and non-food packaging applications, exported worldwide from Azerbaijan.",
     url: SITE_URL,
     logo: `${SITE_URL}/images/polycleaner-logonew.png`,
     image: `${SITE_URL}/images/polycleaner-logonew.png`,

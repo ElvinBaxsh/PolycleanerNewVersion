@@ -22,11 +22,11 @@ const quicksand = Quicksand({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Poly Cleaner MMC | Hot Washed rPET Flakes Supplier from Azerbaijan",
-    template: "%s | Poly Cleaner MMC",
+    default: "Poly Cleaner | Hot Washed rPET Flakes Supplier from Azerbaijan",
+    template: "%s | Poly Cleaner",
   },
   description:
-    "Poly Cleaner MMC supplies consistently processed, fully documented hot washed rPET flakes for sheet, strap, fiber and non-food packaging applications, exported worldwide from Azerbaijan.",
+    "Poly Cleaner supplies consistently processed, fully documented hot washed rPET flakes for sheet, strap, fiber and non-food packaging applications, exported worldwide from Azerbaijan.",
   keywords: [
     "rPET flakes supplier",
     "hot washed PET flakes",
@@ -39,11 +39,11 @@ export const metadata: Metadata = {
     "documented recycled PET supplier",
   ],
   openGraph: {
-    title: "Poly Cleaner MMC | Hot Washed rPET Flakes Supplier from Azerbaijan",
+    title: "Poly Cleaner | Hot Washed rPET Flakes Supplier from Azerbaijan",
     description:
       "Documented, hot washed rPET flakes for sheet, strap, fiber and non-food packaging. Producer, not a trader — export-ready from Baku, Azerbaijan.",
     url: SITE_URL,
-    siteName: "Poly Cleaner MMC",
+    siteName: "Poly Cleaner",
     locale: "en_US",
     alternateLocale: ["az_AZ"],
     type: "website",
@@ -52,13 +52,13 @@ export const metadata: Metadata = {
         url: "/images/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Poly Cleaner MMC — Hot Washed rPET Flakes Supplier from Azerbaijan",
+        alt: "Poly Cleaner — Hot Washed rPET Flakes Supplier from Azerbaijan",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Poly Cleaner MMC | Hot Washed rPET Flakes Supplier from Azerbaijan",
+    title: "Poly Cleaner | Hot Washed rPET Flakes Supplier from Azerbaijan",
     description:
       "Documented, hot washed rPET flakes for sheet, strap, fiber and non-food packaging, exported worldwide from Azerbaijan.",
     images: ["/images/og-image.png"],

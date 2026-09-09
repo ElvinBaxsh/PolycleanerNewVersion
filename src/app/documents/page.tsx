@@ -12,7 +12,7 @@ import { DOCUMENTS_FAQ } from "@/lib/constants";
 export const metadata: Metadata = {
   title: { absolute: "Buyer Documents | TDS, COA and Product Offer Sheet" },
   description:
-    "Access Poly Cleaner MMC's buyer documents — company profile, product offer sheet, technical data sheet, traceability note and more — for your due diligence.",
+    "Access Poly Cleaner's buyer documents — company profile, product offer sheet, technical data sheet, traceability note and more — for your due diligence.",
   alternates: { canonical: "/documents" },
 };
 

@@ -12,7 +12,7 @@ import { breadcrumbJsonLd } from "@/lib/seo";
 export const metadata: Metadata = {
   title: { absolute: "About Poly Cleaner | rPET Flakes Producer in Azerbaijan" },
   description:
-    "Poly Cleaner MMC is an Azerbaijan-based producer of high quality hot washed rPET flakes, transforming post-consumer PET waste into consistent, clean and traceable raw material.",
+    "Poly Cleaner is an Azerbaijan-based producer of high quality hot washed rPET flakes, transforming post-consumer PET waste into consistent, clean and traceable raw material.",
   alternates: { canonical: "/about" },
 };
 

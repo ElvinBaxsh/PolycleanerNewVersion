@@ -12,7 +12,7 @@ import { breadcrumbJsonLd } from "@/lib/seo";
 export const metadata: Metadata = {
   title: { absolute: "Process & Quality | Documented rPET Flakes Production" },
   description:
-    "Poly Cleaner MMC's integrated process and quality systems ensure high quality rPET flakes with consistent specifications, full traceability and reliable export documentation.",
+    "Poly Cleaner's integrated process and quality systems ensure high quality rPET flakes with consistent specifications, full traceability and reliable export documentation.",
   alternates: { canonical: "/process-quality" },
 };
 

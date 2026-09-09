@@ -1,8 +1,8 @@
 export const SITE_URL = "https://polycleaner.az";
-export const SITE_NAME = "Poly Cleaner MMC";
+export const SITE_NAME = "Poly Cleaner";
 
 export const COMPANY = {
-  name: "Poly Cleaner MMC",
+  name: "Poly Cleaner",
   tagline: "From Waste to Value",
   email: "office@polycleaner.az",
   phone: "+994 55 257 54 54",

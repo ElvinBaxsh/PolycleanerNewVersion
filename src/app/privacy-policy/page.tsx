@@ -3,7 +3,7 @@ import PrivacyPolicyContent from "./PrivacyPolicyContent";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
-  description: "How Poly Cleaner MMC collects, uses and protects your personal data.",
+  description: "How Poly Cleaner collects, uses and protects your personal data.",
   alternates: { canonical: "/privacy-policy" },
 };
 

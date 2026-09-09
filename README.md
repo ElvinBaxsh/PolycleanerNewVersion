@@ -1,6 +1,6 @@
-# Poly Cleaner MMC — Website (Next.js)
+# Poly Cleaner — Website (Next.js)
 
-Rebuild of the Poly Cleaner MMC marketing site (rPET flakes producer/exporter) as a Next.js
+Rebuild of the Poly Cleaner marketing site (rPET flakes producer/exporter) as a Next.js
 App Router project, following the supplied design brief (`Poly Cleaner Website Redesign
 Texniki Tapşırıq.docx`) and the approved page designs (Home, About Us, rPET Flakes,
 Process & Quality, Sustainability, Contact — Documents built to the brief's spec since no

@@ -9,7 +9,7 @@ import { breadcrumbJsonLd } from "@/lib/seo";
 export const metadata: Metadata = {
   title: { absolute: "Contact Poly Cleaner | Request rPET Flakes Offer" },
   description:
-    "Reach out to Poly Cleaner MMC for rPET flakes inquiries, samples, offers, or partnership opportunities. Our team typically replies within 24 hours.",
+    "Reach out to Poly Cleaner for rPET flakes inquiries, samples, offers, or partnership opportunities. Our team typically replies within 24 hours.",
   alternates: { canonical: "/contact" },
 };
 

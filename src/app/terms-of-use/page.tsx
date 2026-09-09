@@ -3,7 +3,7 @@ import TermsOfUseContent from "./TermsOfUseContent";
 
 export const metadata: Metadata = {
   title: "Terms of Use",
-  description: "Terms governing the use of the Poly Cleaner MMC website.",
+  description: "Terms governing the use of the Poly Cleaner website.",
   alternates: { canonical: "/terms-of-use" },
 };
 
