@@ -126,7 +126,7 @@ export default function LanguageSwitcher({
         className={clsx(
           "flex h-11 cursor-pointer items-center gap-1.5 rounded-lg border px-3.5 transition-colors",
           light
-            ? "border-white/25 bg-white/5 text-white/85 hover:bg-white/10"
+            ? "border-white/25 bg-navy text-white/85 hover:bg-white/10"
             : "border-border bg-white text-slate hover:border-brand-blue/40"
         )}
       >
