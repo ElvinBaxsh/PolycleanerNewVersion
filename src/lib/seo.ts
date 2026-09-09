@@ -28,6 +28,12 @@ export function organizationJsonLd() {
       addressLocality: "Baku",
       addressCountry: "AZ",
     },
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: COMPANY.coordinates.lat,
+      longitude: COMPANY.coordinates.lng,
+    },
+    hasMap: `https://www.openstreetmap.org/?mlat=${COMPANY.coordinates.lat}&mlon=${COMPANY.coordinates.lng}#map=17/${COMPANY.coordinates.lat}/${COMPANY.coordinates.lng}`,
     areaServed: "Worldwide",
     knowsLanguage: ["en", "az", "ru", "tr"],
     contactPoint: {

@@ -4,10 +4,11 @@ import { MapPin, FileText, FlaskConical, CalendarCheck } from "lucide-react";
 import Container from "@/components/ui/Container";
 import Button from "@/components/ui/Button";
 import InquiryButton from "@/components/inquiry/InquiryButton";
-import PhotoPlaceholder from "@/components/ui/PhotoPlaceholder";
+import LocationMap from "./LocationMap";
 import Reveal from "@/components/ui/Reveal";
 import { RevealGroup, RevealItem } from "@/components/ui/RevealGroup";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
+import { COMPANY } from "@/lib/constants";
 
 const QUICK_CARD_ICONS = [FileText, FlaskConical, CalendarCheck];
 const QUICK_CARD_TYPES = ["offer", "sample", "taropak"];
@@ -28,7 +29,7 @@ export default function MapAndActions() {
               <span className="font-semibold">{t.common.address}</span>
             </div>
             <Button
-              href="https://maps.google.com/?q=Balakhani+Industrial+Park+Baku+Azerbaijan"
+              href={`https://www.openstreetmap.org/directions?to=${COMPANY.coordinates.lat}%2C${COMPANY.coordinates.lng}`}
               variant="secondary"
               className="mt-5"
               showArrow
@@ -37,7 +38,7 @@ export default function MapAndActions() {
             </Button>
           </Reveal>
           <Reveal delay={0.15}>
-            <PhotoPlaceholder label="Map — Balakhani Industrial Park, Baku" aspect="aspect-[4/3]" />
+            <LocationMap />
           </Reveal>
         </div>
 

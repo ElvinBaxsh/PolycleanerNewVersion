@@ -8,6 +8,8 @@ export const COMPANY = {
   phone: "+994 55 257 54 54",
   whatsappNumber: "994552575454",
   address: "Balakhani Industrial Park, 1th zone",
+  // Facility location — FW63+JX, Baku, Azerbaijan.
+  coordinates: { lat: 40.46201514558341, lng: 49.905589297413826 },
   languages: ["English", "Russian", "Turkish", "Azerbaijani"],
 };
 
