@@ -7,11 +7,15 @@ import Container from "@/components/ui/Container";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Reveal from "@/components/ui/Reveal";
 import { RevealGroup, RevealItem } from "@/components/ui/RevealGroup";
+import { useLanguage } from "@/lib/i18n/LanguageContext";
 import { PARTNERS } from "@/lib/constants";
 
-const LOOP_ITEMS = [...PARTNERS, ...PARTNERS];
+const LOOP_PARTNERS = [...PARTNERS, ...PARTNERS];
 
 export default function PartnersSection() {
+  const { t } = useLanguage();
+  const partnerText = t.partners;
+  const loopPartnerText = [...partnerText, ...partnerText];
   const [paused, setPaused] = useState(false);
   const resumeTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -29,27 +33,27 @@ export default function PartnersSection() {
       <Container>
         <Reveal>
           <SectionHeading
-            eyebrow="Our Partners"
-            title="We work with the best partners"
-            description="We work with manufacturers, recyclers, traders and logistics partners across Europe, Asia and the Middle East."
+            eyebrow={t.home.partnersEyebrow}
+            title={t.home.partnersTitle}
+            description={t.home.partnersDescription}
           />
         </Reveal>
 
         {/* Desktop / tablet grid */}
         <RevealGroup className="mt-10 hidden grid-cols-3 items-center gap-x-6 gap-y-6 sm:grid">
-          {PARTNERS.map((partner) => (
+          {PARTNERS.map((partner, i) => (
             <RevealItem key={partner.name}>
               <a
                 href={partner.website}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label={`Visit ${partner.name} website`}
+                aria-label={`Visit ${partnerText[i].name} website`}
                 className="flex h-24 items-center justify-center transition-transform duration-300 hover:-translate-y-1"
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={partner.logo}
-                  alt={partner.name}
+                  alt={partnerText[i].name}
                   className="h-auto max-h-20 w-auto max-w-[160px] object-contain sm:max-h-24 sm:max-w-[190px]"
                 />
               </a>
@@ -74,19 +78,19 @@ export default function PartnersSection() {
               animationPlayState: paused ? "paused" : "running",
             }}
           >
-            {LOOP_ITEMS.map((partner, i) => (
+            {LOOP_PARTNERS.map((partner, i) => (
               <a
                 key={`${partner.name}-${i}`}
                 href={partner.website}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label={`Visit ${partner.name} website`}
+                aria-label={`Visit ${loopPartnerText[i].name} website`}
                 className="flex h-16 shrink-0 items-center justify-center"
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={partner.logo}
-                  alt={partner.name}
+                  alt={loopPartnerText[i].name}
                   className="h-auto max-h-16 w-auto max-w-[140px] object-contain"
                 />
               </a>
@@ -102,15 +106,15 @@ export default function PartnersSection() {
               <Users className="size-7" aria-hidden />
             </span>
             <div>
-              <p className="text-xl font-bold text-navy sm:text-2xl">Interested in partnering with us?</p>
-              <p className="text-sm text-slate-500">Let&rsquo;s build a greener future together.</p>
+              <p className="text-xl font-bold text-navy sm:text-2xl">{t.home.partnersCtaTitle}</p>
+              <p className="text-sm text-slate-500">{t.home.partnersCtaDescription}</p>
             </div>
           </div>
           <Link
             href="/contact#form"
             className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-brand-green-dark px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-navy"
           >
-            Become a Partner
+            {t.home.partnersCtaButton}
             <ChevronRight className="size-4" aria-hidden />
           </Link>
         </Reveal>

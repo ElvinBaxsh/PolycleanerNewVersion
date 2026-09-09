@@ -6,13 +6,27 @@ import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { clsx } from "clsx";
 import Logo from "./Logo";
+import LanguageSwitcher from "./LanguageSwitcher";
 import InquiryButton from "@/components/inquiry/InquiryButton";
-import { NAV_LINKS } from "@/lib/constants";
+import { useLanguage } from "@/lib/i18n/LanguageContext";
+
+const NAV_HREFS = ["/", "/about", "/rpet-flakes", "/process-quality", "/sustainability", "/documents", "/contact"];
 
 export default function Header() {
   const pathname = usePathname();
+  const { t } = useLanguage();
   const [open, setOpen] = useState(false);
   const [hideForFooter, setHideForFooter] = useState(false);
+
+  const navLinks = [
+    { label: t.nav.home, href: NAV_HREFS[0] },
+    { label: t.nav.about, href: NAV_HREFS[1] },
+    { label: t.nav.rpet, href: NAV_HREFS[2] },
+    { label: t.nav.process, href: NAV_HREFS[3] },
+    { label: t.nav.sustainability, href: NAV_HREFS[4] },
+    { label: t.nav.documents, href: NAV_HREFS[5] },
+    { label: t.nav.contact, href: NAV_HREFS[6] },
+  ];
 
   // The header is sticky/always-on-top, so once the footer (which repeats
   // the logo and nav-like links) scrolls into view, the two visually
@@ -40,7 +54,7 @@ export default function Header() {
         <Logo />
 
         <nav className="hidden xl:flex items-center gap-6" aria-label="Primary">
-          {NAV_LINKS.map((link) => {
+          {navLinks.map((link) => {
             const active = pathname === link.href;
             return (
               <Link
@@ -63,9 +77,10 @@ export default function Header() {
           })}
         </nav>
 
-        <div className="hidden xl:block">
+        <div className="hidden items-center gap-3 xl:flex">
+          <LanguageSwitcher />
           <InquiryButton type="offer" size="md">
-            Request Offer
+            {t.common.requestOffer}
           </InquiryButton>
         </div>
 
@@ -83,7 +98,7 @@ export default function Header() {
       {open && (
         <div className="xl:hidden border-t border-white/10 bg-navy">
           <nav className="container-page flex flex-col py-4" aria-label="Mobile">
-            {NAV_LINKS.map((link) => (
+            {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
@@ -93,12 +108,15 @@ export default function Header() {
                 {link.label}
               </Link>
             ))}
+            <div className="mt-4 flex justify-center">
+              <LanguageSwitcher />
+            </div>
             <InquiryButton
               type="offer"
               className="mt-4 w-full"
               onClick={() => setOpen(false)}
             >
-              Request Offer
+              {t.common.requestOffer}
             </InquiryButton>
           </nav>
         </div>

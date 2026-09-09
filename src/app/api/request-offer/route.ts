@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { buildRequestOfferEmail, sendMail, type RequestOfferPayload } from "@/lib/mailer";
-import { OFFER_SALES_EMAIL } from "@/lib/constants";
+import { OFFER_SALES_EMAILS } from "@/lib/constants";
 
 function isValidEmail(value: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
@@ -73,7 +73,7 @@ export async function POST(request: NextRequest) {
 
   console.log("[request-offer] New request:", { ...payload, ...meta });
 
-  const result = await sendMail(OFFER_SALES_EMAIL, subject, html, text);
+  const result = await sendMail(OFFER_SALES_EMAILS, subject, html, text);
 
   if (!result.sent && "error" in result) {
     // SMTP was configured but the send itself failed — this is a real error,

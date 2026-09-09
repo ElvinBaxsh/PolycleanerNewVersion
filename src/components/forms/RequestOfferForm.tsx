@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, type FormEvent, type ReactNode } from "react";
+import { motion } from "framer-motion";
 import {
   Loader2,
   CheckCircle2,
@@ -25,10 +26,13 @@ import {
   COUNTRY_OPTIONS,
 } from "@/lib/constants";
 import { trackEvent } from "@/lib/analytics";
+import { useLanguage } from "@/lib/i18n/LanguageContext";
 
 type Status = "idle" | "submitting" | "success" | "error";
 
 export default function RequestOfferForm({ onCancel }: { onCancel?: () => void }) {
+  const { t, locale } = useLanguage();
+  const f = t.forms;
   const [status, setStatus] = useState<Status>("idle");
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -43,7 +47,7 @@ export default function RequestOfferForm({ onCancel }: { onCancel?: () => void }
       ...Object.fromEntries(data.entries()),
       consent: data.get("consent") === "on",
       sourcePage: window.location.href,
-      userLanguage: "EN",
+      userLanguage: locale.toUpperCase(),
     };
 
     trackEvent("request_offer_submit");
@@ -57,10 +61,7 @@ export default function RequestOfferForm({ onCancel }: { onCancel?: () => void }
 
       if (!res.ok) {
         const body = await res.json().catch(() => ({}));
-        throw new Error(
-          body.error ||
-            "Something went wrong. Please try again or contact us directly by email."
-        );
+        throw new Error(body.error || f.genericErrorContact);
       }
 
       setStatus("success");
@@ -69,37 +70,44 @@ export default function RequestOfferForm({ onCancel }: { onCancel?: () => void }
     } catch (err) {
       setStatus("error");
       trackEvent("request_offer_error");
-      setErrorMessage(
-        err instanceof Error
-          ? err.message
-          : "Something went wrong. Please try again or contact us directly by email."
-      );
+      setErrorMessage(err instanceof Error ? err.message : f.genericErrorContact);
     }
   }
 
   if (status === "success") {
     return (
-      <div className="flex flex-col items-center gap-3 rounded-2xl border border-brand-green/30 bg-brand-green/5 p-8 text-center sm:p-10">
-        <CheckCircle2 className="size-10 text-brand-green" />
+      <motion.div
+        initial={{ opacity: 0, y: 12, scale: 0.98 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+        className="flex flex-col items-center gap-3 rounded-2xl border border-brand-green/30 bg-brand-green/5 p-8 text-center sm:p-10"
+      >
+        <motion.div
+          initial={{ scale: 0, rotate: -20 }}
+          animate={{ scale: 1, rotate: 0 }}
+          transition={{ type: "spring", stiffness: 260, damping: 18, delay: 0.1 }}
+        >
+          <CheckCircle2 className="size-10 text-brand-green" />
+        </motion.div>
         <h3 className="text-lg font-bold text-navy">
-          Thank you. Your request has been received.
+          {f.thankYouOffer}
         </h3>
         <p className="text-sm text-slate">
-          Our sales team will contact you shortly.
+          {f.thankYouOfferSub}
         </p>
         <button
           type="button"
           onClick={() => setStatus("idle")}
-          className="mt-2 text-sm font-semibold text-brand-blue underline"
+          className="mt-2 inline-flex h-11 cursor-pointer items-center justify-center rounded-lg border-2 border-border px-6 text-sm font-semibold text-navy transition-colors hover:bg-soft-gray"
         >
-          Send another request
+          {f.sendAnotherRequest}
         </button>
-      </div>
+      </motion.div>
     );
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-5">
+    <form onSubmit={handleSubmit} className="space-y-4">
       {/* Honeypot field — hidden from real users, bots tend to fill every input */}
       <input
         type="text"
@@ -110,82 +118,86 @@ export default function RequestOfferForm({ onCancel }: { onCancel?: () => void }
         aria-hidden="true"
       />
 
-      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-        <IconField icon={<User />} label="Full Name" name="fullName" required placeholder="John Doe" />
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+        <IconField icon={<User />} label={f.fullName} name="fullName" required placeholder="John Doe" />
         <IconField
           icon={<Building2 />}
-          label="Company Name"
+          label={f.companyName}
           name="company"
           required
-          placeholder="Company Ltd."
+          placeholder={f.companyNamePlaceholder2}
         />
       </div>
 
-      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <IconSelectField
           icon={<Globe2 />}
-          label="Country"
+          label={f.country}
           name="country"
           required
-          placeholder="Select country"
-          options={COUNTRY_OPTIONS}
+          placeholder={f.countryPlaceholder2}
+          values={COUNTRY_OPTIONS}
+          labels={COUNTRY_OPTIONS}
         />
         <IconField
           icon={<Mail />}
-          label="Email Address"
+          label={f.emailAddress}
           name="email"
           type="email"
           required
-          placeholder="name@company.com"
+          placeholder={f.emailPlaceholder}
         />
       </div>
 
-      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <IconField
           icon={<Phone />}
-          label="Phone / WhatsApp"
+          label={f.phone}
           name="phone"
           type="tel"
           required
-          placeholder="+48 123 456 789"
+          placeholder={f.phonePlaceholder2}
         />
         <IconSelectField
           icon={<Package />}
-          label="Product Interest"
+          label={f.productInterest}
           name="productInterest"
           required
-          placeholder="Select product"
-          options={OFFER_PRODUCT_INTEREST_OPTIONS}
+          placeholder={f.selectProduct}
+          values={OFFER_PRODUCT_INTEREST_OPTIONS}
+          labels={f.offerProductInterestOptions}
         />
       </div>
 
-      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <IconSelectField
           icon={<BarChart3 />}
-          label="Required Volume"
+          label={f.requiredVolume}
           name="requiredVolume"
-          placeholder="Select volume"
-          options={OFFER_VOLUME_OPTIONS}
+          placeholder={f.selectVolume}
+          values={OFFER_VOLUME_OPTIONS}
+          labels={f.offerVolumeOptions}
         />
         <IconSelectField
           icon={<Layers />}
-          label="Application"
+          label={f.application}
           name="application"
-          placeholder="Select application"
-          options={OFFER_APPLICATION_OPTIONS}
+          placeholder={f.selectApplication}
+          values={OFFER_APPLICATION_OPTIONS}
+          labels={f.offerApplicationOptions}
         />
       </div>
 
       <IconField
         icon={<MapPin />}
-        label="Delivery Destination"
+        label={f.deliveryDestination}
         name="deliveryDestination"
-        placeholder="Poland, Germany, Netherlands, Turkey, etc."
+        placeholder={f.deliveryDestinationPlaceholder}
       />
 
       <div>
         <label htmlFor="message" className="mb-1.5 block text-sm font-semibold text-navy">
-          Message <span className="font-normal text-slate/60">(optional)</span>
+          {f.message} <span className="font-normal text-slate/60">{f.messageOptional}</span>
         </label>
         <div className="relative">
           <MessageSquare className="pointer-events-none absolute left-3.5 top-3.5 size-4 text-slate/40" />
@@ -193,7 +205,7 @@ export default function RequestOfferForm({ onCancel }: { onCancel?: () => void }
             id="message"
             name="message"
             rows={4}
-            placeholder="Please describe your required product, target volume, delivery terms or any special specifications."
+            placeholder={f.messagePlaceholderOffer}
             className="w-full rounded-lg border border-border py-3 pl-10 pr-4 text-sm text-charcoal outline-none transition-colors focus:border-brand-blue"
           />
         </div>
@@ -202,11 +214,11 @@ export default function RequestOfferForm({ onCancel }: { onCancel?: () => void }
       <label className="flex items-start gap-2 text-xs text-slate">
         <input type="checkbox" name="consent" required className="mt-0.5" />
         <span>
-          I agree to be contacted by Poly Cleaner regarding my inquiry.{" "}
+          {f.consentContact}{" "}
           <span className="text-brand-green">*</span>
           <span className="mt-0.5 flex items-center gap-1.5 text-slate/60">
             <ShieldCheck className="size-3.5 shrink-0" />
-            Your information will only be used to respond to your request.
+            {f.consentDataUse}
           </span>
         </span>
       </label>
@@ -217,30 +229,30 @@ export default function RequestOfferForm({ onCancel }: { onCancel?: () => void }
         </p>
       )}
 
-      <div className="flex items-center justify-between gap-3 pt-1">
+      <div className="flex flex-col gap-3 pt-1 sm:flex-row">
         <button
           type="button"
           onClick={onCancel}
-          className="inline-flex h-12 items-center justify-center rounded-lg border-2 border-border px-6 text-sm font-semibold text-navy transition-colors hover:bg-soft-gray"
+          className="inline-flex h-12 flex-1 cursor-pointer items-center justify-center rounded-lg border-2 border-border px-6 text-sm font-semibold text-navy transition-colors hover:bg-soft-gray"
         >
-          Cancel
+          {f.cancel}
         </button>
         <button
           type="submit"
           disabled={status === "submitting"}
-          className="inline-flex h-12 flex-1 items-center justify-center gap-2 rounded-lg bg-brand-green text-sm font-semibold text-white transition-colors hover:bg-brand-green-dark disabled:opacity-70 sm:flex-none sm:px-10"
+          className="inline-flex h-12 flex-1 cursor-pointer items-center justify-center gap-2 rounded-lg bg-brand-green text-sm font-semibold text-white transition-colors hover:bg-brand-green-dark disabled:opacity-70"
         >
           {status === "submitting" ? (
             <Loader2 className="size-4 animate-spin" />
           ) : (
             <Send className="size-4" />
           )}
-          Send Request
+          {f.sendRequest}
         </button>
       </div>
 
       <p className="text-center text-xs text-slate/50">
-        All fields marked with <span className="text-brand-green">*</span> are required.
+        {f.requiredNote}
       </p>
     </form>
   );
@@ -287,14 +299,16 @@ function IconSelectField({
   icon,
   label,
   name,
-  options,
+  values,
+  labels,
   required = false,
   placeholder = "Select an option",
 }: {
   icon: ReactNode;
   label: string;
   name: string;
-  options: string[];
+  values: readonly string[];
+  labels: readonly string[];
   required?: boolean;
   placeholder?: string;
 }) {
@@ -317,9 +331,9 @@ function IconSelectField({
           <option value="" disabled>
             {placeholder}
           </option>
-          {options.map((opt) => (
-            <option key={opt} value={opt}>
-              {opt}
+          {values.map((value, i) => (
+            <option key={value} value={value}>
+              {labels[i]}
             </option>
           ))}
         </select>

@@ -139,6 +139,37 @@ html {
   }
 }
 
+@keyframes card-fade-in {
+  /* Filtrlə dəyişən (scroll-triggered deyil, click-triggered) kart
+     siyahıları üçün — framer-motion-un whileInView + once:true
+     kombinasiyası artıq bir dəfə tetiklənmiş RevealGroup-a sonradan
+     əlavə olunan uşaqları animasiya etmir (əbədi opacity:0 qalır), ona
+     görə bu siyahılar RevealItem əvəzinə bu sadə CSS animasiyasını
+     istifadə edir. */
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes spin-up {
+  /* Fırfıra (top) kimi fırlanıb yuxarı qalxma effekti — scroll-to-top
+     düyməsinin ox ikonu üçün. */
+  0% {
+    transform: rotate(0deg) translateY(0);
+  }
+  60% {
+    transform: rotate(360deg) translateY(-3px);
+  }
+  100% {
+    transform: rotate(360deg) translateY(0);
+  }
+}
+
 @keyframes float-nudge {
   0%,
   100% {

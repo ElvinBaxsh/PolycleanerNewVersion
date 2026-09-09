@@ -1,7 +1,12 @@
 import Link from "next/link";
 import Image from "next/image";
 
-export default function Logo() {
+const SIZES = {
+  default: "h-[52px] w-auto object-contain sm:h-[58px] lg:h-[64px] xl:h-[68px]",
+  large: "h-[84px] w-auto object-contain sm:h-[96px] lg:h-[104px] xl:h-[112px]",
+};
+
+export default function Logo({ size = "default" }: { size?: keyof typeof SIZES }) {
   return (
     <Link href="/" className="flex shrink-0 items-center py-1">
       <Image
@@ -10,7 +15,7 @@ export default function Logo() {
         width={2149}
         height={732}
         priority
-        className="h-[52px] w-auto object-contain sm:h-[58px] lg:h-[64px] xl:h-[68px]"
+        className={SIZES[size]}
       />
     </Link>
   );

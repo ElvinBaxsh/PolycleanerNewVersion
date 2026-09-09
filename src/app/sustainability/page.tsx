@@ -9,7 +9,7 @@ import ImpactStats from "@/components/sections/sustainability/ImpactStats";
 import FinalCta from "@/components/sections/FinalCta";
 
 export const metadata: Metadata = {
-  title: "Sustainability",
+  title: { absolute: "Sustainability | From Waste to Value | Poly Cleaner" },
   description:
     "At Poly Cleaner, sustainability is at the core of everything we do. We transform post-consumer PET waste into high-quality rPET flakes, supporting a circular economy and a cleaner future.",
   alternates: { canonical: "/sustainability" },
@@ -18,26 +18,14 @@ export const metadata: Metadata = {
 export default function SustainabilityPage() {
   return (
     <>
-      <PageHero
-        crumb="Sustainability"
-        title="Turning Waste"
-        titleAccent="into Value"
-        description="At Poly Cleaner, sustainability is at the core of everything we do. We transform post-consumer PET waste into high-quality rPET flakes, supporting a circular economy and a cleaner future."
-        photoLabel="rPET flakes bag with recycled bottles"
-        cta={[
-          { label: "Request rPET Flakes Offer", inquiryType: "offer" },
-          { label: "Request Sample", inquiryType: "sample" },
-        ]}
-      />
+      <PageHero pageKey="sustainability" image="/images/sustainabilityImg.jpg" imagePosition="right" />
       <SustainabilityTrustStrip />
       <ImpactCards />
       <BottleToFlakeStrip />
       <SustainabilityPillars />
       <PlasticCreditBanner />
       <ImpactStats />
-      <FinalCta
-        description="Partner with Poly Cleaner for reliable, high-quality rPET flakes and measurable sustainability."
-      />
+      <FinalCta variant="sustainability" />
     </>
   );
 }

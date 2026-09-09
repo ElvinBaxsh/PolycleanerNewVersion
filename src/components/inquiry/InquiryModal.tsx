@@ -5,7 +5,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { X } from "lucide-react";
 import InquiryForm from "@/components/forms/InquiryForm";
 import RequestOfferForm from "@/components/forms/RequestOfferForm";
-import { INQUIRY_TYPES } from "@/lib/constants";
+import { useLanguage } from "@/lib/i18n/LanguageContext";
 import { trackEvent } from "@/lib/analytics";
 import type { InquiryModalOptions } from "./InquiryModalContext";
 
@@ -16,6 +16,7 @@ export default function InquiryModal({
   options: InquiryModalOptions | null;
   onClose: () => void;
 }) {
+  const { t } = useLanguage();
   const isOpen = options !== null;
 
   // `options` flips to null the instant the modal starts closing, but the
@@ -33,7 +34,13 @@ export default function InquiryModal({
   useEffect(() => {
     if (!isOpen) return;
 
+    // Locking scroll via overflow:hidden removes the body's scrollbar, which
+    // shifts all fixed/centered content (including this modal) rightward by
+    // the scrollbar's width. Padding that gap back in keeps the page still.
+    const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
     document.body.style.overflow = "hidden";
+    if (scrollbarWidth > 0) document.body.style.paddingRight = `${scrollbarWidth}px`;
+
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
     };
@@ -43,6 +50,7 @@ export default function InquiryModal({
 
     return () => {
       document.body.style.overflow = "";
+      document.body.style.paddingRight = "";
       window.removeEventListener("keydown", onKeyDown);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -51,12 +59,12 @@ export default function InquiryModal({
   if (!renderOptions) return null;
 
   const title = isOfferFlow
-    ? "Request rPET Flakes Offer"
-    : INQUIRY_TYPES.find((t) => t.value === renderOptions.type)?.label ?? "Send an Inquiry";
+    ? t.inquiryModal.offerTitle
+    : t.inquiryTypes.find((it) => it.value === renderOptions.type)?.label ?? t.inquiryModal.fallbackTitle;
 
   const subtitle = isOfferFlow
-    ? "Tell us your requirements and our sales team will prepare a tailored offer for your company."
-    : "Fill in the form below and our team will get back to you promptly.";
+    ? t.inquiryModal.offerSubtitle
+    : t.inquiryModal.defaultSubtitle;
 
   return (
     <AnimatePresence>
@@ -85,7 +93,10 @@ export default function InquiryModal({
             aria-modal="true"
             aria-label={title}
             onClick={(e) => e.stopPropagation()}
-            className="scrollbar-thin relative max-h-[90vh] w-full max-w-[680px] overflow-y-auto rounded-2xl bg-white p-6 shadow-2xl will-change-[opacity,transform] sm:p-8"
+            // relative + no overflow clipping here (unlike the scrollable card
+            // below) so the close button can sit half outside the card's edge
+            // without being cut off by scroll clipping.
+            className="relative w-full max-w-[680px] will-change-[opacity,transform]"
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 14 }}
@@ -95,21 +106,27 @@ export default function InquiryModal({
               type="button"
               onClick={onClose}
               aria-label="Close"
-              className="absolute right-4 top-4 flex size-9 items-center justify-center rounded-full text-slate transition-colors hover:bg-soft-gray hover:text-navy"
+              className="absolute -right-3.5 -top-3.5 z-10 flex size-11 cursor-pointer items-center justify-center rounded-full border border-border bg-white text-slate shadow-md transition-colors hover:bg-soft-gray hover:text-navy"
             >
               <X className="size-5" />
             </button>
 
-            <h2 className="pr-10 text-2xl font-bold text-navy">{title}</h2>
-            {isOfferFlow && <span className="mt-2 block h-1 w-10 rounded-full bg-brand-green" />}
-            <p className="mt-3 text-sm text-slate">{subtitle}</p>
+            <div className="scrollbar-thin max-h-[92vh] overflow-y-auto rounded-2xl bg-white p-5 shadow-2xl sm:p-7">
+              <h2 className="pr-10 text-2xl font-bold text-navy">{title}</h2>
+              {isOfferFlow && <span className="mt-2 block h-1 w-10 rounded-full bg-brand-green" />}
+              <p className="mt-2 text-sm text-slate">{subtitle}</p>
 
-            <div className="mt-6">
-              {isOfferFlow ? (
-                <RequestOfferForm onCancel={onClose} />
-              ) : (
-                <InquiryForm defaultType={renderOptions.type} defaultInterest={renderOptions.interest} />
-              )}
+              <div className="mt-5">
+                {isOfferFlow ? (
+                  <RequestOfferForm onCancel={onClose} />
+                ) : (
+                  <InquiryForm
+                    defaultType={renderOptions.type}
+                    defaultInterest={renderOptions.interest}
+                    onCancel={onClose}
+                  />
+                )}
+              </div>
             </div>
           </motion.div>
         </motion.div>

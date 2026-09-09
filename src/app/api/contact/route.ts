@@ -1,25 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
-
-interface ContactPayload {
-  fullName: string;
-  company: string;
-  country?: string;
-  email: string;
-  phone?: string;
-  productInterest?: string;
-  monthlyVolume?: string;
-  documentType?: string;
-  inquiryType?: string;
-  message?: string;
-  website?: string; // honeypot field, must stay empty
-}
+import { buildContactEmail, sendMail, type ContactPayload } from "@/lib/mailer";
+import { COMPANY } from "@/lib/constants";
 
 function isValidEmail(value: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
 }
 
 export async function POST(request: NextRequest) {
-  let body: Partial<ContactPayload>;
+  let body: Partial<ContactPayload> & { website?: string; sourcePage?: string; userLanguage?: string };
 
   try {
     body = await request.json();
@@ -49,15 +37,46 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "Please provide a valid email address." }, { status: 400 });
   }
 
-  // TODO: wire up real delivery once credentials are available, e.g.:
-  //   - Resend / SendGrid API to notify sales@polycleaner.com
-  //   - or persist to a CRM / Google Sheet
-  // For now, log server-side so submissions aren't silently lost during development.
-  console.log("[contact-form] New inquiry:", {
-    ...body,
-    website: undefined,
-    receivedAt: new Date().toISOString(),
-  });
+  const payload: ContactPayload = {
+    fullName: body.fullName!,
+    company: body.company!,
+    country: body.country,
+    email: body.email!,
+    phone: body.phone,
+    productInterest: body.productInterest,
+    monthlyVolume: body.monthlyVolume,
+    documentType: body.documentType,
+    sampleType: body.sampleType,
+    application: body.application,
+    deliveryDestination: body.deliveryDestination,
+    deliveryAddress: body.deliveryAddress,
+    courierAccount: body.courierAccount,
+    message: body.message,
+    inquiryType: body.inquiryType,
+    consent: body.consent === undefined ? undefined : Boolean(body.consent),
+  };
+
+  const meta = {
+    sourcePage: body.sourcePage || request.headers.get("referer") || "unknown",
+    submittedAt: new Date().toISOString(),
+    userLanguage: body.userLanguage || "EN",
+    ip: request.headers.get("x-forwarded-for")?.split(",")[0]?.trim(),
+  };
+
+  const { subject, html, text } = buildContactEmail(payload, meta);
+
+  console.log("[contact-form] New inquiry:", { ...payload, ...meta });
+
+  const result = await sendMail(COMPANY.email, subject, html, text);
+
+  if (!result.sent && "error" in result) {
+    // SMTP was configured but the send itself failed — this is a real error,
+    // unlike the "not configured yet" dev-mode case which still returns ok.
+    return NextResponse.json(
+      { error: "We couldn't send your request right now. Please try again or email us directly." },
+      { status: 502 }
+    );
+  }
 
   return NextResponse.json({ ok: true });
 }

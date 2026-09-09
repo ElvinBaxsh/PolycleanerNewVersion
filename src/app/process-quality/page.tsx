@@ -8,7 +8,7 @@ import HowWeWork from "@/components/sections/process/HowWeWork";
 import FinalCta from "@/components/sections/FinalCta";
 
 export const metadata: Metadata = {
-  title: "Process & Quality",
+  title: { absolute: "Process & Quality | Documented rPET Flakes Production" },
   description:
     "Poly Cleaner MMC's integrated process and quality systems ensure high quality rPET flakes with consistent specifications, full traceability and reliable export documentation.",
   alternates: { canonical: "/process-quality" },
@@ -17,26 +17,13 @@ export const metadata: Metadata = {
 export default function ProcessQualityPage() {
   return (
     <>
-      <PageHero
-        crumb="Process & Quality"
-        title="Process &"
-        titleAccent="Quality"
-        description="At Poly Cleaner MMC, our integrated process and quality systems ensure high quality rPET flakes with consistent specifications, full traceability and reliable export documentation."
-        photoLabel="rPET flakes production line, conveyor"
-        cta={[
-          { label: "Request Product Information", href: "/documents" },
-          { label: "Speak with Sales", inquiryType: "general" },
-        ]}
-      />
+      <PageHero pageKey="process" image="/images/ProcessQuality.jpg" />
       <FullProcessFlow />
       <CapabilitiesAndQuality />
       <QAPillars />
       <KeySpecsStrip />
       <HowWeWork />
-      <FinalCta
-        title="Let's build a cleaner future together."
-        description="Contact our team for product information or a customized solution."
-      />
+      <FinalCta variant="process" />
     </>
   );
 }

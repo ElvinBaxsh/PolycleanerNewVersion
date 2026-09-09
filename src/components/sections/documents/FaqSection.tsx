@@ -7,22 +7,23 @@ import Container from "@/components/ui/Container";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Reveal from "@/components/ui/Reveal";
 import { RevealGroup, RevealItem } from "@/components/ui/RevealGroup";
-import { DOCUMENTS_FAQ } from "@/lib/constants";
+import { useLanguage } from "@/lib/i18n/LanguageContext";
 
 export default function FaqSection() {
+  const { t } = useLanguage();
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
     <section id="faq" className="section-y scroll-mt-24 bg-white">
       <Container className="mx-auto max-w-3xl">
         <Reveal>
-          <SectionHeading title="Frequently Asked Questions" />
+          <SectionHeading title={t.documents.faqTitle} />
         </Reveal>
         <RevealGroup className="mt-8 space-y-3">
-          {DOCUMENTS_FAQ.map((item, i) => {
+          {t.documentsFaq.map((item, i) => {
             const open = openIndex === i;
             return (
-              <RevealItem key={item.q} className="overflow-hidden rounded-xl border border-border">
+              <RevealItem key={i} className="overflow-hidden rounded-xl border border-border">
                 <button
                   type="button"
                   onClick={() => setOpenIndex(open ? null : i)}

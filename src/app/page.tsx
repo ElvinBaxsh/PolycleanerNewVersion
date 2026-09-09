@@ -10,9 +10,9 @@ import TaropakBanner from "@/components/sections/TaropakBanner";
 import FinalCta from "@/components/sections/FinalCta";
 
 export const metadata: Metadata = {
-  title: "Hot Washed rPET Flakes Supplier from Azerbaijan",
+  title: { absolute: "Poly Cleaner MMC | Hot Washed rPET Flakes Supplier from Azerbaijan" },
   description:
-    "Documented Hot Washed rPET Flakes Supplier from Azerbaijan. Poly Cleaner MMC supplies consistently processed, fully documented rPET flakes for sheet, strap, fiber and non-food packaging.",
+    "Poly Cleaner MMC supplies documented hot washed rPET flakes for sheet, strap, fiber and non-food packaging applications. Export-ready recycled PET supplier from Azerbaijan.",
   alternates: { canonical: "/" },
 };
 

@@ -5,7 +5,10 @@ import "./globals.css";
 import MotionProvider from "@/components/layout/MotionProvider";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import ScrollToTopButton from "@/components/layout/ScrollToTopButton";
 import InquiryModalProvider from "@/components/inquiry/InquiryModalProvider";
+import DocumentRequestModalProvider from "@/components/sections/documents/DocumentRequestModalProvider";
+import { LanguageProvider } from "@/lib/i18n/LanguageContext";
 import { SITE_URL } from "@/lib/constants";
 
 const quicksand = Quicksand({
@@ -58,13 +61,18 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html lang="en" className={`${quicksand.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col bg-white text-[color:var(--color-charcoal)]">
         <NextTopLoader color="#4caf1b" height={3} showSpinner={false} />
-        <MotionProvider>
-          <InquiryModalProvider>
-            <Header />
-            <main className="flex-1">{children}</main>
-            <Footer />
-          </InquiryModalProvider>
-        </MotionProvider>
+        <LanguageProvider>
+          <MotionProvider>
+            <InquiryModalProvider>
+              <DocumentRequestModalProvider>
+                <Header />
+                <main className="flex-1">{children}</main>
+                <Footer />
+                <ScrollToTopButton />
+              </DocumentRequestModalProvider>
+            </InquiryModalProvider>
+          </MotionProvider>
+        </LanguageProvider>
       </body>
     </html>
   );

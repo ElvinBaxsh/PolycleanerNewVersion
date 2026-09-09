@@ -5,7 +5,7 @@ import MapAndActions from "@/components/sections/contact/MapAndActions";
 import FinalCta from "@/components/sections/FinalCta";
 
 export const metadata: Metadata = {
-  title: "Contact",
+  title: { absolute: "Contact Poly Cleaner | Request rPET Flakes Offer" },
   description:
     "Reach out to Poly Cleaner MMC for rPET flakes inquiries, samples, offers, or partnership opportunities. Our team typically replies within 24 hours.",
   alternates: { canonical: "/contact" },

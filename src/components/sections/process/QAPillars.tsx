@@ -1,28 +1,71 @@
-import { BadgeCheck, ShieldCheck, FileText, LineChart, type LucideIcon } from "lucide-react";
+"use client";
+
+import { ShieldCheck, FileText, type LucideIcon } from "lucide-react";
 import Container from "@/components/ui/Container";
 import SectionHeading from "@/components/ui/SectionHeading";
-import IconBadge from "@/components/ui/IconBadge";
 import Reveal from "@/components/ui/Reveal";
 import { RevealGroup, RevealItem } from "@/components/ui/RevealGroup";
-import { QA_PILLARS } from "@/lib/constants";
+import { useLanguage } from "@/lib/i18n/LanguageContext";
 
-const ICONS: LucideIcon[] = [BadgeCheck, ShieldCheck, FileText, LineChart];
+const ICONS: (LucideIcon | null)[] = [null, ShieldCheck, FileText, null];
+const ICON_IMAGES = [
+  "/images/icons/trimmed/consistentQuality.png",
+  null,
+  null,
+  "/images/icons/trimmed/processTransparency.png",
+];
 
 export default function QAPillars() {
+  const { t } = useLanguage();
   return (
-    <section className="section-y bg-white">
-      <Container>
+    <section className="bg-slate-50/50 py-12 lg:py-16">
+      <Container className="max-w-[1400px]">
+        {/* Bölmə Başlığı - digər bölmələr kimi soldan */}
         <Reveal>
-          <SectionHeading title="Our Quality Assurance Pillars" />
+          <SectionHeading
+            title={t.process.qaPillarsTitle}
+            className="text-2xl sm:text-3xl font-extrabold text-[#0F2A4A]"
+          />
         </Reveal>
-        <RevealGroup className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {QA_PILLARS.map((item, i) => (
-            <RevealItem key={item.title} className="rounded-2xl border border-border p-6">
-              <IconBadge icon={ICONS[i]} tone="green" size="lg" />
-              <h3 className="mt-4 text-base font-bold text-navy">{item.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-slate">{item.description}</p>
-            </RevealItem>
-          ))}
+
+        {/* Kartlar Qrupu */}
+        <RevealGroup className="mt-8 sm:mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4 items-stretch">
+          {t.qaPillars.map((item, i) => {
+            const Icon = ICONS[i];
+            const iconSrc = ICON_IMAGES[i];
+            return (
+              <RevealItem
+                key={i}
+                className="flex flex-col items-center text-center rounded-2xl border border-slate-200/80 bg-white p-6 sm:p-7 shadow-xs h-full"
+              >
+                {/* İkon - Yaşıl rəngdə */}
+                {Icon ? (
+                  <Icon className="size-12 sm:size-14 shrink-0 stroke-[1.3] text-brand-green" aria-hidden />
+                ) : (
+                  // Plain <img> (not next/image): at this small a display size
+                  // Next's optimizer re-encodes to a tiny lossy thumbnail that
+                  // visibly darkens/desaturates fine linework like this badge —
+                  // a plain img lets the browser scale the full-res PNG itself.
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    src={iconSrc!}
+                    alt=""
+                    className="size-12 sm:size-14 shrink-0 object-contain"
+                  />
+                )}
+
+                {/* Başlıq */}
+                <h3 className="mt-5 text-base sm:text-lg font-bold text-[#0F2A4A] leading-snug">
+                  {item.title}
+                </h3>
+
+                {/* Açıqlama Mətni */}
+                <p className="mt-2.5 text-xs sm:text-sm leading-relaxed text-slate-500 font-normal">
+                  {item.description}
+                </p>
+              </RevealItem>
+            );
+          })}
         </RevealGroup>
       </Container>
     </section>

@@ -1,20 +1,22 @@
+"use client";
+
 import Container from "@/components/ui/Container";
 import Reveal from "@/components/ui/Reveal";
-import { SPEC_TABLE, PRODUCT_INFO } from "@/lib/constants";
-
+import { useLanguage } from "@/lib/i18n/LanguageContext";
 export default function SpecsAndInfo() {
+  const { t } = useLanguage();
   return (
     <section className="bg-slate-50/50 py-12 lg:py-16">
       <Container className="grid grid-cols-1 gap-8 items-stretch lg:grid-cols-2">
         {/* Specifications Table */}
         <Reveal className="flex flex-col h-full">
           <h2 className="text-xl sm:text-2xl font-bold text-[#0F2A4A]">
-            Specifications (Typical Values)
+            {t.rpet.specsTitle}
           </h2>
           <div className="mt-4 flex-1 overflow-hidden rounded-xl border border-slate-200/80 bg-white shadow-xs flex flex-col">
             <table className="w-full h-full border-collapse text-xs sm:text-sm">
               <tbody className="divide-y divide-slate-100 h-full">
-                {SPEC_TABLE.map((row) => (
+                {t.specTable.map((row) => (
                   <tr key={row.label} className="transition-colors hover:bg-slate-50/40">
                     <td className="w-[38%] bg-slate-50/80 px-4 py-2.5 font-bold text-[#0F2A4A] align-middle">
                       {row.label}
@@ -32,13 +34,13 @@ export default function SpecsAndInfo() {
         {/* Product Information Card */}
         <Reveal delay={0.1} className="flex flex-col h-full">
           <h2 className="text-xl sm:text-2xl font-bold text-[#0F2A4A]">
-            Product Information
+            {t.rpet.productInfoTitle}
           </h2>
           <div className="mt-4 flex-1 rounded-xl border border-slate-200/80 bg-white shadow-xs flex flex-col justify-between overflow-hidden">
             <ul className="divide-y divide-slate-100 flex-1 flex flex-col justify-between">
-              {PRODUCT_INFO.map((item) => (
-                <li 
-                  key={item.label} 
+              {t.productInfo.map((item) => (
+                <li
+                  key={item.label}
                   className="flex items-center gap-2.5 px-4 py-2.5 flex-1 text-xs sm:text-sm leading-tight"
                 >
                   <span className="font-bold text-emerald-500 shrink-0 select-none" aria-hidden>

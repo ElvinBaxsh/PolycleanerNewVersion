@@ -1,20 +1,20 @@
-export const SITE_URL = "https://www.polycleaner.com";
+export const SITE_URL = "https://polycleaner.az";
 export const SITE_NAME = "Poly Cleaner MMC";
 
 export const COMPANY = {
   name: "Poly Cleaner MMC",
   tagline: "From Waste to Value",
-  email: "info@polycleaner.com",
-  phone: "+994 50 123 45 67",
-  whatsappNumber: "994501234567",
-  address: "Balakhani Industrial Park, Sabunchu District, Baku, Azerbaijan",
+  email: "office@polycleaner.az",
+  phone: "+994 55 257 54 54",
+  whatsappNumber: "994552575454",
+  address: "Balakhani Industrial Park, 1th zone",
   languages: ["English", "Russian", "Turkish", "Azerbaijani"],
 };
 
-// Sales inbox for the "Request Offer" modal specifically, per the client's
-// technical brief for that flow. Swap for the confirmed live address before
-// launch — see README.
-export const OFFER_SALES_EMAIL = "info@polycleaner.az";
+// Where form submissions are routed internally. "Request Offer" goes to all
+// three inboxes; every other inquiry type (sample, TAROPAK, documents,
+// general) goes to COMPANY.email only.
+export const OFFER_SALES_EMAILS = [COMPANY.email, "sales@polycleaner.az", "telmannadjafov@polycleaner.az"];
 
 export const OFFER_PRODUCT_INTEREST_OPTIONS = [
   "Transparent / Clear rPET Flakes",
@@ -41,6 +41,14 @@ export const OFFER_APPLICATION_OPTIONS = [
   "Non-food Packaging",
   "Trading / Distribution",
   "Other",
+];
+
+export const SAMPLE_TYPE_OPTIONS = [
+  "500g Sample",
+  "1kg Sample",
+  "2kg Sample",
+  "5kg Sample",
+  "Custom Quantity",
 ];
 
 export const COUNTRY_OPTIONS = [
@@ -156,11 +164,10 @@ export const PRODUCT_INFO = [
 ];
 
 export const BUYER_DOCUMENTS = [
-  { name: "Company Profile", format: "PDF" },
-  { name: "Product Offer Sheet", format: "PDF" },
-  { name: "Technical Data Sheet", format: "PDF" },
-  { name: "Sample COA", format: "PDF" },
-  { name: "Traceability Note", format: "PDF" },
+  { name: "Company Profile", format: "PDF", file: "/PDF/company-profile.pdf" },
+  { name: "Product Offer Sheet", format: "PDF", file: "/PDF/product-offer-sheet.pdf" },
+  { name: "Technical Data Sheet", format: "PDF", file: "/PDF/technical-data-sheet.pdf" },
+  { name: "Traceability Note", format: "PDF", file: "/PDF/traceability-note.pdf" },
 ];
 
 export const WHY_CHOOSE_ITEMS = [
@@ -170,19 +177,19 @@ export const WHY_CHOOSE_ITEMS = [
   },
   {
     title: "Quality Assurance",
-    description: "Every batch is tested in our in-house lab to ensure consistent quality and customer satisfaction.",
+    description: "Every batch is controlled to support consistent quality and customer confidence.",
   },
   {
     title: "Global Partnership",
-    description: "We build long-term partnerships with manufacturers, recyclers and traders worldwide.",
+    description: "We build long-term partnerships with manufacturers, recyclers and traders.",
   },
   {
     title: "Fast & Reliable",
-    description: "Flexible logistics, on-time delivery and dedicated support for your business.",
+    description: "Flexible logistics, clear documentation and responsive sales support.",
   },
   {
     title: "Experienced Team",
-    description: "Professional team with deep industry knowledge and export expertise.",
+    description: "Professional team with recycling and export experience.",
   },
 ];
 
@@ -196,10 +203,10 @@ export const PRODUCT_INTERESTS = [
 ];
 
 export const INQUIRY_TYPES = [
-  { value: "offer", label: "Request Offer" },
+  { value: "offer", label: "Request rPET Flakes Offer" },
   { value: "sample", label: "Request Sample" },
   { value: "taropak", label: "Book TAROPAK Meeting" },
-  { value: "documents", label: "Request Document Pack" },
+  { value: "documents", label: "Request Buyer Documents" },
   { value: "general", label: "General / Contact Sales" },
 ];
 
@@ -266,7 +273,7 @@ export const QUALITY_CONTROL = [
 export const QA_PILLARS = [
   { title: "Consistent Quality", description: "Standardized processes and advanced equipment ensure stable, high-quality rPET flakes batch after batch." },
   { title: "Traceable Operations", description: "End-to-end traceability from collection to shipment for complete visibility and accountability." },
-  { title: "Export Documentation", description: "Full set of export documents including COA, Packing List, Invoice and Bill of Lading provided." },
+  { title: "Export Documentation", description: "Commercial and shipping documents are prepared for international trade." },
   { title: "Process Transparency", description: "Open communication and clear data to build long-term trust with our global partners." },
 ];
 
@@ -304,7 +311,7 @@ export const SUSTAINABILITY_STEPS = [
   { name: "Drying", description: "Moisture is removed for clean flakes." },
   { name: "Flaking", description: "Bottles are shredded into uniform flakes." },
   { name: "Quality Control", description: "Strict testing ensures consistent quality." },
-  { name: "rPET Flakes", description: "Ready for your production." },
+  { name: "High-Quality rPET Flakes", description: "Ready for your production." },
 ];
 
 export const IMPACT_STATS = [
@@ -315,42 +322,85 @@ export const IMPACT_STATS = [
   { value: "Positive", label: "Social impact supporting local jobs and communities" },
 ];
 
-export const DOCUMENT_CATEGORIES = [
-  "All Documents",
-  "Company",
-  "Product",
-  "Quality",
-  "Sustainability",
-  "Events",
-];
-
-export const DOCUMENT_LIST = [
-  { name: "Company Profile", category: "Company", format: "PDF", size: "2.4 MB", icon: "company" },
-  { name: "Product Offer Sheet", category: "Product", format: "PDF", size: "1.6 MB", icon: "product" },
-  { name: "Technical Data Sheet", category: "Product", format: "PDF", size: "1.3 MB", icon: "technical" },
-  { name: "Sample COA (General)", category: "Quality", format: "PDF", size: "850 KB", icon: "coa" },
-  { name: "Traceability Note", category: "Quality", format: "PDF", size: "1.1 MB", icon: "traceability" },
-  { name: "Process Overview", category: "Company", format: "PDF", size: "1.7 MB", icon: "process" },
-  { name: "Sustainability Note", category: "Sustainability", format: "PDF", size: "1.2 MB", icon: "sustainability" },
-  { name: "TAROPAK Meeting Brochure", category: "Events", format: "PDF", size: "2.0 MB", icon: "event" },
+export const DOCUMENT_LIST: {
+  name: string;
+  category: string;
+  format: string;
+  size: string;
+  icon: string;
+  file?: string;
+  description: string;
+}[] = [
+  {
+    name: "Company Profile",
+    category: "Company",
+    format: "PDF",
+    size: "71 KB",
+    icon: "company",
+    file: "/PDF/company-profile.pdf",
+    description: "Company structure, background and overall capabilities.",
+  },
+  {
+    name: "Product Offer Sheet",
+    category: "Product",
+    format: "PDF",
+    size: "151 KB",
+    icon: "product",
+    file: "/PDF/product-offer-sheet.pdf",
+    description: "Grades, colors and commercial offer summary.",
+  },
+  {
+    name: "Technical Data Sheet",
+    category: "Product",
+    format: "PDF",
+    size: "208 KB",
+    icon: "technical",
+    file: "/PDF/technical-data-sheet.pdf",
+    description: "Physical and chemical properties, specs and application notes.",
+  },
+  {
+    name: "Traceability Note",
+    category: "Quality",
+    format: "PDF",
+    size: "140 KB",
+    icon: "traceability",
+    file: "/PDF/traceability-note.pdf",
+    description: "Raw material chain of custody and batch traceability.",
+  },
+  {
+    name: "Process Overview",
+    category: "Company",
+    format: "PDF",
+    size: "1.7 MB",
+    icon: "process",
+    description: "Step-by-step overview of our production and quality process.",
+  },
+  {
+    name: "Sustainability Note",
+    category: "Sustainability",
+    format: "PDF",
+    size: "1.2 MB",
+    icon: "sustainability",
+    description: "Our approach to responsible sourcing and environmental impact.",
+  },
 ];
 
 export const DOCUMENTS_FAQ = [
   {
-    q: "Are your documents updated regularly?",
-    a: "Yes. All documents are reviewed and updated regularly to reflect our current certifications, specifications and operations.",
+    q: "How can I request a sample?",
+    a: "Use the Request Sample button on this page or the Contact page, and our sales team will arrange a sample for your evaluation.",
   },
   {
-    q: "Can I get documents in other languages?",
+    q: "How do I request a TDS or COA?",
+    a: "Request our Technical Data Sheet or Certificate of Analysis through the document request form on this page or by contacting our sales team directly.",
+  },
+  {
+    q: "Do you provide export documents?",
+    a: "Yes. We prepare the commercial and shipping documents required for international trade for every shipment upon order confirmation.",
+  },
+  {
+    q: "Can I get documents in another language?",
     a: "Most documents are available in English. For other languages, contact our team and we'll do our best to accommodate your request.",
-  },
-  {
-    q: "Do you provide documents for specific customers or destinations?",
-    a: "Yes. We can tailor documentation — such as certificates and packing details — to match specific customer or destination requirements upon request.",
-  },
-  {
-    q: "How can I request additional documents?",
-    a: "Use the custom document request form on this page, or contact our sales team directly, and we'll prepare the documents you need.",
   },
 ];
 
@@ -405,9 +455,9 @@ export const PARTNERS = [
 ];
 
 export const CONTACT_INFO = [
-  { label: "Sales Email", value: "info@polycleaner.com", sub: "We typically reply within 24 hours." },
-  { label: "Phone / WhatsApp", value: "+994 50 123 45 67", sub: "Mon – Fri, 09:00 – 18:00 (GMT+4)" },
-  { label: "Location", value: "Balakhani Industrial Park, Sabunchu District, Baku, Azerbaijan", sub: "Factory & Headquarters" },
-  { label: "Website", value: "www.polycleaner.com", sub: "Learn more about our products & services." },
+  { label: "Sales Email", value: "office@polycleaner.az", sub: "We typically reply within 24 hours." },
+  { label: "Phone / WhatsApp", value: "+994 55 257 54 54", sub: "Mon – Fri, 09:00 – 18:00 (GMT+4)" },
+  { label: "Location", value: "Balakhani Industrial Park, 1th zone", sub: "Factory & Headquarters" },
+  { label: "Website", value: "polycleaner.az", sub: "Learn more about our products & services." },
   { label: "Working Languages", value: "English • Russian • Turkish • Azerbaijani", sub: "We support you in your language." },
 ];
