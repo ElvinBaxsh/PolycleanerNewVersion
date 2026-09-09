@@ -6,6 +6,8 @@ import NumbersStrip from "@/components/sections/about/NumbersStrip";
 import WhyPartner from "@/components/sections/about/WhyPartner";
 import ProcessStrip from "@/components/sections/ProcessStrip";
 import FinalCta from "@/components/sections/FinalCta";
+import JsonLd from "@/components/seo/JsonLd";
+import { breadcrumbJsonLd } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: { absolute: "About Poly Cleaner | rPET Flakes Producer in Azerbaijan" },
@@ -17,6 +19,7 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <>
+      <JsonLd data={breadcrumbJsonLd([{ name: "Home", path: "/" }, { name: "About Us", path: "/about" }])} />
       <PageHero pageKey="about" />
       <CompanyOverview />
       <OurValues />

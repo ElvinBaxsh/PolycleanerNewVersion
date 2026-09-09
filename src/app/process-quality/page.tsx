@@ -6,6 +6,8 @@ import QAPillars from "@/components/sections/process/QAPillars";
 import KeySpecsStrip from "@/components/sections/process/KeySpecsStrip";
 import HowWeWork from "@/components/sections/process/HowWeWork";
 import FinalCta from "@/components/sections/FinalCta";
+import JsonLd from "@/components/seo/JsonLd";
+import { breadcrumbJsonLd } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: { absolute: "Process & Quality | Documented rPET Flakes Production" },
@@ -17,6 +19,9 @@ export const metadata: Metadata = {
 export default function ProcessQualityPage() {
   return (
     <>
+      <JsonLd
+        data={breadcrumbJsonLd([{ name: "Home", path: "/" }, { name: "Process & Quality", path: "/process-quality" }])}
+      />
       <PageHero pageKey="process" image="/images/ProcessQuality.jpg" />
       <FullProcessFlow />
       <CapabilitiesAndQuality />

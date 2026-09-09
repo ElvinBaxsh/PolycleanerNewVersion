@@ -7,6 +7,8 @@ import SpecsAndInfo from "@/components/sections/rpet/SpecsAndInfo";
 import CloseupGallery from "@/components/sections/rpet/CloseupGallery";
 import BuyerDocuments from "@/components/sections/BuyerDocuments";
 import FinalCta from "@/components/sections/FinalCta";
+import JsonLd from "@/components/seo/JsonLd";
+import { breadcrumbJsonLd } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Hot Washed rPET Flakes",
@@ -18,6 +20,7 @@ export const metadata: Metadata = {
 export default function RpetFlakesPage() {
   return (
     <>
+      <JsonLd data={breadcrumbJsonLd([{ name: "Home", path: "/" }, { name: "rPET Flakes", path: "/rpet-flakes" }])} />
       <PageHero pageKey="rpet" />
       <RpetTrustStrip />
       <ProductGrades />

@@ -7,6 +7,8 @@ import SustainabilityPillars from "@/components/sections/sustainability/Sustaina
 import PlasticCreditBanner from "@/components/sections/sustainability/PlasticCreditBanner";
 import ImpactStats from "@/components/sections/sustainability/ImpactStats";
 import FinalCta from "@/components/sections/FinalCta";
+import JsonLd from "@/components/seo/JsonLd";
+import { breadcrumbJsonLd } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: { absolute: "Sustainability | From Waste to Value | Poly Cleaner" },
@@ -18,6 +20,7 @@ export const metadata: Metadata = {
 export default function SustainabilityPage() {
   return (
     <>
+      <JsonLd data={breadcrumbJsonLd([{ name: "Home", path: "/" }, { name: "Sustainability", path: "/sustainability" }])} />
       <PageHero pageKey="sustainability" image="/images/sustainabilityImg.jpg" imagePosition="right" />
       <SustainabilityTrustStrip />
       <ImpactCards />

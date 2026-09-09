@@ -3,6 +3,8 @@ import ContactHero from "@/components/sections/contact/ContactHero";
 import ContactFormSection from "@/components/sections/contact/ContactFormSection";
 import MapAndActions from "@/components/sections/contact/MapAndActions";
 import FinalCta from "@/components/sections/FinalCta";
+import JsonLd from "@/components/seo/JsonLd";
+import { breadcrumbJsonLd } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: { absolute: "Contact Poly Cleaner | Request rPET Flakes Offer" },
@@ -25,6 +27,7 @@ export default async function ContactPage({
 
   return (
     <>
+      <JsonLd data={breadcrumbJsonLd([{ name: "Home", path: "/" }, { name: "Contact", path: "/contact" }])} />
       <ContactHero />
       <ContactFormSection defaultType={type} defaultInterest={interest} />
       <MapAndActions />

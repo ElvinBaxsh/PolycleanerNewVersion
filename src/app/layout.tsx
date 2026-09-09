@@ -10,6 +10,8 @@ import InquiryModalProvider from "@/components/inquiry/InquiryModalProvider";
 import DocumentRequestModalProvider from "@/components/sections/documents/DocumentRequestModalProvider";
 import { LanguageProvider } from "@/lib/i18n/LanguageContext";
 import { SITE_URL } from "@/lib/constants";
+import { organizationJsonLd, websiteJsonLd } from "@/lib/seo";
+import JsonLd from "@/components/seo/JsonLd";
 
 const quicksand = Quicksand({
   variable: "--font-quicksand",
@@ -43,16 +45,37 @@ export const metadata: Metadata = {
     url: SITE_URL,
     siteName: "Poly Cleaner MMC",
     locale: "en_US",
+    alternateLocale: ["az_AZ"],
     type: "website",
+    images: [
+      {
+        url: "/images/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Poly Cleaner MMC — Hot Washed rPET Flakes Supplier from Azerbaijan",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Poly Cleaner MMC | Hot Washed rPET Flakes Supplier from Azerbaijan",
     description:
       "Documented, hot washed rPET flakes for sheet, strap, fiber and non-food packaging, exported worldwide from Azerbaijan.",
+    images: ["/images/og-image.png"],
   },
   alternates: {
     canonical: SITE_URL,
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
   },
 };
 
@@ -60,6 +83,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" className={`${quicksand.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col bg-white text-[color:var(--color-charcoal)]">
+        <JsonLd data={organizationJsonLd()} />
+        <JsonLd data={websiteJsonLd()} />
         <NextTopLoader color="#4caf1b" height={3} showSpinner={false} />
         <LanguageProvider>
           <MotionProvider>
