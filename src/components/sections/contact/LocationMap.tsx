@@ -59,9 +59,13 @@ export default function LocationMap() {
   }, []);
 
   return (
+    // relative + z-0 gives Leaflet's container its own stacking context —
+    // without it, Leaflet's internal panes/controls (z-index up to 1000)
+    // aren't contained and render above the site's sticky header instead
+    // of staying inside this card.
     <div
       ref={containerRef}
-      className="aspect-[4/3] w-full overflow-hidden rounded-2xl border border-border"
+      className="relative z-0 aspect-[4/3] w-full overflow-hidden rounded-2xl border border-border"
       aria-label={`Map showing ${COMPANY.name} at ${COMPANY.address}`}
     />
   );
