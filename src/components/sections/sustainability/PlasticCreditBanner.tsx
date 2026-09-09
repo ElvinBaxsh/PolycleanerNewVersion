@@ -6,9 +6,10 @@ import { ArrowRight } from "lucide-react";
 import Container from "@/components/ui/Container";
 import Reveal from "@/components/ui/Reveal";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
+import { localizePath } from "@/lib/i18n/localizePath";
 
 export default function PlasticCreditBanner() {
-  const { t } = useLanguage();
+  const { t, locale } = useLanguage();
   return (
     <section className="bg-slate-50/50 py-8 lg:py-10">
       <Container className="max-w-[1140px]">
@@ -38,7 +39,7 @@ export default function PlasticCreditBanner() {
                 {t.sustainability.plasticCreditDescription}
               </p>
               <Link
-                href="/sustainability"
+                href={localizePath("/sustainability", locale)}
                 className="mt-4 inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-emerald-600 hover:text-emerald-700 transition-colors"
               >
                 {t.sustainability.plasticCreditLink}

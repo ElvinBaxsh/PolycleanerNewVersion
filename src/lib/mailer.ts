@@ -1,5 +1,6 @@
 import nodemailer from "nodemailer";
 import path from "path";
+import { BUYER_DOCUMENTS } from "./constants";
 
 // Embedded as a CID attachment (see sendMail) rather than linked by URL —
 // a linked <img src="https://..."> would only render once the site is
@@ -8,6 +9,15 @@ import path from "path";
 const LOGO_CID = "polycleaner-logo";
 const LOGO_SRC = `cid:${LOGO_CID}`;
 const LOGO_PATH = path.join(process.cwd(), "public", "images", "polycleaner-logonew.png");
+
+// Same reasoning as the logo above: attaching the actual PDF files (rather
+// than linking to /PDF/... on the live site) means a "Buyer Documents"
+// request email works immediately, regardless of whether the site has
+// been deployed yet.
+export const BUYER_DOCUMENT_ATTACHMENTS: EmailAttachment[] = BUYER_DOCUMENTS.map((doc) => ({
+  filename: doc.file.split("/").pop()!,
+  path: path.join(process.cwd(), "public", doc.file),
+}));
 
 export interface RequestOfferPayload {
   fullName: string;
@@ -191,9 +201,13 @@ export function buildRequestOfferEmail(payload: RequestOfferPayload, meta: Reque
 
 export interface ContactPayload {
   fullName: string;
-  company: string;
+  // Optional — the Partner form's "Company / Organisation" field isn't required.
+  company?: string;
   country?: string;
-  email: string;
+  city?: string;
+  // Optional (not required) rather than string — the Partner form accepts
+  // either an email or a phone number, not necessarily both.
+  email?: string;
   phone?: string;
   productInterest?: string;
   monthlyVolume?: string;
@@ -203,6 +217,7 @@ export interface ContactPayload {
   deliveryDestination?: string;
   deliveryAddress?: string;
   courierAccount?: string;
+  partnershipInterest?: string;
   message?: string;
   inquiryType?: string;
   consent?: boolean;
@@ -213,13 +228,27 @@ export interface ContactMeta {
   submittedAt: string;
   userLanguage?: string;
   ip?: string;
+  attachmentNames?: string[];
+}
+
+/** A customer-uploaded file (e.g. a reference photo on the Sample form),
+ * read fully into memory server-side and passed through to nodemailer. */
+export interface EmailAttachment {
+  filename: string;
+  /** In-memory content (customer file uploads) — mutually exclusive with `path`. */
+  content?: Buffer;
+  /** A local file path (bundled assets, e.g. the buyer-document PDFs) — mutually exclusive with `content`. */
+  path?: string;
+  contentType?: string;
 }
 
 const INQUIRY_TYPE_LABELS: Record<string, string> = {
   sample: "Sample Request",
   taropak: "TAROPAK Meeting Request",
+  amiExpo: "AMI Expo Meeting Request",
   documents: "Buyer Documents Request",
   general: "General Inquiry",
+  partner: "Partnership Request",
 };
 
 /**
@@ -231,16 +260,28 @@ const INQUIRY_TYPE_LABELS: Record<string, string> = {
 export function buildContactEmail(payload: ContactPayload, meta: ContactMeta) {
   const kind = INQUIRY_TYPE_LABELS[payload.inquiryType ?? "general"] ?? "General Inquiry";
   const isSample = payload.inquiryType === "sample";
-  const subject = `New ${kind} — Poly Cleaner Website — ${payload.company}`;
+  const isDocuments = payload.inquiryType === "documents";
+  const isPartner = payload.inquiryType === "partner";
+  const subject = `New ${kind} — Poly Cleaner Website — ${payload.company || payload.fullName}`;
 
   const leadInfo = `
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
       ${infoRow("Full Name:", payload.fullName)}
       ${infoRow("Company Name:", payload.company)}
       ${infoRow("Country:", payload.country)}
+      ${infoRow("City:", payload.city)}
       ${infoRow("Email:", payload.email)}
       ${infoRow("Phone / WhatsApp:", payload.phone)}
     </table>`;
+
+  // The Partner form doesn't collect Product Interest / Monthly Volume /
+  // Document Type — Partnership Interest is its own thing, own section.
+  const partnershipDetails = isPartner
+    ? `
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+      ${infoRow("Partnership Interest:", payload.partnershipInterest)}
+    </table>`
+    : "";
 
   // Sample requests carry their own set of fields (sample type, application,
   // delivery address, courier account) that don't apply to other inquiry
@@ -265,6 +306,25 @@ export function buildContactEmail(payload: ContactPayload, meta: ContactMeta) {
     </table>`;
   const hasOtherDetails = Boolean(payload.productInterest || payload.monthlyVolume || payload.documentType);
 
+  // The 4 buyer-document PDFs are attached to this email (see sendMail /
+  // BUYER_DOCUMENT_ATTACHMENTS) rather than linked — a cid: link in an <a
+  // href> isn't reliably clickable-to-open across email clients the way
+  // cid: works for inline <img>, so this is a plain list, not fake buttons.
+  const buyerDocumentsList = isDocuments
+    ? `
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+      ${BUYER_DOCUMENTS.map(
+        (doc) => `
+      <tr>
+        <td style="padding:5px 0;color:#062B3A;font-size:14px;font-weight:700;">
+          &#128206; ${escapeHtml(doc.name)} <span style="color:#64748b;font-weight:400;">(${escapeHtml(doc.format)})</span>
+        </td>
+      </tr>`
+      ).join("")}
+    </table>
+    <p style="margin:10px 0 0;color:#64748b;font-size:12px;">These documents are attached to this email.</p>`
+    : "";
+
   const sourcePageLink = `<a href="${escapeHtml(meta.sourcePage)}" style="color:#1688B5;text-decoration:underline;">${escapeHtml(meta.sourcePage)}</a>`;
   const systemInfo = `
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
@@ -276,6 +336,7 @@ export function buildContactEmail(payload: ContactPayload, meta: ContactMeta) {
       ${infoRow("User Language:", meta.userLanguage)}
       ${meta.ip ? infoRow("IP Address:", meta.ip) : ""}
       ${payload.consent !== undefined ? infoRow("Consent:", payload.consent ? "Granted (Privacy Policy Accepted)" : "Not granted") : ""}
+      ${meta.attachmentNames?.length ? infoRow("Attachments:", meta.attachmentNames.join(", ")) : ""}
     </table>`;
 
   const html = `
@@ -304,6 +365,8 @@ export function buildContactEmail(payload: ContactPayload, meta: ContactMeta) {
           ${sectionCard("&#128100;", "Lead Information", leadInfo)}
           ${isSample ? sectionCard("&#128230;", "Sample Requirements", sampleRequirements) : ""}
           ${!isSample && hasOtherDetails ? sectionCard("&#128230;", "Inquiry Details", otherDetails) : ""}
+          ${isDocuments ? sectionCard("&#128193;", "Buyer Documents", buyerDocumentsList) : ""}
+          ${isPartner ? sectionCard("&#129309;", "Partnership Details", partnershipDetails) : ""}
           ${
             payload.message
               ? sectionCard(
@@ -338,9 +401,10 @@ export function buildContactEmail(payload: ContactPayload, meta: ContactMeta) {
     "",
     "Lead Information",
     `Full Name: ${payload.fullName}`,
-    `Company Name: ${payload.company}`,
+    payload.company ? `Company Name: ${payload.company}` : null,
     payload.country ? `Country: ${payload.country}` : null,
-    `Email: ${payload.email}`,
+    payload.city ? `City: ${payload.city}` : null,
+    payload.email ? `Email: ${payload.email}` : null,
     payload.phone ? `Phone / WhatsApp: ${payload.phone}` : null,
     isSample ? "" : null,
     isSample ? "Sample Requirements" : null,
@@ -355,6 +419,12 @@ export function buildContactEmail(payload: ContactPayload, meta: ContactMeta) {
     !isSample && payload.productInterest ? `Product Interest: ${payload.productInterest}` : null,
     !isSample && payload.monthlyVolume ? `Monthly Volume: ${payload.monthlyVolume}` : null,
     !isSample && payload.documentType ? `Document Type: ${payload.documentType}` : null,
+    isDocuments ? "" : null,
+    isDocuments ? "Buyer Documents (attached to this email)" : null,
+    ...(isDocuments ? BUYER_DOCUMENTS.map((doc) => `- ${doc.name} (${doc.format})`) : []),
+    isPartner ? "" : null,
+    isPartner ? "Partnership Details" : null,
+    isPartner && payload.partnershipInterest ? `Partnership Interest: ${payload.partnershipInterest}` : null,
     payload.message ? `\nMessage:\n${payload.message}` : null,
     "",
     "System Information",
@@ -365,6 +435,7 @@ export function buildContactEmail(payload: ContactPayload, meta: ContactMeta) {
     payload.consent !== undefined
       ? `Consent: ${payload.consent ? "Granted (Privacy Policy Accepted)" : "Not granted"}`
       : null,
+    meta.attachmentNames?.length ? `Attachments: ${meta.attachmentNames.join(", ")}` : null,
   ]
     .filter((line): line is string => line !== null)
     .join("\n");
@@ -378,7 +449,13 @@ export function buildContactEmail(payload: ContactPayload, meta: ContactMeta) {
  * configured yet, so local/dev submissions still succeed (logged to the
  * console) while the real send path is ready for production credentials.
  */
-export async function sendMail(to: string | string[], subject: string, html: string, text: string) {
+export async function sendMail(
+  to: string | string[],
+  subject: string,
+  html: string,
+  text: string,
+  extraAttachments: EmailAttachment[] = []
+) {
   const { SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS, SMTP_FROM } = process.env;
 
   if (!SMTP_HOST || !SMTP_USER || !SMTP_PASS) {
@@ -411,6 +488,7 @@ export async function sendMail(to: string | string[], subject: string, html: str
           path: LOGO_PATH,
           cid: LOGO_CID,
         },
+        ...extraAttachments,
       ],
     });
     return { sent: true as const };

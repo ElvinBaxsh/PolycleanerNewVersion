@@ -1,12 +1,11 @@
 "use client";
 
 import { useRef, useState } from "react";
-import Link from "next/link";
 import { ChevronRight, Users } from "lucide-react";
 import Container from "@/components/ui/Container";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Reveal from "@/components/ui/Reveal";
-import { RevealGroup, RevealItem } from "@/components/ui/RevealGroup";
+import InquiryButton from "@/components/inquiry/InquiryButton";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 import { PARTNERS } from "@/lib/constants";
 
@@ -39,29 +38,10 @@ export default function PartnersSection() {
           />
         </Reveal>
 
-        {/* Desktop / tablet grid */}
-        <RevealGroup className="mt-10 hidden grid-cols-3 items-center gap-x-6 gap-y-6 sm:grid">
-          {PARTNERS.map((partner, i) => (
-            <RevealItem key={partner.name}>
-              <a
-                href={partner.website}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`Visit ${partnerText[i].name} website`}
-                className="flex h-24 items-center justify-center transition-transform duration-300 hover:-translate-y-1"
-              >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={partner.logo}
-                  alt={partnerText[i].name}
-                  className="h-auto max-h-20 w-auto max-w-[160px] object-contain sm:max-h-24 sm:max-w-[190px]"
-                />
-              </a>
-            </RevealItem>
-          ))}
-        </RevealGroup>
-
-        {/* Mobile Marquee */}
+        {/* A static grid stopped fitting once the partner list grew past
+            ~6 logos (four-plus rows on desktop) — a single continuously
+            scrolling strip keeps this section a fixed, compact height no
+            matter how many partners get added, at every breakpoint. */}
         <div
           onMouseEnter={handlePauseStart}
           onMouseLeave={handlePauseEnd}
@@ -69,32 +49,42 @@ export default function PartnersSection() {
           onPointerUp={handlePauseEnd}
           onTouchStart={handlePauseStart}
           onTouchEnd={handlePauseEnd}
-          className="scrollbar-none mt-10 overflow-x-auto sm:hidden"
+          className="scrollbar-none mt-10 overflow-x-auto"
         >
           <div
-            className="flex w-max items-center gap-8"
+            className="flex w-max items-center gap-8 sm:gap-12"
             style={{
-              animation: "partners-marquee 24s linear infinite",
+              animation: "partners-marquee 32s linear infinite",
               animationPlayState: paused ? "paused" : "running",
             }}
           >
-            {LOOP_PARTNERS.map((partner, i) => (
-              <a
-                key={`${partner.name}-${i}`}
-                href={partner.website}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`Visit ${loopPartnerText[i].name} website`}
-                className="flex h-16 shrink-0 items-center justify-center"
-              >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={partner.logo}
-                  alt={loopPartnerText[i].name}
-                  className="h-auto max-h-16 w-auto max-w-[140px] object-contain"
-                />
-              </a>
-            ))}
+            {LOOP_PARTNERS.map((partner, i) => {
+              // Verra's mark is a slim boxed wordmark — at the shared logo
+              // height it reads visibly smaller/lighter than the bolder
+              // marks around it, so it gets a bit more room to match.
+              const isVerra = partner.name === "Verra";
+              return (
+                <a
+                  key={`${partner.name}-${i}`}
+                  href={partner.website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Visit ${loopPartnerText[i].name} website`}
+                  className="flex h-16 shrink-0 items-center justify-center transition-transform duration-300 hover:-translate-y-1 sm:h-24"
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={partner.logo}
+                    alt={loopPartnerText[i].name}
+                    className={
+                      isVerra
+                        ? "h-auto max-h-20 w-auto max-w-[170px] object-contain sm:max-h-28 sm:max-w-[220px]"
+                        : "h-auto max-h-16 w-auto max-w-[140px] object-contain sm:max-h-24 sm:max-w-[190px]"
+                    }
+                  />
+                </a>
+              );
+            })}
           </div>
         </div>
 
@@ -110,13 +100,14 @@ export default function PartnersSection() {
               <p className="text-sm text-slate-500">{t.home.partnersCtaDescription}</p>
             </div>
           </div>
-          <Link
-            href="/contact#form"
-            className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-brand-green-dark px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-navy"
+          <InquiryButton
+            type="partner"
+            variant="outline"
+            className="inline-flex shrink-0 items-center gap-1.5 rounded-full !border-0 !bg-brand-green-dark px-6 py-3 text-sm font-semibold text-white transition-colors hover:!bg-navy"
           >
             {t.home.partnersCtaButton}
             <ChevronRight className="size-4" aria-hidden />
-          </Link>
+          </InquiryButton>
         </Reveal>
       </Container>
     </section>

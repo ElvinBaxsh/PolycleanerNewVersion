@@ -7,6 +7,7 @@ import Logo from "./Logo";
 import Container from "@/components/ui/Container";
 import LanguageSwitcher from "./LanguageSwitcher";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
+import { localizePath } from "@/lib/i18n/localizePath";
 import {
   NAV_LINKS,
   FOOTER_PRODUCT_LINKS,
@@ -15,7 +16,7 @@ import {
 } from "@/lib/constants";
 
 export default function Footer() {
-  const { t } = useLanguage();
+  const { t, locale } = useLanguage();
   const navLabels = [t.nav.home, t.nav.about, t.nav.rpet, t.nav.process, t.nav.sustainability, t.nav.documents, t.nav.contact];
 
   return (
@@ -35,7 +36,7 @@ export default function Footer() {
           <ul className="mt-4 space-y-2.5 text-sm">
             {NAV_LINKS.map((link, i) => (
               <li key={link.href}>
-                <Link href={link.href} className="text-white/60 hover:text-white">
+                <Link href={localizePath(link.href, locale)} className="text-white/60 hover:text-white">
                   {navLabels[i]}
                 </Link>
               </li>
@@ -48,7 +49,7 @@ export default function Footer() {
           <ul className="mt-4 space-y-2.5 text-sm">
             {FOOTER_PRODUCT_LINKS.map((link, i) => (
               <li key={link.label}>
-                <Link href={link.href} className="text-white/60 hover:text-white">
+                <Link href={localizePath(link.href, locale)} className="text-white/60 hover:text-white">
                   {t.footer.productLinks[i]}
                 </Link>
               </li>
@@ -61,7 +62,7 @@ export default function Footer() {
           <ul className="mt-4 space-y-2.5 text-sm">
             {FOOTER_INFO_LINKS.map((link, i) => (
               <li key={link.label}>
-                <Link href={link.href} className="text-white/60 hover:text-white">
+                <Link href={localizePath(link.href, locale)} className="text-white/60 hover:text-white">
                   {t.footer.infoLinks[i]}
                 </Link>
               </li>
@@ -106,10 +107,10 @@ export default function Footer() {
         <Container className="flex flex-col items-center justify-between gap-4 text-xs text-white/50 sm:flex-row">
           <p>{t.footer.copyright(2025)}</p>
           <div className="flex flex-wrap items-center justify-center gap-4">
-            <Link href="/privacy-policy" className="hover:text-white/80">
+            <Link href={localizePath("/privacy-policy", locale)} className="hover:text-white/80">
               {t.footer.privacyPolicy}
             </Link>
-            <Link href="/terms-of-use" className="hover:text-white/80">
+            <Link href={localizePath("/terms-of-use", locale)} className="hover:text-white/80">
               {t.footer.termsOfUse}
             </Link>
             <LanguageSwitcher variant="simple" />

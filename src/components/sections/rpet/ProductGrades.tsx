@@ -9,10 +9,11 @@ import Button from "@/components/ui/Button";
 import Reveal from "@/components/ui/Reveal";
 import { RevealGroup, RevealItem } from "@/components/ui/RevealGroup";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
+import { localizePath } from "@/lib/i18n/localizePath";
 import { PRODUCT_GRADES } from "@/lib/constants";
 
 export default function ProductGrades() {
-  const { t } = useLanguage();
+  const { t, locale } = useLanguage();
   return (
     <section className="section-y bg-white">
       <Container>
@@ -22,7 +23,7 @@ export default function ProductGrades() {
             title={t.rpet.gradesTitle}
             description={t.rpet.gradesDescription}
           />
-          <Button href="/rpet-flakes" showArrow className="shrink-0">
+          <Button href={localizePath("/rpet-flakes", locale)} showArrow className="shrink-0">
             {t.common.viewAllProducts}
           </Button>
         </Reveal>

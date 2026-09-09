@@ -2,13 +2,6 @@ import type { Metadata } from "next";
 import { Quicksand } from "next/font/google";
 import NextTopLoader from "nextjs-toploader";
 import "./globals.css";
-import MotionProvider from "@/components/layout/MotionProvider";
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
-import ScrollToTopButton from "@/components/layout/ScrollToTopButton";
-import InquiryModalProvider from "@/components/inquiry/InquiryModalProvider";
-import DocumentRequestModalProvider from "@/components/sections/documents/DocumentRequestModalProvider";
-import { LanguageProvider } from "@/lib/i18n/LanguageContext";
 import { SITE_URL } from "@/lib/constants";
 import { organizationJsonLd, websiteJsonLd } from "@/lib/seo";
 import JsonLd from "@/components/seo/JsonLd";
@@ -37,6 +30,35 @@ export const metadata: Metadata = {
     "rPET flakes for fiber",
     "PET recycling Azerbaijan",
     "documented recycled PET supplier",
+    // Azərbaycan dilində SEO açar sözləri — sayt tək HTML-də (URL-ə görə
+    // ayrılmayıb) render olunduğu üçün bura, dil seçimindən asılı olmayaraq
+    // hər ziyarətçiyə gedən yeganə yerdir.
+    "rPET lopa təchizatçısı",
+    "təkrar emal edilmiş PET lopa təchizatçısı",
+    "isti yuyulmuş PET lopaları",
+    "təkrar emal edilmiş PET qırıntılarının ixracatçısı",
+    "PET lövhə istehsalı üçün rPET qırıntıları",
+    "qablaşdırma çəmbəri istehsalı üçün rPET lopaları",
+    "polyester lif istehsalı üçün rPET lopaları",
+    "əlyaf istehsalı üçün rPET qırıntıları",
+    "Azərbaycanda PET butulkaların təkrar emalı",
+    "sənədləşdirilib təkrar emal edilmiş PET təchizatçısı",
+    "istifadə olunmuş PET butulkalardan alınan lopalar",
+    "Avropaya isti yuyulmuş rPET lopalarının tədarükü",
+    "plastik təkrar emalı Azərbaycan",
+    "Bakıda plastik təkrar emalı",
+    "plastik tullantıların təkrar emalı",
+    "PET butulkaların təkrar emalı",
+    "plastik butulkaların təkrar emalı",
+    "plastik şüşələrin təkrar emalı",
+    "Azərbaycanda PET təkrar emalı zavodu",
+    "rPET istehsalçısı Azərbaycan",
+    "PET lopa istehsalı",
+    "PET lopalarının satışı",
+    "təkrar emal edilmiş plastik xammal",
+    "Poly Cleaner Azərbaycan",
+    "Poly Cleaner Bakı",
+    "Balaxanı Sənaye Parkı plastik təkrar emalı",
   ],
   openGraph: {
     title: "Poly Cleaner | Hot Washed rPET Flakes Supplier from Azerbaijan",
@@ -86,18 +108,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <JsonLd data={organizationJsonLd()} />
         <JsonLd data={websiteJsonLd()} />
         <NextTopLoader color="#4caf1b" height={3} showSpinner={false} />
-        <LanguageProvider>
-          <MotionProvider>
-            <InquiryModalProvider>
-              <DocumentRequestModalProvider>
-                <Header />
-                <main className="flex-1">{children}</main>
-                <Footer />
-                <ScrollToTopButton />
-              </DocumentRequestModalProvider>
-            </InquiryModalProvider>
-          </MotionProvider>
-        </LanguageProvider>
+        {children}
       </body>
     </html>
   );

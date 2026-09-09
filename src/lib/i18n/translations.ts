@@ -60,7 +60,7 @@ const en = {
     heroTitleLine2: "Supplier",
     heroTitleLine3: "from Azerbaijan",
     heroDescription:
-      "Poly Cleaner supplies consistently processed and fully documented rPET flakes for sheet, strap, fiber and non-food packaging applications.",
+      "Poly Cleaner supplies consistently processed and fully documented rPET flakes for sheet, strap, fiber, food and non-food packaging applications.",
     taropakMeetUs: (name: string) => `Meet us at ${name}`,
     taropakBannerTagline: "Discover our rPET flakes and build your next sustainable solution with us.",
     trustBar: [
@@ -151,6 +151,26 @@ const en = {
       name: "Azerbaijan Ministry of Ecology and Natural Resources",
       description:
         "Our partnerships with local companies, built on a zero-waste philosophy, strengthen our resources.",
+    },
+    {
+      name: "Verra",
+      description:
+        "A global leader in carbon markets and sustainability standards, supporting our commitment to measurable environmental impact.",
+    },
+    {
+      name: "Iterum",
+      description:
+        "A Latvia-based polymer recycling company — together we advance turning plastic waste into valuable, reusable raw material.",
+    },
+    {
+      name: "Onur Ambalaj",
+      description:
+        "A Turkey-based packaging solutions manufacturer, one of the international partners putting our rPET flakes to work in real products.",
+    },
+    {
+      name: "İnan Tech",
+      description:
+        "A Türkiye-based manufacturer of plastic recycling machinery, supporting the technology side of the recycling industry we're part of.",
     },
   ],
 
@@ -532,8 +552,10 @@ const en = {
     { value: "offer", label: "Request rPET Flakes Offer" },
     { value: "sample", label: "Request Sample" },
     { value: "taropak", label: "Book TAROPAK Meeting" },
+    { value: "amiExpo", label: "Book AMI Expo Meeting" },
     { value: "documents", label: "Request Buyer Documents" },
     { value: "general", label: "General / Contact Sales" },
+    { value: "partner", label: "Become a Partner" },
   ],
 
   inquiryModal: {
@@ -574,6 +596,24 @@ const en = {
     selectSampleType: "Select sample type",
     courierAccount: "Courier Account",
     courierAccountPlaceholder: "e.g. DHL Account #123456789",
+    attachments: "Attachments",
+    attachmentsHint: "Images or PDF, up to 3 files, 5MB each.",
+    chooseFiles: "Click to upload or drag and drop",
+    tooManyFiles: "You can attach up to 3 files.",
+    fileTooLarge: "Each attached file must be under 5MB.",
+    companyOrganisation: "Company / Organisation",
+    city: "City",
+    cityPlaceholder: "Your city",
+    emailOrPhoneNote: "Please provide an email address or phone number.",
+    partnershipInterest: "Partnership Interest",
+    selectPartnershipType: "Select partnership type",
+    partnershipInterestOptions: [
+      "PET Bottle Supply",
+      "Collection Partnership",
+      "Logistics & Transportation",
+      "Distribution & Sales Partnership",
+      "Other Partnership",
+    ],
     message: "Message",
     messageOptional: "(optional)",
     messagePlaceholder: "Tell us about your requirements...",
@@ -614,7 +654,7 @@ const en = {
       "Not sure yet",
     ],
     offerVolumeOptions: ["Sample only", "1–5 MT", "20–25 MT Trial Order", "50–100 MT", "Regular monthly supply", "Other"],
-    offerApplicationOptions: ["Sheet / Thermoforming", "Strap", "Fiber", "Non-food Packaging", "Trading / Distribution", "Other"],
+    offerApplicationOptions: ["Sheet / Thermoforming", "Strap", "Fiber", "Food Packaging", "Non-food Packaging", "Trading / Distribution", "Other"],
     sampleTypeOptions: ["500g Sample", "1kg Sample", "2kg Sample", "5kg Sample", "Custom Quantity"],
   },
 
@@ -692,8 +732,8 @@ const az = {
     heroTitleLine2: "Təchizatçısı",
     heroTitleLine3: "Azərbaycandan",
     heroDescription:
-      "Poly Cleaner sheet, strap, fiber və non-food packaging tətbiqləri üçün sabit emal olunmuş və tam sənədləşdirilmiş rPET fleks təchiz edir.",
-    taropakMeetUs: (name: string) => `${name}-də bizimlə görüşün`,
+      "Poly Cleaner sheet, strap, fiber, food və non-food packaging tətbiqləri üçün sabit emal olunmuş və tam sənədləşdirilmiş rPET fleks təchiz edir.",
+    taropakMeetUs: (name: string) => `${name}-da bizimlə görüşün`,
     taropakBannerTagline: "rPET fleks-lərimizi kəşf edin və növbəti dayanıqlı həllinizi bizimlə quraq.",
     trustBar: [
       { label: "İSTEHSALÇI", sub: "BROKER DEYİL" },
@@ -783,6 +823,26 @@ const az = {
       name: "Azərbaycan Respublikası Ekologiya və Təbii Sərvətlər Nazirliyi",
       description:
         "Yerli şirkətlərlə sıfır itgi fəlsəfəsinə söykənən əməkdaşlıqlarımız resurslarımızı artırır.",
+    },
+    {
+      name: "Verra",
+      description:
+        "Karbon bazarları və davamlılıq standartlarında qlobal lider olan Verra, ölçülə bilən ekoloji təsir öhdəliyimizi dəstəkləyir.",
+    },
+    {
+      name: "Iterum",
+      description:
+        "Latviyada yerləşən polimer emalı şirkəti Iterum ilə birgə plastik tullantıları dəyərli xammala çevirmək məqsədini irəli aparırıq.",
+    },
+    {
+      name: "Onur Ambalaj",
+      description:
+        "Türkiyədə yerləşən qablaşdırma həlləri istehsalçısı Onur Ambalaj, rPET fleksimizi real məhsullarda dəyərləndirən beynəlxalq tərəfdaşlarımızdandır.",
+    },
+    {
+      name: "İnan Tech",
+      description:
+        "Türkiyədə plastik emalı avadanlıqları istehsalçısı İnan Tech, daxil olduğumuz emal sənayesinin texnoloji tərəfini dəstəkləyir.",
     },
   ],
 
@@ -1164,8 +1224,10 @@ const az = {
     { value: "offer", label: "rPET Fleks Təklifi İstə" },
     { value: "sample", label: "Nümunə İstə" },
     { value: "taropak", label: "TAROPAK Görüşü Təyin Et" },
+    { value: "amiExpo", label: "AMI Expo Görüşü Təyin Et" },
     { value: "documents", label: "Alıcı Sənədlərini İstə" },
     { value: "general", label: "Ümumi / Satış Komandası ilə Əlaqə" },
+    { value: "partner", label: "Tərəfdaş Olun" },
   ],
 
   inquiryModal: {
@@ -1206,6 +1268,24 @@ const az = {
     selectSampleType: "Nümunə növünü seçin",
     courierAccount: "Kuryer Hesabı",
     courierAccountPlaceholder: "məs. DHL Hesab #123456789",
+    attachments: "Əlavələr",
+    attachmentsHint: "Şəkil və ya PDF, maksimum 3 fayl, hər biri 5MB-a qədər.",
+    chooseFiles: "Yükləmək üçün klikləyin və ya faylı bura sürükləyin",
+    tooManyFiles: "Maksimum 3 fayl əlavə edə bilərsiniz.",
+    fileTooLarge: "Hər bir fayl 5MB-dan az olmalıdır.",
+    companyOrganisation: "Şirkət / Təşkilat",
+    city: "Şəhər",
+    cityPlaceholder: "Şəhəriniz",
+    emailOrPhoneNote: "Zəhmət olmasa email ünvanı və ya telefon nömrəsi qeyd edin.",
+    partnershipInterest: "Əməkdaşlıq Növü",
+    selectPartnershipType: "Əməkdaşlıq növünü seçin",
+    partnershipInterestOptions: [
+      "PET butulka təchizatı",
+      "Tullantıların toplanması üzrə əməkdaşlıq",
+      "Logistika və daşınma",
+      "Distribütorluq və satış tərəfdaşlığı",
+      "Digər əməkdaşlıq",
+    ],
     message: "Mesaj",
     messageOptional: "(könüllü)",
     messagePlaceholder: "Tələbləriniz haqqında bizə bildirin...",
@@ -1246,7 +1326,7 @@ const az = {
       "Hələ Əmin Deyiləm",
     ],
     offerVolumeOptions: ["Yalnız nümunə", "1–5 MT", "20–25 MT Sınaq Sifarişi", "50–100 MT", "Müntəzəm aylıq təchizat", "Digər"],
-    offerApplicationOptions: ["Sheet / Termoform", "Strap", "Fiber", "Qeyri-Qida Qablaşdırma", "Ticarət / Distribusiya", "Digər"],
+    offerApplicationOptions: ["Sheet / Termoform", "Strap", "Fiber", "Qida Qablaşdırma", "Qeyri-Qida Qablaşdırma", "Ticarət / Distribusiya", "Digər"],
     sampleTypeOptions: ["500q Nümunə", "1kq Nümunə", "2kq Nümunə", "5kq Nümunə", "Fərdi Miqdar"],
   },
 

@@ -1,14 +1,17 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useRouter, usePathname } from "next/navigation";
 import { ChevronDown, Check, Globe } from "lucide-react";
 import { clsx } from "clsx";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
+import { localizePath, delocalizePath } from "@/lib/i18n/localizePath";
+import type { Locale } from "@/lib/i18n/translations";
 
 // Self-hosted flag SVGs (not emoji flags — Windows fonts commonly lack the
 // regional-indicator glyphs and fall back to rendering the raw two-letter
 // code instead of a flag; a CDN-hosted flag was also unreliable to load).
-const OPTIONS: { locale: "en" | "az"; flagSrc: string; label: string }[] = [
+const OPTIONS: { locale: Locale; flagSrc: string; label: string }[] = [
   { locale: "en", flagSrc: "/images/flags/gb.svg", label: "English" },
   { locale: "az", flagSrc: "/images/flags/az.svg", label: "Azərbaycan" },
 ];
@@ -29,11 +32,21 @@ export default function LanguageSwitcher({
       one gets an underline. */
   variant?: "dropdown" | "simple" | "flags";
 }) {
-  const { locale, setLocale } = useLanguage();
+  const { locale } = useLanguage();
+  const router = useRouter();
+  const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
 
   const current = OPTIONS.find((o) => o.locale === locale) ?? OPTIONS[0];
+
+  // Locale is now a URL concern (EN unprefixed, AZ under /az) rather than
+  // client state, so switching means navigating to the equivalent path in
+  // the other locale — not just flipping a value in place.
+  function goToLocale(target: Locale) {
+    if (target === locale) return;
+    router.push(localizePath(delocalizePath(pathname), target));
+  }
 
   // Declared before the variant early-returns below (not conditionally
   // after them) so the hook order stays stable across renders regardless
@@ -63,7 +76,7 @@ export default function LanguageSwitcher({
             <button
               key={opt.locale}
               type="button"
-              onClick={() => setLocale(opt.locale)}
+              onClick={() => goToLocale(opt.locale)}
               aria-pressed={active}
               aria-label={opt.label}
               className={clsx(
@@ -93,7 +106,7 @@ export default function LanguageSwitcher({
               {i > 0 && <span className={light ? "text-white/30" : "text-border"}>|</span>}
               <button
                 type="button"
-                onClick={() => setLocale(opt.locale)}
+                onClick={() => goToLocale(opt.locale)}
                 aria-pressed={locale === opt.locale}
                 aria-label={opt.label}
                 className={clsx(
@@ -124,10 +137,10 @@ export default function LanguageSwitcher({
         aria-expanded={open}
         aria-label={`Select language, current: ${current.label}`}
         className={clsx(
-          "flex h-11 cursor-pointer items-center gap-1.5 rounded-lg border px-3.5 transition-colors",
+          "flex h-11 cursor-pointer items-center gap-1.5 rounded-lg px-3.5 transition-colors",
           light
-            ? "border-white/25 bg-navy text-white/85 hover:bg-white/10"
-            : "border-border bg-white text-slate hover:border-brand-blue/40"
+            ? "bg-navy text-white/85 hover:bg-white/10"
+            : "bg-white text-slate hover:bg-soft-gray"
         )}
       >
         <span className="block size-5 shrink-0 overflow-hidden rounded-full" aria-hidden>
@@ -157,7 +170,7 @@ export default function LanguageSwitcher({
                   role="option"
                   aria-selected={active}
                   onClick={() => {
-                    setLocale(opt.locale);
+                    goToLocale(opt.locale);
                     setOpen(false);
                   }}
                   className={clsx(

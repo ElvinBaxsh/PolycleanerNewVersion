@@ -13,10 +13,16 @@ export const COMPANY = {
   languages: ["English", "Russian", "Turkish", "Azerbaijani"],
 };
 
-// Where form submissions are routed internally. "Request Offer" goes to all
-// three inboxes; every other inquiry type (sample, TAROPAK, documents,
-// general) goes to COMPANY.email only.
-export const OFFER_SALES_EMAILS = [COMPANY.email, "sales@polycleaner.az", "telmannadjafov@polycleaner.az"];
+// Where form submissions are routed internally. Request Offer, Request
+// Sample, Book TAROPAK Meeting and Request Buyer Documents/Pack all go to
+// the sales inboxes; only the General/Contact form goes to COMPANY.email.
+export const SALES_EMAILS = ["sales@polycleaner.az", "telmannadjafov@polycleaner.az"];
+
+// Shared by the client-side FileUpload widget and the /api/contact route's
+// server-side check, so the two can't silently drift apart.
+export const MAX_UPLOAD_FILES = 3;
+export const MAX_UPLOAD_FILE_SIZE = 5 * 1024 * 1024; // 5MB per file
+export const MAX_UPLOAD_TOTAL_SIZE = 15 * 1024 * 1024; // 15MB combined
 
 export const OFFER_PRODUCT_INTEREST_OPTIONS = [
   "Transparent / Clear rPET Flakes",
@@ -40,6 +46,7 @@ export const OFFER_APPLICATION_OPTIONS = [
   "Sheet / Thermoforming",
   "Strap",
   "Fiber",
+  "Food Packaging",
   "Non-food Packaging",
   "Trading / Distribution",
   "Other",
@@ -51,6 +58,14 @@ export const SAMPLE_TYPE_OPTIONS = [
   "2kg Sample",
   "5kg Sample",
   "Custom Quantity",
+];
+
+export const PARTNERSHIP_INTEREST_OPTIONS = [
+  "PET Bottle Supply",
+  "Collection Partnership",
+  "Logistics & Transportation",
+  "Distribution & Sales Partnership",
+  "Other Partnership",
 ];
 
 export const COUNTRY_OPTIONS = [
@@ -105,6 +120,16 @@ export const TAROPAK_EVENT = {
   name: "TAROPAK 2026",
   dates: "23–25 September 2026",
   location: "Poznań, Poland",
+};
+
+export const AMI_EXPO_EVENT = {
+  // Non-breaking space before "2026" — the AZ translation appends a
+  // suffix directly onto the year ("2026-də"), and without this a line
+  // break could land between "EU" and "2026-də", splitting the edition
+  // year from the event name awkwardly.
+  name: "Compounding & Recycling Expo EU 2026",
+  dates: "23–24 September 2026",
+  location: "Frankfurt, Germany",
 };
 
 export const PRODUCT_GRADES = [
@@ -453,6 +478,34 @@ export const PARTNERS = [
     website: "https://www.eco.gov.az/",
     description:
       "Yerli şirkətlərlə sıfır itgi fəlsəfəsinə söykənən əməkdaşlıqlarımız resurslarımızı artırır.",
+  },
+  {
+    name: "Verra",
+    logo: "/images/partners/verra-partners.svg",
+    website: "https://verra.org/",
+    description:
+      "Karbon bazarları və davamlılıq standartlarında qlobal lider olan Verra, ölçülə bilən ekoloji təsir öhdəliyimizi dəstəkləyir.",
+  },
+  {
+    name: "Iterum",
+    logo: "/images/partners/iterum-partners.svg",
+    website: "https://iterum.lv/en/",
+    description:
+      "Latviyada yerləşən polimer emalı şirkəti Iterum ilə birgə plastik tullantıları dəyərli xammala çevirmək məqsədini irəli aparırıq.",
+  },
+  {
+    name: "Onur Ambalaj",
+    logo: "/images/partners/onurAmbalaj-partners.png",
+    website: "https://www.onurambalaj.com.tr/",
+    description:
+      "Türkiyədə yerləşən qablaşdırma həlləri istehsalçısı Onur Ambalaj, rPET fleksimizi real məhsullarda dəyərləndirən beynəlxalq tərəfdaşlarımızdandır.",
+  },
+  {
+    name: "İnan Tech",
+    logo: "/images/partners/inanTech-partners.png",
+    website: "https://www.inanplastics.com/en/",
+    description:
+      "Türkiyədə plastik emalı avadanlıqları istehsalçısı İnan Tech, daxil olduğumuz emal sənayesinin texnoloji tərəfini dəstəkləyir.",
   },
 ];
 

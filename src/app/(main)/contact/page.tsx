@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { SITE_URL } from "@/lib/constants";
 import ContactHero from "@/components/sections/contact/ContactHero";
 import ContactFormSection from "@/components/sections/contact/ContactFormSection";
 import MapAndActions from "@/components/sections/contact/MapAndActions";
@@ -10,12 +11,16 @@ export const metadata: Metadata = {
   title: { absolute: "Contact Poly Cleaner | Request rPET Flakes Offer" },
   description:
     "Reach out to Poly Cleaner for rPET flakes inquiries, samples, offers, or partnership opportunities. Our team typically replies within 24 hours.",
-  alternates: { canonical: "/contact" },
+  alternates: {
+    canonical: "/contact",
+    languages: { en: `${SITE_URL}/contact`, az: `${SITE_URL}/az/contact`, "x-default": `${SITE_URL}/contact` },
+  },
 };
 
 export default async function ContactPage({
   searchParams,
-}: PageProps<"/contact">) {
+  basePath = "",
+}: PageProps<"/contact"> & { basePath?: string }) {
   // The GitHub Pages static preview has no server to resolve searchParams
   // with, so it skips awaiting it entirely (reading it at all is what
   // forces dynamic rendering, which `output: "export"` can't do) — the
@@ -27,7 +32,12 @@ export default async function ContactPage({
 
   return (
     <>
-      <JsonLd data={breadcrumbJsonLd([{ name: "Home", path: "/" }, { name: "Contact", path: "/contact" }])} />
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Home", path: basePath || "/" },
+          { name: "Contact", path: `${basePath}/contact` },
+        ])}
+      />
       <ContactHero />
       <ContactFormSection defaultType={type} defaultInterest={interest} />
       <MapAndActions />

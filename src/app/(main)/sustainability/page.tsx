@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { SITE_URL } from "@/lib/constants";
 import PageHero from "@/components/sections/PageHero";
 import SustainabilityTrustStrip from "@/components/sections/sustainability/SustainabilityTrustStrip";
 import ImpactCards from "@/components/sections/sustainability/ImpactCards";
@@ -14,13 +15,25 @@ export const metadata: Metadata = {
   title: { absolute: "Sustainability | From Waste to Value | Poly Cleaner" },
   description:
     "At Poly Cleaner, sustainability is at the core of everything we do. We transform post-consumer PET waste into high-quality rPET flakes, supporting a circular economy and a cleaner future.",
-  alternates: { canonical: "/sustainability" },
+  alternates: {
+    canonical: "/sustainability",
+    languages: {
+      en: `${SITE_URL}/sustainability`,
+      az: `${SITE_URL}/az/sustainability`,
+      "x-default": `${SITE_URL}/sustainability`,
+    },
+  },
 };
 
-export default function SustainabilityPage() {
+export default function SustainabilityPage({ basePath = "" }: { basePath?: string }) {
   return (
     <>
-      <JsonLd data={breadcrumbJsonLd([{ name: "Home", path: "/" }, { name: "Sustainability", path: "/sustainability" }])} />
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Home", path: basePath || "/" },
+          { name: "Sustainability", path: `${basePath}/sustainability` },
+        ])}
+      />
       <PageHero pageKey="sustainability" image="/images/sustainabilityImg.jpg" imagePosition="right" />
       <SustainabilityTrustStrip />
       <ImpactCards />

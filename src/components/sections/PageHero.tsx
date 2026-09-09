@@ -9,6 +9,7 @@ import Reveal from "@/components/ui/Reveal";
 import Button from "@/components/ui/Button";
 import InquiryButton from "@/components/inquiry/InquiryButton";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
+import { localizePath } from "@/lib/i18n/localizePath";
 
 export type PageHeroKey = "about" | "rpet" | "process" | "sustainability" | "documents";
 
@@ -27,7 +28,7 @@ export default function PageHero({
   imagePosition?: string;
   extra?: ReactNode;
 }) {
-  const { t } = useLanguage();
+  const { t, locale } = useLanguage();
 
   const crumb = pageKey === "documents" ? t.documents.heroCrumb : t.nav[pageKey === "rpet" ? "rpet" : pageKey];
 
@@ -66,7 +67,7 @@ export default function PageHero({
   let cta: CtaItem[] | undefined;
   if (pageKey === "process") {
     cta = [
-      { label: t.process.ctaRequestInfo, href: "/documents" },
+      { label: t.process.ctaRequestInfo, href: localizePath("/documents", locale) },
       { label: t.process.ctaSpeakWithSales, inquiryType: "general" },
     ];
   } else if (pageKey !== "documents") {
@@ -100,7 +101,7 @@ export default function PageHero({
 
       <Container className="relative z-10">
         <nav className="mb-6 flex items-center gap-2 text-xs text-white/60" aria-label="Breadcrumb">
-          <Link href="/" className="hover:text-white/90">
+          <Link href={localizePath("/", locale)} className="hover:text-white/90">
             {t.nav.home}
           </Link>
           <span>&gt;</span>

@@ -6,11 +6,12 @@ import Container from "@/components/ui/Container";
 import Reveal from "@/components/ui/Reveal";
 import { RevealGroup, RevealItem } from "@/components/ui/RevealGroup";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
+import { localizePath } from "@/lib/i18n/localizePath";
 import { PRODUCT_GRADES } from "@/lib/constants";
 import { ArrowRight } from "lucide-react";
 
 export default function ProductGrid() {
-  const { t } = useLanguage();
+  const { t, locale } = useLanguage();
   return (
     <section className="bg-white pt-12 pb-6 lg:pt-16 lg:pb-8">
       <Container className="flex flex-col gap-8 lg:flex-row lg:items-start lg:justify-between">
@@ -24,7 +25,7 @@ export default function ProductGrid() {
           </p>
 
           <Link
-            href="/rpet-flakes"
+            href={localizePath("/rpet-flakes", locale)}
             className="mt-6 inline-flex items-center gap-2 rounded-md bg-[#2E7D32] px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-white transition-colors hover:bg-[#1B5E20]"
           >
             {t.common.viewAllProducts}
@@ -39,7 +40,7 @@ export default function ProductGrid() {
             return (
             <RevealItem key={grade.slug}>
               <Link
-                href={`/rpet-flakes#${grade.slug}`}
+                href={localizePath(`/rpet-flakes#${grade.slug}`, locale)}
                 className="group flex h-full flex-col overflow-hidden rounded-xl border border-slate-100 bg-white shadow-xs transition-all duration-300 hover:shadow-md"
               >
                 {/* Şəkil Bloku */}

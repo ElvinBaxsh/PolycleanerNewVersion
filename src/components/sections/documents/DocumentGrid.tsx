@@ -1,7 +1,8 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
+import { AnimatePresence, motion } from "framer-motion";
 import {
   Download,
   Building2,
@@ -14,6 +15,7 @@ import {
   Info,
   CalendarDays,
   CalendarCheck,
+  ChevronRight,
   MapPin,
   type LucideIcon,
 } from "lucide-react";
@@ -24,7 +26,18 @@ import { useInquiryModal } from "@/components/inquiry/InquiryModalContext";
 import { useDocumentRequestModal } from "./DocumentRequestModalContext";
 import DocumentRequestForm from "./DocumentRequestForm";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
-import { DOCUMENT_LIST, TAROPAK_EVENT } from "@/lib/constants";
+import { DOCUMENT_LIST, TAROPAK_EVENT, AMI_EXPO_EVENT } from "@/lib/constants";
+
+type EventTab = "taropak" | "amiExpo";
+
+const EVENT_PHOTOS: Record<EventTab, string> = {
+  taropak: "/images/destination-warsaw-hero-banner-taropak.jpg",
+  amiExpo: "/images/destination-frankfurt-hero-banner-ami.jpg",
+};
+const EVENT_PHOTO_ALTS: Record<EventTab, string> = {
+  taropak: "Poznań, Poland — TAROPAK venue",
+  amiExpo: "Frankfurt, Germany — Compounding & Recycling Expo EU venue",
+};
 
 // Sənəd növünə görə ikon — bir neçəsi üçün icons qovluğundakı xüsusi
 // fayllar var (daha dəqiq uyğun gəlir), qalanı lucide fallback-də qalır.
@@ -54,6 +67,18 @@ export default function DocumentGrid() {
   const { open: openDocumentRequest } = useDocumentRequestModal();
   const { t } = useLanguage();
   const [active, setActive] = useState("All");
+  const [activeEvent, setActiveEvent] = useState<EventTab>("taropak");
+  const eventData = activeEvent === "taropak" ? TAROPAK_EVENT : AMI_EXPO_EVENT;
+
+  function advanceEvent() {
+    setActiveEvent((prev) => (prev === "taropak" ? "amiExpo" : "taropak"));
+  }
+
+  // Same auto-rotate + reset-on-manual-change pattern as the Hero card.
+  useEffect(() => {
+    const id = setTimeout(advanceEvent, 6000);
+    return () => clearTimeout(id);
+  }, [activeEvent]);
 
   const docsWithText = useMemo(
     () => DOCUMENT_LIST.map((doc, i) => ({ ...doc, name: t.documentList[i].name, description: t.documentList[i].description })),
@@ -169,38 +194,70 @@ export default function DocumentGrid() {
             </Reveal>
 
             <Reveal delay={0.15}>
-              <div className="relative mt-4 flex min-h-[170px] w-full items-center overflow-hidden rounded-2xl">
-                <Image
-                  src="/images/destination-warsaw-hero-banner-taropak.jpg"
-                  alt="Poznań, Poland — TAROPAK venue"
-                  fill
-                  className="object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-r from-navy/95 via-navy/85 to-navy/40" />
-                <div className="relative z-10 max-w-md p-6">
-                  <h3 className="text-xl font-bold text-white">{t.documents.taropakMeet(TAROPAK_EVENT.name)}</h3>
-                  <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm font-semibold text-white/80">
-                    <span className="flex items-center gap-1.5">
-                      <CalendarDays className="size-4 text-brand-green" />
-                      {TAROPAK_EVENT.dates}
-                    </span>
-                    <span className="flex items-center gap-1.5">
-                      <MapPin className="size-4 text-brand-green" />
-                      {TAROPAK_EVENT.location}
-                    </span>
-                  </div>
-                  <p className="mt-2 text-sm leading-relaxed text-white/70">
-                    {t.documents.taropakTagline}
-                  </p>
-                  <button
-                    type="button"
-                    onClick={() => openInquiry({ type: "taropak" })}
-                    className="mt-4 inline-flex h-11 cursor-pointer items-center gap-2 rounded-lg bg-navy px-5 text-sm font-bold uppercase tracking-wide text-white transition-colors hover:bg-white hover:text-navy"
+              <div className="relative mt-4 flex min-h-[230px] w-full items-center overflow-hidden rounded-2xl sm:min-h-[170px]">
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={activeEvent}
+                    initial={{ opacity: 0, y: 4 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -4 }}
+                    transition={{ duration: 0.6, ease: "easeInOut" }}
+                    className="absolute inset-0 flex items-center"
                   >
-                    <CalendarCheck className="size-4" aria-hidden />
-                    {t.documents.taropakButton}
-                  </button>
-                </div>
+                    <Image
+                      src={EVENT_PHOTOS[activeEvent]}
+                      alt={EVENT_PHOTO_ALTS[activeEvent]}
+                      fill
+                      sizes="(min-width: 1024px) 66vw, 100vw"
+                      className="object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-r from-navy/95 via-navy/85 to-navy/50" />
+                    {/* Mətn və düymə eyni sətirdə (sm+) — düymə artıq
+                        tagline-in altına yığılıb kartdan kənara çıxmır,
+                        sağa "sürüşdürülüb". `items-start` (mərkəz əvəzinə)
+                        düyməni başlıqla eyni səviyyədə saxlayır — taglayn
+                        arxada "asılı" qalmır, təbii axan detal kimi görünür.
+                        Dar ekranda (mobil) hələ də alt-alta qalır, çünki
+                        yan-yana sığmaz. */}
+                    <div className="relative z-10 flex w-full max-w-2xl flex-col gap-4 p-6 pb-8 sm:flex-row sm:items-start sm:justify-between">
+                      <div className="min-w-0">
+                        <h3 className="text-xl font-bold text-white">{t.documents.taropakMeet(eventData.name)}</h3>
+                        <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm font-semibold text-white/80">
+                          <span className="flex items-center gap-1.5">
+                            <CalendarDays className="size-4 text-brand-green" />
+                            {eventData.dates}
+                          </span>
+                          <span className="flex items-center gap-1.5">
+                            <MapPin className="size-4 text-brand-green" />
+                            {eventData.location}
+                          </span>
+                        </div>
+                        <p className="mt-2 max-w-sm text-sm leading-relaxed text-white/70">
+                          {t.documents.taropakTagline}
+                        </p>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => openInquiry({ type: activeEvent })}
+                        className="inline-flex h-11 w-fit shrink-0 cursor-pointer items-center gap-2 rounded-lg bg-navy px-5 text-sm font-bold uppercase tracking-wide text-white transition-colors hover:bg-white hover:text-navy"
+                      >
+                        <CalendarCheck className="size-4" aria-hidden />
+                        {t.documents.taropakButton}
+                      </button>
+                    </div>
+                  </motion.div>
+                </AnimatePresence>
+
+                {/* Növbəti sərgiyə keçid — yalnız iki element olduğu üçün
+                    bir "next" oxu kifayətdir (həmişə digərinə keçir). */}
+                <button
+                  type="button"
+                  onClick={advanceEvent}
+                  aria-label="Next exhibition"
+                  className="absolute right-4 top-4 z-20 flex size-9 cursor-pointer items-center justify-center rounded-full bg-white/15 text-white backdrop-blur-sm transition-colors hover:bg-white/25"
+                >
+                  <ChevronRight className="size-5" aria-hidden />
+                </button>
               </div>
             </Reveal>
           </div>

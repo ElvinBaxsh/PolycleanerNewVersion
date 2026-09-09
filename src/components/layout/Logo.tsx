@@ -1,5 +1,9 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
+import { useLanguage } from "@/lib/i18n/LanguageContext";
+import { localizePath } from "@/lib/i18n/localizePath";
 
 const SIZES = {
   default: "h-[60px] w-auto object-contain sm:h-[62px] lg:h-[64px] xl:h-[68px]",
@@ -7,8 +11,9 @@ const SIZES = {
 };
 
 export default function Logo({ size = "default" }: { size?: keyof typeof SIZES }) {
+  const { locale } = useLanguage();
   return (
-    <Link href="/" className="flex shrink-0 items-center">
+    <Link href={localizePath("/", locale)} className="flex shrink-0 items-center">
       <Image
         src="/images/polycleaner-logonew.png"
         alt="Poly Cleaner — From Waste to Value"

@@ -9,24 +9,25 @@ import Logo from "./Logo";
 import LanguageSwitcher from "./LanguageSwitcher";
 import InquiryButton from "@/components/inquiry/InquiryButton";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
+import { localizePath } from "@/lib/i18n/localizePath";
 
 const NAV_HREFS = ["/", "/about", "/rpet-flakes", "/process-quality", "/sustainability", "/documents", "/contact"];
 
 export default function Header() {
   const pathname = usePathname();
-  const { t } = useLanguage();
+  const { t, locale } = useLanguage();
   const [open, setOpen] = useState(false);
   const [hideForFooter, setHideForFooter] = useState(false);
   const headerRef = useRef<HTMLElement>(null);
 
   const navLinks = [
-    { label: t.nav.home, href: NAV_HREFS[0] },
-    { label: t.nav.about, href: NAV_HREFS[1] },
-    { label: t.nav.rpet, href: NAV_HREFS[2] },
-    { label: t.nav.process, href: NAV_HREFS[3] },
-    { label: t.nav.sustainability, href: NAV_HREFS[4] },
-    { label: t.nav.documents, href: NAV_HREFS[5] },
-    { label: t.nav.contact, href: NAV_HREFS[6] },
+    { label: t.nav.home, href: localizePath(NAV_HREFS[0], locale) },
+    { label: t.nav.about, href: localizePath(NAV_HREFS[1], locale) },
+    { label: t.nav.rpet, href: localizePath(NAV_HREFS[2], locale) },
+    { label: t.nav.process, href: localizePath(NAV_HREFS[3], locale) },
+    { label: t.nav.sustainability, href: localizePath(NAV_HREFS[4], locale) },
+    { label: t.nav.documents, href: localizePath(NAV_HREFS[5], locale) },
+    { label: t.nav.contact, href: localizePath(NAV_HREFS[6], locale) },
   ];
 
   // The header is sticky/always-on-top, so once the footer (which repeats

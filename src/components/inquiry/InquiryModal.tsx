@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { X } from "lucide-react";
+import { CheckCircle2, Handshake, X } from "lucide-react";
 import InquiryForm from "@/components/forms/InquiryForm";
 import RequestOfferForm from "@/components/forms/RequestOfferForm";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
@@ -30,6 +30,7 @@ export default function InquiryModal({
   }
 
   const isOfferFlow = renderOptions?.type === "offer";
+  const isPartnerFlow = renderOptions?.type === "partner";
 
   useEffect(() => {
     if (!isOpen) return;
@@ -117,7 +118,15 @@ export default function InquiryModal({
                 close button above the top edge. dvh tracks the real,
                 currently-visible viewport. */}
             <div className="scrollbar-thin max-h-[85dvh] overflow-y-auto rounded-2xl bg-white p-5 shadow-2xl sm:p-7">
-              <h2 className="pr-10 text-2xl font-bold text-navy">{title}</h2>
+              <h2 className="flex items-center gap-2 pr-10 text-2xl font-bold text-navy">
+                {isPartnerFlow && (
+                  <span className="relative inline-flex shrink-0" aria-hidden>
+                    <Handshake className="size-9 text-brand-green" />
+                    <CheckCircle2 className="absolute -right-2 -top-2 size-5 rounded-full bg-white text-brand-green" />
+                  </span>
+                )}
+                {title}
+              </h2>
               {isOfferFlow && <span className="mt-2 block h-1 w-10 rounded-full bg-brand-green" />}
               <p className="mt-2 text-sm text-slate">{subtitle}</p>
 

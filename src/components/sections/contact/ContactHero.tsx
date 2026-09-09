@@ -5,6 +5,7 @@ import Container from "@/components/ui/Container";
 import Reveal from "@/components/ui/Reveal";
 import Link from "next/link";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
+import { localizePath } from "@/lib/i18n/localizePath";
 
 const ICON_SRCS = [
   "/images/icons/trimmed/reliability.png",
@@ -13,7 +14,7 @@ const ICON_SRCS = [
 ];
 
 export default function ContactHero() {
-  const { t } = useLanguage();
+  const { t, locale } = useLanguage();
   return (
     <section className="relative min-h-[420px] overflow-hidden bg-navy pb-14 pt-8 sm:pt-10 lg:min-h-[480px]">
       <div className="absolute inset-0 z-0">
@@ -22,7 +23,7 @@ export default function ContactHero() {
       </div>
       <Container className="relative z-10">
         <nav className="mb-6 flex items-center gap-2 text-xs text-white/60" aria-label="Breadcrumb">
-          <Link href="/" className="hover:text-white/80">
+          <Link href={localizePath("/", locale)} className="hover:text-white/80">
             {t.nav.home}
           </Link>
           <span>&gt;</span>

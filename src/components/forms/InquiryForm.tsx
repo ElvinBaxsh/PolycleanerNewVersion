@@ -2,10 +2,18 @@
 
 import { useState, type FormEvent } from "react";
 import { motion } from "framer-motion";
-import { Loader2, CheckCircle2, AlertCircle } from "lucide-react";
+import { Loader2, CheckCircle2, AlertCircle, Send } from "lucide-react";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
-import { PRODUCT_INTERESTS, SAMPLE_TYPE_OPTIONS, OFFER_APPLICATION_OPTIONS } from "@/lib/constants";
+import {
+  PRODUCT_INTERESTS,
+  SAMPLE_TYPE_OPTIONS,
+  OFFER_APPLICATION_OPTIONS,
+  PARTNERSHIP_INTEREST_OPTIONS,
+  MAX_UPLOAD_FILES,
+  MAX_UPLOAD_FILE_SIZE,
+} from "@/lib/constants";
 import CustomSelect from "./CustomSelect";
+import FileUpload from "./FileUpload";
 
 type Status = "idle" | "submitting" | "success" | "error";
 
@@ -21,10 +29,12 @@ export default function InquiryForm({
   const { t, locale } = useLanguage();
   const f = t.forms;
   const isSample = defaultType === "sample";
+  const isPartner = defaultType === "partner";
   const FIELD_LABELS: Record<string, string> = {
     fullName: f.fullName,
-    company: f.companyName,
+    company: isPartner ? f.companyOrganisation : f.companyName,
     country: f.country,
+    city: f.city,
     email: f.email,
     phone: f.phone,
     productInterest: f.productInterest,
@@ -34,6 +44,8 @@ export default function InquiryForm({
     deliveryDestination: f.deliveryDestination,
     deliveryAddress: f.deliveryAddress,
     courierAccount: f.courierAccount,
+    attachments: f.attachments,
+    partnershipInterest: f.partnershipInterest,
     message: f.message,
   };
 
@@ -48,18 +60,61 @@ export default function InquiryForm({
 
     const form = event.currentTarget;
     const data = new FormData(form);
-    const payload = {
-      ...Object.fromEntries(data.entries()),
-      consent: data.get("consent") === "on",
-      sourcePage: window.location.href,
-      userLanguage: locale.toUpperCase(),
-    } as Record<string, string | boolean>;
+
+    // File objects can't survive JSON.stringify, so the whole form now
+    // submits as multipart/form-data (the server accepts both that and
+    // plain JSON — see /api/contact) rather than switching on whether an
+    // attachment is actually present.
+    const files = data.getAll("attachments").filter((v): v is File => v instanceof File && v.size > 0);
+    if (files.length > MAX_UPLOAD_FILES) {
+      setStatus("error");
+      setErrorMessage(f.tooManyFiles);
+      return;
+    }
+    const oversized = files.find((file) => file.size > MAX_UPLOAD_FILE_SIZE);
+    if (oversized) {
+      setStatus("error");
+      setErrorMessage(f.fileTooLarge);
+      return;
+    }
+
+    // The Partner form doesn't mark email/phone individually required (either
+    // one is enough), so that combined rule is enforced here instead.
+    // partnershipInterest is a CustomSelect (submits via a hidden input the
+    // browser's native `required` can't focus/validate), so — same
+    // established pattern as RequestOfferForm.tsx — it's checked manually
+    // here too rather than relying on the server's rejection alone.
+    if (isPartner) {
+      const email = (data.get("email") as string | null)?.trim();
+      const phone = (data.get("phone") as string | null)?.trim();
+      if (!email && !phone) {
+        setStatus("error");
+        setErrorMessage(f.emailOrPhoneNote);
+        return;
+      }
+      if (!data.get("partnershipInterest")) {
+        setStatus("error");
+        setErrorMessage(f.requiredNote);
+        return;
+      }
+    }
+
+    data.set("consent", data.get("consent") === "on" ? "true" : "false");
+    data.set("sourcePage", window.location.href);
+    data.set("userLanguage", locale.toUpperCase());
+
+    // A display-safe copy for the success-screen summary — File values
+    // don't render sensibly, so they're collapsed to a filename list.
+    const displayPayload: Record<string, string | boolean> = {};
+    for (const [key, value] of data.entries()) {
+      if (typeof value === "string") displayPayload[key] = value;
+    }
+    if (files.length > 0) displayPayload.attachments = files.map((file) => file.name).join(", ");
 
     try {
       const res = await fetch("/api/contact", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
+        body: data,
       });
 
       if (!res.ok) {
@@ -67,8 +122,7 @@ export default function InquiryForm({
         throw new Error(body.error || f.genericError);
       }
 
-      console.log("[InquiryForm] Submitted values:", payload);
-      setSubmitted(payload);
+      setSubmitted(displayPayload);
       setStatus("success");
       form.reset();
     } catch (err) {
@@ -141,27 +195,59 @@ export default function InquiryForm({
       {/* Carries which CTA the visitor came from (Request Offer/Sample/TAROPAK/etc.) without showing a field for it */}
       <input type="hidden" name="inquiryType" value={defaultType ?? "general"} />
 
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-        <Field label={f.fullName} name="fullName" required placeholder={f.fullNamePlaceholder} />
-        <Field label={f.companyName} name="company" required placeholder={f.companyNamePlaceholder} />
-      </div>
+      {isPartner ? (
+        <>
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <Field label={f.fullName} name="fullName" required placeholder={f.fullNamePlaceholder} />
+            <Field
+              label={`${f.companyOrganisation} ${f.messageOptional}`}
+              name="company"
+              placeholder={f.companyNamePlaceholder}
+            />
+          </div>
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <Field label={f.country} name="country" required placeholder={f.countryPlaceholder} />
+            <Field label={f.city} name="city" required placeholder={f.cityPlaceholder} />
+          </div>
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <Field label={f.email} name="email" type="email" placeholder={f.emailPlaceholder} />
+            <Field label={f.phone} name="phone" placeholder={f.phonePlaceholder} />
+          </div>
+          <p className="-mt-2 text-xs text-slate/60">{f.emailOrPhoneNote}</p>
+          <CustomSelect
+            label={f.partnershipInterest}
+            name="partnershipInterest"
+            values={PARTNERSHIP_INTEREST_OPTIONS}
+            labels={f.partnershipInterestOptions}
+            placeholder={f.selectPartnershipType}
+            required
+          />
+        </>
+      ) : (
+        <>
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <Field label={f.fullName} name="fullName" required placeholder={f.fullNamePlaceholder} />
+            <Field label={f.companyName} name="company" required placeholder={f.companyNamePlaceholder} />
+          </div>
 
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-        <Field label={f.country} name="country" required placeholder={f.countryPlaceholder} />
-        <Field label={f.email} name="email" type="email" required placeholder={f.emailPlaceholder} />
-      </div>
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <Field label={f.country} name="country" required placeholder={f.countryPlaceholder} />
+            <Field label={f.email} name="email" type="email" required placeholder={f.emailPlaceholder} />
+          </div>
 
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-        <Field label={f.phone} name="phone" required placeholder={f.phonePlaceholder} />
-        <CustomSelect
-          label={f.productInterest}
-          name="productInterest"
-          defaultValue={defaultInterest}
-          values={PRODUCT_INTERESTS}
-          labels={f.productInterestOptions}
-          placeholder={f.selectOption}
-        />
-      </div>
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <Field label={f.phone} name="phone" required placeholder={f.phonePlaceholder} />
+            <CustomSelect
+              label={f.productInterest}
+              name="productInterest"
+              defaultValue={defaultInterest}
+              values={PRODUCT_INTERESTS}
+              labels={f.productInterestOptions}
+              placeholder={f.selectOption}
+            />
+          </div>
+        </>
+      )}
 
       {isSample ? (
         <>
@@ -196,12 +282,21 @@ export default function InquiryForm({
             name="courierAccount"
             placeholder={f.courierAccountPlaceholder}
           />
+
+          <FileUpload
+            name="attachments"
+            label={`${f.attachments} ${f.messageOptional}`}
+            hint={f.attachmentsHint}
+            chooseLabel={f.chooseFiles}
+            tooManyMessage={f.tooManyFiles}
+            tooLargeMessage={f.fileTooLarge}
+          />
         </>
-      ) : (
+      ) : !isPartner ? (
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <Field label={f.monthlyVolume} name="monthlyVolume" placeholder={f.monthlyVolumePlaceholder} />
         </div>
-      )}
+      ) : null}
 
       <div>
         <label htmlFor="message" className="mb-1.5 block text-sm font-semibold text-navy">
@@ -247,7 +342,11 @@ export default function InquiryForm({
               : "inline-flex h-12 w-full cursor-pointer items-center justify-center gap-2 rounded-lg bg-brand-green text-sm font-semibold text-white transition-colors hover:bg-brand-green-dark disabled:opacity-70 sm:w-auto sm:px-8"
           }
         >
-          {status === "submitting" && <Loader2 className="size-4 animate-spin" />}
+          {status === "submitting" ? (
+            <Loader2 className="size-4 animate-spin" />
+          ) : (
+            <Send className="size-4" aria-hidden />
+          )}
           {f.sendMessage}
         </button>
       </div>
