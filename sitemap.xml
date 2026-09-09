@@ -1,55 +1,145 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
 <url>
 <loc>https://polycleaner.az</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://polycleaner.az" />
+<xhtml:link rel="alternate" hreflang="az" href="https://polycleaner.az/az" />
+<lastmod>2026-09-09T00:00:00.000Z</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1</priority>
+</url>
+<url>
+<loc>https://polycleaner.az/az</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://polycleaner.az" />
+<xhtml:link rel="alternate" hreflang="az" href="https://polycleaner.az/az" />
 <lastmod>2026-09-09T00:00:00.000Z</lastmod>
 <changefreq>weekly</changefreq>
 <priority>1</priority>
 </url>
 <url>
 <loc>https://polycleaner.az/about</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://polycleaner.az/about" />
+<xhtml:link rel="alternate" hreflang="az" href="https://polycleaner.az/az/about" />
+<lastmod>2026-09-09T00:00:00.000Z</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.7</priority>
+</url>
+<url>
+<loc>https://polycleaner.az/az/about</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://polycleaner.az/about" />
+<xhtml:link rel="alternate" hreflang="az" href="https://polycleaner.az/az/about" />
 <lastmod>2026-09-09T00:00:00.000Z</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 <url>
 <loc>https://polycleaner.az/rpet-flakes</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://polycleaner.az/rpet-flakes" />
+<xhtml:link rel="alternate" hreflang="az" href="https://polycleaner.az/az/rpet-flakes" />
+<lastmod>2026-09-09T00:00:00.000Z</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.7</priority>
+</url>
+<url>
+<loc>https://polycleaner.az/az/rpet-flakes</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://polycleaner.az/rpet-flakes" />
+<xhtml:link rel="alternate" hreflang="az" href="https://polycleaner.az/az/rpet-flakes" />
 <lastmod>2026-09-09T00:00:00.000Z</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 <url>
 <loc>https://polycleaner.az/process-quality</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://polycleaner.az/process-quality" />
+<xhtml:link rel="alternate" hreflang="az" href="https://polycleaner.az/az/process-quality" />
+<lastmod>2026-09-09T00:00:00.000Z</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.7</priority>
+</url>
+<url>
+<loc>https://polycleaner.az/az/process-quality</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://polycleaner.az/process-quality" />
+<xhtml:link rel="alternate" hreflang="az" href="https://polycleaner.az/az/process-quality" />
 <lastmod>2026-09-09T00:00:00.000Z</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 <url>
 <loc>https://polycleaner.az/sustainability</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://polycleaner.az/sustainability" />
+<xhtml:link rel="alternate" hreflang="az" href="https://polycleaner.az/az/sustainability" />
+<lastmod>2026-09-09T00:00:00.000Z</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.7</priority>
+</url>
+<url>
+<loc>https://polycleaner.az/az/sustainability</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://polycleaner.az/sustainability" />
+<xhtml:link rel="alternate" hreflang="az" href="https://polycleaner.az/az/sustainability" />
 <lastmod>2026-09-09T00:00:00.000Z</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 <url>
 <loc>https://polycleaner.az/documents</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://polycleaner.az/documents" />
+<xhtml:link rel="alternate" hreflang="az" href="https://polycleaner.az/az/documents" />
+<lastmod>2026-09-09T00:00:00.000Z</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.7</priority>
+</url>
+<url>
+<loc>https://polycleaner.az/az/documents</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://polycleaner.az/documents" />
+<xhtml:link rel="alternate" hreflang="az" href="https://polycleaner.az/az/documents" />
 <lastmod>2026-09-09T00:00:00.000Z</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 <url>
 <loc>https://polycleaner.az/contact</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://polycleaner.az/contact" />
+<xhtml:link rel="alternate" hreflang="az" href="https://polycleaner.az/az/contact" />
+<lastmod>2026-09-09T00:00:00.000Z</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.7</priority>
+</url>
+<url>
+<loc>https://polycleaner.az/az/contact</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://polycleaner.az/contact" />
+<xhtml:link rel="alternate" hreflang="az" href="https://polycleaner.az/az/contact" />
 <lastmod>2026-09-09T00:00:00.000Z</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
 <url>
 <loc>https://polycleaner.az/privacy-policy</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://polycleaner.az/privacy-policy" />
+<xhtml:link rel="alternate" hreflang="az" href="https://polycleaner.az/az/privacy-policy" />
+<lastmod>2026-09-09T00:00:00.000Z</lastmod>
+<changefreq>yearly</changefreq>
+<priority>0.3</priority>
+</url>
+<url>
+<loc>https://polycleaner.az/az/privacy-policy</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://polycleaner.az/privacy-policy" />
+<xhtml:link rel="alternate" hreflang="az" href="https://polycleaner.az/az/privacy-policy" />
 <lastmod>2026-09-09T00:00:00.000Z</lastmod>
 <changefreq>yearly</changefreq>
 <priority>0.3</priority>
 </url>
 <url>
 <loc>https://polycleaner.az/terms-of-use</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://polycleaner.az/terms-of-use" />
+<xhtml:link rel="alternate" hreflang="az" href="https://polycleaner.az/az/terms-of-use" />
+<lastmod>2026-09-09T00:00:00.000Z</lastmod>
+<changefreq>yearly</changefreq>
+<priority>0.3</priority>
+</url>
+<url>
+<loc>https://polycleaner.az/az/terms-of-use</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://polycleaner.az/terms-of-use" />
+<xhtml:link rel="alternate" hreflang="az" href="https://polycleaner.az/az/terms-of-use" />
 <lastmod>2026-09-09T00:00:00.000Z</lastmod>
 <changefreq>yearly</changefreq>
 <priority>0.3</priority>
