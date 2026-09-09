@@ -81,7 +81,7 @@ export default function InquiryModal({
           // the browser to re-blur the whole page every frame, which is what
           // made the modal stutter/freeze on open. A plain tinted overlay is
           // cheap to composite.
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-[rgba(6,43,58,0.72)] p-4"
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-[rgba(6,43,58,0.72)] p-4 pt-[max(1rem,env(safe-area-inset-top))]"
           onClick={onClose}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -111,7 +111,12 @@ export default function InquiryModal({
               <X className="size-5" />
             </button>
 
-            <div className="scrollbar-thin max-h-[92vh] overflow-y-auto rounded-2xl bg-white p-5 shadow-2xl sm:p-7">
+            {/* dvh (not vh) — vh on mobile Safari is based on the viewport
+                with the address bar hidden, so a modal sized off 92vh can
+                render taller than what's actually visible, pushing the
+                close button above the top edge. dvh tracks the real,
+                currently-visible viewport. */}
+            <div className="scrollbar-thin max-h-[85dvh] overflow-y-auto rounded-2xl bg-white p-5 shadow-2xl sm:p-7">
               <h2 className="pr-10 text-2xl font-bold text-navy">{title}</h2>
               {isOfferFlow && <span className="mt-2 block h-1 w-10 rounded-full bg-brand-green" />}
               <p className="mt-2 text-sm text-slate">{subtitle}</p>

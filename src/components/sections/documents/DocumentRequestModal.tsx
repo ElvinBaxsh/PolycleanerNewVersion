@@ -35,7 +35,7 @@ export default function DocumentRequestModal({ isOpen, onClose }: { isOpen: bool
       {isOpen && (
         <motion.div
           key="document-request-modal-backdrop"
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-[rgba(6,43,58,0.72)] p-4"
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-[rgba(6,43,58,0.72)] p-4 pt-[max(1rem,env(safe-area-inset-top))]"
           onClick={onClose}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -64,7 +64,12 @@ export default function DocumentRequestModal({ isOpen, onClose }: { isOpen: bool
             >
               <X className="size-5" />
             </button>
-            <div className="scrollbar-thin max-h-[92vh] overflow-y-auto rounded-2xl shadow-2xl">
+            {/* dvh (not vh) — vh on mobile Safari is based on the viewport
+                with the address bar hidden, so a modal sized off 92vh can
+                render taller than what's actually visible, pushing the
+                close button above the top edge. dvh tracks the real,
+                currently-visible viewport. */}
+            <div className="scrollbar-thin max-h-[85dvh] overflow-y-auto rounded-2xl shadow-2xl">
               <DocumentRequestForm onCancel={onClose} />
             </div>
           </motion.div>
