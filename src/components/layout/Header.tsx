@@ -133,7 +133,7 @@ export default function Header() {
               {t.common.requestOffer}
             </InquiryButton>
             <div className="mt-4 flex justify-center">
-              <LanguageSwitcher variant="simple" />
+              <LanguageSwitcher variant="flags" />
             </div>
           </nav>
         </div>

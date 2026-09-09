@@ -185,7 +185,7 @@ export default function DocumentRequestForm({ onCancel }: { onCancel?: () => voi
             <button
               type="button"
               onClick={onCancel}
-              className="inline-flex h-11 flex-1 cursor-pointer items-center justify-center rounded-lg border-2 border-border px-5 text-xs font-bold uppercase tracking-wider text-navy transition-colors hover:bg-soft-gray"
+              className="inline-flex h-11 w-full cursor-pointer items-center justify-center rounded-lg border-2 border-border px-5 text-xs font-bold uppercase tracking-wider text-navy transition-colors hover:bg-soft-gray sm:w-auto sm:flex-1"
             >
               {t.forms.cancel}
             </button>
@@ -195,7 +195,7 @@ export default function DocumentRequestForm({ onCancel }: { onCancel?: () => voi
             disabled={status === "submitting"}
             className={
               onCancel
-                ? "inline-flex h-11 flex-1 cursor-pointer items-center justify-center gap-2 rounded-lg bg-brand-green text-xs font-bold uppercase tracking-wider text-white transition-colors hover:bg-brand-green-dark disabled:opacity-70"
+                ? "inline-flex h-11 w-full cursor-pointer items-center justify-center gap-2 rounded-lg bg-brand-green text-xs font-bold uppercase tracking-wider text-white transition-colors hover:bg-brand-green-dark disabled:opacity-70 sm:w-auto sm:flex-1"
                 : "mt-5 inline-flex h-11 w-full cursor-pointer items-center justify-center gap-2 rounded-lg bg-brand-green text-xs font-bold uppercase tracking-wider text-white transition-colors hover:bg-brand-green-dark disabled:opacity-70"
             }
           >
