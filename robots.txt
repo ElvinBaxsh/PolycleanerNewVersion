@@ -2,4 +2,4 @@ User-Agent: *
 Allow: /
 Disallow: /api/
 
-Sitemap: https://www.polycleaner.com/sitemap.xml
+Sitemap: https://polycleaner.az/sitemap.xml
