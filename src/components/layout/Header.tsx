@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
@@ -17,6 +17,7 @@ export default function Header() {
   const { t } = useLanguage();
   const [open, setOpen] = useState(false);
   const [hideForFooter, setHideForFooter] = useState(false);
+  const headerRef = useRef<HTMLElement>(null);
 
   const navLinks = [
     { label: t.nav.home, href: NAV_HREFS[0] },
@@ -43,11 +44,27 @@ export default function Header() {
     return () => observer.disconnect();
   }, []);
 
+  // Clicking anywhere outside the header (the inline mobile-menu panel has
+  // no backdrop of its own, unlike the modals elsewhere on the site) closes
+  // the open mobile menu.
+  useEffect(() => {
+    if (!open) return;
+    function onClickOutside(e: MouseEvent) {
+      if (headerRef.current && !headerRef.current.contains(e.target as Node)) setOpen(false);
+    }
+    document.addEventListener("mousedown", onClickOutside);
+    return () => document.removeEventListener("mousedown", onClickOutside);
+  }, [open]);
+
   return (
     <header
+      ref={headerRef}
       className={clsx(
         "sticky top-0 z-50 bg-navy transition-transform duration-300",
-        hideForFooter ? "-translate-y-full" : "translate-y-0"
+        // Never slide the header away while the mobile menu is open — it
+        // carries the only close (X) button, so hiding it would strand the
+        // user with an open, unreachable menu once the footer comes into view.
+        hideForFooter && !open ? "-translate-y-full" : "translate-y-0"
       )}
     >
       <div className="container-header flex h-16 items-center justify-between gap-6 sm:h-20">
@@ -108,9 +125,6 @@ export default function Header() {
                 {link.label}
               </Link>
             ))}
-            <div className="mt-4 flex justify-center">
-              <LanguageSwitcher />
-            </div>
             <InquiryButton
               type="offer"
               className="mt-4 w-full"
@@ -118,6 +132,9 @@ export default function Header() {
             >
               {t.common.requestOffer}
             </InquiryButton>
+            <div className="mt-4 flex justify-center">
+              <LanguageSwitcher variant="simple" />
+            </div>
           </nav>
         </div>
       )}

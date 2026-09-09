@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 const SIZES = {
-  default: "h-[52px] w-auto object-contain sm:h-[58px] lg:h-[64px] xl:h-[68px]",
+  default: "h-[56px] w-auto object-contain sm:h-[60px] lg:h-[64px] xl:h-[68px]",
   large: "h-[84px] w-auto object-contain sm:h-[96px] lg:h-[104px] xl:h-[112px]",
 };
 

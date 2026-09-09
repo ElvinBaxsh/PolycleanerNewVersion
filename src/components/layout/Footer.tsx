@@ -104,7 +104,7 @@ export default function Footer() {
 
       <div className="border-t border-white/10 py-5">
         <Container className="flex flex-col items-center justify-between gap-4 text-xs text-white/50 sm:flex-row">
-          <p>{t.footer.copyright(new Date().getFullYear())}</p>
+          <p>{t.footer.copyright(2025)}</p>
           <div className="flex flex-wrap items-center justify-center gap-4">
             <Link href="/privacy-policy" className="hover:text-white/80">
               {t.footer.privacyPolicy}

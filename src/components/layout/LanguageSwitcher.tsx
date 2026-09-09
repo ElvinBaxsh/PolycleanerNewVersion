@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { ChevronDown, Check, Globe } from "lucide-react";
+import { ChevronDown, Check } from "lucide-react";
 import { clsx } from "clsx";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 
@@ -23,8 +23,8 @@ export default function LanguageSwitcher({
       placements near the bottom of the viewport (e.g. the footer), where a
       downward dropdown would spill past the page edge. */
   dropUp?: boolean;
-  /** "simple" renders a compact inline "🌐 AZ | EN" toggle instead of the
-      flag + dropdown — no popup, so there's nothing to spill off-screen. */
+  /** "simple" renders a compact inline flag + "AZ | EN" toggle — no popup,
+      so there's nothing to spill off-screen. */
   variant?: "dropdown" | "simple";
 }) {
   const { locale, setLocale } = useLanguage();
@@ -36,7 +36,10 @@ export default function LanguageSwitcher({
   if (variant === "simple") {
     return (
       <div className={clsx("flex items-center gap-1.5 text-sm font-semibold", light ? "text-white/70" : "text-slate")}>
-        <Globe className="size-4 shrink-0" aria-hidden />
+        <span className="block size-4 shrink-0 overflow-hidden rounded-full" aria-hidden>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={current.flagSrc} alt="" className="size-full object-cover" />
+        </span>
         {OPTIONS.slice()
           .reverse()
           .map((opt, i) => (

@@ -169,7 +169,7 @@ export default function DocumentRequestForm({ onCancel }: { onCancel?: () => voi
               name="message"
               rows={3}
               placeholder={f.notesPlaceholder}
-              className="w-full flex-1 resize-none rounded-lg border border-border px-3.5 py-2.5 text-sm text-charcoal outline-none transition-colors focus:border-brand-blue"
+              className="w-full flex-1 resize-none rounded-lg border border-border px-3.5 py-2.5 text-base text-charcoal outline-none transition-colors focus:border-brand-blue sm:text-sm"
             />
           </div>
         </div>
@@ -180,7 +180,7 @@ export default function DocumentRequestForm({ onCancel }: { onCancel?: () => voi
           </p>
         )}
 
-        <div className={onCancel ? "mt-5 flex flex-col gap-3 sm:flex-row" : ""}>
+        <div className={onCancel ? "mt-5 flex flex-col-reverse gap-3 sm:flex-row" : ""}>
           {onCancel && (
             <button
               type="button"
@@ -243,7 +243,7 @@ function FormField({
           required={required}
           placeholder={placeholder}
           className={clsx(
-            "w-full rounded-lg border border-border py-2.5 text-sm text-charcoal outline-none transition-colors focus:border-brand-blue",
+            "w-full rounded-lg border border-border py-2.5 text-base text-charcoal outline-none transition-colors focus:border-brand-blue sm:text-sm",
             Icon ? "pl-9 pr-3.5" : "px-3.5"
           )}
         />

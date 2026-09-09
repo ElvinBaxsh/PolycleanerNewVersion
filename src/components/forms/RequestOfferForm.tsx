@@ -27,6 +27,7 @@ import {
 } from "@/lib/constants";
 import { trackEvent } from "@/lib/analytics";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
+import CustomSelect from "./CustomSelect";
 
 type Status = "idle" | "submitting" | "success" | "error";
 
@@ -43,6 +44,16 @@ export default function RequestOfferForm({ onCancel }: { onCancel?: () => void }
 
     const form = event.currentTarget;
     const data = new FormData(form);
+
+    // CustomSelect submits via a hidden input, which the browser's native
+    // required-field validation can't focus/scroll to — so the required
+    // dropdowns (country, product interest) are checked here instead.
+    if (!data.get("country") || !data.get("productInterest")) {
+      setStatus("error");
+      setErrorMessage(f.requiredNote);
+      return;
+    }
+
     const payload = {
       ...Object.fromEntries(data.entries()),
       consent: data.get("consent") === "on",
@@ -130,7 +141,7 @@ export default function RequestOfferForm({ onCancel }: { onCancel?: () => void }
       </div>
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-        <IconSelectField
+        <CustomSelect
           icon={<Globe2 />}
           label={f.country}
           name="country"
@@ -158,7 +169,7 @@ export default function RequestOfferForm({ onCancel }: { onCancel?: () => void }
           required
           placeholder={f.phonePlaceholder2}
         />
-        <IconSelectField
+        <CustomSelect
           icon={<Package />}
           label={f.productInterest}
           name="productInterest"
@@ -170,7 +181,7 @@ export default function RequestOfferForm({ onCancel }: { onCancel?: () => void }
       </div>
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-        <IconSelectField
+        <CustomSelect
           icon={<BarChart3 />}
           label={f.requiredVolume}
           name="requiredVolume"
@@ -178,7 +189,7 @@ export default function RequestOfferForm({ onCancel }: { onCancel?: () => void }
           values={OFFER_VOLUME_OPTIONS}
           labels={f.offerVolumeOptions}
         />
-        <IconSelectField
+        <CustomSelect
           icon={<Layers />}
           label={f.application}
           name="application"
@@ -206,7 +217,7 @@ export default function RequestOfferForm({ onCancel }: { onCancel?: () => void }
             name="message"
             rows={4}
             placeholder={f.messagePlaceholderOffer}
-            className="w-full rounded-lg border border-border py-3 pl-10 pr-4 text-sm text-charcoal outline-none transition-colors focus:border-brand-blue"
+            className="w-full rounded-lg border border-border py-3 pl-10 pr-4 text-base text-charcoal outline-none transition-colors focus:border-brand-blue sm:text-sm"
           />
         </div>
       </div>
@@ -229,7 +240,7 @@ export default function RequestOfferForm({ onCancel }: { onCancel?: () => void }
         </p>
       )}
 
-      <div className="flex flex-col gap-3 pt-1 sm:flex-row">
+      <div className="flex flex-col-reverse gap-3 pt-1 sm:flex-row">
         <button
           type="button"
           onClick={onCancel}
@@ -288,64 +299,8 @@ function IconField({
           type={type}
           required={required}
           placeholder={placeholder}
-          className="w-full rounded-lg border border-border py-2.5 pl-10 pr-4 text-sm text-charcoal outline-none transition-colors focus:border-brand-blue"
+          className="w-full rounded-lg border border-border py-2.5 pl-10 pr-4 text-base text-charcoal outline-none transition-colors focus:border-brand-blue sm:text-sm"
         />
-      </div>
-    </div>
-  );
-}
-
-function IconSelectField({
-  icon,
-  label,
-  name,
-  values,
-  labels,
-  required = false,
-  placeholder = "Select an option",
-}: {
-  icon: ReactNode;
-  label: string;
-  name: string;
-  values: readonly string[];
-  labels: readonly string[];
-  required?: boolean;
-  placeholder?: string;
-}) {
-  return (
-    <div>
-      <label htmlFor={name} className="mb-1.5 block text-sm font-semibold text-navy">
-        {label} {required && <span className="text-brand-green">*</span>}
-      </label>
-      <div className="relative">
-        <span className="pointer-events-none absolute left-3.5 top-1/2 size-4 -translate-y-1/2 text-slate/40 [&>svg]:size-4">
-          {icon}
-        </span>
-        <select
-          id={name}
-          name={name}
-          required={required}
-          defaultValue=""
-          className="w-full appearance-none rounded-lg border border-border bg-white py-2.5 pl-10 pr-8 text-sm text-charcoal outline-none transition-colors focus:border-brand-blue"
-        >
-          <option value="" disabled>
-            {placeholder}
-          </option>
-          {values.map((value, i) => (
-            <option key={value} value={value}>
-              {labels[i]}
-            </option>
-          ))}
-        </select>
-        <svg
-          className="pointer-events-none absolute right-3 top-1/2 size-3.5 -translate-y-1/2 text-slate/40"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-        >
-          <path d="m6 9 6 6 6-6" />
-        </svg>
       </div>
     </div>
   );

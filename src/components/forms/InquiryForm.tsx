@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { Loader2, CheckCircle2, AlertCircle } from "lucide-react";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 import { PRODUCT_INTERESTS, SAMPLE_TYPE_OPTIONS, OFFER_APPLICATION_OPTIONS } from "@/lib/constants";
+import CustomSelect from "./CustomSelect";
 
 type Status = "idle" | "submitting" | "success" | "error";
 
@@ -152,32 +153,32 @@ export default function InquiryForm({
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <Field label={f.phone} name="phone" required placeholder={f.phonePlaceholder} />
-        <SelectField
+        <CustomSelect
           label={f.productInterest}
           name="productInterest"
           defaultValue={defaultInterest}
           values={PRODUCT_INTERESTS}
           labels={f.productInterestOptions}
-          selectOptionLabel={f.selectOption}
+          placeholder={f.selectOption}
         />
       </div>
 
       {isSample ? (
         <>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-            <SelectField
+            <CustomSelect
               label={f.sampleType}
               name="sampleType"
               values={SAMPLE_TYPE_OPTIONS}
               labels={f.sampleTypeOptions}
-              selectOptionLabel={f.selectSampleType}
+              placeholder={f.selectSampleType}
             />
-            <SelectField
+            <CustomSelect
               label={f.application}
               name="application"
               values={OFFER_APPLICATION_OPTIONS}
               labels={f.offerApplicationOptions}
-              selectOptionLabel={f.selectApplication}
+              placeholder={f.selectApplication}
             />
           </div>
 
@@ -212,7 +213,7 @@ export default function InquiryForm({
           required
           rows={5}
           placeholder={f.messagePlaceholder}
-          className="w-full rounded-lg border border-border px-4 py-3 text-sm text-charcoal outline-none transition-colors focus:border-brand-blue"
+          className="w-full rounded-lg border border-border px-4 py-3 text-base text-charcoal outline-none transition-colors focus:border-brand-blue sm:text-sm"
         />
       </div>
 
@@ -227,7 +228,7 @@ export default function InquiryForm({
         </p>
       )}
 
-      <div className={onCancel ? "flex flex-col gap-3 sm:flex-row" : ""}>
+      <div className={onCancel ? "flex flex-col-reverse gap-3 sm:flex-row" : ""}>
         {onCancel && (
           <button
             type="button"
@@ -279,47 +280,8 @@ function Field({
         type={type}
         required={required}
         placeholder={placeholder}
-        className="w-full rounded-lg border border-border px-4 py-2.5 text-sm text-charcoal outline-none transition-colors focus:border-brand-blue"
+        className="w-full rounded-lg border border-border px-4 py-2.5 text-base text-charcoal outline-none transition-colors focus:border-brand-blue sm:text-sm"
       />
-    </div>
-  );
-}
-
-function SelectField({
-  label,
-  name,
-  values,
-  labels,
-  defaultValue,
-  selectOptionLabel,
-}: {
-  label: string;
-  name: string;
-  values: readonly string[];
-  labels: readonly string[];
-  defaultValue?: string;
-  selectOptionLabel: string;
-}) {
-  return (
-    <div>
-      <label htmlFor={name} className="mb-1.5 block text-sm font-semibold text-navy">
-        {label}
-      </label>
-      <select
-        id={name}
-        name={name}
-        defaultValue={defaultValue ?? ""}
-        className="w-full rounded-lg border border-border bg-white px-4 py-2.5 text-sm text-charcoal outline-none transition-colors focus:border-brand-blue"
-      >
-        <option value="" disabled>
-          {selectOptionLabel}
-        </option>
-        {values.map((value, i) => (
-          <option key={value} value={value}>
-            {labels[i]}
-          </option>
-        ))}
-      </select>
     </div>
   );
 }
