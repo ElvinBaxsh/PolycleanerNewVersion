@@ -103,7 +103,10 @@ export default function ProcessStrip({ variant = "home" }: { variant?: "home" | 
           <div
             className="flex w-max items-center gap-x-6"
             style={{
-              animation: "partners-marquee 28s linear infinite",
+              animationName: "partners-marquee",
+              animationDuration: "28s",
+              animationTimingFunction: "linear",
+              animationIterationCount: "infinite",
               animationPlayState: paused ? "paused" : "running",
             }}
           >

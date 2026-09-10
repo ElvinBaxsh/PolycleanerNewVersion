@@ -41,6 +41,7 @@ export default function Hero() {
           alt="Hot washed rPET flakes on the production line"
           fill
           priority
+          sizes="100vw"
           className="object-cover object-center"
         />
 
@@ -138,6 +139,7 @@ export default function Hero() {
                       src={isTaropak ? "/images/taropak-logo.webp" : "/images/cre-expo-icon.png"}
                       alt={isTaropak ? "TAROPAK 2026" : "Compounding & Recycling Expo EU 2026"}
                       fill
+                      sizes="160px"
                       className={clsx("object-contain", isTaropak ? "p-1" : "p-3")}
                     />
                   </div>

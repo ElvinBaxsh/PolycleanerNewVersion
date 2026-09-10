@@ -79,10 +79,17 @@ export default function PartnersSection() {
           onTouchEnd={handlePauseEnd}
           className="scrollbar-none mt-10 overflow-x-auto"
         >
+          {/* Yalnız uzun (longhand) animasiya xüsusiyyətləri: `animation`
+              qısaltması ilə `animationPlayState`-i eyni style obyektində
+              qarışdırmaq React-in "mixing shorthand and non-shorthand"
+              xətasını verirdi (hover-də pauza da etibarsız olurdu). */}
           <div
             className="flex w-max items-center gap-8 sm:gap-12"
             style={{
-              animation: started ? "partners-marquee 32s linear infinite" : undefined,
+              animationName: started ? "partners-marquee" : "none",
+              animationDuration: "32s",
+              animationTimingFunction: "linear",
+              animationIterationCount: "infinite",
               animationPlayState: paused ? "paused" : "running",
             }}
           >

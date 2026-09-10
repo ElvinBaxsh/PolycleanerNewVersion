@@ -75,7 +75,10 @@ export default function Applications() {
           <div
             className="flex w-max items-stretch gap-4"
             style={{
-              animation: "partners-marquee 26s linear infinite",
+              animationName: "partners-marquee",
+              animationDuration: "26s",
+              animationTimingFunction: "linear",
+              animationIterationCount: "infinite",
               animationPlayState: paused ? "paused" : "running",
             }}
           >

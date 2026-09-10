@@ -54,7 +54,10 @@ export default function CloseupGallery() {
           <div
             className="flex w-max items-stretch gap-3"
             style={{
-              animation: "partners-marquee 30s linear infinite",
+              animationName: "partners-marquee",
+              animationDuration: "30s",
+              animationTimingFunction: "linear",
+              animationIterationCount: "infinite",
               animationPlayState: paused ? "paused" : "running",
             }}
           >
