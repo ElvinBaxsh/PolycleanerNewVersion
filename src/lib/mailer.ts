@@ -8,7 +8,12 @@ import { BUYER_DOCUMENTS } from "./constants";
 // with the email itself and works immediately, regardless of deploy status.
 const LOGO_CID = "polycleaner-logo";
 const LOGO_SRC = `cid:${LOGO_CID}`;
-const LOGO_PATH = path.join(process.cwd(), "public", "images", "polycleaner-logonew.png");
+// A mail-sized copy, not the site's own file: the original is 2149x732 and
+// 423KB, but the header renders it at 188x64. Embedding the full-size asset
+// added ~400KB to every single email for no visible gain — this is 376x128
+// (2x the display size, so still crisp on high-density screens) at ~21KB.
+// The site keeps using the original; only the email uses this one.
+const LOGO_PATH = path.join(process.cwd(), "public", "images", "mail", "polycleaner-logo.png");
 
 // Section badges use the site's own icon set rather than emoji, so the email
 // reads as part of the brand instead of a generic template — and so it looks
