@@ -13,7 +13,9 @@ import type { Locale } from "@/lib/i18n/translations";
 // code instead of a flag; a CDN-hosted flag was also unreliable to load).
 const OPTIONS: { locale: Locale; flagSrc: string; label: string }[] = [
   { locale: "en", flagSrc: "/images/flags/gb.svg", label: "English" },
-  { locale: "az", flagSrc: "/images/flags/az.svg", label: "Azərbaycan" },
+  // Labelled in English, not as the endonym "Azərbaycan": the site opens in
+  // English for everyone, so this menu is read by an English speaker first.
+  { locale: "az", flagSrc: "/images/flags/az.svg", label: "Azerbaijan" },
 ];
 
 export default function LanguageSwitcher({
