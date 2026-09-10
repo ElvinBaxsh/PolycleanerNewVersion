@@ -194,7 +194,10 @@ export default function DocumentGrid() {
             </Reveal>
 
             <Reveal delay={0.15}>
-              <div className="relative mt-4 flex min-h-[230px] w-full items-center overflow-hidden rounded-2xl sm:min-h-[170px]">
+              {/* Məzmun normal axındadır (absolute deyil) — belə olmasa
+                  uzun tərcümə (məsələn AZ-da 2 sətirlik başlıq) kartı
+                  böyüdə bilmir və overflow-hidden onu kəsir. */}
+              <div className="relative mt-4 w-full overflow-hidden rounded-2xl">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={activeEvent}
@@ -202,7 +205,7 @@ export default function DocumentGrid() {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -4 }}
                     transition={{ duration: 0.6, ease: "easeInOut" }}
-                    className="absolute inset-0 flex items-center"
+                    className="relative flex min-h-[170px] items-center"
                   >
                     <Image
                       src={EVENT_PHOTOS[activeEvent]}
@@ -219,7 +222,7 @@ export default function DocumentGrid() {
                         arxada "asılı" qalmır, təbii axan detal kimi görünür.
                         Dar ekranda (mobil) hələ də alt-alta qalır, çünki
                         yan-yana sığmaz. */}
-                    <div className="relative z-10 flex w-full max-w-2xl flex-col gap-4 p-6 pb-8 sm:flex-row sm:items-start sm:justify-between">
+                    <div className="relative z-10 flex w-full max-w-2xl flex-col gap-4 p-6 pb-8 pr-16 sm:flex-row sm:items-start sm:justify-between">
                       <div className="min-w-0">
                         <h3 className="text-xl font-bold text-white">{t.documents.taropakMeet(eventData.name)}</h3>
                         <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm font-semibold text-white/80">
