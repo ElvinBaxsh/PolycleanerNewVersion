@@ -1,8 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
 import { buildContactEmail, sendMail, BUYER_DOCUMENT_ATTACHMENTS, type ContactPayload, type EmailAttachment } from "@/lib/mailer";
-import { COMPANY, SALES_EMAILS, MAX_UPLOAD_FILES, MAX_UPLOAD_FILE_SIZE, MAX_UPLOAD_TOTAL_SIZE } from "@/lib/constants";
+import {
+  COMPANY,
+  SALES_EMAILS,
+  MAX_UPLOAD_FILES,
+  MAX_UPLOAD_FILE_SIZE,
+  MAX_UPLOAD_TOTAL_SIZE,
+  hasAllowedUploadExtension,
+} from "@/lib/constants";
 
-const ALLOWED_TYPES = ["image/jpeg", "image/png", "image/webp", "image/gif", "application/pdf"];
 
 function isValidEmail(value: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
@@ -37,9 +43,15 @@ export async function POST(request: NextRequest) {
     if (files.length > MAX_UPLOAD_FILES) {
       return NextResponse.json({ error: `You can attach up to ${MAX_UPLOAD_FILES} files.` }, { status: 400 });
     }
-    const invalidType = files.find((file) => !ALLOWED_TYPES.includes(file.type));
+    // Checked by extension, not by file.type — see the note on
+    // ALLOWED_UPLOAD_EXTENSIONS: browsers routinely report no MIME type at
+    // all for a valid .docx/.xlsx, and rejecting those would lose real leads.
+    const invalidType = files.find((file) => !hasAllowedUploadExtension(file.name));
     if (invalidType) {
-      return NextResponse.json({ error: "Only images and PDF files can be attached." }, { status: 400 });
+      return NextResponse.json(
+        { error: "You can attach images, PDF, Word or Excel files." },
+        { status: 400 }
+      );
     }
     const oversized = files.find((file) => file.size > MAX_UPLOAD_FILE_SIZE);
     if (oversized) {

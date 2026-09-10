@@ -3,9 +3,14 @@
 import { useRef, useState, type DragEvent } from "react";
 import { Paperclip, FileText, X } from "lucide-react";
 import { clsx } from "clsx";
-import { MAX_UPLOAD_FILES, MAX_UPLOAD_FILE_SIZE } from "@/lib/constants";
+import {
+  MAX_UPLOAD_FILES,
+  MAX_UPLOAD_FILE_SIZE,
+  UPLOAD_ACCEPT_ATTRIBUTE,
+  hasAllowedUploadExtension,
+} from "@/lib/constants";
 
-const ACCEPT = "image/jpeg,image/png,image/webp,image/gif,application/pdf";
+const ACCEPT = UPLOAD_ACCEPT_ATTRIBUTE;
 
 function formatSize(bytes: number) {
   if (bytes < 1024) return `${bytes} B`;
@@ -32,6 +37,7 @@ export default function FileUpload({
   chooseLabel,
   tooManyMessage,
   tooLargeMessage,
+  wrongTypeMessage,
 }: {
   name: string;
   label: string;
@@ -39,6 +45,7 @@ export default function FileUpload({
   chooseLabel: string;
   tooManyMessage: string;
   tooLargeMessage: string;
+  wrongTypeMessage: string;
 }) {
   const [files, setFiles] = useState<File[]>([]);
   const [error, setError] = useState("");
@@ -62,6 +69,16 @@ export default function FileUpload({
       seen.add(key);
       return true;
     });
+
+    // The `accept` attribute only filters the OS file picker — a drag-and-drop
+    // ignores it entirely, so the same rule the server enforces runs here too,
+    // to fail immediately rather than after a submit round-trip.
+    const wrongType = deduped.find((f) => !hasAllowedUploadExtension(f.name));
+    if (wrongType) {
+      setError(wrongTypeMessage);
+      syncInput(files);
+      return;
+    }
 
     const oversized = deduped.find((f) => f.size > MAX_UPLOAD_FILE_SIZE);
     if (oversized) {

@@ -24,6 +24,43 @@ export const MAX_UPLOAD_FILES = 3;
 export const MAX_UPLOAD_FILE_SIZE = 5 * 1024 * 1024; // 5MB per file
 export const MAX_UPLOAD_TOTAL_SIZE = 15 * 1024 * 1024; // 15MB combined
 
+// What a buyer may attach. Office formats are here because specifications
+// arrive as .xlsx and purchase orders as .docx at least as often as PDFs;
+// archives (.zip) are deliberately left out — they carry real risk into the
+// sales inbox and a buyer can always attach the files themselves.
+//
+// The extension is what actually gets enforced. A browser's reported MIME
+// type is unreliable for Office files in particular — Windows without Office
+// installed reports "application/octet-stream" or an empty string for a
+// perfectly valid .xlsx — so rejecting on MIME alone would turn away real
+// customers. The MIME list below only steers the OS file picker.
+export const ALLOWED_UPLOAD_EXTENSIONS = [
+  ".jpg", ".jpeg", ".png", ".webp", ".gif",
+  ".pdf",
+  ".doc", ".docx",
+  ".xls", ".xlsx",
+];
+
+export const ALLOWED_UPLOAD_MIME_TYPES = [
+  "image/jpeg",
+  "image/png",
+  "image/webp",
+  "image/gif",
+  "application/pdf",
+  "application/msword",
+  "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+  "application/vnd.ms-excel",
+  "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+];
+
+/** For an <input type="file"> `accept` attribute. */
+export const UPLOAD_ACCEPT_ATTRIBUTE = [...ALLOWED_UPLOAD_MIME_TYPES, ...ALLOWED_UPLOAD_EXTENSIONS].join(",");
+
+export function hasAllowedUploadExtension(filename: string) {
+  const lower = filename.toLowerCase();
+  return ALLOWED_UPLOAD_EXTENSIONS.some((ext) => lower.endsWith(ext));
+}
+
 export const OFFER_PRODUCT_INTEREST_OPTIONS = [
   "Transparent / Clear rPET Flakes",
   "Light Blue rPET Flakes",

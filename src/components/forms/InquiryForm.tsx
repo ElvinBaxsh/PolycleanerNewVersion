@@ -290,6 +290,7 @@ export default function InquiryForm({
             chooseLabel={f.chooseFiles}
             tooManyMessage={f.tooManyFiles}
             tooLargeMessage={f.fileTooLarge}
+            wrongTypeMessage={f.fileTypeNotAllowed}
           />
         </>
       ) : !isPartner ? (
