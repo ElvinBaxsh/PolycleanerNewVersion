@@ -46,3 +46,6 @@ AGENTS.md
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Local dev tooling
+.claude/

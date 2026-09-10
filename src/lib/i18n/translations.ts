@@ -88,6 +88,8 @@ const en = {
     partnersCtaTitle: "Interested in partnering with us?",
     partnersCtaDescription: "Let’s build a greener future together.",
     partnersCtaButton: "Become a Partner",
+    partnersViewAll: (count: number) => `View all partners (${count})`,
+    partnersModalClose: "Close",
   },
 
   whyChooseItems: [
@@ -760,6 +762,8 @@ const az = {
     partnersCtaTitle: "Bizimlə tərəfdaşlıq etmək istəyirsiniz?",
     partnersCtaDescription: "Daha yaşıl bir gələcəyi birlikdə quraq.",
     partnersCtaButton: "Tərəfdaş Olun",
+    partnersViewAll: (count: number) => `Bütün partnerlərə bax (${count})`,
+    partnersModalClose: "Bağla",
   },
 
   whyChooseItems: [

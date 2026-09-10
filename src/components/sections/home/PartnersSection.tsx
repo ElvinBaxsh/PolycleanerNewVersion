@@ -1,11 +1,12 @@
 "use client";
 
-import { useRef, useState } from "react";
-import { ChevronRight, Users } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { ChevronRight, LayoutGrid, Users } from "lucide-react";
 import Container from "@/components/ui/Container";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Reveal from "@/components/ui/Reveal";
 import InquiryButton from "@/components/inquiry/InquiryButton";
+import PartnersModal from "./PartnersModal";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 import { PARTNERS } from "@/lib/constants";
 
@@ -16,7 +17,33 @@ export default function PartnersSection() {
   const partnerText = t.partners;
   const loopPartnerText = [...partnerText, ...partnerText];
   const [paused, setPaused] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
   const resumeTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const scrollerRef = useRef<HTMLDivElement>(null);
+  // The strip sits well down the page, so a marquee started at page load
+  // would already be mid-run (logos clipped at both edges) by the time
+  // anyone scrolls to it. Hold it at the first partner until the section
+  // is actually on screen, then start from the beginning.
+  const [started, setStarted] = useState(false);
+
+  useEffect(() => {
+    const el = scrollerRef.current;
+    if (!el) return;
+    // Browsers can restore a scroll container's offset across reloads.
+    el.scrollLeft = 0;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setStarted(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.15 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   function handlePauseStart() {
     if (resumeTimeout.current) clearTimeout(resumeTimeout.current);
@@ -43,6 +70,7 @@ export default function PartnersSection() {
             scrolling strip keeps this section a fixed, compact height no
             matter how many partners get added, at every breakpoint. */}
         <div
+          ref={scrollerRef}
           onMouseEnter={handlePauseStart}
           onMouseLeave={handlePauseEnd}
           onPointerDown={handlePauseStart}
@@ -54,7 +82,7 @@ export default function PartnersSection() {
           <div
             className="flex w-max items-center gap-8 sm:gap-12"
             style={{
-              animation: "partners-marquee 32s linear infinite",
+              animation: started ? "partners-marquee 32s linear infinite" : undefined,
               animationPlayState: paused ? "paused" : "running",
             }}
           >
@@ -87,6 +115,21 @@ export default function PartnersSection() {
             })}
           </div>
         </div>
+
+        {/* The marquee only ever shows a few logos at a time — this opens the
+            full list at once, for anyone looking for a specific partner. */}
+        <div className="mt-6 flex justify-center">
+          <button
+            type="button"
+            onClick={() => setModalOpen(true)}
+            className="inline-flex cursor-pointer items-center gap-2 rounded-full border border-border bg-white px-5 py-2.5 text-sm font-semibold text-navy transition-colors hover:border-brand-green/40 hover:bg-soft-gray"
+          >
+            <LayoutGrid className="size-4 text-brand-green" aria-hidden />
+            {t.home.partnersViewAll(PARTNERS.length)}
+          </button>
+        </div>
+
+        <PartnersModal open={modalOpen} onClose={() => setModalOpen(false)} />
 
         {/* Call to Action Banner */}
         <Reveal className="mt-10 flex flex-col items-center gap-5 rounded-2xl border border-slate-100 bg-[#F8FAFC] p-6 text-center sm:flex-row sm:justify-between sm:gap-4 sm:p-8 sm:text-left">
