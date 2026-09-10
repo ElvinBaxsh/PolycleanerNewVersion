@@ -69,11 +69,11 @@ export async function POST(request: NextRequest) {
     ip: request.headers.get("x-forwarded-for")?.split(",")[0]?.trim(),
   };
 
-  const { subject, html, text } = buildRequestOfferEmail(payload, meta);
+  const { subject, html, text, inlineImages } = buildRequestOfferEmail(payload, meta);
 
   console.log("[request-offer] New request:", { ...payload, ...meta });
 
-  const result = await sendMail(SALES_EMAILS, subject, html, text);
+  const result = await sendMail(SALES_EMAILS, subject, html, text, [], inlineImages);
 
   if (!result.sent && "error" in result) {
     // SMTP was configured but the send itself failed — this is a real error,

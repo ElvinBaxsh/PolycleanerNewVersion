@@ -127,15 +127,15 @@ export async function POST(request: NextRequest) {
     submittedAt: new Date().toISOString(),
     userLanguage: fields.userLanguage || "EN",
     ip: request.headers.get("x-forwarded-for")?.split(",")[0]?.trim(),
-    attachmentNames: attachments.map((a) => a.filename),
+    attachmentFiles: attachments.map((a) => ({ name: a.filename, size: a.content?.length ?? 0 })),
   };
 
-  const { subject, html, text } = buildContactEmail(payload, meta);
+  const { subject, html, text, inlineImages } = buildContactEmail(payload, meta);
 
   console.log("[contact-form] New inquiry:", {
     ...payload,
     sourcePage: meta.sourcePage,
-    attachments: meta.attachmentNames,
+    attachments: meta.attachmentFiles.map((f) => f.name),
   });
 
   // The General/Contact form and Partner enquiries go to the office inbox —
@@ -150,7 +150,7 @@ export async function POST(request: NextRequest) {
   const outgoingAttachments =
     payload.inquiryType === "documents" ? [...attachments, ...BUYER_DOCUMENT_ATTACHMENTS] : attachments;
 
-  const result = await sendMail(recipients, subject, html, text, outgoingAttachments);
+  const result = await sendMail(recipients, subject, html, text, outgoingAttachments, inlineImages);
 
   if (!result.sent && "error" in result) {
     // SMTP was configured but the send itself failed — this is a real error,

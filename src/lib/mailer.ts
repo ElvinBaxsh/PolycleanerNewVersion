@@ -10,6 +10,29 @@ const LOGO_CID = "polycleaner-logo";
 const LOGO_SRC = `cid:${LOGO_CID}`;
 const LOGO_PATH = path.join(process.cwd(), "public", "images", "polycleaner-logonew.png");
 
+// Section badges use the site's own icon set rather than emoji, so the email
+// reads as part of the brand instead of a generic template — and so it looks
+// identical everywhere (emoji render full-colour in Gmail but flat and
+// differently shaped in Outlook). These are 64px copies of the site icons,
+// small enough to embed; the originals are ~500px and would be ~6x the weight
+// for a badge displayed at 20px. Travelling with the email (cid:) rather than
+// hotlinked also means they show before the domain is even live, and they are
+// not blocked by the "don't load remote images" default many clients ship.
+const SECTION_ICONS = {
+  lead: "corporate-building.png",
+  product: "inventory.png",
+  buyerDocs: "TraceabilityN.png",
+  partnership: "handshake-blue.png",
+  message: "inquiry.png",
+  attachments: "traceability.png",
+  system: "processTransparency.png",
+} as const;
+type SectionIcon = keyof typeof SECTION_ICONS;
+
+const iconCid = (icon: SectionIcon) => `section-icon-${icon}`;
+const iconPath = (icon: SectionIcon) =>
+  path.join(process.cwd(), "public", "images", "icons", "mail", SECTION_ICONS[icon]);
+
 // Same reasoning as the logo above: attaching the actual PDF files (rather
 // than linking to /PDF/... on the live site) means a "Buyer Documents"
 // request email works immediately, regardless of whether the site has
@@ -51,6 +74,12 @@ function escapeHtml(value: string) {
 // Table-based layout throughout (not flexbox/grid) so this renders correctly
 // in Outlook desktop's Word engine, not just modern webmail clients.
 
+function formatBytes(bytes: number) {
+  if (bytes < 1024) return `${bytes} B`;
+  const kb = bytes / 1024;
+  return kb < 1024 ? `${Math.round(kb)} KB` : `${(kb / 1024).toFixed(1)} MB`;
+}
+
 function infoRow(label: string, value?: string) {
   if (!value) return "";
   return `
@@ -60,18 +89,28 @@ function infoRow(label: string, value?: string) {
     </tr>`;
 }
 
-function sectionCard(icon: string, title: string, innerHtml: string) {
-  return `
+/**
+ * Builds the section-card renderer for one email, recording which icons it
+ * actually used. Only those get embedded: an unreferenced cid: image is shown
+ * by some clients as a real attachment, which would clutter the very
+ * attachment list this template is trying to keep readable.
+ */
+function makeSectionRenderer() {
+  const usedIcons = new Set<SectionIcon>();
+
+  function sectionCard(icon: SectionIcon, title: string, innerHtml: string) {
+    usedIcons.add(icon);
+    return `
   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:16px;background:#ffffff;border:1px solid #DDE5E8;border-radius:12px;">
     <tr>
       <td style="padding:18px 20px;">
         <table role="presentation" cellpadding="0" cellspacing="0" style="margin-bottom:12px;">
           <tr>
-            <td style="width:34px;height:34px;background:#1688B5;border-radius:999px;text-align:center;vertical-align:middle;font-size:17px;line-height:34px;">
-              ${icon}
+            <td style="width:36px;height:36px;background:#EAF3F7;border-radius:999px;text-align:center;vertical-align:middle;line-height:36px;">
+              <img src="cid:${iconCid(icon)}" width="20" height="20" alt="" style="display:inline-block;width:20px;height:20px;vertical-align:middle;border:0;" />
             </td>
-            <td style="padding-left:12px;color:#1688B5;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;vertical-align:middle;">
-              ${title}
+            <td style="padding-left:12px;color:#1688B5;font-size:13px;font-weight:700;letter-spacing:.04em;vertical-align:middle;">
+              ${escapeHtml(title.toUpperCase())}
             </td>
           </tr>
         </table>
@@ -79,9 +118,22 @@ function sectionCard(icon: string, title: string, innerHtml: string) {
       </td>
     </tr>
   </table>`;
+  }
+
+  /** The embedded copies of exactly the icons this email referenced. */
+  function inlineIcons(): EmailAttachment[] {
+    return [...usedIcons].map((icon) => ({
+      filename: SECTION_ICONS[icon],
+      path: iconPath(icon),
+      cid: iconCid(icon),
+    }));
+  }
+
+  return { sectionCard, inlineIcons };
 }
 
 export function buildRequestOfferEmail(payload: RequestOfferPayload, meta: RequestOfferMeta) {
+  const { sectionCard, inlineIcons } = makeSectionRenderer();
   const subject = `New Request Offer — Poly Cleaner Website — ${payload.company} — ${payload.country}`;
 
   const leadInfo = `
@@ -138,18 +190,18 @@ export function buildRequestOfferEmail(payload: RequestOfferPayload, meta: Reque
             You have received a new Request Offer from the Poly Cleaner website.
           </p>
 
-          ${sectionCard("&#128100;", "Lead Information", leadInfo)}
-          ${sectionCard("&#128230;", "Product Requirements", productReq)}
+          ${sectionCard("lead", "Lead Information", leadInfo)}
+          ${sectionCard("product", "Product Requirements", productReq)}
           ${
             payload.message
               ? sectionCard(
-                  "&#128172;",
+                  "message",
                   "Message",
                   `<p style="margin:0;color:#334155;font-size:14px;line-height:1.6;white-space:pre-wrap;">${escapeHtml(payload.message)}</p>`
                 )
               : ""
           }
-          ${sectionCard("&#9881;", "System Information", systemInfo)}
+          ${sectionCard("system", "System Information", systemInfo)}
         </td>
       </tr>
       <tr>
@@ -196,7 +248,7 @@ export function buildRequestOfferEmail(payload: RequestOfferPayload, meta: Reque
     .filter((line): line is string => line !== null)
     .join("\n");
 
-  return { subject, html, text };
+  return { subject, html, text, inlineImages: inlineIcons() };
 }
 
 export interface ContactPayload {
@@ -228,7 +280,9 @@ export interface ContactMeta {
   submittedAt: string;
   userLanguage?: string;
   ip?: string;
-  attachmentNames?: string[];
+  /** Customer-uploaded files, with sizes so the email can show them without
+   *  the reader having to open each one to judge what arrived. */
+  attachmentFiles?: { name: string; size: number }[];
 }
 
 /** A customer-uploaded file (e.g. a reference photo on the Sample form),
@@ -240,6 +294,9 @@ export interface EmailAttachment {
   /** A local file path (bundled assets, e.g. the buyer-document PDFs) — mutually exclusive with `content`. */
   path?: string;
   contentType?: string;
+  /** Set for images referenced from the HTML as `cid:<value>` — clients render
+   *  these inline instead of listing them as downloadable attachments. */
+  cid?: string;
 }
 
 const INQUIRY_TYPE_LABELS: Record<string, string> = {
@@ -258,6 +315,7 @@ const INQUIRY_TYPE_LABELS: Record<string, string> = {
  * same handful of fields, distinguished by `inquiryType`.
  */
 export function buildContactEmail(payload: ContactPayload, meta: ContactMeta) {
+  const { sectionCard, inlineIcons } = makeSectionRenderer();
   const kind = INQUIRY_TYPE_LABELS[payload.inquiryType ?? "general"] ?? "General Inquiry";
   const isSample = payload.inquiryType === "sample";
   const isDocuments = payload.inquiryType === "documents";
@@ -336,8 +394,28 @@ export function buildContactEmail(payload: ContactPayload, meta: ContactMeta) {
       ${infoRow("User Language:", meta.userLanguage)}
       ${meta.ip ? infoRow("IP Address:", meta.ip) : ""}
       ${payload.consent !== undefined ? infoRow("Consent:", payload.consent ? "Granted (Privacy Policy Accepted)" : "Not granted") : ""}
-      ${meta.attachmentNames?.length ? infoRow("Attachments:", meta.attachmentNames.join(", ")) : ""}
     </table>`;
+
+  // The files the customer sent are the part of the email someone actually
+  // acts on, so they get their own card instead of being a comma-joined row
+  // buried under the IP address and the submission timestamp.
+  const uploadedFilesList = meta.attachmentFiles?.length
+    ? `
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+      ${meta.attachmentFiles
+        .map(
+          (file) => `
+      <tr>
+        <td style="padding:6px 0;color:#062B3A;font-size:14px;font-weight:700;">
+          &#128206; ${escapeHtml(file.name)}
+          <span style="color:#64748b;font-weight:400;">(${escapeHtml(formatBytes(file.size))})</span>
+        </td>
+      </tr>`
+        )
+        .join("")}
+    </table>
+    <p style="margin:10px 0 0;color:#64748b;font-size:12px;">Sent by the customer and attached to this email.</p>`
+    : "";
 
   const html = `
   <div style="background:#F4F7F8;padding:32px 16px;font-family:Arial, Helvetica, sans-serif;">
@@ -362,21 +440,22 @@ export function buildContactEmail(payload: ContactPayload, meta: ContactMeta) {
             You have received a new ${escapeHtml(kind.toLowerCase())} from the Poly Cleaner website.
           </p>
 
-          ${sectionCard("&#128100;", "Lead Information", leadInfo)}
-          ${isSample ? sectionCard("&#128230;", "Sample Requirements", sampleRequirements) : ""}
-          ${!isSample && hasOtherDetails ? sectionCard("&#128230;", "Inquiry Details", otherDetails) : ""}
-          ${isDocuments ? sectionCard("&#128193;", "Buyer Documents", buyerDocumentsList) : ""}
-          ${isPartner ? sectionCard("&#129309;", "Partnership Details", partnershipDetails) : ""}
+          ${sectionCard("lead", "Lead Information", leadInfo)}
+          ${isSample ? sectionCard("product", "Sample Requirements", sampleRequirements) : ""}
+          ${!isSample && hasOtherDetails ? sectionCard("product", "Inquiry Details", otherDetails) : ""}
+          ${isDocuments ? sectionCard("buyerDocs", "Buyer Documents", buyerDocumentsList) : ""}
+          ${isPartner ? sectionCard("partnership", "Partnership Details", partnershipDetails) : ""}
           ${
             payload.message
               ? sectionCard(
-                  "&#128172;",
+                  "message",
                   "Message",
                   `<p style="margin:0;color:#334155;font-size:14px;line-height:1.6;white-space:pre-wrap;">${escapeHtml(payload.message)}</p>`
                 )
               : ""
           }
-          ${sectionCard("&#9881;", "System Information", systemInfo)}
+          ${uploadedFilesList ? sectionCard("attachments", "Attachments", uploadedFilesList) : ""}
+          ${sectionCard("system", "System Information", systemInfo)}
         </td>
       </tr>
       <tr>
@@ -426,6 +505,11 @@ export function buildContactEmail(payload: ContactPayload, meta: ContactMeta) {
     isPartner ? "Partnership Details" : null,
     isPartner && payload.partnershipInterest ? `Partnership Interest: ${payload.partnershipInterest}` : null,
     payload.message ? `\nMessage:\n${payload.message}` : null,
+    // Mirrors the HTML: the customer's files are their own block, above the
+    // technical metadata rather than a row buried inside it.
+    meta.attachmentFiles?.length ? "" : null,
+    meta.attachmentFiles?.length ? "Attachments (sent by the customer)" : null,
+    ...(meta.attachmentFiles?.map((f) => `- ${f.name} (${formatBytes(f.size)})`) ?? []),
     "",
     "System Information",
     `Source Page: ${meta.sourcePage}`,
@@ -435,12 +519,11 @@ export function buildContactEmail(payload: ContactPayload, meta: ContactMeta) {
     payload.consent !== undefined
       ? `Consent: ${payload.consent ? "Granted (Privacy Policy Accepted)" : "Not granted"}`
       : null,
-    meta.attachmentNames?.length ? `Attachments: ${meta.attachmentNames.join(", ")}` : null,
   ]
     .filter((line): line is string => line !== null)
     .join("\n");
 
-  return { subject, html, text };
+  return { subject, html, text, inlineImages: inlineIcons() };
 }
 
 /**
@@ -454,7 +537,10 @@ export async function sendMail(
   subject: string,
   html: string,
   text: string,
-  extraAttachments: EmailAttachment[] = []
+  extraAttachments: EmailAttachment[] = [],
+  /** Images the HTML references as `cid:` — the section badges, from the
+   *  builder's `inlineImages`. Shown inline, not listed as attachments. */
+  inlineImages: EmailAttachment[] = []
 ) {
   const { SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS, SMTP_FROM } = process.env;
 
@@ -488,6 +574,7 @@ export async function sendMail(
           path: LOGO_PATH,
           cid: LOGO_CID,
         },
+        ...inlineImages,
         ...extraAttachments,
       ],
     });
