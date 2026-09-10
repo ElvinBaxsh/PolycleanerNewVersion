@@ -49,3 +49,9 @@ next-env.d.ts
 
 # Local dev tooling
 .claude/
+
+# Added by the Vercel CLI on `vercel link`
+.vercel
+.env*
+# ...but the template carries no secrets and is meant to be committed.
+!.env.example
