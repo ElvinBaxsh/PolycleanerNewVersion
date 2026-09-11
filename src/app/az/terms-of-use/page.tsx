@@ -1,18 +1,13 @@
 import type { Metadata } from "next";
-import { SITE_URL } from "@/lib/constants";
+import { pageMetadata } from "@/lib/seo";
 import TermsOfUsePage from "@/app/(main)/terms-of-use/page";
 
-export const metadata: Metadata = {
-  title: "İstifadə Şərtləri",
-  description: "Poly Cleaner veb saytından istifadə şərtləri və qaydaları.",
-  alternates: {
-    canonical: "/az/terms-of-use",
-    languages: {
-      en: `${SITE_URL}/terms-of-use`,
-      az: `${SITE_URL}/az/terms-of-use`,
-      "x-default": `${SITE_URL}/terms-of-use`,
-    },
-  },
-};
+export const metadata: Metadata = pageMetadata({
+  path: "/terms-of-use",
+  locale: "az",
+  title: "İstifadə Şərtləri | Poly Cleaner",
+  description:
+    "Poly Cleaner veb saytından istifadə şərtləri və qaydaları.",
+});
 
 export default TermsOfUsePage;

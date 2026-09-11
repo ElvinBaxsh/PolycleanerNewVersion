@@ -1,11 +1,71 @@
+import type { Metadata } from "next";
 import { SITE_URL, SITE_NAME, COMPANY } from "./constants";
+import { localizePath } from "./i18n/localizePath";
+import type { Locale } from "./i18n/translations";
+
+const OG_IMAGE = { url: "/images/og-image.png", width: 1200, height: 630 };
+const OG_LOCALE: Record<Locale, string> = { en: "en_US", az: "az_AZ" };
 
 /**
- * Structured data is emitted with static English copy regardless of the
- * visitor's selected UI language: the site's i18n is client-side only (see
- * LanguageContext), so crawlers only ever see the English strings baked
- * into the server-rendered HTML anyway — matching that here keeps the
- * schema consistent with what search engines actually index.
+ * The complete metadata for one page, built from its path and locale.
+ *
+ * Every page used to spell out its own title/description/alternates and
+ * none set openGraph or twitter at all — so each one inherited the root
+ * layout's, and a shared link to any page (in either language) previewed
+ * as the English homepage: same title, same description, og:url pointing
+ * at "/". Next merges metadata one key deep, so a page that sets openGraph
+ * must set all of it; building it here keeps the social preview, the
+ * <title>, the canonical and the hreflang pair from drifting apart.
+ *
+ * `path` is the English path ("/about"); the Azerbaijani one is derived.
+ * `title` is the final <title> text — it bypasses the layout's template.
+ */
+export function pageMetadata({
+  path,
+  locale,
+  title,
+  description,
+}: {
+  path: string;
+  locale: Locale;
+  title: string;
+  description: string;
+}): Metadata {
+  const canonical = localizePath(path, locale);
+  const enUrl = `${SITE_URL}${path}`;
+  const azUrl = `${SITE_URL}${localizePath(path, "az")}`;
+  const otherLocale: Locale = locale === "en" ? "az" : "en";
+
+  return {
+    title: { absolute: title },
+    description,
+    alternates: {
+      canonical,
+      languages: { en: enUrl, az: azUrl, "x-default": enUrl },
+    },
+    openGraph: {
+      type: "website",
+      siteName: SITE_NAME,
+      url: locale === "en" ? enUrl : azUrl,
+      title,
+      description,
+      locale: OG_LOCALE[locale],
+      alternateLocale: [OG_LOCALE[otherLocale]],
+      images: [{ ...OG_IMAGE, alt: title }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [OG_IMAGE.url],
+    },
+  };
+}
+
+/**
+ * Structured data stays in English on both locales: it describes the one
+ * organization, and search engines read it as data rather than as page
+ * copy. A localized variant for /az is a possible follow-up, not a gap.
  */
 
 export function organizationJsonLd() {

@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { SITE_URL } from "@/lib/constants";
 import PageHero from "@/components/sections/PageHero";
 import SustainabilityTrustStrip from "@/components/sections/sustainability/SustainabilityTrustStrip";
 import ImpactCards from "@/components/sections/sustainability/ImpactCards";
@@ -9,21 +8,15 @@ import PlasticCreditBanner from "@/components/sections/sustainability/PlasticCre
 import ImpactStats from "@/components/sections/sustainability/ImpactStats";
 import FinalCta from "@/components/sections/FinalCta";
 import JsonLd from "@/components/seo/JsonLd";
-import { breadcrumbJsonLd } from "@/lib/seo";
+import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: { absolute: "Sustainability | From Waste to Value | Poly Cleaner" },
+export const metadata: Metadata = pageMetadata({
+  path: "/sustainability",
+  locale: "en",
+  title: "Sustainability | From Waste to Value | Poly Cleaner",
   description:
     "At Poly Cleaner, sustainability is at the core of everything we do. We transform post-consumer PET waste into high-quality rPET flakes, supporting a circular economy and a cleaner future.",
-  alternates: {
-    canonical: "/sustainability",
-    languages: {
-      en: `${SITE_URL}/sustainability`,
-      az: `${SITE_URL}/az/sustainability`,
-      "x-default": `${SITE_URL}/sustainability`,
-    },
-  },
-};
+});
 
 export default function SustainabilityPage({ basePath = "" }: { basePath?: string }) {
   return (

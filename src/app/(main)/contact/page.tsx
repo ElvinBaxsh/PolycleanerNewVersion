@@ -1,21 +1,18 @@
 import type { Metadata } from "next";
-import { SITE_URL } from "@/lib/constants";
 import ContactHero from "@/components/sections/contact/ContactHero";
 import ContactFormSection from "@/components/sections/contact/ContactFormSection";
 import MapAndActions from "@/components/sections/contact/MapAndActions";
 import FinalCta from "@/components/sections/FinalCta";
 import JsonLd from "@/components/seo/JsonLd";
-import { breadcrumbJsonLd } from "@/lib/seo";
+import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: { absolute: "Contact Poly Cleaner | Request rPET Flakes Offer" },
+export const metadata: Metadata = pageMetadata({
+  path: "/contact",
+  locale: "en",
+  title: "Contact Poly Cleaner | Request rPET Flakes Offer",
   description:
     "Reach out to Poly Cleaner for rPET flakes inquiries, samples, offers, or partnership opportunities. Our team typically replies within 24 hours.",
-  alternates: {
-    canonical: "/contact",
-    languages: { en: `${SITE_URL}/contact`, az: `${SITE_URL}/az/contact`, "x-default": `${SITE_URL}/contact` },
-  },
-};
+});
 
 export default async function ContactPage({
   searchParams,

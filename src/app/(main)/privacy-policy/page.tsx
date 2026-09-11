@@ -1,19 +1,14 @@
 import type { Metadata } from "next";
-import { SITE_URL } from "@/lib/constants";
+import { pageMetadata } from "@/lib/seo";
 import PrivacyPolicyContent from "./PrivacyPolicyContent";
 
-export const metadata: Metadata = {
-  title: "Privacy Policy",
-  description: "How Poly Cleaner collects, uses and protects your personal data.",
-  alternates: {
-    canonical: "/privacy-policy",
-    languages: {
-      en: `${SITE_URL}/privacy-policy`,
-      az: `${SITE_URL}/az/privacy-policy`,
-      "x-default": `${SITE_URL}/privacy-policy`,
-    },
-  },
-};
+export const metadata: Metadata = pageMetadata({
+  path: "/privacy-policy",
+  locale: "en",
+  title: "Privacy Policy | Poly Cleaner",
+  description:
+    "How Poly Cleaner collects, uses and protects your personal data.",
+});
 
 export default function PrivacyPolicyPage() {
   return <PrivacyPolicyContent />;
