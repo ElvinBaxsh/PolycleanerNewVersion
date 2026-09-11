@@ -720,7 +720,7 @@ const az = {
 
   footer: {
     tagline:
-      "Poly Cleaner Azərbaycandan yüksək keyfiyyətli rPET fleks-in etibarlı istehsalçısıdır. Biz istifadə olunmuş şüşələri dayanıqlı gələcək üçün dəyərli xammala çeviririk.",
+      "Poly Cleaner Azərbaycandan yüksək keyfiyyətli rPET fleksin etibarlı istehsalçısıdır. Biz istifadə olunmuş şüşələri dayanıqlı gələcək üçün dəyərli xammala çeviririk.",
     quickLinks: "Sürətli Linklər",
     products: "Məhsullar",
     information: "Məlumat",
@@ -730,33 +730,33 @@ const az = {
     copyright: (year: number) => `© ${year} Poly Cleaner. Bütün hüquqlar qorunur.`,
     privacyPolicy: "Məxfilik Siyasəti",
     termsOfUse: "İstifadə Şərtləri",
-    productLinks: ["Transparent", "Açıq Mavi", "Yaşıl", "Qarışıq Rənglər", "Xüsusi Spesifikasiyalar"],
+    productLinks: ["Şəffaf", "Açıq Mavi", "Yaşıl", "Qarışıq Rənglər", "Xüsusi Spesifikasiyalar"],
     infoLinks: ["Keyfiyyət Təminatı", "Sertifikatlar", "Logistika və Daşınma", "Ödənişlər", "FAQ"],
   },
 
   home: {
     heroEyebrow: "Sənədləşdirilmiş rPET Fleks",
-    heroTitleLine1: "Sənədləşdirilmiş Hot Washed",
+    heroTitleLine1: "Sənədləşdirilmiş İsti Yuyulmuş",
     heroTitleAccent: "rPET Fleks",
     heroTitleLine2: "Təchizatçısı",
     heroTitleLine3: "Azərbaycandan",
     heroDescription:
-      "Poly Cleaner sheet, strap, fiber, food və non-food packaging tətbiqləri üçün sabit emal olunmuş və tam sənədləşdirilmiş rPET fleks təchiz edir.",
+      "Poly Cleaner PET lövhə, qablaşdırma çəmbəri, polyester lif, qida və qeyri-qida qablaşdırması üçün sabit keyfiyyətli, tam sənədləşdirilmiş isti yuyulmuş (hot washed) rPET fleks təchiz edir.",
     taropakMeetUs: (name: string) => `${name}-da bizimlə görüşün`,
-    taropakBannerTagline: "rPET fleks-lərimizi kəşf edin və növbəti dayanıqlı həllinizi bizimlə quraq.",
+    taropakBannerTagline: "rPET flekslərimizi kəşf edin və növbəti dayanıqlı həllinizi bizimlə quraq.",
     trustBar: [
-      { label: "İSTEHSALÇI", sub: "BROKER DEYİL" },
+      { label: "İSTEHSALÇI", sub: "VASİTƏÇİ DEYİL" },
       { label: "SƏNƏDLƏŞDİRİLMİŞ VƏ", sub: "AUDİTƏ AÇIQ" },
       { label: "İXRACA HAZIR", sub: "DÜNYA ÜÇÜN" },
       { label: "BALAXANI", sub: "SƏNAYE PARKI" },
       { label: "İZLƏNƏ BİLƏN", sub: "ƏMƏLİYYATLAR" },
-      { label: "TRİAL HƏCMLƏR", sub: "MÜMKÜNDÜR" },
+      { label: "SINAQ HƏCMLƏRİ", sub: "MÜMKÜNDÜR" },
     ],
     productsTitle: "rPET Fleks Məhsullarımız",
     productsDescription:
-      "İstehsal ehtiyaclarınıza uyğun müxtəlif rəng və spesifikasiyalarda yüksək keyfiyyətli hot washed rPET fleks.",
+      "İstehsal ehtiyaclarınıza uyğun müxtəlif rəng və spesifikasiyalarda yüksək keyfiyyətli isti yuyulmuş rPET fleks.",
     processEyebrow: "Prosesimiz",
-    processTitle: "Şüşələrdən Yüksək Keyfiyyətli rPET Fleks-ə",
+    processTitle: "Şüşələrdən Yüksək Keyfiyyətli rPET Fleksə",
     whyChooseTitle: "Nəyə Görə Poly Cleaner",
     buyerDocsTitle: "Alıcı Sənədləri",
     buyerDocsDescription: "Bütün əsas sənədlər yoxlama prosesiniz üçün hazırdır.",
@@ -798,10 +798,10 @@ const az = {
   ],
 
   buyerDocuments: [
-    { name: "Company Profile" },
-    { name: "Product Offer Sheet" },
-    { name: "Technical Data Sheet" },
-    { name: "Traceability Note" },
+    { name: "Şirkət Profili" },
+    { name: "Məhsul Təklifi Vərəqəsi" },
+    { name: "Texniki Məlumat Vərəqəsi (TDS)" },
+    { name: "İzlənəbilənlik Qeydi" },
   ],
 
   partners: [
@@ -860,7 +860,7 @@ const az = {
   processSteps: [
     { name: "Toplama", description: "Post-consumer PET şüşələri etibarlı mənbələrdən toplanır." },
     { name: "Çeşidləmə", description: "Şüşələr rəng və materiala görə çeşidlənir; etiket və çirklər təmizlənir." },
-    { name: "Yuma", description: "Ekoloji cəhətdən təmiz kimyəvi maddələrlə hot wash prosesi çirki, yapışqan və qalıqları təmizləyir." },
+    { name: "Yuma", description: "Ekoloji cəhətdən təmiz kimyəvi maddələrlə isti yuyulma prosesi çirki, yapışqan və qalıqları təmizləyir." },
     { name: "Qurutma", description: "İdeal rətubət səviyyəsinə çatmaq üçün santrifuqa və termik qurutma." },
     { name: "Keyfiyyətə Nəzarət", description: "Sabit keyfiyyəti təmin etmək üçün proses daxili və yekun yoxlama." },
     { name: "Qablaşdırma və Yükləmə", description: "Fleks böyük çantalara qablaşdırılır və dünya üzrə göndəriş üçün yüklənir." },
@@ -869,8 +869,8 @@ const az = {
   aboutProcessSteps: [
     { name: "Toplama", description: "Post-consumer PET şüşələri etibarlı mənbələrdən toplanır." },
     { name: "Çeşidləmə", description: "Şüşələr rəng və materiala görə çeşidlənir; etiket və çirklər təmizlənir." },
-    { name: "Xırdalama", description: "Şüşələr sonrakı emal üçün eyni ölçülü fleks-ə xırdalanır." },
-    { name: "Hot Washing", description: "Ekoloji cəhətdən təmiz kimyəvi maddələrlə hot wash prosesi çirki, yapışqan və qalıqları təmizləyir." },
+    { name: "Xırdalama", description: "Şüşələr sonrakı emal üçün eyni ölçülü fleksə xırdalanır." },
+    { name: "İsti Yuyulma", description: "Ekoloji cəhətdən təmiz kimyəvi maddələrlə isti yuyulma prosesi çirki, yapışqan və qalıqları təmizləyir." },
     { name: "Qurutma", description: "İdeal rətubət səviyyəsinə çatmaq üçün santrifuqa və termik qurutma." },
     { name: "Keyfiyyətə Nəzarət", description: "Sabit keyfiyyəti təmin etmək üçün proses daxili və yekun yoxlama." },
     { name: "Qablaşdırma və Yükləmə", description: "Fleks böyük çantalara qablaşdırılır və dünya üzrə göndəriş üçün yüklənir." },
@@ -880,11 +880,11 @@ const az = {
     heroTitle: "Poly Cleaner",
     heroTitleAccent: "haqqında",
     heroDescription:
-      "Poly Cleaner Azərbaycanda yerləşən yüksək keyfiyyətli hot washed rPET fleks istehsalçısıdır. Biz post-consumer PET tullantılarını sabit, təmiz və izlənə bilən təkrar emal xammalına çevirərək beynəlxalq recycler və istehsalçılara təqdim edirik.",
+      "Poly Cleaner Azərbaycanda yerləşən, yüksək keyfiyyətli isti yuyulmuş (hot washed) rPET fleks istehsalçısıdır. Biz istifadə olunmuş PET tullantılarını sabit, təmiz və izlənə bilən təkrar emal xammalına çevirərək beynəlxalq təkrar emal müəssisələrinə və istehsalçılara təqdim edirik.",
     overviewEyebrow: "ŞİRKƏT İCMALI",
     overviewTitle: "Azərbaycanda yerləşən. Keyfiyyət yönümlü. İxraca hazır.",
     overviewParagraph1:
-      "Poly Cleaner Bakı şəhərində, Balaxanı Sənaye Parkında fəaliyyət göstərir. Müəssisəmiz effektiv və dayanıqlı rPET fleks istehsalı üçün qurulmuşdur. Hot washing texnologiyası, keyfiyyətə nəzarət və məsuliyyətli əməliyyat yanaşması beynəlxalq müştərilər üçün sabit məhsul təqdim etməyimizə imkan yaradır.",
+      "Poly Cleaner Bakı şəhərində, Balaxanı Sənaye Parkında fəaliyyət göstərir. Müəssisəmiz effektiv və dayanıqlı rPET fleks istehsalı üçün qurulmuşdur. İsti yuyulma texnologiyası, keyfiyyətə nəzarət və məsuliyyətli əməliyyat yanaşması beynəlxalq müştərilər üçün sabit məhsul təqdim etməyimizə imkan yaradır.",
     overviewParagraph2:
       "Biz uzunmüddətli tərəfdaşlığa, şəffaf kommunikasiyaya və tullantıdan dəyər yaratmağa — müştərilərimiz, cəmiyyət və planet üçün faydalı nəticələrə inanırıq.",
     factsLocation: "Yerləşmə",
@@ -901,10 +901,10 @@ const az = {
   },
 
   companyValues: [
-    { title: "Tullantıdan Dəyərə", description: "Post-consumer PET tullantılarını dairəvi iqtisadiyyatı gücləndirən yüksək keyfiyyətli fleks-ə çeviririk." },
+    { title: "Tullantıdan Dəyərə", description: "İstifadə olunmuş PET tullantılarını dairəvi iqtisadiyyatı gücləndirən yüksək keyfiyyətli fleksə çeviririk." },
     { title: "Etibarlılıq", description: "Sabit keyfiyyət, vaxtında çatdırılma və şəffaf kommunikasiya uzunmüddətli tərəfdaşlıqlar qurur." },
     { title: "Dayanıqlılıq", description: "Ekoloji təsiri azaltmaq üçün enerji-effektiv əməliyyatlar və məsuliyyətli resurs idarəetməsi." },
-    { title: "İzlənəbilənlik", description: "Şüşədən fleks-ə qədər — hər partiya sənədləşdirilir, test edilir və tam izlənə biləndir." },
+    { title: "İzlənəbilənlik", description: "Şüşədən fleksə qədər — hər partiya sənədləşdirilir, test edilir və tam izlənə biləndir." },
   ],
 
   companyNumbers: [
@@ -916,17 +916,17 @@ const az = {
   ],
 
   whyPartnerItems: [
-    { title: "Sabit Keyfiyyət", description: "Qabaqcıl hot wash prosesi və ciddi QC təmiz, az çirklənmiş rPET fleks təmin edir." },
+    { title: "Sabit Keyfiyyət", description: "Qabaqcıl isti yuyulma prosesi və ciddi keyfiyyət nəzarəti təmiz, az çirklənmiş rPET fleks təmin edir." },
     { title: "İxraca Hazır", description: "Rəvan beynəlxalq göndərişlər üçün qablaşdırma, sənədləşmə və logistika dəstəyi." },
     { title: "Çevik Həllər", description: "İstehsal tələblərinizə uyğun müxtəlif fleks rəngləri və xüsusi spesifikasiyalar." },
     { title: "Müştəriyönümlü", description: "Çatdırılmadan əvvəl, əsnasında və sonrasında operativ xidmət və texniki dəstək." },
   ],
 
   rpet: {
-    heroTitle: "Hot Washed",
+    heroTitle: "İsti Yuyulmuş",
     heroTitleAccent: "rPET Fleks",
     heroDescription:
-      "Azərbaycanda post-consumer PET şüşələrindən istehsal olunan yüksək keyfiyyətli rPET fleks. Məhsul sheet, strap, fiber, non-food packaging və trading tətbiqlərində sabit performansı dəstəkləmək üçün yuyulur, qurudulur və çeşidlənir.",
+      "Azərbaycanda istifadə olunmuş PET şüşələrindən istehsal olunan yüksək keyfiyyətli isti yuyulmuş rPET fleks (PET lopa). Məhsul PET lövhə, qablaşdırma çəmbəri, polyester lif, qeyri-qida qablaşdırması və ticarət sahələrində sabit performans üçün yuyulur, qurudulur və çeşidlənir.",
     trustStrip: [
       { label: "Azərbaycanda istehsal\nAvropaya ixrac" },
       { label: "Sabit\nKeyfiyyət" },
@@ -937,31 +937,31 @@ const az = {
     gradesTitle: "rPET Fleks Növlərimiz",
     gradesDescription: "İstehsal ehtiyaclarınıza uyğun müxtəlif rəng və spesifikasiyalar.",
     applicationsTitle: "Tətbiq Sahələri",
-    applicationsDescription: "rPET fleks-lərimiz geniş sahə sənaye sahələrində istifadə olunur.",
+    applicationsDescription: "rPET flekslərimiz geniş sənaye sahələrində istifadə olunur.",
     specsTitle: "Spesifikasiyalar (Tipik Dəyərlər)",
     productInfoTitle: "Məhsul Məlumatı",
     closeupTitle: "Yaxından Görünüş",
   },
 
   productGrades: [
-    { name: "Transparent", description: "Sheet, thermoforming və ümumi tətbiqlər üçün." },
-    { name: "Açıq Mavi", description: "Sheet, strapping, thermoforming üçün." },
-    { name: "Yaşıl", description: "Strap, sheet, ümumi tətbiqlər üçün." },
-    { name: "Qarışıq Rənglər", description: "Fiber, non-food packaging və digərləri üçün." },
+    { name: "Şəffaf", description: "PET lövhə, termoformalaşdırma və ümumi tətbiqlər üçün." },
+    { name: "Açıq Mavi", description: "PET lövhə, qablaşdırma çəmbəri və termoformalaşdırma üçün." },
+    { name: "Yaşıl", description: "Qablaşdırma çəmbəri, PET lövhə və ümumi tətbiqlər üçün." },
+    { name: "Qarışıq Rənglər", description: "Polyester lif, qeyri-qida qablaşdırması və digər sahələr üçün." },
   ],
 
   closeups: [
-    { label: "Transparent fleks yaxından görünüş" },
-    { label: "Açıq Mavi fleks yaxından görünüş" },
-    { label: "Yaşıl fleks yaxından görünüş" },
-    { label: "Qarışıq Rənglər fleks yaxından görünüş" },
+    { label: "Şəffaf fleksin yaxından görünüşü" },
+    { label: "Açıq mavi fleksin yaxından görünüşü" },
+    { label: "Yaşıl fleksin yaxından görünüşü" },
+    { label: "Qarışıq rəngli fleksin yaxından görünüşü" },
     { label: "Əldə fleks" },
   ],
 
   applications: [
-    { name: "Sheet", description: "Termoform vərəqlər və qablar" },
-    { name: "Strap", description: "Bağlama və çəmbərləmə" },
-    { name: "Fiber", description: "Polyester ştapel lif və nonwoven" },
+    { name: "Lövhə", description: "Termoformalaşdırılmış lövhələr və qablar" },
+    { name: "Çəmbər", description: "Qablaşdırma çəmbəri və bağlama" },
+    { name: "Lif", description: "Polyester ştapel lif və toxunmamış material" },
     { name: "Qeyri-Qida Qablaşdırma", description: "Butulka, banka, qutu və sərt qablaşdırma" },
     { name: "Ticarət / Distribusiya", description: "Qlobal ticarət və yenidən satış" },
   ],
@@ -972,12 +972,12 @@ const az = {
     { label: "Çirklənmə", value: "≤ 100 ppm (PVC, etiketlər, digər plastiklər)" },
     { label: "Qablaşdırma", value: "1.100 kq Jumbo Çantalar" },
     { label: "Yükləmə", value: "20–22 MT / 20' FCL, 24–26 MT / 40' HC" },
-    { label: "Tətbiqlər", value: "Sheet, strap, fiber, qeyri-qida qablaşdırma, ticarət" },
+    { label: "Tətbiqlər", value: "PET lövhə, qablaşdırma çəmbəri, polyester lif, qeyri-qida qablaşdırması, ticarət" },
   ],
 
   productInfo: [
     { label: "Xammal", value: "Post-consumer PET şüşələri (taylarda)" },
-    { label: "Proses", value: "Hot washing, friction washing, durulama, qurutma, çeşidləmə, metal aşkarlanması" },
+    { label: "Proses", value: "İsti yuyulma, sürtünmə ilə yuyulma, durulama, qurutma, çeşidləmə, metal aşkarlanması" },
     { label: "Keyfiyyətə Nəzarət", value: "Hər partiya üçün daxili laboratoriya testi" },
     { label: "Mənşə", value: "Azərbaycan" },
     { label: "Sertifikatlaşdırma", value: "REACH Uyğun (tələb əsasında)" },
@@ -998,7 +998,7 @@ const az = {
     qaPillarsTitle: "Keyfiyyət Təminatı Prinsiplərimiz",
     keySpecsTitle: "Əsas Spesifikasiyalar*",
     keySpecsFootnote: "* Spesifikasiyalar rəng və növə görə fərqlənə bilər. Göstərilən dəyərlər tipikdir və normal istehsala əsaslandırılıb.",
-    colorOptionsValue: "Transparent, Açıq Mavi, Yaşıl, Qarışıq",
+    colorOptionsValue: "Şəffaf, Açıq Mavi, Yaşıl, Qarışıq",
     howWeWorkTitle: "Necə İşləyirik",
     finalCtaTitle: "Daha təmiz gələcəyi birlikdə quraq.",
     finalCtaDescription: "Məhsul məlumatı və ya fərdi həll üçün komandamızla əlaqə saxlayın.",
@@ -1006,8 +1006,8 @@ const az = {
 
   processCapabilities: [
     "Qabaqcıl çeşidləmə və rəng ayırma xətləri",
-    "Çoxmərhələli hot washing sistemi",
-    "Yüksək effektivlikli friction və üzmə/batma ayırma",
+    "Çoxmərhələli isti yuyulma sistemi",
+    "Yüksək effektivlikli sürtünmə ilə yuyulma və üzmə/batma ayırması",
     "Avtomatlaşdırılmış qurutma və hava klassifikasiyası",
     "Metal detektoru və yekun yoxlama",
     "1100–1250 kq böyük çantalarda toplu qablaşdırma",
@@ -1054,14 +1054,14 @@ const az = {
     heroTitle: "Tullantıdan",
     heroTitleAccent: "Dəyərə",
     heroDescription:
-      "Poly Cleaner üçün dayanıqlılıq fəaliyyətimizin mərkəzində dayanır. Biz post-consumer PET tullantılarını yüksək keyfiyyətli rPET fleks-ə çevirərək dairəvi iqtisadiyyatı və daha təmiz bir gələcəyi dəstəkləyirik.",
+      "Poly Cleaner üçün dayanıqlılıq fəaliyyətimizin mərkəzində dayanır. Biz istifadə olunmuş PET tullantılarını yüksək keyfiyyətli rPET fleksə çevirərək dairəvi iqtisadiyyatı və daha təmiz bir gələcəyi dəstəkləyirik.",
     trustStrip: [
       { title: "Dairəvi İqtisadiyyat", description: "Materialları daha uzun müddət istifadədə saxlamaq" },
-      { title: "İzlənə Bilən və\nSənədləşdirilmiş", description: "Mənbədən fleks-ə qədər tam şəffaflıq" },
+      { title: "İzlənə Bilən və\nSənədləşdirilmiş", description: "Mənbədən fleksə qədər tam şəffaflıq" },
       { title: "Məsuliyyətli\nƏməliyyatlar", description: "İnsanlar və planet üçün yüksək standartlar" },
       { title: "Tullantıdan\nDəyərə", description: "Daha yaxşı bir sabah üçün yüksək keyfiyyətli rPET yaratmaq" },
     ],
-    bottleToFlakeTitle: "Şüşələrdən Yüksək Keyfiyyətli rPET Fleks-ə",
+    bottleToFlakeTitle: "Şüşələrdən Yüksək Keyfiyyətli rPET Fleksə",
     pillarsTitle: "Dayanıqlılıq Prinsiplərimiz",
     plasticCreditHeading: "Əməliyyatlarımızdan Kənarda Müsbət Təsir Yaratmaq",
     plasticCreditDescription:
@@ -1096,15 +1096,15 @@ const az = {
   sustainabilitySteps: [
     { name: "Toplama", description: "Post-consumer PET şüşələri toplanır." },
     { name: "Çeşidləmə", description: "Şüşələr rəng və növünə görə çeşidlənir." },
-    { name: "Yuma", description: "Hot washing etiket, yapışqan və çirki təmizləyir." },
-    { name: "Qurutma", description: "Təmiz fleks üçün rətubət təmizlənir." },
-    { name: "Xırdalama", description: "Şüşələr eyni ölçülü fleks-ə xırdalanır." },
+    { name: "Yuma", description: "İsti yuyulma etiket, yapışqan və çirki təmizləyir." },
+    { name: "Qurutma", description: "Təmiz fleks üçün rütubət təmizlənir." },
+    { name: "Xırdalama", description: "Şüşələr eyni ölçülü fleksə xırdalanır." },
     { name: "Keyfiyyətə Nəzarət", description: "Ciddi test sabit keyfiyyəti təmin edir." },
     { name: "Yüksək Keyfiyyətli rPET Fleks", description: "İstehsalınız üçün hazırdır." },
   ],
 
   sustainabilityPillars: [
-    { title: "Dayanıqlı Təchizat", description: "Təbii resursları qorumaq üçün post-consumer PET-in məsuliyyətli təchizatına üstünlük veririk." },
+    { title: "Dayanıqlı Təchizat", description: "Təbii resursları qorumaq üçün istifadə olunmuş PET-in məsuliyyətli təchizatına üstünlük veririk." },
     { title: "İnnovasiya və Effektivlik", description: "Daha az enerji, daha az su istifadə etmək və daha az tullantı yaratmaq üçün proseslərimizi davamlı təkmilləşdiririk." },
     { title: "İnsanlar və Təhlükəsizlik", description: "Komandamızın rifahı və təhlükəsizliyi dayanıqlı böyüməyimiz üçün əsasdır." },
     { title: "Tərəfdaşlıqlar", description: "Daha güclü və məsuliyyətli dəyər zənciri qurmaq üçün təchizatçılar, müştərilər və icmalarla işləyirik." },
@@ -1152,12 +1152,12 @@ const az = {
   },
 
   documentList: [
-    { name: "Company Profile", description: "Şirkət strukturu, fəaliyyət tarixçəsi və ümumi imkanlar." },
-    { name: "Product Offer Sheet", description: "Növlər, rənglər və kommersiya təklifi xülasəsi." },
-    { name: "Technical Data Sheet", description: "Fiziki və kimyəvi xüsusiyyətlər, spesifikasiyalar və tətbiq qeydləri." },
-    { name: "Traceability Note", description: "Xammalın zəncirvari izlənəbilənliyi və partiya izləməsi." },
-    { name: "Process Overview", description: "İstehsal və keyfiyyət prosesimizin addım-addım icmalı." },
-    { name: "Sustainability Note", description: "Məsuliyyətli təchizat və ekoloji təsir yanaşmamız." },
+    { name: "Şirkət Profili", description: "Şirkət strukturu, fəaliyyət tarixçəsi və ümumi imkanlar." },
+    { name: "Məhsul Təklifi Vərəqəsi", description: "Növlər, rənglər və kommersiya təklifi xülasəsi." },
+    { name: "Texniki Məlumat Vərəqəsi (TDS)", description: "Fiziki və kimyəvi xüsusiyyətlər, spesifikasiyalar və tətbiq qeydləri." },
+    { name: "İzlənəbilənlik Qeydi", description: "Xammalın zəncirvari izlənəbilənliyi və partiya izləməsi." },
+    { name: "Proses İcmalı", description: "İstehsal və keyfiyyət prosesimizin addım-addım icmalı." },
+    { name: "Dayanıqlılıq Qeydi", description: "Məsuliyyətli təchizat və ekoloji təsir yanaşmamız." },
   ],
 
   documentsFaq: [
@@ -1190,7 +1190,7 @@ const az = {
     successTitle: "Sorğu qəbul edildi.",
     successDescription: "Komandamız tezliklə sənəd paketinizi hazırlayacaq.",
     sendAnother: "Yeni sorğu göndər",
-    documentTypeOptions: ["Packing List", "CMR", "Certificate of Origin", "Invoice", "Purchase Order", "Quality Passport"],
+    documentTypeOptions: ["Qablaşdırma Vərəqəsi (Packing List)", "CMR", "Mənşə Sertifikatı", "Hesab-faktura (Invoice)", "Satınalma Sifarişi", "Keyfiyyət Pasportu"],
     fullName: "Ad Soyad",
     fullNamePlaceholder: "Ad və soyadınızı daxil edin",
     company: "Şirkət",
@@ -1233,7 +1233,7 @@ const az = {
     { label: "Satış Email", sub: "Adətən 24 saat ərzində cavab veririk." },
     { label: "Telefon / WhatsApp", sub: "B.e – C, 09:00 – 18:00 (GMT+4)" },
     { label: "Yerləşmə", sub: "Zavod və Baş Ofis" },
-    { label: "Website", sub: "Məhsul və xidmətlərimiz haqqında daha çox." },
+    { label: "Veb sayt", sub: "Məhsul və xidmətlərimiz haqqında daha çox." },
     { label: "İş Dilləri", value: "İngilis • Rus • Türk • Azərbaycan", sub: "Sizin dilinizdə dəstək oluruq." },
   ],
 
@@ -1328,7 +1328,7 @@ const az = {
     genericError: "Nəsə səhv getdi. Zəhmət olmasa yenidən cəhd edin.",
     genericErrorContact: "Nəsə səhv getdi. Zəhmət olmasa yenidən cəhd edin və ya birbaşa email ilə bizimlə əlaqə saxlayın.",
     productInterestOptions: [
-      "Transparent rPET Fleks",
+      "Şəffaf rPET Fleks",
       "Açıq Mavi rPET Fleks",
       "Yaşıl rPET Fleks",
       "Qarışıq Rənglər rPET Fleks",
@@ -1336,7 +1336,7 @@ const az = {
       "Ümumi Sorğu",
     ],
     offerProductInterestOptions: [
-      "Transparent / Şəffaf rPET Fleks",
+      "Şəffaf rPET Fleks",
       "Açıq Mavi rPET Fleks",
       "Yaşıl rPET Fleks",
       "Qarışıq Rəng rPET Fleks",
@@ -1344,7 +1344,7 @@ const az = {
       "Hələ Əmin Deyiləm",
     ],
     offerVolumeOptions: ["Yalnız nümunə", "1–5 MT", "20–25 MT Sınaq Sifarişi", "50–100 MT", "Müntəzəm aylıq təchizat", "Digər"],
-    offerApplicationOptions: ["Sheet / Termoform", "Strap", "Fiber", "Qida Qablaşdırma", "Qeyri-Qida Qablaşdırma", "Ticarət / Distribusiya", "Digər"],
+    offerApplicationOptions: ["PET Lövhə / Termoformalaşdırma", "Qablaşdırma Çəmbəri", "Polyester Lif", "Qida Qablaşdırma", "Qeyri-Qida Qablaşdırma", "Ticarət / Distribusiya", "Digər"],
     sampleTypeOptions: ["500q Nümunə", "1kq Nümunə", "2kq Nümunə", "5kq Nümunə", "Fərdi Miqdar"],
   },
 
@@ -1358,7 +1358,7 @@ const az = {
     privacyParagraph1:
       "Poly Cleaner (\"biz\") sizin məxfiliyinizə hörmət edir. Əlaqə və sorğu formaları vasitəsilə təqdim olunan məlumatlar (ad, şirkət, email, telefon və mesaj) yalnız sorğunuza cavab vermək üçün istifadə olunur və marketinq məqsədilə üçüncü tərəflərə satılmır və ya paylaşılmır.",
     privacyParagraph2:
-      "Bu saytı işlətmək üçün zəruri cookie-lərdən, aktiv olduqda isə sayt istifadəsini anlamaq üçün analitik cookie-lərdən istifadə edirik. Cookie tərcihlərinizi brauzer parametrləriniz vasitəsilə idarə edə bilərsiniz.",
+      "Bu saytı işlətmək üçün zəruri çərəzlərdən (cookie), aktiv olduqda isə sayt istifadəsini anlamaq üçün analitik çərəzlərdən istifadə edirik. Çərəz tərcihlərinizi brauzer parametrləriniz vasitəsilə idarə edə bilərsiniz.",
     privacyContactPrefix: "Məlumatlarınızın necə idarə olunduğu barədə suallarınız varsa, bizimlə əlaqə saxlayın:",
     termsTitle: "İstifadə Şərtləri",
     termsParagraph1:

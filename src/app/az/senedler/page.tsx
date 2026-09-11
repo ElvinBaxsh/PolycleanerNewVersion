@@ -11,5 +11,5 @@ export const metadata: Metadata = pageMetadata({
 });
 
 export default function DocumentsPageAz() {
-  return <DocumentsPage basePath="/az" />;
+  return <DocumentsPage locale="az" />;
 }

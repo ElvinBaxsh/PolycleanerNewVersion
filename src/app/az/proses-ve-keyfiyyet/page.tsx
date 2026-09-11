@@ -7,9 +7,9 @@ export const metadata: Metadata = pageMetadata({
   locale: "az",
   title: "Proses və Keyfiyyət | Poly Cleaner Azərbaycan",
   description:
-    "İstifadə olunmuş PET butulkalardan alınan lopaların necə yığıldığını, isti yuyulduğunu və keyfiyyətə görə yoxlanıldığını addım-addım kəşf edin.",
+    "İstifadə olunmuş PET butulkaların necə toplandığını, isti yuyulub fleksə çevrildiyini və keyfiyyət yoxlamasından keçdiyini addım-addım kəşf edin.",
 });
 
 export default function ProcessQualityPageAz() {
-  return <ProcessQualityPage basePath="/az" />;
+  return <ProcessQualityPage locale="az" />;
 }

@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
+import type { Locale } from "@/lib/i18n/translations";
 import ContactHero from "@/components/sections/contact/ContactHero";
 import ContactFormSection from "@/components/sections/contact/ContactFormSection";
 import MapAndActions from "@/components/sections/contact/MapAndActions";
 import FinalCta from "@/components/sections/FinalCta";
 import JsonLd from "@/components/seo/JsonLd";
-import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
+import { pageBreadcrumbJsonLd, pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
   path: "/contact",
@@ -16,8 +17,8 @@ export const metadata: Metadata = pageMetadata({
 
 export default async function ContactPage({
   searchParams,
-  basePath = "",
-}: PageProps<"/contact"> & { basePath?: string }) {
+  locale = "en",
+}: PageProps<"/contact"> & { locale?: Locale }) {
   // The GitHub Pages static preview has no server to resolve searchParams
   // with, so it skips awaiting it entirely (reading it at all is what
   // forces dynamic rendering, which `output: "export"` can't do) — the
@@ -30,10 +31,7 @@ export default async function ContactPage({
   return (
     <>
       <JsonLd
-        data={breadcrumbJsonLd([
-          { name: "Home", path: basePath || "/" },
-          { name: "Contact", path: `${basePath}/contact` },
-        ])}
+        data={pageBreadcrumbJsonLd("/contact", "contact", locale)}
       />
       <ContactHero />
       <ContactFormSection defaultType={type} defaultInterest={interest} />

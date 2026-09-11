@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import type { Locale } from "@/lib/i18n/translations";
 import PageHero from "@/components/sections/PageHero";
 import FullProcessFlow from "@/components/sections/process/FullProcessFlow";
 import CapabilitiesAndQuality from "@/components/sections/process/CapabilitiesAndQuality";
@@ -7,7 +8,7 @@ import KeySpecsStrip from "@/components/sections/process/KeySpecsStrip";
 import HowWeWork from "@/components/sections/process/HowWeWork";
 import FinalCta from "@/components/sections/FinalCta";
 import JsonLd from "@/components/seo/JsonLd";
-import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
+import { pageBreadcrumbJsonLd, pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
   path: "/process-quality",
@@ -17,14 +18,11 @@ export const metadata: Metadata = pageMetadata({
     "Poly Cleaner's integrated process and quality systems ensure high quality rPET flakes with consistent specifications, full traceability and reliable export documentation.",
 });
 
-export default function ProcessQualityPage({ basePath = "" }: { basePath?: string }) {
+export default function ProcessQualityPage({ locale = "en" }: { locale?: Locale }) {
   return (
     <>
       <JsonLd
-        data={breadcrumbJsonLd([
-          { name: "Home", path: basePath || "/" },
-          { name: "Process & Quality", path: `${basePath}/process-quality` },
-        ])}
+        data={pageBreadcrumbJsonLd("/process-quality", "process", locale)}
       />
       <PageHero pageKey="process" image="/images/ProcessQuality.jpg" />
       <FullProcessFlow />

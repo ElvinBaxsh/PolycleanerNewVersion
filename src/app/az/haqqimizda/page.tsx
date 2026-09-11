@@ -11,5 +11,5 @@ export const metadata: Metadata = pageMetadata({
 });
 
 export default function AboutPageAz() {
-  return <AboutPage basePath="/az" />;
+  return <AboutPage locale="az" />;
 }

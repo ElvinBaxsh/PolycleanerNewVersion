@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { SITE_URL, SITE_NAME, COMPANY } from "./constants";
 import { localizePath } from "./i18n/localizePath";
-import type { Locale } from "./i18n/translations";
+import { translations, type Locale } from "./i18n/translations";
 
 // The preview card's image has its tagline baked into the pixels, so each
 // language gets its own file. The Azerbaijani one is the English design
@@ -136,6 +136,22 @@ export function breadcrumbJsonLd(items: { name: string; path: string }[]) {
       item: `${SITE_URL}${item.path}`,
     })),
   };
+}
+
+/**
+ * The Home › Page breadcrumb for a top-level page, in the page's language.
+ * Names come from the nav labels and URLs from localizePath, so the /az
+ * trail Google may show under a search result reads "Əsas › Haqqımızda" and
+ * links to /az/haqqimizda — not the English names and English slugs the
+ * pages used to hard-code. (The English labels are the same strings those
+ * pages had, so the English output is unchanged.)
+ */
+export function pageBreadcrumbJsonLd(path: string, navKey: keyof (typeof translations)["en"]["nav"], locale: Locale) {
+  const nav = translations[locale].nav;
+  return breadcrumbJsonLd([
+    { name: nav.home, path: localizePath("/", locale) },
+    { name: nav[navKey], path: localizePath(path, locale) },
+  ]);
 }
 
 export function faqJsonLd(items: { q: string; a: string }[]) {

@@ -11,5 +11,5 @@ export const metadata: Metadata = pageMetadata({
 });
 
 export default function SustainabilityPageAz() {
-  return <SustainabilityPage basePath="/az" />;
+  return <SustainabilityPage locale="az" />;
 }

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import type { Locale } from "@/lib/i18n/translations";
 import PageHero from "@/components/sections/PageHero";
 import CompanyOverview from "@/components/sections/about/CompanyOverview";
 import OurValues from "@/components/sections/about/OurValues";
@@ -7,7 +8,7 @@ import WhyPartner from "@/components/sections/about/WhyPartner";
 import ProcessStrip from "@/components/sections/ProcessStrip";
 import FinalCta from "@/components/sections/FinalCta";
 import JsonLd from "@/components/seo/JsonLd";
-import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
+import { pageBreadcrumbJsonLd, pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
   path: "/about",
@@ -17,14 +18,11 @@ export const metadata: Metadata = pageMetadata({
     "Poly Cleaner is an Azerbaijan-based producer of high quality hot washed rPET flakes, transforming post-consumer PET waste into consistent, clean and traceable raw material.",
 });
 
-export default function AboutPage({ basePath = "" }: { basePath?: string }) {
+export default function AboutPage({ locale = "en" }: { locale?: Locale }) {
   return (
     <>
       <JsonLd
-        data={breadcrumbJsonLd([
-          { name: "Home", path: basePath || "/" },
-          { name: "About Us", path: `${basePath}/about` },
-        ])}
+        data={pageBreadcrumbJsonLd("/about", "about", locale)}
       />
       <PageHero pageKey="about" />
       <CompanyOverview />

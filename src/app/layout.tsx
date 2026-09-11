@@ -30,9 +30,11 @@ export const metadata: Metadata = {
     "rPET flakes for fiber",
     "PET recycling Azerbaijan",
     "documented recycled PET supplier",
-    // Azərbaycan dilində SEO açar sözləri — sayt tək HTML-də (URL-ə görə
-    // ayrılmayıb) render olunduğu üçün bura, dil seçimindən asılı olmayaraq
-    // hər ziyarətçiyə gedən yeganə yerdir.
+    // Azərbaycan dilində SEO açar sözləri. Qeyd: Google `keywords` meta
+    // teqini sıralamada nəzərə almır — açar sözün təsiri səhifənin görünən
+    // mətnindən, başlığından və təsvirindən gəlir. Siyahı digər axtarış
+    // sistemləri üçün saxlanılır; həm "fleks" (saytın öz termini), həm də
+    // "lopa/qırıntı" (insanların axtardığı variantlar) burada var.
     "rPET lopa təchizatçısı",
     "təkrar emal edilmiş PET lopa təchizatçısı",
     "isti yuyulmuş PET lopaları",
@@ -59,6 +61,11 @@ export const metadata: Metadata = {
     "Poly Cleaner Azərbaycan",
     "Poly Cleaner Bakı",
     "Balaxanı Sənaye Parkı plastik təkrar emalı",
+    "rPET fleks",
+    "PET fleks",
+    "isti yuyulmuş rPET fleks",
+    "rPET fleks təchizatçısı",
+    "PET fleks istehsalı",
   ],
   openGraph: {
     title: "Poly Cleaner | Hot Washed rPET Flakes Supplier from Azerbaijan",
