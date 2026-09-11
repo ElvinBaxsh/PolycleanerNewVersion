@@ -535,6 +535,12 @@ const en = {
     findUsDescription:
       "Our facility is located in the Balakhani Industrial Park, strategically positioned for efficient logistics and global shipping.",
     getDirections: "Get Directions",
+    directionsHint: "On a phone, the app opens directly.",
+    coordinates: "Coordinates",
+    copy: "Copy",
+    copied: "Copied",
+    mapView: "Map",
+    satelliteView: "Satellite",
     quickCards: [
       { title: "Request Offer", description: "Get a tailored offer for your required rPET flakes specifications.", cta: "Request rPET Flakes Offer" },
       { title: "Request Sample", description: "Receive a sample to evaluate our rPET flakes quality.", cta: "Request Sample" },
@@ -1210,6 +1216,12 @@ const az = {
     findUsDescription:
       "Müəssisəmiz Balaxanı Sənaye Parkında yerləşir, effektiv logistika və qlobal göndəriş üçün strateji baxımdan əlverişli mövqedədir.",
     getDirections: "Yol Göstər",
+    directionsHint: "Telefonda tətbiq birbaşa açılır.",
+    coordinates: "Koordinatlar",
+    copy: "Kopyala",
+    copied: "Kopyalandı",
+    mapView: "Xəritə",
+    satelliteView: "Peyk",
     quickCards: [
       { title: "Təklif İstə", description: "Tələb olunan rPET fleks spesifikasiyalarınız üçün fərdi təklif alın.", cta: "rPET Fleks Təklifi İstə" },
       { title: "Nümunə İstə", description: "rPET fleks keyfiyyətimizi qiymətləndirmək üçün nümunə alın.", cta: "Nümunə İstə" },
