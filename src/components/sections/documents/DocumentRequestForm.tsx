@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
-import { motion } from "framer-motion";
 import {
   FileText,
   Building2,
@@ -9,7 +8,6 @@ import {
   Mail,
   ShieldCheck,
   Loader2,
-  CheckCircle2,
   AlertCircle,
   Send,
   Check,
@@ -17,6 +15,7 @@ import {
 } from "lucide-react";
 import { clsx } from "clsx";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
+import SubmissionSuccess, { summarize, type SummaryField, type SummaryRow } from "@/components/forms/SubmissionSuccess";
 
 type Status = "idle" | "submitting" | "success" | "error";
 
@@ -32,6 +31,17 @@ export default function DocumentRequestForm({ onCancel }: { onCancel?: () => voi
   const [status, setStatus] = useState<Status>("idle");
   const [errorMessage, setErrorMessage] = useState("");
   const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
+  const [summary, setSummary] = useState<SummaryRow[]>([]);
+
+  // Document types need no value/label pairing: the chips submit the very
+  // label the visitor clicked (see the hidden documentType input below).
+  const SUMMARY_FIELDS: SummaryField[] = [
+    { name: "fullName", label: f.fullName },
+    { name: "company", label: f.company },
+    { name: "email", label: f.email },
+    { name: "documentType", label: f.documentTypeLabel },
+    { name: "message", label: f.notesLabel },
+  ];
 
   function toggleType(type: string) {
     setSelectedTypes((prev) => (prev.includes(type) ? prev.filter((t) => t !== type) : [...prev, type]));
@@ -62,6 +72,7 @@ export default function DocumentRequestForm({ onCancel }: { onCancel?: () => voi
         throw new Error(errBody.error || t.forms.genericError);
       }
 
+      setSummary(summarize(data, SUMMARY_FIELDS));
       setStatus("success");
       form.reset();
       setSelectedTypes([]);
@@ -73,29 +84,18 @@ export default function DocumentRequestForm({ onCancel }: { onCancel?: () => voi
 
   if (status === "success") {
     return (
-      <motion.div
-        initial={{ opacity: 0, y: 12, scale: 0.98 }}
-        animate={{ opacity: 1, y: 0, scale: 1 }}
-        transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-        className="flex flex-col items-center gap-2 rounded-2xl border border-brand-green/30 bg-brand-green/5 p-6 text-center"
-      >
-        <motion.div
-          initial={{ scale: 0, rotate: -20 }}
-          animate={{ scale: 1, rotate: 0 }}
-          transition={{ type: "spring", stiffness: 260, damping: 18, delay: 0.1 }}
-        >
-          <CheckCircle2 className="size-8 text-brand-green" />
-        </motion.div>
-        <p className="text-sm font-bold text-navy">{f.successTitle}</p>
-        <p className="text-xs text-slate">{f.successDescription}</p>
-        <button
-          type="button"
-          onClick={() => setStatus("idle")}
-          className="mt-1 inline-flex h-9 cursor-pointer items-center justify-center rounded-lg border-2 border-border px-5 text-xs font-semibold text-navy transition-colors hover:bg-soft-gray"
-        >
-          {f.sendAnother}
-        </button>
-      </motion.div>
+      <SubmissionSuccess
+        title={f.successTitle}
+        subtitle={f.successDescription}
+        pill={t.forms.inTouchSoon}
+        detailsTitle={t.forms.inquiryDetails}
+        rows={summary}
+        resetLabel={f.sendAnother}
+        onReset={() => {
+          setStatus("idle");
+          setSummary([]);
+        }}
+      />
     );
   }
 

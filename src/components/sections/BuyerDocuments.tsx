@@ -1,6 +1,8 @@
 "use client";
 
-import { Download, FileText } from "lucide-react";
+import { FileText } from "lucide-react";
+import { motion } from "framer-motion";
+import { useDownloadFeedback, DownloadStatusIcon, type DownloadState } from "@/components/ui/DownloadFeedback";
 import Container from "@/components/ui/Container";
 import Reveal from "@/components/ui/Reveal";
 import { RevealGroup, RevealItem } from "@/components/ui/RevealGroup";
@@ -30,13 +32,7 @@ export default function BuyerDocuments({
           {BUYER_DOCUMENTS.map((doc, i) => (
             <RevealItem key={doc.name} className="h-full">
               {doc.file ? (
-                <a
-                  href={doc.file}
-                  download
-                  className="group flex h-[82px] w-full items-center gap-2.5 rounded-lg border border-slate-100 bg-white p-3 text-left shadow-xs transition-all hover:border-slate-200 hover:shadow-sm"
-                >
-                  <BuyerDocCardContent doc={{ name: t.buyerDocuments[i].name, format: doc.format }} />
-                </a>
+                <BuyerDocDownload href={doc.file} name={t.buyerDocuments[i].name} format={doc.format} />
               ) : (
                 <button
                   type="button"
@@ -54,13 +50,39 @@ export default function BuyerDocuments({
   );
 }
 
-function BuyerDocCardContent({ doc }: { doc: { name: string; format: string } }) {
+/** A downloadable card that shows the download happening (see useDownloadFeedback). */
+function BuyerDocDownload({ href, name, format }: { href: string; name: string; format: string }) {
+  const { state, start } = useDownloadFeedback();
+  return (
+    <a
+      href={href}
+      download
+      onClick={start}
+      className="group flex h-[82px] w-full items-center gap-2.5 rounded-lg border border-slate-100 bg-white p-3 text-left shadow-xs transition-all hover:border-slate-200 hover:shadow-sm"
+    >
+      <BuyerDocCardContent doc={{ name, format }} state={state} />
+    </a>
+  );
+}
+
+function BuyerDocCardContent({
+  doc,
+  state = "idle",
+}: {
+  doc: { name: string; format: string };
+  state?: DownloadState;
+}) {
+  const { t } = useLanguage();
   return (
     <>
       {/* Sol Böyüdülmüş PDF Vector İkonu */}
-      <div className="flex shrink-0 items-center justify-center text-[#1B365D]">
+      <motion.div
+        className="flex shrink-0 items-center justify-center text-[#1B365D]"
+        animate={state === "downloading" ? { y: [0, -3, 0] } : { y: 0 }}
+        transition={state === "downloading" ? { duration: 0.7, repeat: Infinity, ease: "easeInOut" } : { duration: 0.2 }}
+      >
         <FileText className="size-10 stroke-[1.3]" />
-      </div>
+      </motion.div>
 
       {/* Sağ Tərəf: Ad, PDF mətni və Yükləmə İkonu */}
       <div className="flex h-full min-w-0 flex-1 flex-col justify-between py-0.5">
@@ -69,8 +91,20 @@ function BuyerDocCardContent({ doc }: { doc: { name: string; format: string } })
         </p>
 
         <div className="flex items-center justify-between">
-          <span className="text-[10px] font-semibold tracking-wide text-slate-400">{doc.format}</span>
-          <Download className="size-3.5 shrink-0 text-[#1B365D] transition-transform group-hover:translate-y-0.5" />
+          <span
+            aria-live="polite"
+            className={
+              state === "done"
+                ? "text-[10px] font-semibold tracking-wide text-brand-green-dark"
+                : "text-[10px] font-semibold tracking-wide text-slate-400"
+            }
+          >
+            {state === "done" ? t.common.downloaded : state === "downloading" ? t.common.downloading : doc.format}
+          </span>
+          <DownloadStatusIcon
+            state={state}
+            className="size-3.5 text-[#1B365D] transition-transform group-hover:translate-y-0.5"
+          />
         </div>
       </div>
     </>

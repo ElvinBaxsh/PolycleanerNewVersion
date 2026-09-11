@@ -1,8 +1,7 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
-import { motion } from "framer-motion";
-import { Loader2, CheckCircle2, AlertCircle, Send } from "lucide-react";
+import { Loader2, AlertCircle, Send } from "lucide-react";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 import {
   PRODUCT_INTERESTS,
@@ -14,6 +13,7 @@ import {
 } from "@/lib/constants";
 import CustomSelect from "./CustomSelect";
 import FileUpload from "./FileUpload";
+import SubmissionSuccess, { summarize, type SummaryField, type SummaryRow } from "./SubmissionSuccess";
 
 type Status = "idle" | "submitting" | "success" | "error";
 
@@ -30,28 +30,32 @@ export default function InquiryForm({
   const f = t.forms;
   const isSample = defaultType === "sample";
   const isPartner = defaultType === "partner";
-  const FIELD_LABELS: Record<string, string> = {
-    fullName: f.fullName,
-    company: isPartner ? f.companyOrganisation : f.companyName,
-    country: f.country,
-    city: f.city,
-    email: f.email,
-    phone: f.phone,
-    productInterest: f.productInterest,
-    monthlyVolume: f.monthlyVolume,
-    sampleType: f.sampleType,
-    application: f.application,
-    deliveryDestination: f.deliveryDestination,
-    deliveryAddress: f.deliveryAddress,
-    courierAccount: f.courierAccount,
-    attachments: f.attachments,
-    partnershipInterest: f.partnershipInterest,
-    message: f.message,
-  };
+  // Every field any variant of this form can have, in on-screen order — the
+  // success summary shows whichever of them were filled in. Selects carry
+  // their value/label pairs so the summary shows the option the visitor
+  // picked in their language, not the English value that gets submitted.
+  const SUMMARY_FIELDS: SummaryField[] = [
+    { name: "fullName", label: f.fullName },
+    { name: "company", label: isPartner ? f.companyOrganisation : f.companyName },
+    { name: "country", label: f.country },
+    { name: "city", label: f.city },
+    { name: "email", label: f.email },
+    { name: "phone", label: f.phone },
+    { name: "partnershipInterest", label: f.partnershipInterest, options: [PARTNERSHIP_INTEREST_OPTIONS, f.partnershipInterestOptions] },
+    { name: "productInterest", label: f.productInterest, options: [PRODUCT_INTERESTS, f.productInterestOptions] },
+    { name: "sampleType", label: f.sampleType, options: [SAMPLE_TYPE_OPTIONS, f.sampleTypeOptions] },
+    { name: "application", label: f.application, options: [OFFER_APPLICATION_OPTIONS, f.offerApplicationOptions] },
+    { name: "deliveryDestination", label: f.deliveryDestination },
+    { name: "deliveryAddress", label: f.deliveryAddress },
+    { name: "courierAccount", label: f.courierAccount },
+    { name: "monthlyVolume", label: f.monthlyVolume },
+    { name: "attachments", label: f.attachments },
+    { name: "message", label: f.message },
+  ];
 
   const [status, setStatus] = useState<Status>("idle");
   const [errorMessage, setErrorMessage] = useState("");
-  const [submitted, setSubmitted] = useState<Record<string, string | boolean> | null>(null);
+  const [summary, setSummary] = useState<SummaryRow[] | null>(null);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -103,13 +107,8 @@ export default function InquiryForm({
     data.set("sourcePage", window.location.href);
     data.set("userLanguage", locale.toUpperCase());
 
-    // A display-safe copy for the success-screen summary — File values
-    // don't render sensibly, so they're collapsed to a filename list.
-    const displayPayload: Record<string, string | boolean> = {};
-    for (const [key, value] of data.entries()) {
-      if (typeof value === "string") displayPayload[key] = value;
-    }
-    if (files.length > 0) displayPayload.attachments = files.map((file) => file.name).join(", ");
+    // Taken before the request (and before form.reset() clears the inputs).
+    const rows = summarize(data, SUMMARY_FIELDS);
 
     try {
       const res = await fetch("/api/contact", {
@@ -122,7 +121,7 @@ export default function InquiryForm({
         throw new Error(body.error || f.genericError);
       }
 
-      setSubmitted(displayPayload);
+      setSummary(rows);
       setStatus("success");
       form.reset();
     } catch (err) {
@@ -131,53 +130,20 @@ export default function InquiryForm({
     }
   }
 
-  if (status === "success" && submitted) {
+  if (status === "success" && summary) {
     return (
-      <motion.div
-        initial={{ opacity: 0, y: 12, scale: 0.98 }}
-        animate={{ opacity: 1, y: 0, scale: 1 }}
-        transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-        className="rounded-2xl border border-brand-green/30 bg-brand-green/5 p-6 sm:p-8"
-      >
-        <div className="flex flex-col items-center gap-2 text-center">
-          <motion.div
-            initial={{ scale: 0, rotate: -20 }}
-            animate={{ scale: 1, rotate: 0 }}
-            transition={{ type: "spring", stiffness: 260, damping: 18, delay: 0.1 }}
-          >
-            <CheckCircle2 className="size-10 text-brand-green" />
-          </motion.div>
-          <h3 className="text-lg font-bold text-navy">{f.thankYouInquiry}</h3>
-          <p className="text-sm text-slate">{f.thankYouInquirySub}</p>
-        </div>
-
-        <dl className="mt-6 space-y-2 rounded-xl border border-border bg-white p-4">
-          {Object.entries(submitted)
-            .filter(
-              ([key, value]) =>
-                !["website", "inquiryType", "consent", "sourcePage", "userLanguage"].includes(key) && value
-            )
-            .map(([key, value]) => (
-              <div key={key} className="flex flex-col gap-0.5 sm:flex-row sm:justify-between sm:gap-4">
-                <dt className="text-xs font-semibold uppercase tracking-wide text-slate/60">
-                  {FIELD_LABELS[key] ?? key}
-                </dt>
-                <dd className="text-sm font-medium text-navy sm:text-right">{String(value)}</dd>
-              </div>
-            ))}
-        </dl>
-
-        <button
-          type="button"
-          onClick={() => {
-            setStatus("idle");
-            setSubmitted(null);
-          }}
-          className="mx-auto mt-5 inline-flex h-11 cursor-pointer items-center justify-center rounded-lg border-2 border-border px-6 text-sm font-semibold text-navy transition-colors hover:bg-soft-gray"
-        >
-          {f.sendAnotherInquiry}
-        </button>
-      </motion.div>
+      <SubmissionSuccess
+        title={f.thankYouInquiry}
+        subtitle={f.thankYouInquirySub}
+        pill={f.inTouchSoon}
+        detailsTitle={f.inquiryDetails}
+        rows={summary}
+        resetLabel={f.sendAnotherInquiry}
+        onReset={() => {
+          setStatus("idle");
+          setSummary(null);
+        }}
+      />
     );
   }
 

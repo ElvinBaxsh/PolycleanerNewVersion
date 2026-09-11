@@ -24,6 +24,7 @@ import Container from "@/components/ui/Container";
 import Reveal from "@/components/ui/Reveal";
 import { useInquiryModal } from "@/components/inquiry/InquiryModalContext";
 import { useDocumentRequestModal } from "./DocumentRequestModalContext";
+import { useDownloadFeedback, DownloadStatusIcon } from "@/components/ui/DownloadFeedback";
 import DocumentRequestForm from "./DocumentRequestForm";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 import { DOCUMENT_LIST, TAROPAK_EVENT, AMI_EXPO_EVENT } from "@/lib/constants";
@@ -61,6 +62,25 @@ const CATEGORY_ICONS: Record<string, LucideIcon> = {
   Quality: ShieldCheck,
   Sustainability: Leaf,
 };
+
+/** "Download" that shows it's working — see useDownloadFeedback. */
+function DocumentDownloadLink({ href }: { href: string }) {
+  const { t } = useLanguage();
+  const { state, start } = useDownloadFeedback();
+  const label = state === "downloading" ? t.common.downloading : state === "done" ? t.common.downloaded : t.common.download;
+
+  return (
+    <a
+      href={href}
+      download
+      onClick={start}
+      className="mt-3 inline-flex w-fit items-center gap-1.5 text-xs font-semibold text-brand-green-dark hover:underline"
+    >
+      <span aria-live="polite">{label}</span>
+      <DownloadStatusIcon state={state} className="size-3.5" />
+    </a>
+  );
+}
 
 export default function DocumentGrid() {
   const { open: openInquiry } = useInquiryModal();
@@ -147,14 +167,7 @@ export default function DocumentGrid() {
                         </p>
                         <p className="mt-2 text-xs leading-relaxed text-slate">{doc.description}</p>
                         {doc.file ? (
-                          <a
-                            href={doc.file}
-                            download
-                            className="mt-3 inline-flex w-fit items-center gap-1.5 text-xs font-semibold text-brand-green-dark hover:underline"
-                          >
-                            {t.common.download}
-                            <Download className="size-3.5" />
-                          </a>
+                          <DocumentDownloadLink href={doc.file} />
                         ) : (
                           <button
                             type="button"

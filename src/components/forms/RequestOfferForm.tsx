@@ -1,10 +1,8 @@
 "use client";
 
 import { useState, type FormEvent, type ReactNode } from "react";
-import { motion } from "framer-motion";
 import {
   Loader2,
-  CheckCircle2,
   AlertCircle,
   User,
   Building2,
@@ -28,6 +26,7 @@ import {
 import { trackEvent } from "@/lib/analytics";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 import CustomSelect from "./CustomSelect";
+import SubmissionSuccess, { summarize, type SummaryField, type SummaryRow } from "./SubmissionSuccess";
 
 type Status = "idle" | "submitting" | "success" | "error";
 
@@ -36,6 +35,22 @@ export default function RequestOfferForm({ onCancel }: { onCancel?: () => void }
   const f = t.forms;
   const [status, setStatus] = useState<Status>("idle");
   const [errorMessage, setErrorMessage] = useState("");
+  const [summary, setSummary] = useState<SummaryRow[]>([]);
+
+  // In on-screen order. Selects carry their value/label pairs so the
+  // summary shows the option as the visitor saw it (see summarize()).
+  const SUMMARY_FIELDS: SummaryField[] = [
+    { name: "fullName", label: f.fullName },
+    { name: "company", label: f.companyName },
+    { name: "country", label: f.country },
+    { name: "email", label: f.emailAddress },
+    { name: "phone", label: f.phone },
+    { name: "productInterest", label: f.productInterest, options: [OFFER_PRODUCT_INTEREST_OPTIONS, f.offerProductInterestOptions] },
+    { name: "requiredVolume", label: f.requiredVolume, options: [OFFER_VOLUME_OPTIONS, f.offerVolumeOptions] },
+    { name: "application", label: f.application, options: [OFFER_APPLICATION_OPTIONS, f.offerApplicationOptions] },
+    { name: "deliveryDestination", label: f.deliveryDestination },
+    { name: "message", label: f.message },
+  ];
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -75,6 +90,7 @@ export default function RequestOfferForm({ onCancel }: { onCancel?: () => void }
         throw new Error(body.error || f.genericErrorContact);
       }
 
+      setSummary(summarize(data, SUMMARY_FIELDS));
       setStatus("success");
       trackEvent("request_offer_success");
       form.reset();
@@ -87,33 +103,18 @@ export default function RequestOfferForm({ onCancel }: { onCancel?: () => void }
 
   if (status === "success") {
     return (
-      <motion.div
-        initial={{ opacity: 0, y: 12, scale: 0.98 }}
-        animate={{ opacity: 1, y: 0, scale: 1 }}
-        transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-        className="flex flex-col items-center gap-3 rounded-2xl border border-brand-green/30 bg-brand-green/5 p-8 text-center sm:p-10"
-      >
-        <motion.div
-          initial={{ scale: 0, rotate: -20 }}
-          animate={{ scale: 1, rotate: 0 }}
-          transition={{ type: "spring", stiffness: 260, damping: 18, delay: 0.1 }}
-        >
-          <CheckCircle2 className="size-10 text-brand-green" />
-        </motion.div>
-        <h3 className="text-lg font-bold text-navy">
-          {f.thankYouOffer}
-        </h3>
-        <p className="text-sm text-slate">
-          {f.thankYouOfferSub}
-        </p>
-        <button
-          type="button"
-          onClick={() => setStatus("idle")}
-          className="mt-2 inline-flex h-11 cursor-pointer items-center justify-center rounded-lg border-2 border-border px-6 text-sm font-semibold text-navy transition-colors hover:bg-soft-gray"
-        >
-          {f.sendAnotherRequest}
-        </button>
-      </motion.div>
+      <SubmissionSuccess
+        title={f.thankYouOffer}
+        subtitle={f.thankYouOfferSub}
+        pill={f.inTouchSoon}
+        detailsTitle={f.inquiryDetails}
+        rows={summary}
+        resetLabel={f.sendAnotherRequest}
+        onReset={() => {
+          setStatus("idle");
+          setSummary([]);
+        }}
+      />
     );
   }
 
