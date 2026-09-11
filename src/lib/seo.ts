@@ -3,7 +3,15 @@ import { SITE_URL, SITE_NAME, COMPANY } from "./constants";
 import { localizePath } from "./i18n/localizePath";
 import type { Locale } from "./i18n/translations";
 
-const OG_IMAGE = { url: "/images/og-image.png", width: 1200, height: 630 };
+// The preview card's image has its tagline baked into the pixels, so each
+// language gets its own file. The Azerbaijani one is the English design
+// with only the two text lines replaced, worded as on the site itself
+// (home hero + trust bar in translations.ts).
+const OG_IMAGE: Record<Locale, string> = {
+  en: "/images/og-image.png",
+  az: "/images/og-image-az.png",
+};
+const OG_IMAGE_SIZE = { width: 1200, height: 630 };
 const OG_LOCALE: Record<Locale, string> = { en: "en_US", az: "az_AZ" };
 
 /**
@@ -51,13 +59,13 @@ export function pageMetadata({
       description,
       locale: OG_LOCALE[locale],
       alternateLocale: [OG_LOCALE[otherLocale]],
-      images: [{ ...OG_IMAGE, alt: title }],
+      images: [{ url: OG_IMAGE[locale], ...OG_IMAGE_SIZE, alt: title }],
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
-      images: [OG_IMAGE.url],
+      images: [OG_IMAGE[locale]],
     },
   };
 }
