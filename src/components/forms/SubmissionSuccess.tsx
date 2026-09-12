@@ -91,15 +91,16 @@ export default function SubmissionSuccess({
       role="status"
     >
       {/* The green wash the leaves sit on: a soft glow low on the left, with
-          a wider wedge fading up and to the right behind it. */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -bottom-24 -left-24 size-80 rounded-full bg-brand-green/25 blur-[72px]"
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute bottom-0 left-0 h-56 w-2/3 bg-gradient-to-tr from-brand-green/20 via-brand-green/5 to-transparent"
-      />
+          a wider wedge fading up and to the right behind it.
+
+          Both sit in a clipping layer. The glow hangs ~96px below the panel's
+          bottom edge, and on a scrollable panel that overhang counts as
+          scrollable area — it, not the content, was the empty band you could
+          scroll into underneath everything. */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden rounded-3xl">
+        <div className="absolute -bottom-24 -left-24 size-80 rounded-full bg-brand-green/25 blur-[72px]" />
+        <div className="absolute bottom-0 left-0 h-56 w-2/3 bg-gradient-to-tr from-brand-green/20 via-brand-green/5 to-transparent" />
+      </div>
 
       <div
         className={
