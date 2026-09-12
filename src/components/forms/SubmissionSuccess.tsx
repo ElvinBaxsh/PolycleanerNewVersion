@@ -51,6 +51,11 @@ const EASE = [0.22, 1, 0.36, 1] as const;
  * that, with the "send another" button after the details so they're read
  * first. Container queries measure the content box, so the panel's own
  * padding counts against that threshold — 36rem missed the contact card.
+ *
+ * Height matters as much as width in a modal: the panel has to fit the
+ * dialog, or the whole thing scrolls and the acknowledgement slides away
+ * with it. Below 780px of window the leaves and a step of padding drop
+ * out, which is what buys the last ~75px on a laptop screen.
  */
 export default function SubmissionSuccess({
   title,
@@ -76,12 +81,19 @@ export default function SubmissionSuccess({
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, ease: EASE }}
-      className="@container/panel relative overflow-hidden rounded-2xl bg-gradient-to-br from-brand-green/[0.07] via-white to-white p-5 ring-1 ring-brand-green/15 sm:p-7"
+      className="@container/panel relative overflow-hidden rounded-2xl bg-gradient-to-br from-brand-green/[0.07] via-white to-white p-5 ring-1 ring-brand-green/15 sm:p-7 [@media(max-height:780px)]:!p-5"
       role="status"
     >
+      {/* The green wash the leaves sit on: a soft glow low on the left, with
+          a wider wedge fading up and to the right behind it. Both are inside
+          the panel's overflow-hidden, so they stop at its rounded edge. */}
       <div
         aria-hidden
-        className="pointer-events-none absolute -bottom-28 -left-24 size-72 rounded-full bg-brand-green/10 blur-3xl"
+        className="pointer-events-none absolute -bottom-24 -left-24 size-80 rounded-full bg-brand-green/25 blur-[72px]"
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute bottom-0 left-0 h-56 w-2/3 bg-gradient-to-tr from-brand-green/20 via-brand-green/5 to-transparent"
       />
 
       <div
@@ -93,8 +105,10 @@ export default function SubmissionSuccess({
       >
         {/* The acknowledgement and the way out stay together, so "send
             another" sits under the message instead of being pushed to the
-            bottom of however long the details list happens to be. */}
-        <div className="flex flex-col items-start">
+            bottom of however long the details list happens to be. On a short
+            window the modal still scrolls a little; sticky keeps this column
+            (and its button) in place while the details move past it. */}
+        <div className="flex flex-col items-start @lg/panel:sticky @lg/panel:top-4 @lg/panel:self-start">
           <SuccessMark />
           <h3 className="mt-5 text-2xl font-bold leading-tight text-navy [text-wrap:balance]">{title}</h3>
           <p className="mt-2 text-slate">{subtitle}</p>
@@ -102,7 +116,13 @@ export default function SubmissionSuccess({
             <Clock className="size-4" aria-hidden />
             {pill}
           </span>
-          {hasRows && <Leaves className="mt-6 hidden @lg:block" />}
+          {/* Decoration, and the first thing to go: on a short window these
+              ~100px are what make this column taller than the modal, which is
+              what forces the whole panel to scroll. Dropping them there keeps
+              the acknowledgement and its button completely still. */}
+          {hasRows && (
+            <Leaves className="mt-6 hidden @lg:block [@media(max-height:780px)]:!hidden" />
+          )}
           <button
             type="button"
             onClick={onReset}
@@ -126,12 +146,13 @@ export default function SubmissionSuccess({
               </span>
               <h4 className="text-lg font-bold text-navy">{detailsTitle}</h4>
             </div>
-            {/* Side by side, a long list would otherwise stretch the panel
-                past the window — a sample request sends ten fields — and
-                push the button out of view. The list scrolls inside its own
-                card instead, under a heading that stays put. Only from @lg:
-                stacked on a phone it just flows down the page. */}
-            <dl className="scrollbar-thin mt-2 divide-y divide-border @lg/panel:max-h-80 @lg/panel:overflow-y-auto">
+            {/* A long list would otherwise stretch the panel past the window
+                — a sample request sends ten fields, and one of them is a
+                free-text message that can be any length — pushing the button
+                out of view. The list scrolls inside its own card instead,
+                under a heading that stays put. The viewport-relative cap
+                bounds it on a phone too, whatever the visitor wrote. */}
+            <dl className="scrollbar-thin mt-2 max-h-[45dvh] divide-y divide-border overflow-y-auto @lg/panel:max-h-80">
               {rows.map((row, i) => (
                 <motion.div
                   key={row.label}
@@ -141,7 +162,9 @@ export default function SubmissionSuccess({
                   className="grid gap-0.5 py-2.5 @sm:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] @sm:gap-4"
                 >
                   <dt className="text-xs font-semibold uppercase tracking-wide text-slate/60">{row.label}</dt>
-                  <dd className="text-sm text-navy [overflow-wrap:anywhere]">{row.value}</dd>
+                  {/* pre-wrap: a message typed across several lines is shown
+                      the way it was written, not collapsed into one block. */}
+                  <dd className="whitespace-pre-wrap text-sm text-navy [overflow-wrap:anywhere]">{row.value}</dd>
                 </motion.div>
               ))}
             </dl>
