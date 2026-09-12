@@ -16,6 +16,7 @@ import {
 import { clsx } from "clsx";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 import SubmissionSuccess, { summarize, type SummaryField, type SummaryRow } from "@/components/forms/SubmissionSuccess";
+import { newReference } from "@/lib/reference";
 
 type Status = "idle" | "submitting" | "success" | "error";
 
@@ -32,6 +33,7 @@ export default function DocumentRequestForm({ onCancel }: { onCancel?: () => voi
   const [errorMessage, setErrorMessage] = useState("");
   const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
   const [summary, setSummary] = useState<SummaryRow[]>([]);
+  const [reference, setReference] = useState("");
 
   // Document types need no value/label pairing: the chips submit the very
   // label the visitor clicked (see the hidden documentType input below).
@@ -54,10 +56,12 @@ export default function DocumentRequestForm({ onCancel }: { onCancel?: () => voi
 
     const form = event.currentTarget;
     const data = new FormData(form);
+    const ref = newReference();
     const payload = {
       ...Object.fromEntries(data.entries()),
       sourcePage: window.location.href,
       userLanguage: locale.toUpperCase(),
+      reference: ref,
     };
 
     try {
@@ -72,6 +76,7 @@ export default function DocumentRequestForm({ onCancel }: { onCancel?: () => voi
         throw new Error(errBody.error || t.forms.genericError);
       }
 
+      setReference(ref);
       setSummary(summarize(data, SUMMARY_FIELDS));
       setStatus("success");
       form.reset();
@@ -87,7 +92,8 @@ export default function DocumentRequestForm({ onCancel }: { onCancel?: () => voi
       <SubmissionSuccess
         title={f.successTitle}
         subtitle={f.successDescription}
-        pill={t.forms.inTouchSoon}
+        referenceLabel={t.forms.referenceLabel}
+        reference={reference}
         detailsTitle={t.forms.inquiryDetails}
         rows={summary}
         resetLabel={f.sendAnother}

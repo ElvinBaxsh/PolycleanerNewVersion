@@ -2,7 +2,7 @@
 
 import { useId } from "react";
 import { motion } from "framer-motion";
-import { ArrowLeft, Clock, FileText } from "lucide-react";
+import { ArrowLeft, FileText, Hash } from "lucide-react";
 
 export type SummaryRow = { label: string; value: string };
 
@@ -60,7 +60,8 @@ const EASE = [0.22, 1, 0.36, 1] as const;
 export default function SubmissionSuccess({
   title,
   subtitle,
-  pill,
+  referenceLabel,
+  reference,
   detailsTitle,
   rows,
   resetLabel,
@@ -68,7 +69,10 @@ export default function SubmissionSuccess({
 }: {
   title: string;
   subtitle: string;
-  pill: string;
+  referenceLabel: string;
+  /** Also written into the email, so quoting it here is useful — it used to
+   *  be a second "we'll be in touch", which the subtitle already says. */
+  reference: string;
   detailsTitle: string;
   rows: SummaryRow[];
   resetLabel: string;
@@ -113,8 +117,8 @@ export default function SubmissionSuccess({
           <h3 className="mt-5 text-2xl font-bold leading-tight text-navy [text-wrap:balance]">{title}</h3>
           <p className="mt-2 text-slate">{subtitle}</p>
           <span className="mt-4 inline-flex items-center gap-2 rounded-full bg-brand-green/10 px-3.5 py-1.5 text-sm font-semibold text-brand-green-dark">
-            <Clock className="size-4" aria-hidden />
-            {pill}
+            <Hash className="size-4 shrink-0" aria-hidden />
+            {referenceLabel}: <span className="font-mono tracking-tight">{reference}</span>
           </span>
           {/* Decoration, and the first thing to go: on a short window these
               ~100px are what make this column taller than the modal, which is
@@ -152,7 +156,9 @@ export default function SubmissionSuccess({
                 out of view. The list scrolls inside its own card instead,
                 under a heading that stays put. The viewport-relative cap
                 bounds it on a phone too, whatever the visitor wrote. */}
-            <dl className="scrollbar-thin mt-2 max-h-[45dvh] divide-y divide-border overflow-y-auto @lg/panel:max-h-80">
+            {/* pr-3 keeps the values off the scrollbar, which otherwise sits
+                right against the text when the list is long enough to scroll. */}
+            <dl className="scrollbar-thin mt-2 max-h-[45dvh] divide-y divide-border overflow-y-auto pr-3 @lg/panel:max-h-80">
               {rows.map((row, i) => (
                 <motion.div
                   key={row.label}

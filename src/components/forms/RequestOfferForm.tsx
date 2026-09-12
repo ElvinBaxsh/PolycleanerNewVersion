@@ -27,15 +27,24 @@ import { trackEvent } from "@/lib/analytics";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 import CustomSelect from "./CustomSelect";
 import SubmissionSuccess, { summarize, type SummaryField, type SummaryRow } from "./SubmissionSuccess";
+import { newReference } from "@/lib/reference";
 
 type Status = "idle" | "submitting" | "success" | "error";
 
-export default function RequestOfferForm({ onCancel }: { onCancel?: () => void }) {
+export default function RequestOfferForm({
+  onCancel,
+  onSuccess,
+}: {
+  onCancel?: () => void;
+  /** See InquiryForm: lets the modal drop its instruction line. */
+  onSuccess?: () => void;
+}) {
   const { t, locale } = useLanguage();
   const f = t.forms;
   const [status, setStatus] = useState<Status>("idle");
   const [errorMessage, setErrorMessage] = useState("");
   const [summary, setSummary] = useState<SummaryRow[]>([]);
+  const [reference, setReference] = useState("");
 
   // In on-screen order. Selects carry their value/label pairs so the
   // summary shows the option as the visitor saw it (see summarize()).
@@ -69,11 +78,13 @@ export default function RequestOfferForm({ onCancel }: { onCancel?: () => void }
       return;
     }
 
+    const ref = newReference();
     const payload = {
       ...Object.fromEntries(data.entries()),
       consent: data.get("consent") === "on",
       sourcePage: window.location.href,
       userLanguage: locale.toUpperCase(),
+      reference: ref,
     };
 
     trackEvent("request_offer_submit");
@@ -90,8 +101,10 @@ export default function RequestOfferForm({ onCancel }: { onCancel?: () => void }
         throw new Error(body.error || f.genericErrorContact);
       }
 
+      setReference(ref);
       setSummary(summarize(data, SUMMARY_FIELDS));
       setStatus("success");
+      onSuccess?.();
       trackEvent("request_offer_success");
       form.reset();
     } catch (err) {
@@ -106,7 +119,8 @@ export default function RequestOfferForm({ onCancel }: { onCancel?: () => void }
       <SubmissionSuccess
         title={f.thankYouOffer}
         subtitle={f.thankYouOfferSub}
-        pill={f.inTouchSoon}
+        referenceLabel={f.referenceLabel}
+        reference={reference}
         detailsTitle={f.inquiryDetails}
         rows={summary}
         resetLabel={f.sendAnotherRequest}

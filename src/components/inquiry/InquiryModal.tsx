@@ -25,8 +25,13 @@ export default function InquiryModal({
   // this during render (not in an effect) is the documented pattern for
   // deriving state from a changing prop.
   const [renderOptions, setRenderOptions] = useState(options);
+  // Reset for each new modal: once the form has been sent it is replaced by
+  // the confirmation, and the subtitle below still says "fill in the form
+  // below" — an instruction for something no longer on screen.
+  const [sent, setSent] = useState(false);
   if (options !== null && options !== renderOptions) {
     setRenderOptions(options);
+    setSent(false);
   }
 
   const isOfferFlow = renderOptions?.type === "offer";
@@ -128,16 +133,17 @@ export default function InquiryModal({
                 {title}
               </h2>
               {isOfferFlow && <span className="mt-2 block h-1 w-10 rounded-full bg-brand-green" />}
-              <p className="mt-2 text-sm text-slate">{subtitle}</p>
+              {!sent && <p className="mt-2 text-sm text-slate">{subtitle}</p>}
 
               <div className="mt-5">
                 {isOfferFlow ? (
-                  <RequestOfferForm onCancel={onClose} />
+                  <RequestOfferForm onCancel={onClose} onSuccess={() => setSent(true)} />
                 ) : (
                   <InquiryForm
                     defaultType={renderOptions.type}
                     defaultInterest={renderOptions.interest}
                     onCancel={onClose}
+                    onSuccess={() => setSent(true)}
                   />
                 )}
               </div>

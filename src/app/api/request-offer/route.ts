@@ -7,7 +7,12 @@ function isValidEmail(value: string) {
 }
 
 export async function POST(request: NextRequest) {
-  let body: Partial<RequestOfferPayload> & { website?: string; sourcePage?: string; userLanguage?: string };
+  let body: Partial<RequestOfferPayload> & {
+    website?: string;
+    sourcePage?: string;
+    userLanguage?: string;
+    reference?: string;
+  };
 
   try {
     body = await request.json();
@@ -67,6 +72,8 @@ export async function POST(request: NextRequest) {
     submittedAt: new Date().toISOString(),
     userLanguage: body.userLanguage || "EN",
     ip: request.headers.get("x-forwarded-for")?.split(",")[0]?.trim(),
+    // See /api/contact: the handle the sender sees on the confirmation.
+    reference: typeof body.reference === "string" ? body.reference : undefined,
   };
 
   const { subject, html, text, inlineImages } = buildRequestOfferEmail(payload, meta);

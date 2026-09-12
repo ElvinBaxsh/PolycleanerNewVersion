@@ -14,6 +14,7 @@ import {
 import CustomSelect from "./CustomSelect";
 import FileUpload from "./FileUpload";
 import SubmissionSuccess, { summarize, type SummaryField, type SummaryRow } from "./SubmissionSuccess";
+import { newReference } from "@/lib/reference";
 
 type Status = "idle" | "submitting" | "success" | "error";
 
@@ -21,10 +22,14 @@ export default function InquiryForm({
   defaultType,
   defaultInterest,
   onCancel,
+  onSuccess,
 }: {
   defaultType?: string;
   defaultInterest?: string;
   onCancel?: () => void;
+  /** Lets the surrounding modal or section know the form is gone, so it can
+   *  drop its "fill in the form below" line. */
+  onSuccess?: () => void;
 }) {
   const { t, locale } = useLanguage();
   const f = t.forms;
@@ -56,6 +61,7 @@ export default function InquiryForm({
   const [status, setStatus] = useState<Status>("idle");
   const [errorMessage, setErrorMessage] = useState("");
   const [summary, setSummary] = useState<SummaryRow[] | null>(null);
+  const [reference, setReference] = useState("");
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -107,6 +113,11 @@ export default function InquiryForm({
     data.set("sourcePage", window.location.href);
     data.set("userLanguage", locale.toUpperCase());
 
+    // Travels with the email (subject and body) as well as being shown on
+    // the confirmation, so both ends can refer to the same enquiry.
+    const ref = newReference();
+    data.set("reference", ref);
+
     // Taken before the request (and before form.reset() clears the inputs).
     const rows = summarize(data, SUMMARY_FIELDS);
 
@@ -121,8 +132,10 @@ export default function InquiryForm({
         throw new Error(body.error || f.genericError);
       }
 
+      setReference(ref);
       setSummary(rows);
       setStatus("success");
+      onSuccess?.();
       form.reset();
     } catch (err) {
       setStatus("error");
@@ -135,7 +148,8 @@ export default function InquiryForm({
       <SubmissionSuccess
         title={f.thankYouInquiry}
         subtitle={f.thankYouInquirySub}
-        pill={f.inTouchSoon}
+        referenceLabel={f.referenceLabel}
+        reference={reference}
         detailsTitle={f.inquiryDetails}
         rows={summary}
         resetLabel={f.sendAnotherInquiry}

@@ -139,6 +139,9 @@ export async function POST(request: NextRequest) {
     submittedAt: new Date().toISOString(),
     userLanguage: fields.userLanguage || "EN",
     ip: request.headers.get("x-forwarded-for")?.split(",")[0]?.trim(),
+    // Generated in the browser and shown to the sender, so the same handle
+    // appears on their screen and in this email (subject included).
+    reference: fields.reference,
     attachmentFiles: attachments.map((a) => ({ name: a.filename, size: a.content?.length ?? 0 })),
   };
 

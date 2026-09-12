@@ -66,6 +66,8 @@ export interface RequestOfferMeta {
   submittedAt: string;
   userLanguage: string;
   ip?: string;
+  /** The handle shown to the sender on screen — see lib/reference.ts. */
+  reference?: string;
 }
 
 function escapeHtml(value: string) {
@@ -139,7 +141,7 @@ function makeSectionRenderer() {
 
 export function buildRequestOfferEmail(payload: RequestOfferPayload, meta: RequestOfferMeta) {
   const { sectionCard, inlineIcons } = makeSectionRenderer();
-  const subject = `New Request Offer — Poly Cleaner Website — ${payload.company} — ${payload.country}`;
+  const subject = `New Request Offer — Poly Cleaner Website — ${payload.company} — ${payload.country}${meta.reference ? ` — ${meta.reference}` : ""}`;
 
   const leadInfo = `
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
@@ -161,6 +163,7 @@ export function buildRequestOfferEmail(payload: RequestOfferPayload, meta: Reque
   const sourcePageLink = `<a href="${escapeHtml(meta.sourcePage)}" style="color:#1688B5;text-decoration:underline;">${escapeHtml(meta.sourcePage)}</a>`;
   const systemInfo = `
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+      ${meta.reference ? infoRow("Reference:", meta.reference) : ""}
       <tr>
         <td style="padding:5px 0;color:#64748b;font-size:13px;width:150px;vertical-align:top;">Source Page:</td>
         <td style="padding:5px 0;font-size:14px;font-weight:700;vertical-align:top;">${sourcePageLink}</td>
@@ -244,6 +247,7 @@ export function buildRequestOfferEmail(payload: RequestOfferPayload, meta: Reque
     payload.message ? `\nMessage:\n${payload.message}` : null,
     "",
     "System Information",
+    meta.reference ? `Reference: ${meta.reference}` : null,
     `Source Page: ${meta.sourcePage}`,
     `Submission Date: ${meta.submittedAt}`,
     `User Language: ${meta.userLanguage}`,
@@ -285,6 +289,8 @@ export interface ContactMeta {
   submittedAt: string;
   userLanguage?: string;
   ip?: string;
+  /** The handle shown to the sender on screen — see lib/reference.ts. */
+  reference?: string;
   /** Customer-uploaded files, with sizes so the email can show them without
    *  the reader having to open each one to judge what arrived. */
   attachmentFiles?: { name: string; size: number }[];
@@ -325,7 +331,7 @@ export function buildContactEmail(payload: ContactPayload, meta: ContactMeta) {
   const isSample = payload.inquiryType === "sample";
   const isDocuments = payload.inquiryType === "documents";
   const isPartner = payload.inquiryType === "partner";
-  const subject = `New ${kind} — Poly Cleaner Website — ${payload.company || payload.fullName}`;
+  const subject = `New ${kind} — Poly Cleaner Website — ${payload.company || payload.fullName}${meta.reference ? ` — ${meta.reference}` : ""}`;
 
   const leadInfo = `
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
@@ -391,6 +397,7 @@ export function buildContactEmail(payload: ContactPayload, meta: ContactMeta) {
   const sourcePageLink = `<a href="${escapeHtml(meta.sourcePage)}" style="color:#1688B5;text-decoration:underline;">${escapeHtml(meta.sourcePage)}</a>`;
   const systemInfo = `
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+      ${meta.reference ? infoRow("Reference:", meta.reference) : ""}
       <tr>
         <td style="padding:5px 0;color:#64748b;font-size:13px;width:150px;vertical-align:top;">Source Page:</td>
         <td style="padding:5px 0;font-size:14px;font-weight:700;vertical-align:top;">${sourcePageLink}</td>
@@ -517,6 +524,7 @@ export function buildContactEmail(payload: ContactPayload, meta: ContactMeta) {
     ...(meta.attachmentFiles?.map((f) => `- ${f.name} (${formatBytes(f.size)})`) ?? []),
     "",
     "System Information",
+    meta.reference ? `Reference: ${meta.reference}` : null,
     `Source Page: ${meta.sourcePage}`,
     `Submission Date: ${meta.submittedAt}`,
     meta.userLanguage ? `User Language: ${meta.userLanguage}` : null,
