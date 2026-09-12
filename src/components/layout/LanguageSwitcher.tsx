@@ -45,9 +45,16 @@ export default function LanguageSwitcher({
   // Locale is now a URL concern (EN unprefixed, AZ under /az) rather than
   // client state, so switching means navigating to the equivalent path in
   // the other locale — not just flipping a value in place.
+  //
+  // usePathname() carries no query string, so the query and #anchor are read
+  // from the location at click time: without them /contact?type=sample came
+  // back as a bare /az/elaqe, and the form lost the enquiry type the visitor
+  // had arrived with. (useSearchParams would work too, but would force every
+  // page rendering the header behind a Suspense boundary.)
   function goToLocale(target: Locale) {
     if (target === locale) return;
-    router.push(localizePath(delocalizePath(pathname), target));
+    const { search, hash } = window.location;
+    router.push(localizePath(delocalizePath(pathname) + search + hash, target));
   }
 
   // Declared before the variant early-returns below (not conditionally
