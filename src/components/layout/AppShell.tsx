@@ -4,6 +4,7 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import ScrollToTopButton from "@/components/layout/ScrollToTopButton";
 import InquiryModalProvider from "@/components/inquiry/InquiryModalProvider";
+import SubmissionSuccessProvider from "@/components/forms/SubmissionSuccessProvider";
 import DocumentRequestModalProvider from "@/components/sections/documents/DocumentRequestModalProvider";
 import { LanguageProvider } from "@/lib/i18n/LanguageContext";
 import type { Locale } from "@/lib/i18n/translations";
@@ -27,14 +28,19 @@ export default function AppShell({
   return (
     <LanguageProvider initialLocale={initialLocale}>
       <MotionProvider>
-        <InquiryModalProvider>
-          <DocumentRequestModalProvider>
-            <Header />
-            <main className="flex-1">{children}</main>
-            <Footer />
-            <ScrollToTopButton />
-          </DocumentRequestModalProvider>
-        </InquiryModalProvider>
+        {/* Outside the modal providers on purpose: a form sent from inside
+            the inquiry modal closes it, and the confirmation has to outlive
+            that unmount. */}
+        <SubmissionSuccessProvider>
+          <InquiryModalProvider>
+            <DocumentRequestModalProvider>
+              <Header />
+              <main className="flex-1">{children}</main>
+              <Footer />
+              <ScrollToTopButton />
+            </DocumentRequestModalProvider>
+          </InquiryModalProvider>
+        </SubmissionSuccessProvider>
       </MotionProvider>
     </LanguageProvider>
   );

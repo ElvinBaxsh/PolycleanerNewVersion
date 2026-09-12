@@ -1,7 +1,24 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
-import { Loader2, AlertCircle, Send } from "lucide-react";
+import {
+  Loader2,
+  AlertCircle,
+  Send,
+  User,
+  Building2,
+  MapPin,
+  Mail,
+  Phone,
+  Handshake,
+  Package,
+  FlaskConical,
+  Layers,
+  Truck,
+  BarChart3,
+  Paperclip,
+  MessageSquare,
+} from "lucide-react";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 import {
   PRODUCT_INTERESTS,
@@ -13,7 +30,8 @@ import {
 } from "@/lib/constants";
 import CustomSelect from "./CustomSelect";
 import FileUpload from "./FileUpload";
-import SubmissionSuccess, { summarize, type SummaryField, type SummaryRow } from "./SubmissionSuccess";
+import { summarize, type SummaryField } from "./SubmissionSuccess";
+import { useSubmissionSuccess } from "./SubmissionSuccessContext";
 import { newReference } from "@/lib/reference";
 
 type Status = "idle" | "submitting" | "success" | "error";
@@ -33,6 +51,7 @@ export default function InquiryForm({
 }) {
   const { t, locale } = useLanguage();
   const f = t.forms;
+  const successModal = useSubmissionSuccess();
   const isSample = defaultType === "sample";
   const isPartner = defaultType === "partner";
   // Every field any variant of this form can have, in on-screen order — the
@@ -40,28 +59,26 @@ export default function InquiryForm({
   // their value/label pairs so the summary shows the option the visitor
   // picked in their language, not the English value that gets submitted.
   const SUMMARY_FIELDS: SummaryField[] = [
-    { name: "fullName", label: f.fullName },
-    { name: "company", label: isPartner ? f.companyOrganisation : f.companyName },
-    { name: "country", label: f.country },
-    { name: "city", label: f.city },
-    { name: "email", label: f.email },
-    { name: "phone", label: f.phone },
-    { name: "partnershipInterest", label: f.partnershipInterest, options: [PARTNERSHIP_INTEREST_OPTIONS, f.partnershipInterestOptions] },
-    { name: "productInterest", label: f.productInterest, options: [PRODUCT_INTERESTS, f.productInterestOptions] },
-    { name: "sampleType", label: f.sampleType, options: [SAMPLE_TYPE_OPTIONS, f.sampleTypeOptions] },
-    { name: "application", label: f.application, options: [OFFER_APPLICATION_OPTIONS, f.offerApplicationOptions] },
-    { name: "deliveryDestination", label: f.deliveryDestination },
-    { name: "deliveryAddress", label: f.deliveryAddress },
-    { name: "courierAccount", label: f.courierAccount },
-    { name: "monthlyVolume", label: f.monthlyVolume },
-    { name: "attachments", label: f.attachments },
-    { name: "message", label: f.message },
+    { name: "fullName", label: f.fullName, icon: User },
+    { name: "company", label: isPartner ? f.companyOrganisation : f.companyName, icon: Building2 },
+    { name: "country", label: f.country, icon: MapPin },
+    { name: "city", label: f.city, icon: MapPin },
+    { name: "email", label: f.email, icon: Mail },
+    { name: "phone", label: f.phone, icon: Phone },
+    { name: "partnershipInterest", label: f.partnershipInterest, icon: Handshake, options: [PARTNERSHIP_INTEREST_OPTIONS, f.partnershipInterestOptions] },
+    { name: "productInterest", label: f.productInterest, icon: Package, options: [PRODUCT_INTERESTS, f.productInterestOptions] },
+    { name: "sampleType", label: f.sampleType, icon: FlaskConical, options: [SAMPLE_TYPE_OPTIONS, f.sampleTypeOptions] },
+    { name: "application", label: f.application, icon: Layers, options: [OFFER_APPLICATION_OPTIONS, f.offerApplicationOptions] },
+    { name: "deliveryDestination", label: f.deliveryDestination, icon: MapPin },
+    { name: "deliveryAddress", label: f.deliveryAddress, icon: MapPin },
+    { name: "courierAccount", label: f.courierAccount, icon: Truck },
+    { name: "monthlyVolume", label: f.monthlyVolume, icon: BarChart3 },
+    { name: "attachments", label: f.attachments, icon: Paperclip },
+    { name: "message", label: f.message, icon: MessageSquare },
   ];
 
   const [status, setStatus] = useState<Status>("idle");
   const [errorMessage, setErrorMessage] = useState("");
-  const [summary, setSummary] = useState<SummaryRow[] | null>(null);
-  const [reference, setReference] = useState("");
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -132,33 +149,23 @@ export default function InquiryForm({
         throw new Error(body.error || f.genericError);
       }
 
-      setReference(ref);
-      setSummary(rows);
-      setStatus("success");
+      // The confirmation lives above every modal (see
+      // SubmissionSuccessProvider), so it outlives onSuccess() closing
+      // the inquiry modal this form may be sitting in.
+      successModal.show({
+        title: f.thankYouInquiry,
+        subtitle: f.thankYouInquirySub,
+        reference: ref,
+        rows,
+        resetLabel: f.sendAnotherInquiry,
+      });
+      setStatus("idle");
       onSuccess?.();
       form.reset();
     } catch (err) {
       setStatus("error");
       setErrorMessage(err instanceof Error ? err.message : f.genericError);
     }
-  }
-
-  if (status === "success" && summary) {
-    return (
-      <SubmissionSuccess
-        title={f.thankYouInquiry}
-        subtitle={f.thankYouInquirySub}
-        referenceLabel={f.referenceLabel}
-        reference={reference}
-        detailsTitle={f.inquiryDetails}
-        rows={summary}
-        resetLabel={f.sendAnotherInquiry}
-        onReset={() => {
-          setStatus("idle");
-          setSummary(null);
-        }}
-      />
-    );
   }
 
   return (

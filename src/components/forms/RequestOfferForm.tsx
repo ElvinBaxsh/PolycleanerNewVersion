@@ -26,7 +26,8 @@ import {
 import { trackEvent } from "@/lib/analytics";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 import CustomSelect from "./CustomSelect";
-import SubmissionSuccess, { summarize, type SummaryField, type SummaryRow } from "./SubmissionSuccess";
+import { summarize, type SummaryField } from "./SubmissionSuccess";
+import { useSubmissionSuccess } from "./SubmissionSuccessContext";
 import { newReference } from "@/lib/reference";
 
 type Status = "idle" | "submitting" | "success" | "error";
@@ -41,24 +42,23 @@ export default function RequestOfferForm({
 }) {
   const { t, locale } = useLanguage();
   const f = t.forms;
+  const successModal = useSubmissionSuccess();
   const [status, setStatus] = useState<Status>("idle");
   const [errorMessage, setErrorMessage] = useState("");
-  const [summary, setSummary] = useState<SummaryRow[]>([]);
-  const [reference, setReference] = useState("");
 
   // In on-screen order. Selects carry their value/label pairs so the
   // summary shows the option as the visitor saw it (see summarize()).
   const SUMMARY_FIELDS: SummaryField[] = [
-    { name: "fullName", label: f.fullName },
-    { name: "company", label: f.companyName },
-    { name: "country", label: f.country },
-    { name: "email", label: f.emailAddress },
-    { name: "phone", label: f.phone },
-    { name: "productInterest", label: f.productInterest, options: [OFFER_PRODUCT_INTEREST_OPTIONS, f.offerProductInterestOptions] },
-    { name: "requiredVolume", label: f.requiredVolume, options: [OFFER_VOLUME_OPTIONS, f.offerVolumeOptions] },
-    { name: "application", label: f.application, options: [OFFER_APPLICATION_OPTIONS, f.offerApplicationOptions] },
-    { name: "deliveryDestination", label: f.deliveryDestination },
-    { name: "message", label: f.message },
+    { name: "fullName", label: f.fullName, icon: User },
+    { name: "company", label: f.companyName, icon: Building2 },
+    { name: "country", label: f.country, icon: Globe2 },
+    { name: "email", label: f.emailAddress, icon: Mail },
+    { name: "phone", label: f.phone, icon: Phone },
+    { name: "productInterest", label: f.productInterest, icon: Package, options: [OFFER_PRODUCT_INTEREST_OPTIONS, f.offerProductInterestOptions] },
+    { name: "requiredVolume", label: f.requiredVolume, icon: BarChart3, options: [OFFER_VOLUME_OPTIONS, f.offerVolumeOptions] },
+    { name: "application", label: f.application, icon: Layers, options: [OFFER_APPLICATION_OPTIONS, f.offerApplicationOptions] },
+    { name: "deliveryDestination", label: f.deliveryDestination, icon: MapPin },
+    { name: "message", label: f.message, icon: MessageSquare },
   ];
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -101,9 +101,14 @@ export default function RequestOfferForm({
         throw new Error(body.error || f.genericErrorContact);
       }
 
-      setReference(ref);
-      setSummary(summarize(data, SUMMARY_FIELDS));
-      setStatus("success");
+      successModal.show({
+        title: f.thankYouOffer,
+        subtitle: f.thankYouOfferSub,
+        reference: ref,
+        rows: summarize(data, SUMMARY_FIELDS),
+        resetLabel: f.sendAnotherRequest,
+      });
+      setStatus("idle");
       onSuccess?.();
       trackEvent("request_offer_success");
       form.reset();
@@ -112,24 +117,6 @@ export default function RequestOfferForm({
       trackEvent("request_offer_error");
       setErrorMessage(err instanceof Error ? err.message : f.genericErrorContact);
     }
-  }
-
-  if (status === "success") {
-    return (
-      <SubmissionSuccess
-        title={f.thankYouOffer}
-        subtitle={f.thankYouOfferSub}
-        referenceLabel={f.referenceLabel}
-        reference={reference}
-        detailsTitle={f.inquiryDetails}
-        rows={summary}
-        resetLabel={f.sendAnotherRequest}
-        onReset={() => {
-          setStatus("idle");
-          setSummary([]);
-        }}
-      />
-    );
   }
 
   return (

@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import { Mail, Phone, MapPin, Globe, MessageCircle, type LucideIcon } from "lucide-react";
 import { clsx } from "clsx";
 import Container from "@/components/ui/Container";
@@ -20,9 +19,6 @@ export default function ContactFormSection({
   defaultInterest?: string;
 }) {
   const { t } = useLanguage();
-  // Once the form is gone, "fill in the form below" is describing something
-  // that is no longer on screen.
-  const [sent, setSent] = useState(false);
   const contactItems = CONTACT_INFO.map((item, i) => ({
     label: t.contactInfo[i].label,
     value: i === 2 ? t.common.address : i === 4 ? t.contactInfo[i].value! : item.value,
@@ -39,13 +35,9 @@ export default function ContactFormSection({
             a band of empty card under itself. */}
         <Reveal className="flex h-full flex-col rounded-2xl border border-border p-6 sm:p-8">
           <h2 className="text-2xl font-bold text-navy">{t.contact.formTitle}</h2>
-          {!sent && <p className="mt-1 text-sm text-slate">{t.contact.formIntro}</p>}
+          <p className="mt-1 text-sm text-slate">{t.contact.formIntro}</p>
           <div className="mt-6 flex flex-1 flex-col">
-            <InquiryForm
-              defaultType={defaultType}
-              defaultInterest={defaultInterest}
-              onSuccess={() => setSent(true)}
-            />
+            <InquiryForm defaultType={defaultType} defaultInterest={defaultInterest} />
           </div>
         </Reveal>
 

@@ -6,6 +6,7 @@ import {
   Building2,
   User,
   Mail,
+  MessageSquare,
   ShieldCheck,
   Loader2,
   AlertCircle,
@@ -15,7 +16,8 @@ import {
 } from "lucide-react";
 import { clsx } from "clsx";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
-import SubmissionSuccess, { summarize, type SummaryField, type SummaryRow } from "@/components/forms/SubmissionSuccess";
+import { summarize, type SummaryField } from "@/components/forms/SubmissionSuccess";
+import { useSubmissionSuccess } from "@/components/forms/SubmissionSuccessContext";
 import { newReference } from "@/lib/reference";
 
 type Status = "idle" | "submitting" | "success" | "error";
@@ -29,20 +31,19 @@ type Status = "idle" | "submitting" | "success" | "error";
 export default function DocumentRequestForm({ onCancel }: { onCancel?: () => void }) {
   const { t, locale } = useLanguage();
   const f = t.documentRequestForm;
+  const successModal = useSubmissionSuccess();
   const [status, setStatus] = useState<Status>("idle");
   const [errorMessage, setErrorMessage] = useState("");
   const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
-  const [summary, setSummary] = useState<SummaryRow[]>([]);
-  const [reference, setReference] = useState("");
 
   // Document types need no value/label pairing: the chips submit the very
   // label the visitor clicked (see the hidden documentType input below).
   const SUMMARY_FIELDS: SummaryField[] = [
-    { name: "fullName", label: f.fullName },
-    { name: "company", label: f.company },
-    { name: "email", label: f.email },
-    { name: "documentType", label: f.documentTypeLabel },
-    { name: "message", label: f.notesLabel },
+    { name: "fullName", label: f.fullName, icon: User },
+    { name: "company", label: f.company, icon: Building2 },
+    { name: "email", label: f.email, icon: Mail },
+    { name: "documentType", label: f.documentTypeLabel, icon: FileText },
+    { name: "message", label: f.notesLabel, icon: MessageSquare },
   ];
 
   function toggleType(type: string) {
@@ -76,33 +77,21 @@ export default function DocumentRequestForm({ onCancel }: { onCancel?: () => voi
         throw new Error(errBody.error || t.forms.genericError);
       }
 
-      setReference(ref);
-      setSummary(summarize(data, SUMMARY_FIELDS));
-      setStatus("success");
+      successModal.show({
+        title: f.successTitle,
+        subtitle: f.successDescription,
+        reference: ref,
+        rows: summarize(data, SUMMARY_FIELDS),
+        resetLabel: f.sendAnother,
+      });
+      setStatus("idle");
+      onCancel?.();
       form.reset();
       setSelectedTypes([]);
     } catch (err) {
       setStatus("error");
       setErrorMessage(err instanceof Error ? err.message : t.forms.genericError);
     }
-  }
-
-  if (status === "success") {
-    return (
-      <SubmissionSuccess
-        title={f.successTitle}
-        subtitle={f.successDescription}
-        referenceLabel={t.forms.referenceLabel}
-        reference={reference}
-        detailsTitle={t.forms.inquiryDetails}
-        rows={summary}
-        resetLabel={f.sendAnother}
-        onReset={() => {
-          setStatus("idle");
-          setSummary([]);
-        }}
-      />
-    );
   }
 
   return (
