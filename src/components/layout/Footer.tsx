@@ -72,22 +72,48 @@ export default function Footer() {
 
         <div>
           <h3 className="text-xs font-bold uppercase tracking-wider text-white">{t.footer.contactUs}</h3>
+          {/* Each line is the action someone wants from it: the address opens
+              the location on a map, the number dials, the address writes a
+              mail. The whole row is the target, not just the text, so it is
+              comfortable to tap on a phone. */}
           <ul className="mt-4 space-y-3 text-sm text-white/60">
-            <li className="flex gap-2.5">
-              <MapPin className="size-4 shrink-0 mt-0.5 text-brand-green" />
-              {t.common.address}
+            <li>
+              <a
+                href={`https://www.google.com/maps/search/?api=1&query=${COMPANY.coordinates.lat}%2C${COMPANY.coordinates.lng}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="-my-1 flex gap-2.5 py-1 transition-colors hover:text-white"
+              >
+                <MapPin className="size-4 shrink-0 mt-0.5 text-brand-green" />
+                {t.common.address}
+              </a>
             </li>
-            <li className="flex gap-2.5">
-              <Phone className="size-4 shrink-0 mt-0.5 text-brand-green" />
-              {COMPANY.phone}
+            <li>
+              <a
+                href={`tel:${COMPANY.phone.replace(/\s/g, "")}`}
+                className="-my-1 flex gap-2.5 py-1 transition-colors hover:text-white"
+              >
+                <Phone className="size-4 shrink-0 mt-0.5 text-brand-green" />
+                {COMPANY.phone}
+              </a>
             </li>
-            <li className="flex gap-2.5">
-              <Mail className="size-4 shrink-0 mt-0.5 text-brand-green" />
-              {COMPANY.email}
+            <li>
+              <a
+                href={`mailto:${COMPANY.email}`}
+                className="-my-1 flex gap-2.5 py-1 transition-colors hover:text-white"
+              >
+                <Mail className="size-4 shrink-0 mt-0.5 text-brand-green" />
+                {COMPANY.email}
+              </a>
             </li>
-            <li className="flex gap-2.5">
-              <Globe className="size-4 shrink-0 mt-0.5 text-brand-green" />
-              {t.footer.website}
+            <li>
+              <Link
+                href={localizePath("/", locale)}
+                className="-my-1 flex gap-2.5 py-1 transition-colors hover:text-white"
+              >
+                <Globe className="size-4 shrink-0 mt-0.5 text-brand-green" />
+                {t.footer.website}
+              </Link>
             </li>
           </ul>
 
