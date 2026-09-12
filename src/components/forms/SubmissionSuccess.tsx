@@ -116,9 +116,16 @@ export default function SubmissionSuccess({
           <SuccessMark />
           <h3 className="mt-5 text-2xl font-bold leading-tight text-navy [text-wrap:balance]">{title}</h3>
           <p className="mt-2 text-slate">{subtitle}</p>
-          <span className="mt-4 inline-flex items-center gap-2 rounded-full bg-brand-green/10 px-3.5 py-1.5 text-sm font-semibold text-brand-green-dark">
-            <Hash className="size-4 shrink-0" aria-hidden />
-            {referenceLabel}: <span className="font-mono tracking-tight">{reference}</span>
+          {/* The code must never break: its hyphens are line-break
+              opportunities, so "PC-260912-" / "6344" is what a narrow column
+              gives you. nowrap keeps it whole and flex-wrap lets it drop to
+              its own line under the label when there isn't room beside it. */}
+          <span className="mt-4 inline-flex max-w-full flex-wrap items-center gap-x-2 gap-y-0.5 rounded-2xl bg-brand-green/10 px-3.5 py-1.5 text-sm font-semibold text-brand-green-dark">
+            <span className="inline-flex items-center gap-2">
+              <Hash className="size-4 shrink-0" aria-hidden />
+              {referenceLabel}:
+            </span>
+            <span className="whitespace-nowrap font-mono tracking-tight">{reference}</span>
           </span>
           {/* Decoration, and the first thing to go: on a short window these
               ~100px are what make this column taller than the modal, which is
