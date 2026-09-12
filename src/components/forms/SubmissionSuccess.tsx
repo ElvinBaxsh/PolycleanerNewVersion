@@ -79,12 +79,15 @@ export default function SubmissionSuccess({
 }) {
   const hasRows = rows.length > 0;
 
+  // The panel paints an opaque white base *under* its gradient: the
+  // gradient's first stop is a translucent green, so without that base the
+  // form behind the modal showed through the panel's top-left corner.
   return (
     <motion.div
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, ease: EASE }}
-      className="@container/panel scrollbar-thin relative max-h-[90dvh] overflow-y-auto overflow-x-hidden rounded-3xl bg-gradient-to-br from-brand-green/[0.09] via-white to-white p-5 shadow-2xl ring-1 ring-brand-green/15 sm:p-8 [@media(max-height:780px)]:!p-5"
+      className="@container/panel scrollbar-thin relative max-h-[90dvh] overflow-y-auto overflow-x-hidden rounded-3xl bg-white bg-gradient-to-br from-brand-green/10 via-white to-white p-5 shadow-2xl ring-1 ring-brand-green/15 sm:p-8 [@media(max-height:780px)]:!p-5"
       role="status"
     >
       {/* The green wash the leaves sit on: a soft glow low on the left, with
@@ -172,11 +175,11 @@ export default function SubmissionSuccess({
               <h4 className="text-lg font-bold text-navy">{detailsTitle}</h4>
             </div>
 
-            {/* A sample request sends ten fields, one of them free text of any
-                length, so the list is capped and scrolls inside its own card
-                rather than stretching the modal. pr-3 keeps the values off
-                the scrollbar. */}
-            <dl className="scrollbar-thin mt-3 max-h-[45dvh] divide-y divide-border overflow-y-auto pr-3 @lg/panel:max-h-[22rem]">
+            {/* No cap and no scrollbar of its own: capping it here meant two
+                scrollbars — the card's and the modal's — and the card ended
+                mid-row while the panel below it sat empty. The list runs at
+                its natural height and the modal scrolls as one thing. */}
+            <dl className="mt-3 divide-y divide-border">
               {rows.map((row, i) => {
                 const Icon = row.icon;
                 return (

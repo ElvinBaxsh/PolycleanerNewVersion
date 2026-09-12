@@ -71,7 +71,7 @@ export default function SubmissionSuccessModal({
       {open && (
         <motion.div
           key="submission-success-backdrop"
-          className="fixed inset-0 z-[110] flex items-center justify-center bg-[rgba(6,43,58,0.72)] p-4 pt-[max(1rem,env(safe-area-inset-top))]"
+          className="fixed inset-0 z-[110] flex items-center justify-center bg-[rgba(6,43,58,0.84)] p-4 pt-[max(1rem,env(safe-area-inset-top))]"
           onClick={onClose}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
