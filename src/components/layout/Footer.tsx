@@ -9,6 +9,7 @@ import LanguageSwitcher from "./LanguageSwitcher";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 import { localizePath } from "@/lib/i18n/localizePath";
 import {
+  SITE_URL,
   NAV_LINKS,
   FOOTER_PRODUCT_LINKS,
   FOOTER_INFO_LINKS,
@@ -107,13 +108,17 @@ export default function Footer() {
               </a>
             </li>
             <li>
-              <Link
-                href={localizePath("/", locale)}
+              {/* The full address on purpose, not an internal link: this row
+                  shows the site's own domain, so it should land there even
+                  when the footer is being viewed on a preview deployment.
+                  Still locale-aware, so /az visitors stay in Azerbaijani. */}
+              <a
+                href={`${SITE_URL}${localizePath("/", locale)}`}
                 className="-my-1 flex gap-2.5 py-1 transition-colors hover:text-white"
               >
                 <Globe className="size-4 shrink-0 mt-0.5 text-brand-green" />
                 {t.footer.website}
-              </Link>
+              </a>
             </li>
           </ul>
 
@@ -131,7 +136,9 @@ export default function Footer() {
 
       <div className="border-t border-white/10 py-5">
         <Container className="flex flex-col items-center justify-between gap-4 text-xs text-white/50 sm:flex-row">
-          <p>{t.footer.copyright(2025)}</p>
+          {/* Read at render, not hard-coded — a footer still saying 2025 in
+              2026 is the kind of detail visitors do notice. */}
+          <p>{t.footer.copyright(new Date().getFullYear())}</p>
           <div className="flex flex-wrap items-center justify-center gap-4">
             <Link href={localizePath("/privacy-policy", locale)} className="hover:text-white/80">
               {t.footer.privacyPolicy}
