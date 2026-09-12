@@ -76,7 +76,7 @@ export default function SubmissionSuccess({
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, ease: EASE }}
-      className="@container relative overflow-hidden rounded-2xl bg-gradient-to-br from-brand-green/[0.07] via-white to-white p-5 ring-1 ring-brand-green/15 sm:p-7"
+      className="@container/panel relative overflow-hidden rounded-2xl bg-gradient-to-br from-brand-green/[0.07] via-white to-white p-5 ring-1 ring-brand-green/15 sm:p-7"
       role="status"
     >
       <div
@@ -87,11 +87,14 @@ export default function SubmissionSuccess({
       <div
         className={
           hasRows
-            ? "relative grid gap-6 @lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] @lg:grid-rows-[1fr_auto] @lg:gap-x-8"
+            ? "relative grid gap-6 @lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] @lg:items-start @lg:gap-x-8"
             : "relative grid gap-6"
         }
       >
-        <div className="flex flex-col items-start @lg:col-start-1 @lg:row-start-1">
+        {/* The acknowledgement and the way out stay together, so "send
+            another" sits under the message instead of being pushed to the
+            bottom of however long the details list happens to be. */}
+        <div className="flex flex-col items-start">
           <SuccessMark />
           <h3 className="mt-5 text-2xl font-bold leading-tight text-navy [text-wrap:balance]">{title}</h3>
           <p className="mt-2 text-slate">{subtitle}</p>
@@ -99,7 +102,15 @@ export default function SubmissionSuccess({
             <Clock className="size-4" aria-hidden />
             {pill}
           </span>
-          {hasRows && <Leaves className="mt-auto hidden pt-6 @lg:block" />}
+          {hasRows && <Leaves className="mt-6 hidden @lg:block" />}
+          <button
+            type="button"
+            onClick={onReset}
+            className="mt-6 inline-flex h-11 cursor-pointer items-center gap-2 rounded-lg border border-brand-green px-5 text-sm font-semibold text-brand-green-dark transition-colors hover:bg-brand-green/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-green"
+          >
+            <ArrowLeft className="size-4" aria-hidden />
+            {resetLabel}
+          </button>
         </div>
 
         {hasRows && (
@@ -107,22 +118,27 @@ export default function SubmissionSuccess({
             initial={{ opacity: 0, x: 16 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.45, ease: EASE, delay: 0.15 }}
-            className="@container rounded-xl border border-border bg-white p-5 shadow-sm @lg:col-start-2 @lg:row-span-2 @lg:row-start-1 @lg:self-center"
+            className="@container flex min-h-0 flex-col rounded-xl border border-border bg-white p-5 shadow-sm"
           >
-            <div className="flex items-center gap-3">
+            <div className="flex shrink-0 items-center gap-3">
               <span className="flex size-11 shrink-0 items-center justify-center rounded-lg bg-brand-green/10 text-brand-green-dark">
                 <FileText className="size-5" aria-hidden />
               </span>
               <h4 className="text-lg font-bold text-navy">{detailsTitle}</h4>
             </div>
-            <dl className="mt-2 divide-y divide-border">
+            {/* Side by side, a long list would otherwise stretch the panel
+                past the window — a sample request sends ten fields — and
+                push the button out of view. The list scrolls inside its own
+                card instead, under a heading that stays put. Only from @lg:
+                stacked on a phone it just flows down the page. */}
+            <dl className="scrollbar-thin mt-2 divide-y divide-border @lg/panel:max-h-80 @lg/panel:overflow-y-auto">
               {rows.map((row, i) => (
                 <motion.div
                   key={row.label}
                   initial={{ opacity: 0, y: 4 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.3, ease: EASE, delay: 0.25 + i * 0.04 }}
-                  className="grid gap-0.5 py-3 @sm:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] @sm:gap-4"
+                  className="grid gap-0.5 py-2.5 @sm:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] @sm:gap-4"
                 >
                   <dt className="text-xs font-semibold uppercase tracking-wide text-slate/60">{row.label}</dt>
                   <dd className="text-sm text-navy [overflow-wrap:anywhere]">{row.value}</dd>
@@ -131,17 +147,6 @@ export default function SubmissionSuccess({
             </dl>
           </motion.div>
         )}
-
-        <div className="@lg:col-start-1 @lg:row-start-2">
-          <button
-            type="button"
-            onClick={onReset}
-            className="inline-flex h-11 cursor-pointer items-center gap-2 rounded-lg border border-brand-green px-5 text-sm font-semibold text-brand-green-dark transition-colors hover:bg-brand-green/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-green"
-          >
-            <ArrowLeft className="size-4" aria-hidden />
-            {resetLabel}
-          </button>
-        </div>
       </div>
     </motion.div>
   );
