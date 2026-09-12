@@ -81,7 +81,7 @@ export default function SubmissionSuccess({
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, ease: EASE }}
-      className="@container/panel relative overflow-hidden rounded-2xl bg-gradient-to-br from-brand-green/[0.07] via-white to-white p-5 ring-1 ring-brand-green/15 sm:p-7 [@media(max-height:780px)]:!p-5"
+      className="@container/panel relative flex flex-1 flex-col overflow-hidden rounded-2xl bg-gradient-to-br from-brand-green/[0.07] via-white to-white p-5 ring-1 ring-brand-green/15 sm:p-7 [@media(max-height:780px)]:!p-5"
       role="status"
     >
       {/* The green wash the leaves sit on: a soft glow low on the left, with
@@ -99,8 +99,8 @@ export default function SubmissionSuccess({
       <div
         className={
           hasRows
-            ? "relative grid gap-6 @lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] @lg:items-start @lg:gap-x-8"
-            : "relative grid gap-6"
+            ? "relative grid flex-1 gap-6 @lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] @lg:items-center @lg:gap-x-8"
+            : "relative grid flex-1 gap-6"
         }
       >
         {/* The acknowledgement and the way out stay together, so "send

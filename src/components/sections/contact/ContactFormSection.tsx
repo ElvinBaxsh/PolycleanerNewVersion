@@ -28,10 +28,15 @@ export default function ContactFormSection({
   return (
     <section id="form" className="section-y scroll-mt-24 bg-white">
       <Container className="grid grid-cols-1 gap-10 lg:grid-cols-[1.4fr_1fr] lg:items-stretch">
-        <Reveal className="rounded-2xl border border-border p-6 sm:p-8">
+        {/* A column, so whatever is below the heading can take the rest of
+            the card. The row is stretched to the taller of the two cards
+            (lg:items-stretch above), and after the form is sent the
+            confirmation is shorter than the form was — without this it left
+            a band of empty card under itself. */}
+        <Reveal className="flex h-full flex-col rounded-2xl border border-border p-6 sm:p-8">
           <h2 className="text-2xl font-bold text-navy">{t.contact.formTitle}</h2>
           <p className="mt-1 text-sm text-slate">{t.contact.formIntro}</p>
-          <div className="mt-6">
+          <div className="mt-6 flex flex-1 flex-col">
             <InquiryForm defaultType={defaultType} defaultInterest={defaultInterest} />
           </div>
         </Reveal>
