@@ -62,8 +62,8 @@ export function hasAllowedUploadExtension(filename: string) {
 }
 
 export const OFFER_PRODUCT_INTEREST_OPTIONS = [
-  "Transparent / Clear rPET Flakes",
-  "Light Blue rPET Flakes",
+  "Transparent/light blue rPET Flakes",
+  "Crushed PET Preform",
   "Green rPET Flakes",
   "Mixed Color rPET Flakes",
   "Multiple Products",
@@ -138,8 +138,8 @@ export const NAV_LINKS: NavLink[] = [
 ];
 
 export const FOOTER_PRODUCT_LINKS: NavLink[] = [
-  { label: "Transparent", href: "/rpet-flakes#transparent" },
-  { label: "Light Blue", href: "/rpet-flakes#light-blue" },
+  { label: "Transparent/light blue", href: "/rpet-flakes#transparent" },
+  { label: "Crushed PET Preform", href: "/rpet-flakes#light-blue" },
   { label: "Green", href: "/rpet-flakes#green" },
   { label: "Mixed Colors", href: "/rpet-flakes#mixed-colors" },
   { label: "Custom Specifications", href: "/contact?interest=custom-specification" },
@@ -172,14 +172,14 @@ export const AMI_EXPO_EVENT = {
 export const PRODUCT_GRADES = [
   {
     slug: "transparent",
-    name: "Transparent",
+    name: "Transparent/light blue",
     description: "For sheet, thermoforming and general applications.",
     swatch: "#eef2f2",
     image: "/images/transparent.jpg",
   },
   {
     slug: "light-blue",
-    name: "Light Blue",
+    name: "Crushed PET Preform",
     description: "For sheet, strapping, thermoforming.",
     swatch: "#bfe1ea",
     image: "/images/lightBlue.jpg",
@@ -212,9 +212,9 @@ export const PROCESS_STEPS = [
 export const SPEC_TABLE = [
   { label: "Flake Size", value: "8–14 mm (customizable)" },
   { label: "Moisture", value: "≤ 1.0%" },
-  { label: "Contamination", value: "≤ 100 ppm (PVC, labels, other plastics)" },
-  { label: "Packing", value: "1,100 kg Jumbo Bags" },
-  { label: "Loading", value: "20–22 MT per 20' FCL / 24–26 MT per 40' HC" },
+  { label: "Contamination", value: "30 ppm (PVC, labels, other plastics)" },
+  { label: "Packing", value: "1,000 kgs jumbo bag" },
+  { label: "Loading", value: "20-22 MT per truck/container 40 ft" },
   { label: "Applications", value: "Sheet, strap, fiber, non-food packaging, trading" },
 ];
 
@@ -223,8 +223,8 @@ export const PRODUCT_INFO = [
   { label: "Process", value: "Hot washing, friction washing, rinsing, drying, sorting, metal detection" },
   { label: "Quality Control", value: "In-house lab testing for every batch" },
   { label: "Origin", value: "Azerbaijan" },
-  { label: "Certification", value: "REACH Compliant (upon request)" },
-  { label: "HS Code", value: "3915.10" },
+  { label: "Certification", value: "local compliant" },
+  { label: "HS Code", value: "3907.69" },
 ];
 
 export const BUYER_DOCUMENTS = [
@@ -258,8 +258,8 @@ export const WHY_CHOOSE_ITEMS = [
 ];
 
 export const PRODUCT_INTERESTS = [
-  "Transparent rPET Flakes",
-  "Light Blue rPET Flakes",
+  "Transparent/light blue rPET Flakes",
+  "Crushed PET Preform",
   "Green rPET Flakes",
   "Mixed Colors rPET Flakes",
   "Custom Specification",
@@ -320,7 +320,7 @@ export const PROCESS_CAPABILITIES = [
   "High-efficiency friction & floating sink separation",
   "Automated drying and air classification",
   "Metal detection and final inspection",
-  "Bulk packing in 1100–1250 kg big bags",
+  "Bulk packing in 1,000 kgs jumbo bag",
   "Daily production with strict process control",
 ];
 
@@ -343,12 +343,12 @@ export const QA_PILLARS = [
 
 export const KEY_SPECS = [
   { value: "≤ 1.0%", label: "Moisture" },
-  { value: "≤ 100 ppm", label: "PVC Content" },
+  { value: "45 ppm", label: "PVC Content" },
   { value: "≤ 30 ppm", label: "Labels & Glue" },
-  { value: "≤ 300 ppm", label: "Other Plastics" },
+  { value: "80 ppm", label: "Other Plastics" },
   { value: "100%", label: "Sorted Feedstock" },
-  { value: "1100–1250 kg", label: "Packaging (Big Bags)" },
-  { value: "Transparent, Light Blue, Green, Mixed", label: "Color Options" },
+  { value: "1000 kgs", label: "Packaging (Jumbo Bags)" },
+  { value: "Transparent/light blue, Green, Mixed", label: "Color Options" },
 ];
 
 export const HOW_WE_WORK = [
@@ -379,8 +379,8 @@ export const SUSTAINABILITY_STEPS = [
 ];
 
 export const IMPACT_STATS = [
-  { value: "20,000+", label: "Tons rPET flakes produced annually" },
-  { value: "800M+", label: "Bottles diverted from landfills each year" },
+  { value: "2.000+", label: "Tons rPET flakes produced annually" },
+  { value: "100M+", label: "Bottles diverted from landfills each year" },
   { value: "-30%", label: "Water use compared to industry average" },
   { value: "-25%", label: "Energy use through efficient processes" },
   { value: "Positive", label: "Social impact supporting local jobs and communities" },
@@ -435,16 +435,18 @@ export const DOCUMENT_LIST: {
     name: "Process Overview",
     category: "Company",
     format: "PDF",
-    size: "1.7 MB",
+    size: "193 KB",
     icon: "process",
+    file: "/PDF/process-overview.pdf",
     description: "Step-by-step overview of our production and quality process.",
   },
   {
     name: "Sustainability Note",
     category: "Sustainability",
     format: "PDF",
-    size: "1.2 MB",
+    size: "196 KB",
     icon: "sustainability",
+    file: "/PDF/sustainability-note.pdf",
     description: "Our approach to responsible sourcing and environmental impact.",
   },
 ];

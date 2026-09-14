@@ -51,7 +51,7 @@ const en = {
     copyright: (year: number) => `© ${year} Poly Cleaner. All rights reserved.`,
     privacyPolicy: "Privacy Policy",
     termsOfUse: "Terms of Use",
-    productLinks: ["Transparent", "Light Blue", "Green", "Mixed Colors", "Custom Specifications"],
+    productLinks: ["Transparent/light blue", "Crushed PET Preform", "Green", "Mixed Colors", "Custom Specifications"],
     infoLinks: ["Quality Assurance", "Certificates", "Logistics & Shipping", "Payments", "FAQ"],
   },
 
@@ -265,15 +265,15 @@ const en = {
   },
 
   productGrades: [
-    { name: "Transparent", description: "For sheet, thermoforming and general applications." },
-    { name: "Light Blue", description: "For sheet, strapping, thermoforming." },
+    { name: "Transparent/light blue", description: "For sheet, thermoforming and general applications." },
+    { name: "Crushed PET Preform", description: "For sheet, strapping, thermoforming." },
     { name: "Green", description: "For strap, sheet, general applications." },
     { name: "Mixed Colors", description: "For fiber, non-food packaging, others." },
   ],
 
   closeups: [
-    { label: "Transparent flakes close-up" },
-    { label: "Light Blue flakes close-up" },
+    { label: "Transparent/light blue flakes close-up" },
+    { label: "Crushed PET preform close-up" },
     { label: "Green flakes close-up" },
     { label: "Mixed Colors flakes close-up" },
     { label: "Flakes in hand" },
@@ -290,9 +290,9 @@ const en = {
   specTable: [
     { label: "Flake Size", value: "8–14 mm (customizable)" },
     { label: "Moisture", value: "≤ 1.0%" },
-    { label: "Contamination", value: "≤ 100 ppm (PVC, labels, other plastics)" },
-    { label: "Packing", value: "1,100 kg Jumbo Bags" },
-    { label: "Loading", value: "20–22 MT per 20' FCL / 24–26 MT per 40' HC" },
+    { label: "Contamination", value: "30 ppm (PVC, labels, other plastics)" },
+    { label: "Packing", value: "1,000 kgs jumbo bag" },
+    { label: "Loading", value: "20-22 MT per truck/container 40 ft" },
     { label: "Applications", value: "Sheet, strap, fiber, non-food packaging, trading" },
   ],
 
@@ -301,8 +301,8 @@ const en = {
     { label: "Process", value: "Hot washing, friction washing, rinsing, drying, sorting, metal detection" },
     { label: "Quality Control", value: "In-house lab testing for every batch" },
     { label: "Origin", value: "Azerbaijan" },
-    { label: "Certification", value: "REACH Compliant (upon request)" },
-    { label: "HS Code", value: "3915.10" },
+    { label: "Certification", value: "local compliant" },
+    { label: "HS Code", value: "3907.69" },
   ],
 
   process: {
@@ -319,7 +319,7 @@ const en = {
     qaPillarsTitle: "Our Quality Assurance Pillars",
     keySpecsTitle: "Key Specifications*",
     keySpecsFootnote: "* Specifications may vary by color and grade. Values shown are typical and based on regular production.",
-    colorOptionsValue: "Transparent, Light Blue, Green, Mixed",
+    colorOptionsValue: "Transparent/light blue, Green, Mixed",
     howWeWorkTitle: "How We Work",
     finalCtaTitle: "Let’s build a cleaner future together.",
     finalCtaDescription: "Contact our team for product information or a customized solution.",
@@ -331,7 +331,7 @@ const en = {
     "High-efficiency friction & floating sink separation",
     "Automated drying and air classification",
     "Metal detection and final inspection",
-    "Bulk packing in 1100–1250 kg big bags",
+    "Bulk packing in 1,000 kgs jumbo bag",
     "Daily production with strict process control",
   ],
 
@@ -358,7 +358,7 @@ const en = {
     { label: "Labels & Glue" },
     { label: "Other Plastics" },
     { label: "Sorted Feedstock" },
-    { label: "Packaging (Big Bags)" },
+    { label: "Packaging (Jumbo Bags)" },
     { label: "Color Options" },
   ],
 
@@ -433,8 +433,8 @@ const en = {
   ],
 
   impactStats: [
-    { value: "20,000+", title: "TONS", description: "rPET flakes produced annually" },
-    { value: "800M+", title: "BOTTLES", description: "Diverted from landfills each year" },
+    { value: "2.000+", title: "TONS", description: "rPET flakes produced annually" },
+    { value: "100M+", title: "BOTTLES", description: "Diverted from landfills each year" },
     { value: "-30%", title: "WATER USE", description: "Compared to industry average" },
     { value: "-25%", title: "ENERGY USE", description: "Through efficient processes" },
     { value: "Positive", title: "SOCIAL IMPACT", description: "Supporting local jobs and communities" },
@@ -653,16 +653,16 @@ const en = {
     genericError: "Something went wrong. Please try again.",
     genericErrorContact: "Something went wrong. Please try again or contact us directly by email.",
     productInterestOptions: [
-      "Transparent rPET Flakes",
-      "Light Blue rPET Flakes",
+      "Transparent/light blue rPET Flakes",
+      "Crushed PET Preform",
       "Green rPET Flakes",
       "Mixed Colors rPET Flakes",
       "Custom Specification",
       "General Inquiry",
     ],
     offerProductInterestOptions: [
-      "Transparent / Clear rPET Flakes",
-      "Light Blue rPET Flakes",
+      "Transparent/light blue rPET Flakes",
+      "Crushed PET Preform",
       "Green rPET Flakes",
       "Mixed Color rPET Flakes",
       "Multiple Products",
@@ -738,7 +738,7 @@ const az = {
     copyright: (year: number) => `© ${year} Poly Cleaner. Bütün hüquqlar qorunur.`,
     privacyPolicy: "Məxfilik Siyasəti",
     termsOfUse: "İstifadə Şərtləri",
-    productLinks: ["Şəffaf", "Açıq Mavi", "Yaşıl", "Qarışıq Rənglər", "Xüsusi Spesifikasiyalar"],
+    productLinks: ["Şəffaf/açıq mavi", "Əzilmiş PET Preform", "Yaşıl", "Qarışıq Rənglər", "Xüsusi Spesifikasiyalar"],
     infoLinks: ["Keyfiyyət Təminatı", "Sertifikatlar", "Logistika və Daşınma", "Ödənişlər", "FAQ"],
   },
 
@@ -952,15 +952,15 @@ const az = {
   },
 
   productGrades: [
-    { name: "Şəffaf", description: "PET lövhə, termoformalaşdırma və ümumi tətbiqlər üçün." },
-    { name: "Açıq Mavi", description: "PET lövhə, qablaşdırma çəmbəri və termoformalaşdırma üçün." },
+    { name: "Şəffaf/açıq mavi", description: "PET lövhə, termoformalaşdırma və ümumi tətbiqlər üçün." },
+    { name: "Əzilmiş PET Preform", description: "PET lövhə, qablaşdırma çəmbəri və termoformalaşdırma üçün." },
     { name: "Yaşıl", description: "Qablaşdırma çəmbəri, PET lövhə və ümumi tətbiqlər üçün." },
     { name: "Qarışıq Rənglər", description: "Polyester lif, qeyri-qida qablaşdırması və digər sahələr üçün." },
   ],
 
   closeups: [
-    { label: "Şəffaf fleksin yaxından görünüşü" },
-    { label: "Açıq mavi fleksin yaxından görünüşü" },
+    { label: "Şəffaf/açıq mavi fleksin yaxından görünüşü" },
+    { label: "Əzilmiş PET preformun yaxından görünüşü" },
     { label: "Yaşıl fleksin yaxından görünüşü" },
     { label: "Qarışıq rəngli fleksin yaxından görünüşü" },
     { label: "Əldə fleks" },
@@ -977,9 +977,9 @@ const az = {
   specTable: [
     { label: "Fleks Ölçüsü", value: "8–14 mm (fərdiləşdirilə bilər)" },
     { label: "Rətubət", value: "≤ 1.0%" },
-    { label: "Çirklənmə", value: "≤ 100 ppm (PVC, etiketlər, digər plastiklər)" },
-    { label: "Qablaşdırma", value: "1.100 kq Jumbo Çantalar" },
-    { label: "Yükləmə", value: "20–22 MT / 20' FCL, 24–26 MT / 40' HC" },
+    { label: "Çirklənmə", value: "30 ppm (PVC, etiketlər, digər plastiklər)" },
+    { label: "Qablaşdırma", value: "1.000 kq jumbo çanta" },
+    { label: "Yükləmə", value: "20-22 MT / yük maşını/konteyner 40 ft" },
     { label: "Tətbiqlər", value: "PET lövhə, qablaşdırma çəmbəri, polyester lif, qeyri-qida qablaşdırması, ticarət" },
   ],
 
@@ -988,8 +988,8 @@ const az = {
     { label: "Proses", value: "İsti yuyulma, sürtünmə ilə yuyulma, durulama, qurutma, çeşidləmə, metal aşkarlanması" },
     { label: "Keyfiyyətə Nəzarət", value: "Hər partiya üçün daxili laboratoriya testi" },
     { label: "Mənşə", value: "Azərbaycan" },
-    { label: "Sertifikatlaşdırma", value: "REACH Uyğun (tələb əsasında)" },
-    { label: "HS Kodu", value: "3915.10" },
+    { label: "Sertifikatlaşdırma", value: "Yerli standartlara uyğun" },
+    { label: "HS Kodu", value: "3907.69" },
   ],
 
   process: {
@@ -1006,7 +1006,7 @@ const az = {
     qaPillarsTitle: "Keyfiyyət Təminatı Prinsiplərimiz",
     keySpecsTitle: "Əsas Spesifikasiyalar*",
     keySpecsFootnote: "* Spesifikasiyalar rəng və növə görə fərqlənə bilər. Göstərilən dəyərlər tipikdir və normal istehsala əsaslandırılıb.",
-    colorOptionsValue: "Şəffaf, Açıq Mavi, Yaşıl, Qarışıq",
+    colorOptionsValue: "Şəffaf/açıq mavi, Yaşıl, Qarışıq",
     howWeWorkTitle: "Necə İşləyirik",
     finalCtaTitle: "Daha təmiz gələcəyi birlikdə quraq.",
     finalCtaDescription: "Məhsul məlumatı və ya fərdi həll üçün komandamızla əlaqə saxlayın.",
@@ -1018,7 +1018,7 @@ const az = {
     "Yüksək effektivlikli sürtünmə ilə yuyulma və üzmə/batma ayırması",
     "Avtomatlaşdırılmış qurutma və hava klassifikasiyası",
     "Metal detektoru və yekun yoxlama",
-    "1100–1250 kq böyük çantalarda toplu qablaşdırma",
+    "1.000 kq jumbo çantada toplu qablaşdırma",
     "Ciddi proses nəzarəti ilə gündəlik istehsal",
   ],
 
@@ -1045,7 +1045,7 @@ const az = {
     { label: "Etiket və Yapışqan" },
     { label: "Digər Plastiklər" },
     { label: "Çeşidlənmiş Xammal" },
-    { label: "Qablaşdırma (Böyük Çanta)" },
+    { label: "Qablaşdırma (Jumbo Çanta)" },
     { label: "Rəng Seçimi" },
   ],
 
@@ -1120,8 +1120,8 @@ const az = {
   ],
 
   impactStats: [
-    { value: "20,000+", title: "TON", description: "İldə istehsal olunan rPET fleks" },
-    { value: "800M+", title: "ŞÜŞƏ", description: "Hər il poliqonlardan uzaqlaşdırılan" },
+    { value: "2.000+", title: "TON", description: "İldə istehsal olunan rPET fleks" },
+    { value: "100M+", title: "ŞÜŞƏ", description: "Hər il poliqonlardan uzaqlaşdırılan" },
     { value: "-30%", title: "SU İSTİFADƏSİ", description: "Sənaye ortalaması ilə müqayisə" },
     { value: "-25%", title: "ENERJİ İSTİFADƏSİ", description: "Effektiv proseslər sayəsində" },
     { value: "Müsbət", title: "SOSİAL TƏSİR", description: "Yerli iş yerlərini və icmaları dəstəkləyir" },
@@ -1340,16 +1340,16 @@ const az = {
     genericError: "Nəsə səhv getdi. Zəhmət olmasa yenidən cəhd edin.",
     genericErrorContact: "Nəsə səhv getdi. Zəhmət olmasa yenidən cəhd edin və ya birbaşa email ilə bizimlə əlaqə saxlayın.",
     productInterestOptions: [
-      "Şəffaf rPET Fleks",
-      "Açıq Mavi rPET Fleks",
+      "Şəffaf/açıq mavi rPET Fleks",
+      "Əzilmiş PET Preform",
       "Yaşıl rPET Fleks",
       "Qarışıq Rənglər rPET Fleks",
       "Xüsusi Spesifikasiya",
       "Ümumi Sorğu",
     ],
     offerProductInterestOptions: [
-      "Şəffaf rPET Fleks",
-      "Açıq Mavi rPET Fleks",
+      "Şəffaf/açıq mavi rPET Fleks",
+      "Əzilmiş PET Preform",
       "Yaşıl rPET Fleks",
       "Qarışıq Rəng rPET Fleks",
       "Bir Neçə Məhsul",
