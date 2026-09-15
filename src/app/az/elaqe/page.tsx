@@ -5,7 +5,7 @@ import ContactPage from "@/app/(main)/contact/page";
 export const metadata: Metadata = pageMetadata({
   path: "/contact",
   locale: "az",
-  title: "Əlaqə | Poly Cleaner Azərbaycan",
+  title: "Poly Cleaner ilə əlaqə | rPET Fleks Təklifi İstə",
   description:
     "Poly Cleaner ilə əlaqə saxlayın — rPET fleks təklifi, nümunə sorğusu və ya əməkdaşlıq üçün Bakıdakı komandamızla birbaşa danışın.",
 });

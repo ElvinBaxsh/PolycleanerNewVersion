@@ -5,9 +5,9 @@ import HomePage from "@/app/(main)/page";
 export const metadata: Metadata = pageMetadata({
   path: "/",
   locale: "az",
-  title: "Poly Cleaner | Azərbaycandan İsti Yuyulmuş rPET Fleks Təchizatçısı",
+  title: "Poly Cleaner MMC | Azərbaycandan İsti Yuyulmuş rPET Fleks Təchizatçısı",
   description:
-    "Poly Cleaner PET lövhə, qablaşdırma çəmbəri, polyester lif və qeyri-qida qablaşdırması üçün sənədləşdirilmiş, isti yuyulmuş rPET fleks təchiz edir — Azərbaycandan dünyaya ixrac.",
+    "Poly Cleaner MMC PET lövhə, qablaşdırma çəmbəri, polyester lif və qeyri-qida qablaşdırması üçün sənədləşdirilmiş isti yuyulmuş rPET fleks təchiz edir. Azərbaycandan ixraca hazır təkrar emal edilmiş PET təchizatçısı.",
 });
 
 export default HomePage;

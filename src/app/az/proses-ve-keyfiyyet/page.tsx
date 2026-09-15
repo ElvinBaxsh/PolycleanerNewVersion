@@ -5,7 +5,7 @@ import ProcessQualityPage from "@/app/(main)/process-quality/page";
 export const metadata: Metadata = pageMetadata({
   path: "/process-quality",
   locale: "az",
-  title: "Proses və Keyfiyyət | Poly Cleaner Azərbaycan",
+  title: "Proses və Keyfiyyət | Sənədləşdirilmiş rPET Fleks İstehsalı",
   description:
     "İstifadə olunmuş PET butulkaların necə toplandığını, isti yuyulub fleksə çevrildiyini və keyfiyyət yoxlamasından keçdiyini addım-addım kəşf edin.",
 });

@@ -5,7 +5,7 @@ import DocumentsPage from "@/app/(main)/documents/page";
 export const metadata: Metadata = pageMetadata({
   path: "/documents",
   locale: "az",
-  title: "Alıcı Sənədləri | Poly Cleaner Azərbaycan",
+  title: "Alıcı Sənədləri | TDS, COA və Məhsul Təklifi Vərəqəsi",
   description:
     "Sənədləşdirilib təkrar emal edilmiş PET təchizatçısı olaraq şirkət profili, məhsul təklif vərəqəsi, texniki sənədlər və izlənilə bilənlik qeydlərini buradan yükləyin.",
 });

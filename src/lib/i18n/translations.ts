@@ -543,6 +543,7 @@ const en = {
     copied: "Copied",
     mapView: "Map",
     satelliteView: "Satellite",
+    mapLabel: (name: string, address: string) => `Map showing ${name} at ${address}`,
     quickCards: [
       { title: "Request Offer", description: "Get a tailored offer for your required rPET flakes specifications.", cta: "Request rPET Flakes Offer" },
       { title: "Request Sample", description: "Receive a sample to evaluate our rPET flakes quality.", cta: "Request Sample" },
@@ -712,7 +713,7 @@ const az = {
     bookTaropakMeeting: "TAROPAK Görüşü Təyin Et",
     bookMeeting: "Görüş Təyin Et",
     requestBuyerDocuments: "Alıcı Sənədlərini İstə",
-    generalContactSales: "Ümumi / Satış Komandası ilə Əlaqə",
+    generalContactSales: "Satış Komandası ilə Əlaqə",
     viewAllProducts: "Bütün Məhsullara Bax",
     viewDetails: "Ətraflı Bax",
     learnMore: "Ətraflı məlumat",
@@ -728,7 +729,7 @@ const az = {
 
   footer: {
     tagline:
-      "Poly Cleaner Azərbaycandan yüksək keyfiyyətli rPET fleksin etibarlı istehsalçısıdır. Biz istifadə olunmuş şüşələri dayanıqlı gələcək üçün dəyərli xammala çeviririk.",
+      "Poly Cleaner MMC post-consumer PET şüşələrindən PET lövhə, qablaşdırma çəmbəri, polyester lif və qeyri-qida qablaşdırması üçün isti yuyulmuş rPET fleks istehsal edir. Biz beynəlxalq alıcılara sabit keyfiyyət, aydın sənədləşmə və ixraca hazır təchizat təqdim edirik.",
     quickLinks: "Sürətli Linklər",
     products: "Məhsullar",
     information: "Məlumat",
@@ -743,33 +744,33 @@ const az = {
   },
 
   home: {
-    heroEyebrow: "Sənədləşdirilmiş rPET Fleks",
-    heroTitleLine1: "Sənədləşdirilmiş İsti Yuyulmuş",
-    heroTitleAccent: "rPET Fleks",
-    heroTitleLine2: "Təchizatçısı",
-    heroTitleLine3: "Azərbaycandan",
+    heroEyebrow: "SƏNƏDLƏŞDİRİLMİŞ rPET FLEKS",
+    heroTitleLine1: "Azərbaycandan sənədləşdirilmiş isti yuyulmuş",
+    heroTitleAccent: "rPET fleks",
+    heroTitleLine2: "təchizatçısı",
+    heroTitleLine3: "",
     heroDescription:
-      "Poly Cleaner PET lövhə, qablaşdırma çəmbəri, polyester lif, qida və qeyri-qida qablaşdırması üçün sabit keyfiyyətli, tam sənədləşdirilmiş isti yuyulmuş (hot washed) rPET fleks təchiz edir.",
+      "Poly Cleaner MMC PET lövhə, qablaşdırma çəmbəri, polyester lif və qeyri-qida qablaşdırması üçün sabit emal olunmuş və tam sənədləşdirilmiş rPET fleks təchiz edir.",
     taropakMeetUs: (name: string) => `${name}-da bizimlə görüşün`,
     taropakBannerTagline: "rPET flekslərimizi kəşf edin və növbəti dayanıqlı həllinizi bizimlə quraq.",
     trustBar: [
       { label: "İSTEHSALÇI", sub: "VASİTƏÇİ DEYİL" },
-      { label: "SƏNƏDLƏŞDİRİLMİŞ VƏ", sub: "AUDİTƏ AÇIQ" },
-      { label: "İXRACA HAZIR", sub: "DÜNYA ÜÇÜN" },
+      { label: "SƏNƏDLƏŞDİRİLMİŞ VƏ", sub: "AUDİTƏ AÇIQ PROSES" },
+      { label: "İXRACA HAZIR", sub: "DÜNYA BAZARLARI ÜÇÜN" },
       { label: "BALAXANI", sub: "SƏNAYE PARKI" },
       { label: "İZLƏNƏ BİLƏN", sub: "ƏMƏLİYYATLAR" },
       { label: "SINAQ HƏCMLƏRİ", sub: "MÜMKÜNDÜR" },
     ],
-    productsTitle: "rPET Fleks Məhsullarımız",
+    productsTitle: "rPET Fleks məhsullarımız",
     productsDescription:
       "İstehsal ehtiyaclarınıza uyğun müxtəlif rəng və spesifikasiyalarda yüksək keyfiyyətli isti yuyulmuş rPET fleks.",
     processEyebrow: "Prosesimiz",
-    processTitle: "Şüşələrdən Yüksək Keyfiyyətli rPET Fleksə",
+    processTitle: "PET şüşələrindən yüksək keyfiyyətli rPET fleksə",
     whyChooseTitle: "Nəyə Görə Poly Cleaner",
     buyerDocsTitle: "Alıcı Sənədləri",
-    buyerDocsDescription: "Bütün əsas sənədlər yoxlama prosesiniz üçün hazırdır.",
+    buyerDocsDescription: "Bütün əsas sənədlər uyğun alıcılara sorğu əsasında təqdim olunur.",
     finalCtaTitle: "Daha təmiz gələcəyi birlikdə quraq.",
-    finalCtaDescription: "Nümunə, qiymət təklifi və əməkdaşlıq imkanları üçün bu gün bizimlə əlaqə saxlayın.",
+    finalCtaDescription: "Nümunə, qiymət təklifi və əməkdaşlıq imkanları üçün bizimlə əlaqə saxlayın.",
     partnersEyebrow: "Tərəfdaşlarımız",
     partnersTitle: "Biz ən yaxşı tərəfdaşlarla işləyirik",
     partnersDescription:
@@ -785,10 +786,10 @@ const az = {
     {
       title: "Dayanıqlılıq",
       description:
-        "İstifadə olunmuş şüşələri dəyərli xammala çevirərək plastik tullantını azaldır və dairəvi iqtisadiyyatı dəstəkləyirik.",
+        "İstifadə olunmuş PET şüşələri dəyərli xammala çevirərək plastik tullantını azaldırıq və dairəvi iqtisadiyyatı dəstəkləyirik.",
     },
     {
-      title: "Keyfiyyət Təminatı",
+      title: "Keyfiyyətə Nəzarət",
       description: "Hər partiya sabit keyfiyyəti və alıcı etibarını dəstəkləmək üçün nəzarətdən keçirilir.",
     },
     {
@@ -797,7 +798,7 @@ const az = {
     },
     {
       title: "Sürətli və Etibarlı",
-      description: "Çevik logistika, açıq sənədləşmə və operativ satış dəstəyi.",
+      description: "Çevik logistika, aydın sənədləşmə və operativ satış dəstəyi.",
     },
     {
       title: "Təcrübəli Komanda",
@@ -888,19 +889,19 @@ const az = {
     heroTitle: "Poly Cleaner",
     heroTitleAccent: "haqqında",
     heroDescription:
-      "Poly Cleaner Azərbaycanda yerləşən, yüksək keyfiyyətli isti yuyulmuş (hot washed) rPET fleks istehsalçısıdır. Biz istifadə olunmuş PET tullantılarını sabit, təmiz və izlənə bilən təkrar emal xammalına çevirərək beynəlxalq təkrar emal müəssisələrinə və istehsalçılara təqdim edirik.",
+      "Poly Cleaner MMC Azərbaycanda yerləşən yüksək keyfiyyətli isti yuyulmuş rPET fleks istehsalçısıdır. Biz post-consumer PET tullantılarını sabit, təmiz və izlənə bilən təkrar emal xammalına çevirərək beynəlxalq təkrar emal müəssisələrinə və istehsalçılara təqdim edirik.",
     overviewEyebrow: "ŞİRKƏT İCMALI",
     overviewTitle: "Azərbaycanda yerləşən. Keyfiyyət yönümlü. İxraca hazır.",
     overviewParagraph1:
-      "Poly Cleaner Bakı şəhərində, Balaxanı Sənaye Parkında fəaliyyət göstərir. Müəssisəmiz effektiv və dayanıqlı rPET fleks istehsalı üçün qurulmuşdur. İsti yuyulma texnologiyası, keyfiyyətə nəzarət və məsuliyyətli əməliyyat yanaşması beynəlxalq müştərilər üçün sabit məhsul təqdim etməyimizə imkan yaradır.",
+      "Poly Cleaner MMC Bakı şəhərində, Balaxanı Sənaye Parkında fəaliyyət göstərir. Müəssisəmiz effektiv və dayanıqlı rPET fleks istehsalı üçün qurulmuşdur. İsti yuyulma texnologiyası, keyfiyyətə nəzarət və məsuliyyətli əməliyyat yanaşması beynəlxalq müştərilər üçün sabit məhsul təqdim etməyimizə imkan yaradır.",
     overviewParagraph2:
       "Biz uzunmüddətli tərəfdaşlığa, şəffaf kommunikasiyaya və tullantıdan dəyər yaratmağa — müştərilərimiz, cəmiyyət və planet üçün faydalı nəticələrə inanırıq.",
     factsLocation: "Yerləşmə",
-    factsLocationValue: "Balaxanı Sənaye Parkı, 1-ci zona",
+    factsLocationValue: "Balaxanı Sənaye Parkı, Bakı, Azərbaycan",
     factsFounded: "Fəaliyyət",
-    factsFoundedValue: "Müasir təkrar emal və qlobal bazarlar üçün qurulub",
+    factsFoundedValue: "Post-consumer PET təkrar emalı",
     factsMarkets: "Bazar",
-    factsMarketsValue: "Avropa, Asiya, Yaxın Şərq və daha çox ölkəyə ixrac",
+    factsMarketsValue: "İxrac yönümlü təchizat",
     valuesTitle: "Dəyərlərimiz. Gücümüz.",
     numbersTitle: "Rəqəmlərlə Poly Cleaner",
     whyPartnerTitle: "Niyə Poly Cleaner ilə Əməkdaşlıq?",
@@ -909,10 +910,10 @@ const az = {
   },
 
   companyValues: [
-    { title: "Tullantıdan Dəyərə", description: "İstifadə olunmuş PET tullantılarını dairəvi iqtisadiyyatı gücləndirən yüksək keyfiyyətli fleksə çeviririk." },
-    { title: "Etibarlılıq", description: "Sabit keyfiyyət, vaxtında çatdırılma və şəffaf kommunikasiya uzunmüddətli tərəfdaşlıqlar qurur." },
-    { title: "Dayanıqlılıq", description: "Ekoloji təsiri azaltmaq üçün enerji-effektiv əməliyyatlar və məsuliyyətli resurs idarəetməsi." },
-    { title: "İzlənəbilənlik", description: "Şüşədən fleksə qədər — hər partiya sənədləşdirilir, test edilir və tam izlənə biləndir." },
+    { title: "Tullantıdan Dəyərə", description: "Post-consumer PET tullantılarını dairəvi iqtisadiyyatı dəstəkləyən yüksək keyfiyyətli rPET fleksə çeviririk." },
+    { title: "Etibarlılıq", description: "Sabit keyfiyyət, şəffaf kommunikasiya və etibarlı əməkdaşlıq." },
+    { title: "Dayanıqlılıq", description: "Resursların bərpası və ekoloji təsirin azaldılmasına yönəlmiş məsuliyyətli əməliyyatlar." },
+    { title: "İzlənəbilənlik", description: "Toplamadan fleks mərhələsinə qədər əsas proseslər sənədləşdirilir və nəzarətdə saxlanılır." },
   ],
 
   companyNumbers: [
@@ -925,16 +926,16 @@ const az = {
 
   whyPartnerItems: [
     { title: "Sabit Keyfiyyət", description: "Qabaqcıl isti yuyulma prosesi və ciddi keyfiyyət nəzarəti təmiz, az çirklənmiş rPET fleks təmin edir." },
-    { title: "İxraca Hazır", description: "Rəvan beynəlxalq göndərişlər üçün qablaşdırma, sənədləşmə və logistika dəstəyi." },
+    { title: "İxraca Hazırlıq", description: "Rəvan beynəlxalq göndərişlər üçün qablaşdırma, sənədləşmə və logistika dəstəyi." },
     { title: "Çevik Həllər", description: "İstehsal tələblərinizə uyğun müxtəlif fleks rəngləri və xüsusi spesifikasiyalar." },
-    { title: "Müştəriyönümlü", description: "Çatdırılmadan əvvəl, əsnasında və sonrasında operativ xidmət və texniki dəstək." },
+    { title: "Müştəriyönümlü Yanaşma", description: "Çatdırılmadan əvvəl, əsnasında və sonrasında operativ xidmət və texniki dəstək." },
   ],
 
   rpet: {
     heroTitle: "İsti Yuyulmuş",
     heroTitleAccent: "rPET Fleks",
     heroDescription:
-      "Azərbaycanda istifadə olunmuş PET şüşələrindən istehsal olunan yüksək keyfiyyətli isti yuyulmuş rPET fleks (PET lopa). Məhsul PET lövhə, qablaşdırma çəmbəri, polyester lif, qeyri-qida qablaşdırması və ticarət sahələrində sabit performans üçün yuyulur, qurudulur və çeşidlənir.",
+      "Azərbaycanda post-consumer PET şüşələrindən istehsal olunan yüksək keyfiyyətli isti yuyulmuş rPET fleks. Məhsul PET lövhə, qablaşdırma çəmbəri, polyester lif, qeyri-qida qablaşdırması və ticarət tətbiqlərində sabit performansı dəstəkləmək üçün yuyulur, qurudulur və çeşidlənir.",
     trustStrip: [
       { label: "Azərbaycanda istehsal\nAvropaya ixrac" },
       { label: "Sabit\nKeyfiyyət" },
@@ -943,7 +944,7 @@ const az = {
     ],
     gradesEyebrow: "Məhsul Çeşidi",
     gradesTitle: "rPET Fleks Növlərimiz",
-    gradesDescription: "İstehsal ehtiyaclarınıza uyğun müxtəlif rəng və spesifikasiyalar.",
+    gradesDescription: "rPET fleks məhsullarımız müxtəlif rəng axınlarında təqdim olunur və fərqli sənaye tətbiqlərinə uyğunlaşdırıla bilər.",
     applicationsTitle: "Tətbiq Sahələri",
     applicationsDescription: "rPET flekslərimiz geniş sənaye sahələrində istifadə olunur.",
     specsTitle: "Spesifikasiyalar (Tipik Dəyərlər)",
@@ -955,7 +956,7 @@ const az = {
     { name: "Şəffaf/açıq mavi", description: "PET lövhə, termoformalaşdırma və ümumi tətbiqlər üçün." },
     { name: "Əzilmiş PET Preform", description: "PET lövhə, qablaşdırma çəmbəri və termoformalaşdırma üçün." },
     { name: "Yaşıl", description: "Qablaşdırma çəmbəri, PET lövhə və ümumi tətbiqlər üçün." },
-    { name: "Qarışıq Rənglər", description: "Polyester lif, qeyri-qida qablaşdırması və digər sahələr üçün." },
+    { name: "Qarışıq Rənglər", description: "Polyester lif, qeyri-qida qablaşdırması və digər sənaye tətbiqləri üçün." },
   ],
 
   closeups: [
@@ -984,8 +985,8 @@ const az = {
   ],
 
   productInfo: [
-    { label: "Xammal", value: "Post-consumer PET şüşələri (taylarda)" },
-    { label: "Proses", value: "İsti yuyulma, sürtünmə ilə yuyulma, durulama, qurutma, çeşidləmə, metal aşkarlanması" },
+    { label: "Xammal", value: "Post-consumer PET şüşələri" },
+    { label: "Proses", value: "Çeşidləmə, isti yuyulma, sürtünmə ilə yuyulma, qurutma və qablaşdırma" },
     { label: "Keyfiyyətə Nəzarət", value: "Hər partiya üçün daxili laboratoriya testi" },
     { label: "Mənşə", value: "Azərbaycan" },
     { label: "Sertifikatlaşdırma", value: "Yerli standartlara uyğun" },
@@ -996,13 +997,13 @@ const az = {
     heroTitle: "Proses və",
     heroTitleAccent: "Keyfiyyət",
     heroDescription:
-      "Poly Cleaner-də inteqrasiya olunmuş proses və keyfiyyət sistemimiz sabit spesifikasiyalı, tam izlənə bilən və etibarlı ixrac sənədləri ilə dəstəklənən yüksək keyfiyyətli rPET fleks təmin edir.",
+      "İnteqrasiya olunmuş proses və keyfiyyətə nəzarət sistemimiz sabit spesifikasiyalı, izlənə bilən və ixrac sənədləri ilə dəstəklənən yüksək keyfiyyətli rPET fleks təchizatına xidmət edir.",
     ctaRequestInfo: "Məhsul Məlumatı İstə",
     ctaSpeakWithSales: "Satış Komandası ilə Danış",
     capabilitiesTitle: "Proses İmkanları",
-    capabilitiesDescription: "Müəssisəmiz effektiv, dayanıqlı və miqyaslana bilən rPET fleks istehsalı üçün qurulmuşdur.",
+    capabilitiesDescription: "Müəssisəmiz effektiv, dayanıqlı və miqyaslana bilən rPET fleks istehsalı üçün qurulmuşdur. Əsas əməliyyatlara material çeşidləmə, isti yuyulma, sürtünmə ilə yuyulma, sıxlıqla ayırma, qurutma və böyük çantalarda qablaşdırma daxildir.",
     qualityTitle: "Keyfiyyətə Nəzarət və Sənədləşmə",
-    qualityDescription: "Hər partiya beynəlxalq alıcı tələblərinə uyğun test edilir və sənədləşdirilir.",
+    qualityDescription: "Hər partiya alıcı tələblərinə uyğun qiymətləndirilir və sənədləşdirilir. Məhsul yoxlamalarına rətubət, rəng, vizual təmizlik, çirklənmə nəzarəti və partiya izlənəbilənliyi daxil ola bilər.",
     qaPillarsTitle: "Keyfiyyət Təminatı Prinsiplərimiz",
     keySpecsTitle: "Əsas Spesifikasiyalar*",
     keySpecsFootnote: "* Spesifikasiyalar rəng və növə görə fərqlənə bilər. Göstərilən dəyərlər tipikdir və normal istehsala əsaslandırılıb.",
@@ -1033,10 +1034,10 @@ const az = {
   ],
 
   qaPillars: [
-    { title: "Sabit Keyfiyyət", description: "Standartlaşdırılmış proseslər və qabaqcıl avadanlıq hər partiyada sabit, yüksək keyfiyyətli rPET fleks təmin edir." },
-    { title: "İzlənə Bilən Əməliyyatlar", description: "Toplamadan göndərişə qədər tam şəffaflıq və hesabatlılıq üçün uçdan-uca izlənəbilənlik." },
-    { title: "İxrac Sənədləşməsi", description: "Beynəlxalq ticarət üçün kommersiya və göndəriş sənədləri hazırlanır." },
-    { title: "Proses Şəffaflığı", description: "Açıq kommunikasiya və aydın məlumat qlobal tərəfdaşlarımızla uzunmüddətli etimad qurmağa kömək edir." },
+    { title: "Sabit Keyfiyyət", description: "Standartlaşdırılmış proseslər hər partiyada sabit rPET fleks keyfiyyətini dəstəkləyir." },
+    { title: "İzlənə bilən Əməliyyatlar", description: "Toplamadan göndərişə qədər əsas istehsal və sənədləşmə addımları qeydə alınır." },
+    { title: "İxrac Sənədləri", description: "Beynəlxalq ticarət üçün kommersiya və göndəriş sənədləri hazırlanır." },
+    { title: "Proses Şəffaflığı", description: "Aydın məlumat alıcıların materialı daha etibarlı qiymətləndirməsinə imkan verir." },
   ],
 
   keySpecs: [
@@ -1062,14 +1063,14 @@ const az = {
     heroTitle: "Tullantıdan",
     heroTitleAccent: "Dəyərə",
     heroDescription:
-      "Poly Cleaner üçün dayanıqlılıq fəaliyyətimizin mərkəzində dayanır. Biz istifadə olunmuş PET tullantılarını yüksək keyfiyyətli rPET fleksə çevirərək dairəvi iqtisadiyyatı və daha təmiz bir gələcəyi dəstəkləyirik.",
+      "Poly Cleaner üçün dayanıqlılıq fəaliyyətimizin mərkəzində dayanır. Biz post-consumer PET tullantılarını yüksək keyfiyyətli rPET fleksə çevirərək dairəvi iqtisadiyyatı və daha təmiz gələcəyi dəstəkləyirik.",
     trustStrip: [
       { title: "Dairəvi İqtisadiyyat", description: "Materialları daha uzun müddət istifadədə saxlamaq" },
       { title: "İzlənə Bilən və\nSənədləşdirilmiş", description: "Mənbədən fleksə qədər tam şəffaflıq" },
       { title: "Məsuliyyətli\nƏməliyyatlar", description: "İnsanlar və planet üçün yüksək standartlar" },
       { title: "Tullantıdan\nDəyərə", description: "Daha yaxşı bir sabah üçün yüksək keyfiyyətli rPET yaratmaq" },
     ],
-    bottleToFlakeTitle: "Şüşələrdən Yüksək Keyfiyyətli rPET Fleksə",
+    bottleToFlakeTitle: "PET şüşələrindən yüksək keyfiyyətli rPET fleksə",
     pillarsTitle: "Dayanıqlılıq Prinsiplərimiz",
     plasticCreditHeading: "Əməliyyatlarımızdan Kənarda Müsbət Təsir Yaratmaq",
     plasticCreditDescription:
@@ -1085,19 +1086,19 @@ const az = {
   impactCards: [
     {
       title: "Dairəvi İqtisadiyyat",
-      description: "Post-consumer PET tullantılarını yeni məhsullar üçün dəyərli xammala çevirərək dövrəni bağlayırıq.",
+      description: "PET materiallarını yenidən istifadə olunan xammala çevirərək dəyər zəncirində saxlayırıq.",
     },
     {
       title: "Tullantının Azaldılması",
-      description: "Prosesimiz plastik tullantını poliqonlardan və okeanlardan uzaqlaşdırır, ekoloji izi azaldır.",
+      description: "Prosesimiz plastik tullantıların poliqon və ətraf mühitə düşmə riskini azaltmağa kömək edir.",
     },
     {
       title: "Məsuliyyətli Əməliyyatlar",
-      description: "Enerji-effektiv texnologiyalar, ciddi keyfiyyət nəzarəti və təhlükəsiz iş şəraiti gündəlik əməliyyatlarımıza rəhbərlik edir.",
+      description: "Təhlükəsiz, effektiv və sənədləşdirilmiş təkrar emal praktikalarına fokuslanırıq.",
     },
     {
       title: "Uzunmüddətli Təsir",
-      description: "Davamlı sosial, ekoloji və iqtisadi dəyər yaratmaq üçün tərəfdaşlıq və innovasiyaya investisiya edirik.",
+      description: "Ekoloji, sosial və iqtisadi dəyər yaradan tərəfdaşlıqları dəstəkləyirik.",
     },
   ],
 
@@ -1132,12 +1133,12 @@ const az = {
     heroTitle: "Alıcı",
     heroTitleAccent: "Sənədləri",
     heroDescription:
-      "Poly Cleaner-i qiymətləndirmək, təsdiqləmək və əməkdaşlıq etmək üçün ehtiyac duyduğunuz bütün sənədlər. Təsdiqlənmiş, yenilənmiş və qlobal ticarət üçün hazırlanmış.",
+      "Uyğun alıcılar, tərəfdaşlar və distributorlar üçün hazırlanmış əsas məhsul və şirkət sənədlərinə çıxış əldə edin.",
     heroTrustItems: [
-      { label: "Təsdiqlənmiş və\nYenilənmiş" },
-      { label: "Sürətli və Asan\nÇıxış" },
-      { label: "Etibarlı\nMəlumat" },
-      { label: "Qlobal Ticarət\nüçün Hazır" },
+      { label: "Yenilənmiş və\ntəsdiqə hazır" },
+      { label: "Sürətli və rahat\nçıxış" },
+      { label: "Etibarlı\nməlumat" },
+      { label: "Qlobal ticarət üçün\nhazırlanmış" },
     ],
     infoBanner:
       "Bütün sənədlər PDF formatında mövcuddur. Başqa format və ya əlavə məlumat lazımdır? Bizimlə əlaqə saxlayın, məmnuniyyətlə kömək edərik.",
@@ -1145,7 +1146,7 @@ const az = {
     taropakTagline: "Poly Cleaner komandası ilə rPET fleks ehtiyaclarınızı müzakirə edin və əməkdaşlıq imkanlarını kəşf edin.",
     taropakButton: "Görüş Sorğusu",
     faqTitle: "Tez-tez Verilən Suallar",
-    allDocuments: "Hamısı",
+    allDocuments: "Bütün Sənədlər",
     categories: {
       Company: "Şirkət",
       Product: "Məhsul",
@@ -1160,17 +1161,17 @@ const az = {
   },
 
   documentList: [
-    { name: "Şirkət Profili", description: "Şirkət strukturu, fəaliyyət tarixçəsi və ümumi imkanlar." },
-    { name: "Məhsul Təklifi Vərəqəsi", description: "Növlər, rənglər və kommersiya təklifi xülasəsi." },
-    { name: "Texniki Məlumat Vərəqəsi (TDS)", description: "Fiziki və kimyəvi xüsusiyyətlər, spesifikasiyalar və tətbiq qeydləri." },
-    { name: "İzlənəbilənlik Qeydi", description: "Xammalın zəncirvari izlənəbilənliyi və partiya izləməsi." },
-    { name: "Proses İcmalı", description: "İstehsal və keyfiyyət prosesimizin addım-addım icmalı." },
-    { name: "Dayanıqlılıq Qeydi", description: "Məsuliyyətli təchizat və ekoloji təsir yanaşmamız." },
+    { name: "Şirkət Profili", description: "Poly Cleaner, istehsal imkanları və bazar mövqeyi haqqında ümumi məlumat." },
+    { name: "Məhsul Təklifi Vərəqəsi", description: "Məhsul növləri, kommersiya təklif strukturu və qablaşdırma məlumatları." },
+    { name: "Texniki Məlumat Vərəqəsi (TDS)", description: "rPET fleks növləri üzrə texniki spesifikasiyalar." },
+    { name: "İzlənəbilənlik Qeydi", description: "Sənədləşdirilmiş təkrar emal və proses izlənəbilənliyi haqqında xülasə." },
+    { name: "Proses İcmalı", description: "Toplamadan qablaşdırılmış fleksə qədər proses axını." },
+    { name: "Dayanıqlılıq Qeydi", description: "Dayanıqlılıq yanaşması və plastik kredit layihə fonu." },
   ],
 
   documentsFaq: [
     {
-      q: "Nümunəni necə sifariş edə bilərəm?",
+      q: "Nümunəni necə istəyə bilərəm?",
       a: "Bu səhifədəki və ya Əlaqə səhifəsindəki \"Nümunə İstə\" düyməsindən istifadə edin, satış komandamız qiymətləndirməniz üçün nümunə hazırlayacaq.",
     },
     {
@@ -1188,8 +1189,8 @@ const az = {
   ],
 
   documentRequestForm: {
-    heading: "Fərdi sənəd paketi lazımdır?",
-    subtext: "Nəyə ehtiyacınız olduğunu bizə bildirin, sizin üçün fərdi paket hazırlayaq.",
+    heading: "Xüsusi sənəd paketi lazımdır?",
+    subtext: "Bizə hansı sənədlərə ehtiyacınız olduğunu yazın və komandamız biznesiniz üçün uyğun alıcı paketi hazırlasın.",
     documentTypeLabel: "Sənəd Növü",
     notesLabel: "Əlavə Qeydlər",
     notesPlaceholder: "Sorğunuz haqqında daha ətraflı məlumat verin",
@@ -1209,16 +1210,16 @@ const az = {
 
   contact: {
     heroTitle: "Poly Cleaner ilə",
-    heroTitleAccent: "Əlaqə",
+    heroTitleAccent: "əlaqə",
     heroDescription:
-      "Yüksək keyfiyyətli rPET həlləri və etibarlı xidmətlə biznesinizi dəstəkləməyə hazırıq. Sorğular, nümunələr, təkliflər və əməkdaşlıq imkanları üçün komandamızla əlaqə saxlayın.",
+      "Yüksək keyfiyyətli rPET həlləri və etibarlı xidmətlə biznesinizi dəstəkləməyə hazırıq. Sorğular, nümunələr, qiymət təklifləri və əməkdaşlıq imkanları üçün komandamızla əlaqə saxlayın.",
     heroItems: [
       { title: "Etibarlı Keyfiyyət", description: "Etibar edə biləcəyiniz sabit rPET keyfiyyəti." },
       { title: "Uzunmüddətli Tərəfdaşlıq", description: "Etimad üzərində qurulmuş şəffaf əməkdaşlıq." },
       { title: "Qlobal Dəstək", description: "Harada olursunuzsa olun, operativ xidmət." },
     ],
-    formTitle: "Bizə Mesaj Göndərin",
-    formIntro: "Aşağıdakı formu doldurun, komandamız ən qısa zamanda sizinlə əlaqə saxlayacaq.",
+    formTitle: "Bizə mesaj göndərin",
+    formIntro: "Formu doldurun və komandamız ən qısa zamanda sizinlə əlaqə saxlayacaq.",
     infoTitle: "Əlaqə Məlumatları",
     findUsTitle: "Bizi Tapın",
     findUsDescription:
@@ -1230,10 +1231,11 @@ const az = {
     copied: "Kopyalandı",
     mapView: "Xəritə",
     satelliteView: "Peyk",
+    mapLabel: (name: string, address: string) => `${name} xəritədə: ${address}`,
     quickCards: [
-      { title: "Təklif İstə", description: "Tələb olunan rPET fleks spesifikasiyalarınız üçün fərdi təklif alın.", cta: "rPET Fleks Təklifi İstə" },
-      { title: "Nümunə İstə", description: "rPET fleks keyfiyyətimizi qiymətləndirmək üçün nümunə alın.", cta: "Nümunə İstə" },
-      { title: "TAROPAK Görüşü Təyin Et", description: "Poznań, Polşada TAROPAK 2026-da bizimlə görüşün.", cta: "Görüş Təyin Et" },
+      { title: "Qiymət Təklifi İstə", description: "Tələblərinizi yazın və fərdi kommersiya təklifi alın.", cta: "rPET Fleks Təklifi İstə" },
+      { title: "Nümunə İstə", description: "Texniki qiymətləndirmə üçün məhsul nümunəsi tələb edin.", cta: "Nümunə İstə" },
+      { title: "TAROPAK Görüşü Təyin Et", description: "TAROPAK 2026-da Poznań, Polşada komandamızla görüşün.", cta: "Görüş Təyin Et" },
     ],
   },
 
@@ -1242,7 +1244,7 @@ const az = {
     { label: "Telefon / WhatsApp", sub: "B.e – C, 09:00 – 18:00 (GMT+4)" },
     { label: "Yerləşmə", sub: "Zavod və Baş Ofis" },
     { label: "Veb sayt", sub: "Məhsul və xidmətlərimiz haqqında daha çox." },
-    { label: "İş Dilləri", value: "İngilis • Rus • Türk • Azərbaycan", sub: "Sizin dilinizdə dəstək oluruq." },
+    { label: "İş Dilləri", value: "İngilis • Azərbaycan • Türk • Rus", sub: "Sizin dilinizdə dəstək oluruq." },
   ],
 
   inquiryTypes: [
@@ -1251,7 +1253,7 @@ const az = {
     { value: "taropak", label: "TAROPAK Görüşü Təyin Et" },
     { value: "amiExpo", label: "AMI Expo Görüşü Təyin Et" },
     { value: "documents", label: "Alıcı Sənədlərini İstə" },
-    { value: "general", label: "Ümumi / Satış Komandası ilə Əlaqə" },
+    { value: "general", label: "Satış Komandası ilə Əlaqə" },
     { value: "partner", label: "Tərəfdaş Olun" },
   ],
 
@@ -1277,13 +1279,13 @@ const az = {
     phone: "Telefon / WhatsApp",
     phonePlaceholder: "+00 000 000 0000",
     phonePlaceholder2: "+48 123 456 789",
-    productInterest: "Məhsul Maraqı",
+    productInterest: "Məhsul Marağı",
     selectProduct: "Məhsul seçin",
     monthlyVolume: "Aylıq Həcm",
     monthlyVolumePlaceholder: "məs. 20-40 MT",
     requiredVolume: "Tələb Olunan Həcm",
     selectVolume: "Həcm seçin",
-    application: "Tətbiq Sahəsi",
+    application: "Tətbiq sahəsi",
     selectApplication: "Tətbiq seçin",
     deliveryDestination: "Çatdırılma Ölkəsi",
     deliveryDestinationPlaceholder: "Polşa, Almaniya, Niderland, Türkiyə və s.",
@@ -1315,7 +1317,7 @@ const az = {
     message: "Mesaj",
     messageOptional: "(könüllü)",
     messagePlaceholder: "Tələbləriniz haqqında bizə bildirin...",
-    messagePlaceholderOffer: "Tələb etdiyiniz məhsulu, hədəf həcmi, çatdırılma şərtlərini və ya xüsusi spesifikasiyaları təsvir edin.",
+    messagePlaceholderOffer: "Tələb etdiyiniz məhsulu, aylıq həcmi, çatdırılma ölkəsini və üstünlük verdiyiniz Incoterms şərtini qeyd edin.",
     selectOption: "Bir seçim edin",
     searchPlaceholder: "Axtar...",
     noMatches: "Nəticə tapılmadı",

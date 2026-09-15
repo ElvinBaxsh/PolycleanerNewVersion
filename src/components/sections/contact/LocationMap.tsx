@@ -38,6 +38,11 @@ export default function LocationMap() {
   // Leaflet loads asynchronously, so a toggle clicked before it finishes has
   // no map to act on yet — the init reads the latest choice from here.
   const viewRef = useRef<View>(view);
+  // The pin's popup is built once, when the map is created. Read the
+  // localized address from a ref so the init effect keeps its empty deps
+  // (re-running it would tear the map down and build it again). The locale
+  // comes from the URL, so each language renders its own instance anyway.
+  const addressRef = useRef(t.common.address);
 
   useEffect(() => {
     viewRef.current = view;
@@ -103,7 +108,7 @@ export default function LocationMap() {
 
       L.marker([lat, lng], { icon })
         .addTo(map)
-        .bindPopup(`<strong>${COMPANY.name}</strong><br/>${COMPANY.address}`)
+        .bindPopup(`<strong>${COMPANY.name}</strong><br/>${addressRef.current}`)
         .openPopup();
 
       // The map's height now follows its row (see the container's classes),
@@ -137,7 +142,7 @@ export default function LocationMap() {
       <div
         ref={containerRef}
         className="relative z-0 aspect-[4/3] w-full overflow-hidden rounded-2xl border border-border lg:aspect-auto lg:h-full lg:min-h-[460px]"
-        aria-label={`Map showing ${COMPANY.name} at ${COMPANY.address}`}
+        aria-label={t.contact.mapLabel(COMPANY.name, t.common.address)}
       />
 
       <div

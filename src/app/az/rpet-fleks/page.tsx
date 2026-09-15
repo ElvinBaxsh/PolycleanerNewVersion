@@ -5,7 +5,7 @@ import RpetFlakesPage from "@/app/(main)/rpet-flakes/page";
 export const metadata: Metadata = pageMetadata({
   path: "/rpet-flakes",
   locale: "az",
-  title: "İsti Yuyulmuş rPET Fleks | Poly Cleaner",
+  title: "İsti Yuyulmuş rPET Fleks | Poly Cleaner MMC",
   description:
     "PET lövhə, qablaşdırma çəmbəri və polyester lif istehsalı üçün rPET fleks (PET lopa) — rəng və tətbiqə görə növləri ilə tanış olun.",
 });
