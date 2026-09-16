@@ -1,12 +1,15 @@
 "use client";
 
 import Image from "next/image";
-import { MapPin, CalendarDays, type LucideIcon } from "lucide-react";
+import { MapPin, CalendarDays, Globe, type LucideIcon } from "lucide-react";
 import Container from "@/components/ui/Container";
 import Reveal from "@/components/ui/Reveal";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 
-const ICONS: (LucideIcon | null)[] = [MapPin, CalendarDays, null];
+// All three are line icons from the same set, so they share one size and
+// stroke. The globe used to be a PNG that filled its whole box with a heavier
+// line, which made it read larger than the pin and calendar beside it.
+const ICONS: LucideIcon[] = [MapPin, CalendarDays, Globe];
 
 export default function CompanyOverview() {
   const { t } = useLanguage();
@@ -54,25 +57,15 @@ export default function CompanyOverview() {
             </div>
           </div>
 
-          {/* Aşağı Faktlar Bölməsi - İkonlar böyüdüldü və yanındakı mətnlərlə hizalandı */}
+          {/* Aşağı Faktlar Bölməsi. Top-aligned, not centred: the values wrap
+              to different line counts, and centring each item then pushed the
+              one-line value's heading and icon below the other two. */}
           <div className="mt-6 grid grid-cols-1 gap-4 border-t border-slate-100 pt-4 sm:grid-cols-3">
             {facts.map(({ label, value }, i) => {
               const Icon = ICONS[i];
               return (
-                <div key={i} className="flex items-center gap-3">
-                  {Icon ? (
-                    <Icon className="size-9 sm:size-10 shrink-0 text-[#1B365D] stroke-[1.4]" />
-                  ) : (
-                    <span className="relative size-9 shrink-0 sm:size-10">
-                      <Image
-                        src="/images/icons/trimmed/globus-1B365D.png"
-                        alt=""
-                        fill
-                        className="object-contain"
-                        sizes="40px"
-                      />
-                    </span>
-                  )}
+                <div key={i} className="flex items-start gap-3">
+                  <Icon className="size-9 sm:size-10 shrink-0 text-[#1B365D] stroke-[1.4]" aria-hidden />
                   <div className="min-w-0 flex-1">
                     <p className="text-xs sm:text-[13px] font-bold text-[#1B365D] leading-tight">
                       {label}

@@ -739,7 +739,7 @@ const az = {
     copyright: (year: number) => `© ${year} Poly Cleaner. Bütün hüquqlar qorunur.`,
     privacyPolicy: "Məxfilik Siyasəti",
     termsOfUse: "İstifadə Şərtləri",
-    productLinks: ["Şəffaf/açıq mavi", "Əzilmiş PET Preform", "Yaşıl", "Qarışıq Rənglər", "Xüsusi Spesifikasiyalar"],
+    productLinks: ["Şəffaf/açıq mavi", "Doğranmış PET Preform", "Yaşıl", "Qarışıq Rənglər", "Xüsusi Spesifikasiyalar"],
     infoLinks: ["Keyfiyyət Təminatı", "Sertifikatlar", "Logistika və Daşınma", "Ödənişlər", "FAQ"],
   },
 
@@ -954,14 +954,14 @@ const az = {
 
   productGrades: [
     { name: "Şəffaf/açıq mavi", description: "PET lövhə, termoformalaşdırma və ümumi tətbiqlər üçün." },
-    { name: "Əzilmiş PET Preform", description: "PET lövhə, qablaşdırma çəmbəri və termoformalaşdırma üçün." },
+    { name: "Doğranmış PET Preform", description: "PET lövhə, qablaşdırma çəmbəri və termoformalaşdırma üçün." },
     { name: "Yaşıl", description: "Qablaşdırma çəmbəri, PET lövhə və ümumi tətbiqlər üçün." },
     { name: "Qarışıq Rənglər", description: "Polyester lif, qeyri-qida qablaşdırması və digər sənaye tətbiqləri üçün." },
   ],
 
   closeups: [
     { label: "Şəffaf/açıq mavi fleksin yaxından görünüşü" },
-    { label: "Əzilmiş PET preformun yaxından görünüşü" },
+    { label: "Doğranmış PET preformun yaxından görünüşü" },
     { label: "Yaşıl fleksin yaxından görünüşü" },
     { label: "Qarışıq rəngli fleksin yaxından görünüşü" },
     { label: "Əldə fleks" },
@@ -1343,7 +1343,7 @@ const az = {
     genericErrorContact: "Nəsə səhv getdi. Zəhmət olmasa yenidən cəhd edin və ya birbaşa email ilə bizimlə əlaqə saxlayın.",
     productInterestOptions: [
       "Şəffaf/açıq mavi rPET Fleks",
-      "Əzilmiş PET Preform",
+      "Doğranmış PET Preform",
       "Yaşıl rPET Fleks",
       "Qarışıq Rənglər rPET Fleks",
       "Xüsusi Spesifikasiya",
@@ -1351,7 +1351,7 @@ const az = {
     ],
     offerProductInterestOptions: [
       "Şəffaf/açıq mavi rPET Fleks",
-      "Əzilmiş PET Preform",
+      "Doğranmış PET Preform",
       "Yaşıl rPET Fleks",
       "Qarışıq Rəng rPET Fleks",
       "Bir Neçə Məhsul",
