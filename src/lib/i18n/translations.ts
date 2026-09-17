@@ -780,7 +780,7 @@ const az = {
     productsDescription:
       "İstehsal ehtiyaclarınıza uyğun müxtəlif rəng və spesifikasiyalarda yüksək keyfiyyətli isti yuyulmuş rPET fleks.",
     processEyebrow: "Prosesimiz",
-    processTitle: "PET şüşələrindən yüksək keyfiyyətli rPET fleksə",
+    processTitle: "PET butulkalarından yüksək keyfiyyətli rPET fleksə",
     whyChooseTitle: "Niyə Poly Cleaner",
     buyerDocsTitle: "Alıcı Sənədləri",
     buyerDocsDescription: "Bütün əsas sənədlər uyğun alıcılara sorğu əsasında təqdim olunur.",
@@ -801,7 +801,7 @@ const az = {
     {
       title: "Dayanıqlılıq",
       description:
-        "İstifadə olunmuş PET şüşələri dəyərli xammala çevirərək plastik tullantını azaldırıq və dairəvi iqtisadiyyatı dəstəkləyirik.",
+        "İstifadə olunmuş PET butulkaları dəyərli xammala çevirərək plastik tullantını azaldırıq və dairəvi iqtisadiyyatı dəstəkləyirik.",
     },
     {
       title: "Keyfiyyətə Nəzarət",
@@ -898,7 +898,7 @@ const az = {
 
   processSteps: [
     { name: "Toplama", description: "Tullantı PET butulkaları etibarlı mənbələrdən toplanır." },
-    { name: "Çeşidləmə", description: "Şüşələr rəng və materiala görə çeşidlənir; etiket və çirklər təmizlənir." },
+    { name: "Çeşidləmə", description: "Butulkalar rəng və materiala görə çeşidlənir; etiket və çirklər təmizlənir." },
     { name: "Yuma", description: "Ekoloji cəhətdən təmiz kimyəvi maddələrlə isti yuyulma prosesi çirki, yapışqan və qalıqları təmizləyir." },
     { name: "Qurutma", description: "İdeal rətubət səviyyəsinə çatmaq üçün santrifuqa və termik qurutma." },
     { name: "Keyfiyyətə Nəzarət", description: "Sabit keyfiyyəti təmin etmək üçün proses daxili və yekun yoxlama." },
@@ -907,8 +907,8 @@ const az = {
 
   aboutProcessSteps: [
     { name: "Toplama", description: "Tullantı PET butulkaları etibarlı mənbələrdən toplanır." },
-    { name: "Çeşidləmə", description: "Şüşələr rəng və materiala görə çeşidlənir; etiket və çirklər təmizlənir." },
-    { name: "Xırdalama", description: "Şüşələr sonrakı emal üçün eyni ölçülü fleksə xırdalanır." },
+    { name: "Çeşidləmə", description: "Butulkalar rəng və materiala görə çeşidlənir; etiket və çirklər təmizlənir." },
+    { name: "Xırdalama", description: "Butulkalar sonrakı emal üçün eyni ölçülü fleksə xırdalanır." },
     { name: "İsti Yuyulma", description: "Ekoloji cəhətdən təmiz kimyəvi maddələrlə isti yuyulma prosesi çirki, yapışqan və qalıqları təmizləyir." },
     { name: "Qurutma", description: "İdeal rətubət səviyyəsinə çatmaq üçün santrifuqa və termik qurutma." },
     { name: "Keyfiyyətə Nəzarət", description: "Sabit keyfiyyəti təmin etmək üçün proses daxili və yekun yoxlama." },
@@ -1100,7 +1100,7 @@ const az = {
       { title: "Məsuliyyətli\nƏməliyyatlar", description: "İnsanlar və planet üçün yüksək standartlar" },
       { title: "Tullantıdan\nDəyərə", description: "Daha yaxşı bir sabah üçün yüksək keyfiyyətli rPET yaratmaq" },
     ],
-    bottleToFlakeTitle: "PET şüşələrindən yüksək keyfiyyətli rPET fleksə",
+    bottleToFlakeTitle: "PET butulkalarından yüksək keyfiyyətli rPET fleksə",
     pillarsTitle: "Dayanıqlılıq Prinsiplərimiz",
     plasticCreditHeading: "Əməliyyatlarımızdan Kənarda Müsbət Təsir Yaratmaq",
     plasticCreditDescription:
@@ -1134,10 +1134,10 @@ const az = {
 
   sustainabilitySteps: [
     { name: "Toplama", description: "Tullantı PET butulkaları toplanır." },
-    { name: "Çeşidləmə", description: "Şüşələr rəng və növünə görə çeşidlənir." },
+    { name: "Çeşidləmə", description: "Butulkalar rəng və növünə görə çeşidlənir." },
     { name: "Yuma", description: "İsti yuyulma etiket, yapışqan və çirki təmizləyir." },
     { name: "Qurutma", description: "Təmiz fleks üçün rütubət təmizlənir." },
-    { name: "Xırdalama", description: "Şüşələr eyni ölçülü fleksə xırdalanır." },
+    { name: "Xırdalama", description: "Butulkalar eyni ölçülü fleksə xırdalanır." },
     { name: "Keyfiyyətə Nəzarət", description: "Ciddi test sabit keyfiyyəti təmin edir." },
     { name: "Yüksək Keyfiyyətli rPET Fleks", description: "İstehsalınız üçün hazırdır." },
   ],
