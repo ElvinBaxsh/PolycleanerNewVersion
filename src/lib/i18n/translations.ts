@@ -951,7 +951,7 @@ const az = {
     { value: "2,000+", label: "MT İllik İstehsal Gücü" },
     { value: "5+", label: "Hər Partiyada Keyfiyyət Testi" },
     { value: "6+", label: "İxrac Olunan Ölkə" },
-    { value: "30+", label: "Həsr Olunmuş Komanda Üzvü" },
+    { value: "30+", label: "İxtisaslı Komanda Üzvü" },
   ],
 
   whyPartnerItems: [
