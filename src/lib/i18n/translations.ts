@@ -176,6 +176,21 @@ const en = {
       description:
         "A Türkiye-based manufacturer of plastic recycling machinery, supporting the technology side of the recycling industry we're part of.",
     },
+    {
+      name: "AGL",
+      description:
+        "An international logistics company headquartered in Baku, with offices in Türkiye, Georgia, the Czech Republic, the UK and the Netherlands, supporting our export shipments.",
+    },
+    {
+      name: "EcoHub",
+      description:
+        "A non-profit environmental platform in Azerbaijan working on the circular economy, packaging waste recycling and environmental initiatives.",
+    },
+    {
+      name: "Mooge Tech",
+      description:
+        "A China-based manufacturer of plastic recycling, washing and pelletizing machinery with 20 years of experience.",
+    },
   ],
 
   processSteps: [
@@ -229,11 +244,11 @@ const en = {
   ],
 
   companyNumbers: [
-    { value: "10,000+ m²", label: "Production Facility (Balakhani Industrial Park)" },
-    { value: "30,000+", label: "MT Annual Production Capacity" },
-    { value: "15+", label: "Quality Tests on Every Batch" },
-    { value: "20+", label: "Countries Supplied" },
-    { value: "50+", label: "Dedicated Team Members" },
+    { value: "2,000+ m²", label: "Production Facility (Balakhani Industrial Park)" },
+    { value: "2,000+", label: "MT Annual Production Capacity" },
+    { value: "5+", label: "Quality Tests on Every Batch" },
+    { value: "6+", label: "Countries Supplied" },
+    { value: "30+", label: "Dedicated Team Members" },
   ],
 
   whyPartnerItems: [
@@ -729,7 +744,7 @@ const az = {
 
   footer: {
     tagline:
-      "Poly Cleaner MMC post-consumer PET şüşələrindən PET lövhə, qablaşdırma çəmbəri, polyester lif və qeyri-qida qablaşdırması üçün isti yuyulmuş rPET fleks istehsal edir. Biz beynəlxalq alıcılara sabit keyfiyyət, aydın sənədləşmə və ixraca hazır təchizat təqdim edirik.",
+      "Poly Cleaner MMC tullantı PET butulkalardan PET lövhə, qablaşdırma çəmbəri, polyester lif və qeyri-qida qablaşdırması üçün isti yuyulmuş rPET fleks istehsal edir. Biz beynəlxalq alıcılara sabit keyfiyyət, aydın sənədləşmə və ixraca hazır təchizat təqdim edirik.",
     quickLinks: "Sürətli Linklər",
     products: "Məhsullar",
     information: "Məlumat",
@@ -755,8 +770,8 @@ const az = {
     taropakBannerTagline: "rPET flekslərimizi kəşf edin və növbəti dayanıqlı həllinizi bizimlə quraq.",
     trustBar: [
       { label: "İSTEHSALÇI", sub: "VASİTƏÇİ DEYİL" },
-      { label: "SƏNƏDLƏŞDİRİLMİŞ VƏ", sub: "AUDİTƏ AÇIQ PROSES" },
-      { label: "İXRACA HAZIR", sub: "DÜNYA BAZARLARI ÜÇÜN" },
+      { label: "SƏNƏDLƏŞDİRİLMİŞ", sub: "AUDİTƏ AÇIQ PROSES" },
+      { label: "İXRACA HAZIR", sub: "DÜNYA BAZARLARI" },
       { label: "BALAXANI", sub: "SƏNAYE PARKI" },
       { label: "İZLƏNƏ BİLƏN", sub: "ƏMƏLİYYATLAR" },
       { label: "SINAQ HƏCMLƏRİ", sub: "MÜMKÜNDÜR" },
@@ -766,7 +781,7 @@ const az = {
       "İstehsal ehtiyaclarınıza uyğun müxtəlif rəng və spesifikasiyalarda yüksək keyfiyyətli isti yuyulmuş rPET fleks.",
     processEyebrow: "Prosesimiz",
     processTitle: "PET şüşələrindən yüksək keyfiyyətli rPET fleksə",
-    whyChooseTitle: "Nəyə Görə Poly Cleaner",
+    whyChooseTitle: "Niyə Poly Cleaner",
     buyerDocsTitle: "Alıcı Sənədləri",
     buyerDocsDescription: "Bütün əsas sənədlər uyğun alıcılara sorğu əsasında təqdim olunur.",
     finalCtaTitle: "Daha təmiz gələcəyi birlikdə quraq.",
@@ -864,6 +879,21 @@ const az = {
       description:
         "Türkiyədə plastik emalı avadanlıqları istehsalçısı İnan Tech, daxil olduğumuz emal sənayesinin texnoloji tərəfini dəstəkləyir.",
     },
+    {
+      name: "AGL",
+      description:
+        "Bakıda baş ofisi, Türkiyə, Gürcüstan, Çexiya, Böyük Britaniya və Niderlandda ofisləri olan beynəlxalq logistika şirkəti AGL ixrac daşımalarımızı dəstəkləyir.",
+    },
+    {
+      name: "EcoHub",
+      description:
+        "Dairəvi iqtisadiyyat, qablaşdırma tullantılarının təkrar emalı və ekoloji təşəbbüslər üzərində çalışan Azərbaycanın qeyri-kommersiya ekoloji platforması.",
+    },
+    {
+      name: "Mooge Tech",
+      description:
+        "Plastik təkrar emalı, yuma və qranullama avadanlıqları üzrə 20 illik təcrübəyə malik Çin istehsalçısı.",
+    },
   ],
 
   processSteps: [
@@ -889,7 +919,7 @@ const az = {
     heroTitle: "Poly Cleaner",
     heroTitleAccent: "haqqında",
     heroDescription:
-      "Poly Cleaner MMC Azərbaycanda yerləşən yüksək keyfiyyətli isti yuyulmuş rPET fleks istehsalçısıdır. Biz post-consumer PET tullantılarını sabit, təmiz və izlənə bilən təkrar emal xammalına çevirərək beynəlxalq təkrar emal müəssisələrinə və istehsalçılara təqdim edirik.",
+      "Poly Cleaner MMC Azərbaycanda yerləşən yüksək keyfiyyətli isti yuyulmuş rPET fleks istehsalçısıdır. Biz tullantı PET butulkalarını sabit, təmiz və izlənə bilən təkrar emal xammalına çevirərək beynəlxalq təkrar emal müəssisələrinə və istehsalçılara təqdim edirik.",
     overviewEyebrow: "ŞİRKƏT İCMALI",
     overviewTitle: "Azərbaycanda yerləşən. Keyfiyyət yönümlü. İxraca hazır.",
     overviewParagraph1:
@@ -899,7 +929,7 @@ const az = {
     factsLocation: "Yerləşmə",
     factsLocationValue: "Balaxanı Sənaye Parkı, Bakı, Azərbaycan",
     factsFounded: "Fəaliyyət",
-    factsFoundedValue: "Post-consumer PET təkrar emalı",
+    factsFoundedValue: "Tullantı PET təkrar emalı",
     factsMarkets: "Bazar",
     factsMarketsValue: "İxrac yönümlü təchizat",
     valuesTitle: "Dəyərlərimiz. Gücümüz.",
@@ -910,32 +940,32 @@ const az = {
   },
 
   companyValues: [
-    { title: "Tullantıdan Dəyərə", description: "Post-consumer PET tullantılarını dairəvi iqtisadiyyatı dəstəkləyən yüksək keyfiyyətli rPET fleksə çeviririk." },
+    { title: "Tullantıdan Dəyərə", description: "Tullantı PET butulkalarını dairəvi iqtisadiyyatı dəstəkləyən yüksək keyfiyyətli rPET fleksə çeviririk." },
     { title: "Etibarlılıq", description: "Sabit keyfiyyət, şəffaf kommunikasiya və etibarlı əməkdaşlıq." },
     { title: "Dayanıqlılıq", description: "Resursların bərpası və ekoloji təsirin azaldılmasına yönəlmiş məsuliyyətli əməliyyatlar." },
     { title: "İzlənəbilənlik", description: "Toplamadan fleks mərhələsinə qədər əsas proseslər sənədləşdirilir və nəzarətdə saxlanılır." },
   ],
 
   companyNumbers: [
-    { value: "10,000+ m²", label: "İstehsal Sahəsi (Balaxanı Sənaye Parkı)" },
-    { value: "30,000+", label: "MT İllik İstehsal Gücü" },
-    { value: "15+", label: "Hər Partiyada Keyfiyyət Testi" },
-    { value: "20+", label: "İxrac Olunan Ölkə" },
-    { value: "50+", label: "Həsr Olunmuş Komanda Üzvü" },
+    { value: "2,000+ m²", label: "İstehsal Sahəsi (Balaxanı Sənaye Parkı)" },
+    { value: "2,000+", label: "MT İllik İstehsal Gücü" },
+    { value: "5+", label: "Hər Partiyada Keyfiyyət Testi" },
+    { value: "6+", label: "İxrac Olunan Ölkə" },
+    { value: "30+", label: "Həsr Olunmuş Komanda Üzvü" },
   ],
 
   whyPartnerItems: [
     { title: "Sabit Keyfiyyət", description: "Qabaqcıl isti yuyulma prosesi və ciddi keyfiyyət nəzarəti təmiz, az çirklənmiş rPET fleks təmin edir." },
-    { title: "İxraca Hazırlıq", description: "Rəvan beynəlxalq göndərişlər üçün qablaşdırma, sənədləşmə və logistika dəstəyi." },
+    { title: "İxraca Hazırlıq", description: "Maneəsiz beynəlxalq göndərişlər üçün qablaşdırma, sənədləşmə və logistika dəstəyi." },
     { title: "Çevik Həllər", description: "İstehsal tələblərinizə uyğun müxtəlif fleks rəngləri və xüsusi spesifikasiyalar." },
-    { title: "Müştəriyönümlü Yanaşma", description: "Çatdırılmadan əvvəl, əsnasında və sonrasında operativ xidmət və texniki dəstək." },
+    { title: "Müştəriyönümlü Yanaşma", description: "Çatdırılmadan əvvəl, bu əsnada və sonrasında sürətli xidmət və texniki dəstək." },
   ],
 
   rpet: {
     heroTitle: "İsti Yuyulmuş",
     heroTitleAccent: "rPET Fleks",
     heroDescription:
-      "Azərbaycanda post-consumer PET şüşələrindən istehsal olunan yüksək keyfiyyətli isti yuyulmuş rPET fleks. Məhsul PET lövhə, qablaşdırma çəmbəri, polyester lif, qeyri-qida qablaşdırması və ticarət tətbiqlərində sabit performansı dəstəkləmək üçün yuyulur, qurudulur və çeşidlənir.",
+      "Azərbaycanda tullantı PET butulkalardan istehsal olunan yüksək keyfiyyətli isti yuyulmuş rPET fleks. Məhsul PET lövhə, qablaşdırma çəmbəri, polyester lif, qeyri-qida qablaşdırması və ticarət tətbiqlərində sabit performansı dəstəkləmək üçün yuyulur, qurudulur və çeşidlənir.",
     trustStrip: [
       { label: "Azərbaycanda istehsal\nAvropaya ixrac" },
       { label: "Sabit\nKeyfiyyət" },
@@ -985,7 +1015,7 @@ const az = {
   ],
 
   productInfo: [
-    { label: "Xammal", value: "Post-consumer PET şüşələri" },
+    { label: "Xammal", value: "Tullantı PET butulkaları" },
     { label: "Proses", value: "Çeşidləmə, isti yuyulma, sürtünmə ilə yuyulma, qurutma və qablaşdırma" },
     { label: "Keyfiyyətə Nəzarət", value: "Hər partiya üçün daxili laboratoriya testi" },
     { label: "Mənşə", value: "Azərbaycan" },

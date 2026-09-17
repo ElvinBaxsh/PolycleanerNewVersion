@@ -5,6 +5,7 @@ import Image from "next/image";
 import Container from "@/components/ui/Container";
 import Reveal from "@/components/ui/Reveal";
 import { RevealGroup, RevealItem } from "@/components/ui/RevealGroup";
+import SlashBreaks from "@/components/ui/SlashBreaks";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 import { localizePath } from "@/lib/i18n/localizePath";
 import { PRODUCT_GRADES } from "@/lib/constants";
@@ -14,9 +15,14 @@ export default function ProductGrid() {
   const { t, locale } = useLanguage();
   return (
     <section className="bg-white pt-12 pb-6 lg:pt-16 lg:pb-8">
-      <Container className="flex flex-col gap-8 lg:flex-row lg:items-start lg:justify-between">
+      {/* Intro beside the cards only from xl. Between 1024 and 1279px the
+          intro column left each card ~122px wide, too narrow for words like
+          "termoformalaşdırma" and "ŞƏFFAF/AÇIQ", which the card's rounded
+          overflow clip then cut off — so the intro sits above the cards
+          there, and the cards get the full width. */}
+      <Container className="flex flex-col gap-8 xl:flex-row xl:items-start xl:justify-between">
         {/* Sol tərəf: Dizayndakı kimi daha geniş və yana yayılan mətn */}
-        <Reveal className="flex flex-col items-start lg:max-w-[360px] lg:shrink-0 xl:max-w-[400px]">
+        <Reveal className="flex flex-col items-start xl:max-w-[400px] xl:shrink-0">
           <h2 className="text-2xl font-bold tracking-tight text-navy sm:text-3xl">
             {t.home.productsTitle}
           </h2>
@@ -33,8 +39,9 @@ export default function ProductGrid() {
           </Link>
         </Reveal>
 
-        {/* Sağ tərəf: 4-lü Məhsul Kartları */}
-        <RevealGroup className="grid flex-1 grid-cols-2 gap-4 sm:grid-cols-4 sm:gap-5">
+        {/* Sağ tərəf: 4-lü Məhsul Kartları — four across from md; at 640px four
+            columns were as narrow as the desktop problem above. */}
+        <RevealGroup className="grid flex-1 grid-cols-2 gap-4 md:grid-cols-4 md:gap-5">
           {PRODUCT_GRADES.map((grade, i) => {
             const gradeText = t.productGrades[i];
             return (
@@ -50,14 +57,14 @@ export default function ProductGrid() {
                     alt={`${gradeText.name} rPET flakes close-up`}
                     fill
                     className="object-cover transition-transform duration-300 group-hover:scale-[1.03]"
-                    sizes="(min-width: 1024px) 20vw, (min-width: 640px) 25vw, 50vw"
+                    sizes="(min-width: 1280px) 20vw, (min-width: 768px) 25vw, 50vw"
                   />
                 </div>
 
                 {/* Mətn Bloku */}
                 <div className="flex flex-1 flex-col justify-start p-4 sm:p-5">
                   <h3 className="text-xs font-extrabold uppercase tracking-wider text-navy sm:text-[13px]">
-                    {gradeText.name}
+                    <SlashBreaks text={gradeText.name} />
                   </h3>
                   <p className="mt-2 text-xs leading-normal text-slate-500">
                     {gradeText.description}

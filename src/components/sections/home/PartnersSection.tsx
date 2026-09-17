@@ -5,10 +5,13 @@ import { ChevronRight, LayoutGrid, Users } from "lucide-react";
 import Container from "@/components/ui/Container";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Reveal from "@/components/ui/Reveal";
+import { useMarqueePause } from "@/components/ui/useMarqueePause";
 import InquiryButton from "@/components/inquiry/InquiryButton";
 import PartnersModal from "./PartnersModal";
+import PartnersDiamond from "./PartnersDiamond";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 import { PARTNERS } from "@/lib/constants";
+import { equalAreaFactors } from "@/lib/logoSize";
 
 const LOOP_PARTNERS = [...PARTNERS, ...PARTNERS];
 
@@ -16,9 +19,8 @@ export default function PartnersSection() {
   const { t } = useLanguage();
   const partnerText = t.partners;
   const loopPartnerText = [...partnerText, ...partnerText];
-  const [paused, setPaused] = useState(false);
+  const { paused, handlers: pauseHandlers } = useMarqueePause();
   const [modalOpen, setModalOpen] = useState(false);
-  const resumeTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
   const scrollerRef = useRef<HTMLDivElement>(null);
   // The strip sits well down the page, so a marquee started at page load
   // would already be mid-run (logos clipped at both edges) by the time
@@ -45,15 +47,6 @@ export default function PartnersSection() {
     return () => observer.disconnect();
   }, []);
 
-  function handlePauseStart() {
-    if (resumeTimeout.current) clearTimeout(resumeTimeout.current);
-    setPaused(true);
-  }
-  function handlePauseEnd() {
-    if (resumeTimeout.current) clearTimeout(resumeTimeout.current);
-    resumeTimeout.current = setTimeout(() => setPaused(false), 1200);
-  }
-
   return (
     <section className="bg-white py-12 sm:py-16">
       <Container>
@@ -65,19 +58,20 @@ export default function PartnersSection() {
           />
         </Reveal>
 
-        {/* A static grid stopped fitting once the partner list grew past
-            ~6 logos (four-plus rows on desktop) — a single continuously
-            scrolling strip keeps this section a fixed, compact height no
-            matter how many partners get added, at every breakpoint. */}
+        {/* Desktop: every partner at once, as a diamond wall. */}
+        <Reveal className="mt-12 hidden lg:block">
+          <PartnersDiamond />
+        </Reveal>
+
+        {/* Below desktop the wall doesn't fit, so partners run as a strip.
+            A static grid stopped fitting once the list grew past ~6 logos —
+            a single scrolling strip keeps the section a fixed, compact height
+            however many partners get added. Logos get equal optical area
+            (see equalAreaFactors) instead of one shared width. */}
         <div
           ref={scrollerRef}
-          onMouseEnter={handlePauseStart}
-          onMouseLeave={handlePauseEnd}
-          onPointerDown={handlePauseStart}
-          onPointerUp={handlePauseEnd}
-          onTouchStart={handlePauseStart}
-          onTouchEnd={handlePauseEnd}
-          className="scrollbar-none mt-10 overflow-x-auto"
+          {...pauseHandlers}
+          className="scrollbar-none mt-10 overflow-x-auto [--logo-u:60px] sm:[--logo-u:70px] lg:hidden"
         >
           {/* Yalnız uzun (longhand) animasiya xüsusiyyətləri: `animation`
               qısaltması ilə `animationPlayState`-i eyni style obyektində
@@ -87,17 +81,16 @@ export default function PartnersSection() {
             className="flex w-max items-center gap-8 sm:gap-12"
             style={{
               animationName: started ? "partners-marquee" : "none",
-              animationDuration: "32s",
+              // Scales with the partner count so the strip keeps the same
+              // speed as partners are added (it was tuned at 32s for 10).
+              animationDuration: `${PARTNERS.length * 3.2}s`,
               animationTimingFunction: "linear",
               animationIterationCount: "infinite",
               animationPlayState: paused ? "paused" : "running",
             }}
           >
             {LOOP_PARTNERS.map((partner, i) => {
-              // Verra's mark is a slim boxed wordmark — at the shared logo
-              // height it reads visibly smaller/lighter than the bolder
-              // marks around it, so it gets a bit more room to match.
-              const isVerra = partner.name === "Verra";
+              const logo = equalAreaFactors(partner.ratio);
               return (
                 <a
                   key={`${partner.name}-${i}`}
@@ -107,15 +100,18 @@ export default function PartnersSection() {
                   aria-label={`Visit ${loopPartnerText[i].name} website`}
                   className="flex h-16 shrink-0 items-center justify-center transition-transform duration-300 hover:-translate-y-1 sm:h-24"
                 >
+                  {/* decoding="async" keeps a logo's first decode off the
+                      thread the page scrolls on. */}
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={partner.logo}
                     alt={loopPartnerText[i].name}
-                    className={
-                      isVerra
-                        ? "h-auto max-h-20 w-auto max-w-[170px] object-contain sm:max-h-28 sm:max-w-[220px]"
-                        : "h-auto max-h-16 w-auto max-w-[140px] object-contain sm:max-h-24 sm:max-w-[190px]"
-                    }
+                    decoding="async"
+                    className="max-w-[150px] object-contain sm:max-w-[200px]"
+                    style={{
+                      width: `calc(var(--logo-u) * ${logo.width.toFixed(4)})`,
+                      height: `calc(var(--logo-u) * ${logo.height.toFixed(4)})`,
+                    }}
                   />
                 </a>
               );
@@ -123,9 +119,9 @@ export default function PartnersSection() {
           </div>
         </div>
 
-        {/* The marquee only ever shows a few logos at a time — this opens the
-            full list at once, for anyone looking for a specific partner. */}
-        <div className="mt-6 flex justify-center">
+        {/* The strip only ever shows a few logos at a time — this opens the
+            full list at once. The desktop wall already shows them all. */}
+        <div className="mt-6 flex justify-center lg:hidden">
           <button
             type="button"
             onClick={() => setModalOpen(true)}

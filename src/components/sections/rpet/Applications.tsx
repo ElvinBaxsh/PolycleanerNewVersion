@@ -1,7 +1,7 @@
 "use client";
 
-import { useRef, useState } from "react";
 import Container from "@/components/ui/Container";
+import { useMarqueePause } from "@/components/ui/useMarqueePause";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Reveal from "@/components/ui/Reveal";
 import { RevealGroup, RevealItem } from "@/components/ui/RevealGroup";
@@ -40,17 +40,7 @@ export default function Applications() {
   const { t } = useLanguage();
   const applications = t.applications;
   const loopApplications = [...applications, ...applications];
-  const [paused, setPaused] = useState(false);
-  const resumeTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  function handlePauseStart() {
-    if (resumeTimeout.current) clearTimeout(resumeTimeout.current);
-    setPaused(true);
-  }
-  function handlePauseEnd() {
-    if (resumeTimeout.current) clearTimeout(resumeTimeout.current);
-    resumeTimeout.current = setTimeout(() => setPaused(false), 1200);
-  }
+  const { paused, handlers: pauseHandlers } = useMarqueePause();
 
   return (
     <section className="bg-soft-gray py-8 lg:py-10">
@@ -64,12 +54,7 @@ export default function Applications() {
             toxunanda dayanıb əl ilə scroll oluna bilir. sm+: əvvəlki kimi
             statik grid. */}
         <div
-          onMouseEnter={handlePauseStart}
-          onMouseLeave={handlePauseEnd}
-          onPointerDown={handlePauseStart}
-          onPointerUp={handlePauseEnd}
-          onTouchStart={handlePauseStart}
-          onTouchEnd={handlePauseEnd}
+          {...pauseHandlers}
           className="scrollbar-none -mx-5 mt-6 overflow-x-auto px-5 sm:hidden"
         >
           <div

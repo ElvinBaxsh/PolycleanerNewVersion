@@ -292,11 +292,11 @@ export const COMPANY_VALUES = [
 ];
 
 export const COMPANY_NUMBERS = [
-  { value: "10,000+ m²", label: "Production Facility (Balakhani Industrial Park)" },
-  { value: "30,000+", label: "MT Annual Production Capacity" },
-  { value: "15+", label: "Quality Tests on Every Batch" },
-  { value: "20+", label: "Countries Supplied" },
-  { value: "50+", label: "Dedicated Team Members" },
+  { value: "2,000+ m²", label: "Production Facility (Balakhani Industrial Park)" },
+  { value: "2,000+", label: "MT Annual Production Capacity" },
+  { value: "5+", label: "Quality Tests on Every Batch" },
+  { value: "6+", label: "Countries Supplied" },
+  { value: "30+", label: "Dedicated Team Members" },
 ];
 
 export const WHY_PARTNER_ITEMS = [
@@ -475,10 +475,15 @@ export const DOCUMENTS_FAQ = [
 // several supplied variants per brand (some had white-on-transparent text
 // meant for dark backgrounds and would be invisible on our white cards).
 // `website` links out to each partner's real, verified official site.
+// `ratio` is the logo's drawn width ÷ height, measured after trimming the
+// file's empty margins (the files themselves are trimmed to match). It sizes
+// every logo to the same optical area — see src/lib/logoSize.ts. When adding
+// a partner, trim the logo and set its ratio from the trimmed dimensions.
 export const PARTNERS = [
   {
     name: "KəhrizSu",
     logo: "/images/partners/kehrizSu-partnersLogo.png",
+    ratio: 4.65,
     website: "https://kehrizsu.az/",
     description:
       "Yerli şirkətlərlə sıfır itgi fəlsəfəsinə söykənən əməkdaşlıqlarımız resurslarımızı artırır.",
@@ -486,6 +491,7 @@ export const PARTNERS = [
   {
     name: "Slavyanka",
     logo: "/images/partners/slavyanka-partnersLogo.png",
+    ratio: 2.05,
     website: "https://slavyanka.az/",
     description:
       "Yerli şirkətlərlə sıfır itgi fəlsəfəsinə söykənən əməkdaşlıqlarımız resurslarımızı artırır.",
@@ -493,6 +499,7 @@ export const PARTNERS = [
   {
     name: "Sirab",
     logo: "/images/partners/Sirab-logo.png",
+    ratio: 3.62,
     website: "https://www.sirab.az/",
     description:
       "Yerli şirkətlərlə sıfır itgi fəlsəfəsinə söykənən əməkdaşlıqlarımız resurslarımızı artırır.",
@@ -500,6 +507,7 @@ export const PARTNERS = [
   {
     name: "Təmiz Şəhər",
     logo: "/images/partners/temizSheher-partnersLogo.png",
+    ratio: 1.79,
     website: "https://tamizshahar.az/",
     description:
       "Qafqazın ən böyük və müasir tullantıların çeşidlənməsi və utilizasiyası müəssisəsi ilə əməkdaşlıq bizim uğurumuz və təcrübəmizin inkişafıdır.",
@@ -507,6 +515,7 @@ export const PARTNERS = [
   {
     name: "Auxilium Carbon",
     logo: "/images/partners/auxilium.png",
+    ratio: 2.7,
     website: "https://auxiliumcarbon.com/",
     description:
       "Tullantıdan Dəyərə şüarı ilə tullantıların təkrar emalı və karbon emisiyasının azaldılması fəaliyyətlərimizi qlobal platformalara aparırıq.",
@@ -514,6 +523,7 @@ export const PARTNERS = [
   {
     name: "Azərbaycan Respublikası Ekologiya və Təbii Sərvətlər Nazirliyi",
     logo: "/images/partners/ekologiyaTebii-partners.png",
+    ratio: 3.92,
     website: "https://www.eco.gov.az/",
     description:
       "Yerli şirkətlərlə sıfır itgi fəlsəfəsinə söykənən əməkdaşlıqlarımız resurslarımızı artırır.",
@@ -521,6 +531,7 @@ export const PARTNERS = [
   {
     name: "Verra",
     logo: "/images/partners/verra-partners.svg",
+    ratio: 2.72,
     website: "https://verra.org/",
     description:
       "Karbon bazarları və davamlılıq standartlarında qlobal lider olan Verra, ölçülə bilən ekoloji təsir öhdəliyimizi dəstəkləyir.",
@@ -528,6 +539,7 @@ export const PARTNERS = [
   {
     name: "Iterum",
     logo: "/images/partners/iterum-partners.svg",
+    ratio: 5.06,
     website: "https://iterum.lv/en/",
     description:
       "Latviyada yerləşən polimer emalı şirkəti Iterum ilə birgə plastik tullantıları dəyərli xammala çevirmək məqsədini irəli aparırıq.",
@@ -535,6 +547,7 @@ export const PARTNERS = [
   {
     name: "Onur Ambalaj",
     logo: "/images/partners/onurAmbalaj-partners.png",
+    ratio: 3,
     website: "https://www.onurambalaj.com.tr/",
     description:
       "Türkiyədə yerləşən qablaşdırma həlləri istehsalçısı Onur Ambalaj, rPET fleksimizi real məhsullarda dəyərləndirən beynəlxalq tərəfdaşlarımızdandır.",
@@ -542,9 +555,34 @@ export const PARTNERS = [
   {
     name: "İnan Tech",
     logo: "/images/partners/inanTech-partners.png",
+    ratio: 6.16,
     website: "https://www.inanplastics.com/en/",
     description:
       "Türkiyədə plastik emalı avadanlıqları istehsalçısı İnan Tech, daxil olduğumuz emal sənayesinin texnoloji tərəfini dəstəkləyir.",
+  },
+  {
+    name: "AGL",
+    logo: "/images/partners/agl-partners.png",
+    ratio: 4.17,
+    website: "https://theagl.com/",
+    description:
+      "Bakıda baş ofisi, Türkiyə, Gürcüstan, Çexiya, Böyük Britaniya və Niderlandda ofisləri olan beynəlxalq logistika şirkəti AGL ixrac daşımalarımızı dəstəkləyir.",
+  },
+  {
+    name: "EcoHub",
+    logo: "/images/partners/ecohub-partners.png",
+    ratio: 2.34,
+    website: "https://ecohub.az/",
+    description:
+      "Dairəvi iqtisadiyyat, qablaşdırma tullantılarının təkrar emalı və ekoloji təşəbbüslər üzərində çalışan Azərbaycanın qeyri-kommersiya ekoloji platforması.",
+  },
+  {
+    name: "Mooge Tech",
+    logo: "/images/partners/mooge-partners.jpg",
+    ratio: 2.11,
+    website: "https://moogetech.com/",
+    description:
+      "Plastik təkrar emalı, yuma və qranullama avadanlıqları üzrə 20 illik təcrübəyə malik Çin istehsalçısı.",
   },
 ];
 

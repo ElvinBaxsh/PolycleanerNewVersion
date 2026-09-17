@@ -10,6 +10,7 @@ import Reveal from "@/components/ui/Reveal";
 import { RevealGroup, RevealItem } from "@/components/ui/RevealGroup";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 import { localizePath } from "@/lib/i18n/localizePath";
+import SlashBreaks from "@/components/ui/SlashBreaks";
 import { PRODUCT_GRADES } from "@/lib/constants";
 
 export default function ProductGrades() {
@@ -43,7 +44,9 @@ export default function ProductGrades() {
                 />
               </div>
               <div className="p-5">
-                <h3 className="text-lg font-bold text-navy">{gradeText.name}</h3>
+                <h3 className="text-lg font-bold text-navy">
+                  <SlashBreaks text={gradeText.name} />
+                </h3>
                 <p className="mt-1 text-sm text-slate">{gradeText.description}</p>
                 <Link
                   href={`#${grade.slug}`}

@@ -31,16 +31,18 @@ export default function OurValues() {
           {t.companyValues.map((value, i) => (
             <RevealItem
               key={i}
-              className="flex items-center gap-3.5 rounded-2xl border border-slate-200/80 bg-white p-4 sm:p-5 shadow-xs"
+              className="flex items-start gap-3.5 rounded-2xl border border-slate-200/80 bg-white p-4 sm:p-5 shadow-xs"
             >
-              {/* İkon - Mətn blokunun hündürlüyünə tam bərabərdir */}
-              <MaskIcon 
-                src={ICONS[i]} 
-                className="size-14 sm:size-16 shrink-0 text-[#258D2A] object-contain" 
+              {/* Top-aligned, not centred: descriptions wrap to different line
+                  counts (more so in Azerbaijani), and centring each card then
+                  left the icons and titles at different heights across the row. */}
+              <MaskIcon
+                src={ICONS[i]}
+                className="size-14 sm:size-16 shrink-0 text-[#258D2A] object-contain"
               />
 
               {/* Yazılar - Geniş və eninə yayılan text */}
-              <div className="flex-1 min-w-0 flex flex-col justify-center">
+              <div className="flex-1 min-w-0 flex flex-col">
                 <h3 className="text-sm sm:text-[15px] font-bold text-[#0F2A4A] leading-tight">
                   {value.title}
                 </h3>

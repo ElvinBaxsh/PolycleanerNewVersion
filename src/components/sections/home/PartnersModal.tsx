@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { X, ExternalLink } from "lucide-react";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 import { PARTNERS } from "@/lib/constants";
+import { equalAreaFactors } from "@/lib/logoSize";
 
 /**
  * The homepage strip is a marquee — good for showing there are many
@@ -97,7 +98,13 @@ export default function PartnersModal({ open, onClose }: { open: boolean; onClos
                         <img
                           src={partner.logo}
                           alt={partnerText[i].name}
-                          className="h-auto max-h-16 w-auto max-w-full object-contain"
+                          decoding="async"
+                          className="max-w-full object-contain [--logo-u:42px] sm:[--logo-u:44px]"
+                          style={{
+                            // Same optical area for every logo — see equalAreaFactors.
+                            width: `calc(var(--logo-u) * ${equalAreaFactors(partner.ratio).width.toFixed(4)})`,
+                            height: `calc(var(--logo-u) * ${equalAreaFactors(partner.ratio).height.toFixed(4)})`,
+                          }}
                         />
                       </span>
                       <span className="flex items-center gap-1 text-center text-xs font-semibold text-slate group-hover:text-navy">

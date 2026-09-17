@@ -26,10 +26,16 @@ export default function Footer() {
           <FinalCta />, rendered by every page right before this Footer —
           it used to be duplicated here too, showing the same banner twice
           in a row on every single page. */}
-      <Container className="grid grid-cols-1 gap-10 pb-12 pt-9 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr_1fr]">
-        <div>
+      {/* From xl, five columns; the first is wider than the link columns
+          because it holds the company description, which in Azerbaijani runs
+          long (at 1.4fr it wrapped to eight lines and hung below the rest).
+          Between 1024 and 1279px five columns don't fit — product and info
+          links wrapped onto two lines — so the logo and description take a
+          full-width row there, with the four link columns underneath. */}
+      <Container className="grid grid-cols-1 gap-10 pb-12 pt-9 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8 xl:grid-cols-[1.8fr_1fr_1fr_1fr_1.1fr]">
+        <div className="lg:col-span-4 xl:col-span-1">
           <Logo size="large" />
-          <p className="mt-4 text-sm leading-relaxed text-white/60">{t.footer.tagline}</p>
+          <p className="mt-4 text-sm leading-relaxed text-white/60 lg:max-w-2xl xl:max-w-none">{t.footer.tagline}</p>
         </div>
 
         <div>

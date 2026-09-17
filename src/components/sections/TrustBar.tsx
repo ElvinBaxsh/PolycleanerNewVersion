@@ -36,7 +36,10 @@ export default function TrustBar() {
           the parent's viewport trigger already fired" issue documented on
           DocumentGrid, leaving it stuck at opacity:0 after a language change.
         */}
-        <div className="grid grid-cols-2 gap-x-2 gap-y-7 rounded-2xl border border-slate-200/80 bg-white px-4 py-7 shadow-2xl shadow-slate-900/15 sm:grid-cols-3 sm:gap-y-8 lg:grid-cols-6 lg:gap-y-0 lg:py-8">
+        {/* Six columns only from xl: between 1024 and 1279px each column is
+            too narrow for the Azerbaijani labels, which wrapped to a third
+            line — the 3 + 3 tablet layout reads better there. */}
+        <div className="grid grid-cols-2 gap-x-2 gap-y-7 rounded-2xl border border-slate-200/80 bg-white px-4 py-7 shadow-2xl shadow-slate-900/15 sm:grid-cols-3 sm:gap-y-8 xl:grid-cols-6 xl:gap-y-0 xl:py-8">
           {items.map(({ label, sub }, i) => {
             const Icon = ICONS[i];
             const image = IMAGES[i];

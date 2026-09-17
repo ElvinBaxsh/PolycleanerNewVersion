@@ -20,15 +20,19 @@ export default function BuyerDocuments({
 
   return (
     <section className={`py-8 sm:py-10 ${bg === "soft" ? "bg-[#F4F7FA]" : "bg-white"}`}>
-      <Container className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
+      {/* Heading beside the cards only from xl. Between 1024 and 1279px it
+          left each card's text column 66px wide, and "İzlənəbilənlik Qeydi"
+          was cut off by the line clamp — so the heading sits above there. */}
+      <Container className="flex flex-col gap-6 xl:flex-row xl:items-center xl:justify-between">
         {/* Sol Tərəf - Başlıq və Açıqlama */}
         <Reveal className="max-w-xs shrink-0">
           <h2 className="text-xl font-extrabold tracking-tight text-[#1B365D] sm:text-2xl">{t.home.buyerDocsTitle}</h2>
           <p className="mt-1.5 text-xs font-medium text-slate-500 sm:text-sm">{t.home.buyerDocsDescription}</p>
         </Reveal>
 
-        {/* Sağ Tərəf - Dizayndakı kimi eyni ölçülü və böyük ikonlu kartlar */}
-        <RevealGroup className="grid flex-1 grid-cols-2 gap-3 sm:grid-cols-4">
+        {/* Sağ Tərəf - Dizayndakı kimi eyni ölçülü və böyük ikonlu kartlar —
+            four across from md; at 640px four columns were too narrow too. */}
+        <RevealGroup className="grid flex-1 grid-cols-2 gap-3 md:grid-cols-4">
           {BUYER_DOCUMENTS.map((doc, i) => (
             <RevealItem key={doc.name} className="h-full">
               {doc.file ? (
