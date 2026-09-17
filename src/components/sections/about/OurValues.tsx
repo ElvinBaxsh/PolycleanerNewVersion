@@ -27,7 +27,9 @@ export default function OurValues() {
           />
         </Reveal>
 
-        <RevealGroup className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {/* Four across only from xl: at 1024px each card's text column was so
+            narrow that titles broke and descriptions ran to seven lines. */}
+        <RevealGroup className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
           {t.companyValues.map((value, i) => (
             <RevealItem
               key={i}

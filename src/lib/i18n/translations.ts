@@ -897,7 +897,7 @@ const az = {
   ],
 
   processSteps: [
-    { name: "Toplama", description: "Post-consumer PET şüşələri etibarlı mənbələrdən toplanır." },
+    { name: "Toplama", description: "Tullantı PET butulkaları etibarlı mənbələrdən toplanır." },
     { name: "Çeşidləmə", description: "Şüşələr rəng və materiala görə çeşidlənir; etiket və çirklər təmizlənir." },
     { name: "Yuma", description: "Ekoloji cəhətdən təmiz kimyəvi maddələrlə isti yuyulma prosesi çirki, yapışqan və qalıqları təmizləyir." },
     { name: "Qurutma", description: "İdeal rətubət səviyyəsinə çatmaq üçün santrifuqa və termik qurutma." },
@@ -906,7 +906,7 @@ const az = {
   ],
 
   aboutProcessSteps: [
-    { name: "Toplama", description: "Post-consumer PET şüşələri etibarlı mənbələrdən toplanır." },
+    { name: "Toplama", description: "Tullantı PET butulkaları etibarlı mənbələrdən toplanır." },
     { name: "Çeşidləmə", description: "Şüşələr rəng və materiala görə çeşidlənir; etiket və çirklər təmizlənir." },
     { name: "Xırdalama", description: "Şüşələr sonrakı emal üçün eyni ölçülü fleksə xırdalanır." },
     { name: "İsti Yuyulma", description: "Ekoloji cəhətdən təmiz kimyəvi maddələrlə isti yuyulma prosesi çirki, yapışqan və qalıqları təmizləyir." },
@@ -1093,7 +1093,7 @@ const az = {
     heroTitle: "Tullantıdan",
     heroTitleAccent: "Dəyərə",
     heroDescription:
-      "Poly Cleaner üçün dayanıqlılıq fəaliyyətimizin mərkəzində dayanır. Biz post-consumer PET tullantılarını yüksək keyfiyyətli rPET fleksə çevirərək dairəvi iqtisadiyyatı və daha təmiz gələcəyi dəstəkləyirik.",
+      "Poly Cleaner üçün dayanıqlılıq fəaliyyətimizin mərkəzində dayanır. Biz tullantı PET butulkalarını yüksək keyfiyyətli rPET fleksə çevirərək dairəvi iqtisadiyyatı və daha təmiz gələcəyi dəstəkləyirik.",
     trustStrip: [
       { title: "Dairəvi İqtisadiyyat", description: "Materialları daha uzun müddət istifadədə saxlamaq" },
       { title: "İzlənə Bilən və\nSənədləşdirilmiş", description: "Mənbədən fleksə qədər tam şəffaflıq" },
@@ -1133,7 +1133,7 @@ const az = {
   ],
 
   sustainabilitySteps: [
-    { name: "Toplama", description: "Post-consumer PET şüşələri toplanır." },
+    { name: "Toplama", description: "Tullantı PET butulkaları toplanır." },
     { name: "Çeşidləmə", description: "Şüşələr rəng və növünə görə çeşidlənir." },
     { name: "Yuma", description: "İsti yuyulma etiket, yapışqan və çirki təmizləyir." },
     { name: "Qurutma", description: "Təmiz fleks üçün rütubət təmizlənir." },
