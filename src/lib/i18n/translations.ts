@@ -801,7 +801,7 @@ const az = {
     {
       title: "Dayanıqlılıq",
       description:
-        "İstifadə olunmuş PET şüşələri dəyərli xammala çevirərək plastik tullantını azaldırıq və dairəvi iqtisadiyyatı dəstəkləyirik.",
+        "İstifadə olunmuş PET butulkaları dəyərli xammala çevirərək plastik tullantını azaldırıq və dairəvi iqtisadiyyatı dəstəkləyirik.",
     },
     {
       title: "Keyfiyyətə Nəzarət",
@@ -898,19 +898,19 @@ const az = {
 
   processSteps: [
     { name: "Toplama", description: "Tullantı PET butulkaları etibarlı mənbələrdən toplanır." },
-    { name: "Çeşidləmə", description: "Şüşələr rəng və materiala görə çeşidlənir; etiket və çirklər təmizlənir." },
+    { name: "Çeşidləmə", description: "Butulkalar rəng və materiala görə çeşidlənir; etiket və çirklər təmizlənir." },
     { name: "Yuma", description: "Ekoloji cəhətdən təmiz kimyəvi maddələrlə isti yuyulma prosesi çirki, yapışqan və qalıqları təmizləyir." },
-    { name: "Qurutma", description: "İdeal rətubət səviyyəsinə çatmaq üçün santrifuqa və termik qurutma." },
+    { name: "Qurutma", description: "İdeal rütubət səviyyəsinə çatmaq üçün santrifuqa və termik qurutma." },
     { name: "Keyfiyyətə Nəzarət", description: "Sabit keyfiyyəti təmin etmək üçün proses daxili və yekun yoxlama." },
     { name: "Qablaşdırma və Yükləmə", description: "Fleks böyük çantalara qablaşdırılır və dünya üzrə göndəriş üçün yüklənir." },
   ],
 
   aboutProcessSteps: [
     { name: "Toplama", description: "Tullantı PET butulkaları etibarlı mənbələrdən toplanır." },
-    { name: "Çeşidləmə", description: "Şüşələr rəng və materiala görə çeşidlənir; etiket və çirklər təmizlənir." },
-    { name: "Xırdalama", description: "Şüşələr sonrakı emal üçün eyni ölçülü fleksə xırdalanır." },
+    { name: "Çeşidləmə", description: "Butulkalar rəng və materiala görə çeşidlənir; etiket və çirklər təmizlənir." },
+    { name: "Xırdalama", description: "Butulkalar sonrakı emal üçün eyni ölçülü fleksə xırdalanır." },
     { name: "İsti Yuyulma", description: "Ekoloji cəhətdən təmiz kimyəvi maddələrlə isti yuyulma prosesi çirki, yapışqan və qalıqları təmizləyir." },
-    { name: "Qurutma", description: "İdeal rətubət səviyyəsinə çatmaq üçün santrifuqa və termik qurutma." },
+    { name: "Qurutma", description: "İdeal rütubət səviyyəsinə çatmaq üçün santrifuqa və termik qurutma." },
     { name: "Keyfiyyətə Nəzarət", description: "Sabit keyfiyyəti təmin etmək üçün proses daxili və yekun yoxlama." },
     { name: "Qablaşdırma və Yükləmə", description: "Fleks böyük çantalara qablaşdırılır və dünya üzrə göndəriş üçün yüklənir." },
   ],
@@ -1007,7 +1007,7 @@ const az = {
 
   specTable: [
     { label: "Fleks Ölçüsü", value: "8–14 mm (fərdiləşdirilə bilər)" },
-    { label: "Rətubət", value: "≤ 1.0%" },
+    { label: "Rütubət", value: "≤ 1.0%" },
     { label: "Çirklənmə", value: "30 ppm (PVC, etiketlər, digər plastiklər)" },
     { label: "Qablaşdırma", value: "1.000 kq jumbo çanta" },
     { label: "Yükləmə", value: "20-22 MT / yük maşını/konteyner 40 ft" },
@@ -1033,7 +1033,7 @@ const az = {
     capabilitiesTitle: "Proses İmkanları",
     capabilitiesDescription: "Müəssisəmiz effektiv, dayanıqlı və miqyaslana bilən rPET fleks istehsalı üçün qurulmuşdur. Əsas əməliyyatlara material çeşidləmə, isti yuyulma, sürtünmə ilə yuyulma, sıxlıqla ayırma, qurutma və böyük çantalarda qablaşdırma daxildir.",
     qualityTitle: "Keyfiyyətə Nəzarət və Sənədləşmə",
-    qualityDescription: "Hər partiya alıcı tələblərinə uyğun qiymətləndirilir və sənədləşdirilir. Məhsul yoxlamalarına rətubət, rəng, vizual təmizlik, çirklənmə nəzarəti və partiya izlənəbilənliyi daxil ola bilər.",
+    qualityDescription: "Hər partiya alıcı tələblərinə uyğun qiymətləndirilir və sənədləşdirilir. Məhsul yoxlamalarına rütubət, rəng, vizual təmizlik, çirklənmə nəzarəti və partiya izlənəbilənliyi daxil ola bilər.",
     qaPillarsTitle: "Keyfiyyət Təminatı Prinsiplərimiz",
     keySpecsTitle: "Əsas Spesifikasiyalar*",
     keySpecsFootnote: "* Spesifikasiyalar rəng və növə görə fərqlənə bilər. Göstərilən dəyərlər tipikdir və normal istehsala əsaslandırılıb.",
@@ -1054,7 +1054,7 @@ const az = {
   ],
 
   qualityControl: [
-    "Rətubət testi",
+    "Rütubət testi",
     "PVC, etiket və yapışqan təhlili",
     "Rəng və vizual yoxlama",
     "Çirklənmə və yad maddə yoxlaması",
@@ -1071,7 +1071,7 @@ const az = {
   ],
 
   keySpecs: [
-    { label: "Rətubət" },
+    { label: "Rütubət" },
     { label: "PVC Miqdarı" },
     { label: "Etiket və Yapışqan" },
     { label: "Digər Plastiklər" },
@@ -1134,10 +1134,10 @@ const az = {
 
   sustainabilitySteps: [
     { name: "Toplama", description: "Tullantı PET butulkaları toplanır." },
-    { name: "Çeşidləmə", description: "Şüşələr rəng və növünə görə çeşidlənir." },
+    { name: "Çeşidləmə", description: "Butulkalar rəng və növünə görə çeşidlənir." },
     { name: "Yuma", description: "İsti yuyulma etiket, yapışqan və çirki təmizləyir." },
     { name: "Qurutma", description: "Təmiz fleks üçün rütubət təmizlənir." },
-    { name: "Xırdalama", description: "Şüşələr eyni ölçülü fleksə xırdalanır." },
+    { name: "Xırdalama", description: "Butulkalar eyni ölçülü fleksə xırdalanır." },
     { name: "Keyfiyyətə Nəzarət", description: "Ciddi test sabit keyfiyyəti təmin edir." },
     { name: "Yüksək Keyfiyyətli rPET Fleks", description: "İstehsalınız üçün hazırdır." },
   ],
@@ -1152,7 +1152,7 @@ const az = {
 
   impactStats: [
     { value: "2.000+", title: "TON", description: "İldə istehsal olunan rPET fleks" },
-    { value: "100M+", title: "ŞÜŞƏ", description: "Hər il poliqonlardan uzaqlaşdırılan" },
+    { value: "100M+", title: "BUTULKA", description: "Hər il poliqonlardan uzaqlaşdırılan" },
     { value: "-30%", title: "SU İSTİFADƏSİ", description: "Sənaye ortalaması ilə müqayisə" },
     { value: "-25%", title: "ENERJİ İSTİFADƏSİ", description: "Effektiv proseslər sayəsində" },
     { value: "Müsbət", title: "SOSİAL TƏSİR", description: "Yerli iş yerlərini və icmaları dəstəkləyir" },
