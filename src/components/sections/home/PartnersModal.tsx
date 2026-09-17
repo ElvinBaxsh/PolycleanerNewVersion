@@ -107,9 +107,13 @@ export default function PartnersModal({ open, onClose }: { open: boolean; onClos
                           }}
                         />
                       </span>
-                      <span className="flex items-center gap-1 text-center text-xs font-semibold text-slate group-hover:text-navy">
+                      {/* The link icon hangs off the name's right edge instead of
+                          sitting beside it in the flow: invisible until hover, it
+                          still took 16px of width, which pushed every centred name
+                          8px left — and on touch screens it never appears at all. */}
+                      <span className="relative text-center text-xs font-semibold text-slate group-hover:text-navy">
                         {partnerText[i].name}
-                        <ExternalLink className="size-3 shrink-0 opacity-0 transition-opacity group-hover:opacity-60" aria-hidden />
+                        <ExternalLink className="absolute left-full top-1/2 ml-1 size-3 -translate-y-1/2 opacity-0 transition-opacity group-hover:opacity-60" aria-hidden />
                       </span>
                     </a>
                   </li>
