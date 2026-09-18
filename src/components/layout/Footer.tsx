@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { MapPin, Phone, Mail, Globe } from "lucide-react";
-import { LinkedinIcon, FacebookIcon } from "@/components/ui/SocialIcons";
+import { LinkedinIcon, FacebookIcon, WhatsappIcon } from "@/components/ui/SocialIcons";
 import Logo from "./Logo";
 import Container from "@/components/ui/Container";
 import LanguageSwitcher from "./LanguageSwitcher";
@@ -14,6 +14,8 @@ import {
   FOOTER_PRODUCT_LINKS,
   FOOTER_INFO_LINKS,
   COMPANY,
+  CONTACT_PHONES,
+  CONTACT_EMAILS,
 } from "@/lib/constants";
 
 export default function Footer() {
@@ -81,46 +83,69 @@ export default function Footer() {
           <h3 className="text-xs font-bold uppercase tracking-wider text-white">{t.footer.contactUs}</h3>
           {/* Each line is the action someone wants from it: the address opens
               the location on a map, the number dials, the address writes a
-              mail. The whole row is the target, not just the text, so it is
-              comfortable to tap on a phone. */}
+              mail. Every row has the same padding, so the grouped phone and
+              mail rows below sit at the same spacing as the single ones. */}
           <ul className="mt-4 space-y-3 text-sm text-white/60">
-            <li>
+            <li className="py-0.5">
               <a
                 href={`https://www.google.com/maps/search/?api=1&query=${COMPANY.coordinates.lat}%2C${COMPANY.coordinates.lng}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="-my-1 flex gap-2.5 py-1 transition-colors hover:text-white"
+                className="flex gap-2.5 transition-colors hover:text-white"
               >
                 <MapPin className="size-4 shrink-0 mt-0.5 text-brand-green" />
                 {t.common.address}
               </a>
             </li>
-            <li>
-              <a
-                href={`tel:${COMPANY.phone.replace(/\s/g, "")}`}
-                className="-my-1 flex gap-2.5 py-1 transition-colors hover:text-white"
-              >
-                <Phone className="size-4 shrink-0 mt-0.5 text-brand-green" />
-                {COMPANY.phone}
-              </a>
+            {/* The numbers and the addresses each share one icon, so it
+                isn't repeated down the column; every number still dials and
+                has its WhatsApp chat beside it, as in Contact Information on
+                the contact page. */}
+            <li className="flex gap-2.5 py-0.5">
+              <Phone className="size-4 shrink-0 mt-0.5 text-brand-green" aria-hidden />
+              <ul className="space-y-1.5">
+                {CONTACT_PHONES.map((phone) => (
+                  <li key={phone.tel} className="flex items-center gap-2.5">
+                    <a
+                      href={`tel:${phone.tel}`}
+                      className="whitespace-nowrap tabular-nums transition-colors hover:text-white"
+                    >
+                      {phone.display}
+                    </a>
+                    <a
+                      href={`https://wa.me/${phone.whatsapp}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`WhatsApp ${phone.display}`}
+                      title="WhatsApp"
+                      className="-my-0.5 inline-flex size-6 shrink-0 items-center justify-center rounded-full text-brand-green transition-colors hover:bg-white/10"
+                    >
+                      <WhatsappIcon className="size-4" aria-hidden />
+                    </a>
+                  </li>
+                ))}
+              </ul>
             </li>
-            <li>
-              <a
-                href={`mailto:${COMPANY.email}`}
-                className="-my-1 flex gap-2.5 py-1 transition-colors hover:text-white"
-              >
-                <Mail className="size-4 shrink-0 mt-0.5 text-brand-green" />
-                {COMPANY.email}
-              </a>
+            <li className="flex gap-2.5 py-0.5">
+              <Mail className="size-4 shrink-0 mt-0.5 text-brand-green" aria-hidden />
+              <ul className="space-y-1.5">
+                {CONTACT_EMAILS.map((email) => (
+                  <li key={email}>
+                    <a href={`mailto:${email}`} className="transition-colors hover:text-white">
+                      {email}
+                    </a>
+                  </li>
+                ))}
+              </ul>
             </li>
-            <li>
+            <li className="py-0.5">
               {/* The full address on purpose, not an internal link: this row
                   shows the site's own domain, so it should land there even
                   when the footer is being viewed on a preview deployment.
                   Still locale-aware, so /az visitors stay in Azerbaijani. */}
               <a
                 href={`${SITE_URL}${localizePath("/", locale)}`}
-                className="-my-1 flex gap-2.5 py-1 transition-colors hover:text-white"
+                className="flex gap-2.5 transition-colors hover:text-white"
               >
                 <Globe className="size-4 shrink-0 mt-0.5 text-brand-green" />
                 {t.footer.website}
