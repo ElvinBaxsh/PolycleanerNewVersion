@@ -12,7 +12,7 @@ import { CONTACT_INFO, CONTACT_EMAILS, CONTACT_PHONES, SITE_URL } from "@/lib/co
 
 const ICONS: LucideIcon[] = [Mail, Phone, MapPin, Globe, MessageCircle];
 
-const LINK = "text-base text-slate underline-offset-4 transition-colors hover:text-brand-blue hover:underline";
+const LINK = "text-base text-slate transition-colors hover:text-brand-blue";
 // Icon-only buttons as tall as the number's line and in the card's icon
 // colour, so they sit beside the number without competing with it.
 const ROUND =
