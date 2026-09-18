@@ -5,11 +5,18 @@ import { clsx } from "clsx";
 import Container from "@/components/ui/Container";
 import InquiryForm from "@/components/forms/InquiryForm";
 import Reveal from "@/components/ui/Reveal";
-import { LinkedinIcon, FacebookIcon } from "@/components/ui/SocialIcons";
+import { LinkedinIcon, FacebookIcon, WhatsappIcon } from "@/components/ui/SocialIcons";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
-import { CONTACT_INFO } from "@/lib/constants";
+import { localizePath } from "@/lib/i18n/localizePath";
+import { CONTACT_INFO, CONTACT_EMAILS, CONTACT_PHONES, SITE_URL } from "@/lib/constants";
 
 const ICONS: LucideIcon[] = [Mail, Phone, MapPin, Globe, MessageCircle];
+
+const LINK = "text-base text-slate underline-offset-4 transition-colors hover:text-brand-blue hover:underline";
+// Icon-only buttons as tall as the number's line and in the card's icon
+// colour, so they sit beside the number without competing with it.
+const ROUND =
+  "inline-flex size-6 shrink-0 items-center justify-center rounded-full text-brand-blue transition-colors hover:bg-soft-gray focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-blue";
 
 export default function ContactFormSection({
   defaultType,
@@ -19,11 +26,6 @@ export default function ContactFormSection({
   defaultInterest?: string;
 }) {
   const { t } = useLanguage();
-  const contactItems = CONTACT_INFO.map((item, i) => ({
-    label: t.contactInfo[i].label,
-    value: i === 2 ? t.common.address : i === 4 ? t.contactInfo[i].value! : item.value,
-    sub: t.contactInfo[i].sub,
-  }));
 
   return (
     <section id="form" className="section-y scroll-mt-24 bg-white">
@@ -41,22 +43,22 @@ export default function ContactFormSection({
           </div>
         </Reveal>
 
-        <Reveal delay={0.1} className="flex h-full flex-col rounded-2xl border border-border p-6 sm:p-8">
+        {/* Tighter on phones (smaller icon tiles, padding and gaps) so a number and
+            its call and WhatsApp buttons still fit on one line at 360px. */}
+        <Reveal delay={0.1} className="flex h-full flex-col rounded-2xl border border-border p-4 sm:p-8">
           <h2 className="text-2xl font-bold text-navy">{t.contact.infoTitle}</h2>
           <ul className="mt-6 flex flex-1 flex-col justify-between gap-6">
-            {contactItems.map((item, i) => {
+            {CONTACT_INFO.map((_, i) => {
               const Icon = ICONS[i];
               return (
-                <li key={i} className="flex items-start gap-4">
-                  <span className="flex size-18 shrink-0 items-center justify-center rounded-lg border border-border text-brand-blue">
-                    <Icon className="size-9 stroke-[1.5]" />
+                <li key={i} className="flex items-start gap-3 sm:gap-4">
+                  <span className="flex size-12 shrink-0 items-center justify-center rounded-lg border border-border text-brand-blue sm:size-18">
+                    <Icon className="size-6 stroke-[1.5] sm:size-9" />
                   </span>
-                  <div>
-                    <p className="text-base font-bold text-navy">{item.label}</p>
-                    <p className={clsx("text-base text-slate", i === 2 && "font-semibold")}>
-                      {item.value}
-                    </p>
-                    <p className="mt-0.5 text-sm text-slate/60">{item.sub}</p>
+                  <div className="min-w-0">
+                    <p className="text-base font-bold text-navy">{t.contactInfo[i].label}</p>
+                    <ContactValue index={i} />
+                    <p className="mt-0.5 text-sm text-slate/60">{t.contactInfo[i].sub}</p>
                   </div>
                 </li>
               );
@@ -86,4 +88,77 @@ export default function ContactFormSection({
       </Container>
     </section>
   );
+}
+
+/**
+ * Each row's value is the action someone wants from it: an address writes
+ * a mail, a number offers both a call and a WhatsApp chat (people in the
+ * region reach a supplier either way), the location scrolls down to the map
+ * on this page, and the site name opens the site.
+ */
+function ContactValue({ index }: { index: number }) {
+  const { t, locale } = useLanguage();
+
+  switch (index) {
+    case 0:
+      return (
+        <div className="flex flex-col">
+          {CONTACT_EMAILS.map((email) => (
+            <a key={email} href={`mailto:${email}`} className={LINK}>
+              {email}
+            </a>
+          ))}
+        </div>
+      );
+
+    case 1:
+      return (
+        <ul className="mt-1 space-y-1.5">
+          {CONTACT_PHONES.map((phone) => (
+            <li key={phone.tel} className="flex flex-wrap items-center gap-x-1.5 gap-y-1.5 sm:gap-x-2.5">
+              <a href={`tel:${phone.tel}`} className={clsx(LINK, "whitespace-nowrap tabular-nums")}>
+                {phone.display}
+              </a>
+              <span className="flex gap-1">
+                <a
+                  href={`tel:${phone.tel}`}
+                  aria-label={`${t.contact.callLabel} ${phone.display}`}
+                  title={t.contact.callLabel}
+                  className={ROUND}
+                >
+                  <Phone className="size-4" aria-hidden />
+                </a>
+                <a
+                  href={`https://wa.me/${phone.whatsapp}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`WhatsApp ${phone.display}`}
+                  title="WhatsApp"
+                  className={ROUND}
+                >
+                  <WhatsappIcon className="size-4" aria-hidden />
+                </a>
+              </span>
+            </li>
+          ))}
+        </ul>
+      );
+
+    case 2:
+      return (
+        <a href="#map" className={clsx(LINK, "font-semibold")}>
+          {t.common.address}
+        </a>
+      );
+
+    case 3:
+      return (
+        <a href={`${SITE_URL}${localizePath("/", locale)}`} className={LINK}>
+          polycleaner.az
+        </a>
+      );
+
+    default:
+      return <p className="text-base text-slate">{t.contactInfo[index].value}</p>;
+  }
 }

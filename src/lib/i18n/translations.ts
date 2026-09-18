@@ -548,6 +548,7 @@ const en = {
     formTitle: "Send Us a Message",
     formIntro: "Fill in the form below and our team will get back to you promptly.",
     infoTitle: "Contact Information",
+    callLabel: "Call",
     findUsTitle: "Find Us",
     findUsDescription:
       "Our facility is located in the Balakhani Industrial Park, strategically positioned for efficient logistics and global shipping.",
@@ -567,7 +568,7 @@ const en = {
   },
 
   contactInfo: [
-    { label: "Sales Email", sub: "We typically reply within 24 hours." },
+    { label: "Email", sub: "We typically reply within 24 hours." },
     { label: "Phone / WhatsApp", sub: "Mon – Fri, 09:00 – 18:00 (GMT+4)" },
     { label: "Location", sub: "Factory & Headquarters" },
     { label: "Website", sub: "Learn more about our products & services." },
@@ -1251,6 +1252,7 @@ const az = {
     formTitle: "Bizə mesaj göndərin",
     formIntro: "Formu doldurun və komandamız ən qısa zamanda sizinlə əlaqə saxlayacaq.",
     infoTitle: "Əlaqə Məlumatları",
+    callLabel: "Zəng et",
     findUsTitle: "Bizi Tapın",
     findUsDescription:
       "Müəssisəmiz Balaxanı Sənaye Parkında yerləşir, effektiv logistika və qlobal göndəriş üçün strateji baxımdan əlverişli mövqedədir.",
@@ -1270,7 +1272,7 @@ const az = {
   },
 
   contactInfo: [
-    { label: "Satış Email", sub: "Adətən 24 saat ərzində cavab veririk." },
+    { label: "Email", sub: "Adətən 24 saat ərzində cavab veririk." },
     { label: "Telefon / WhatsApp", sub: "B.e – C, 09:00 – 18:00 (GMT+4)" },
     { label: "Yerləşmə", sub: "Zavod və Baş Ofis" },
     { label: "Veb sayt", sub: "Məhsul və xidmətlərimiz haqqında daha çox." },

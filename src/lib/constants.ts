@@ -586,8 +586,18 @@ export const PARTNERS = [
   },
 ];
 
+// The contact page lists every number and inbox. Each number can be called
+// or opened in WhatsApp — `tel` and `whatsapp` are the same number in the
+// formats those two links need.
+export const CONTACT_PHONES = [
+  { display: "+994 55 257 54 54", tel: "+994552575454", whatsapp: "994552575454" },
+  { display: "+994 55 858 26 95", tel: "+994558582695", whatsapp: "994558582695" },
+];
+
+export const CONTACT_EMAILS = ["sales@polycleaner.az", "office@polycleaner.az"];
+
 export const CONTACT_INFO = [
-  { label: "Sales Email", value: "office@polycleaner.az", sub: "We typically reply within 24 hours." },
+  { label: "Email", value: "sales@polycleaner.az", sub: "We typically reply within 24 hours." },
   { label: "Phone / WhatsApp", value: "+994 55 257 54 54", sub: "Mon – Fri, 09:00 – 18:00 (GMT+4)" },
   { label: "Location", value: "Balakhani Industrial Park, 1th zone", sub: "Factory & Headquarters" },
   { label: "Website", value: "polycleaner.az", sub: "Learn more about our products & services." },

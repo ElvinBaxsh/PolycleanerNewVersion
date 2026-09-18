@@ -33,7 +33,9 @@ const DIRECTIONS = [
 export default function MapAndActions() {
   const { t } = useLanguage();
   return (
-    <section className="section-y bg-soft-gray">
+    // id="map": the address in Contact Information links here. scroll-mt keeps
+    // the section clear of the sticky header when the page jumps to it.
+    <section id="map" className="section-y scroll-mt-24 bg-soft-gray">
       <Container>
         {/* Stretched to the map's height as a card of its own — centred
             beside a tall map, the few lines of copy left a large empty
