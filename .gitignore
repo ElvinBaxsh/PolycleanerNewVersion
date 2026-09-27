@@ -55,3 +55,7 @@ next-env.d.ts
 .env*
 # ...but the template carries no secrets and is meant to be committed.
 !.env.example
+
+# The camera master of the company video (139MB): GitHub rejects files
+# over 100MB, and the site serves the compressed copies next to it.
+/public/video/PolyClean_1.mp4

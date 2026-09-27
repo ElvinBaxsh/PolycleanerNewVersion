@@ -85,7 +85,10 @@ export default function PageHero({
   const HREF_CTA_ICON = <FileText className="ml-1.5 size-5 stroke-[1.8]" aria-hidden />;
 
   return (
-    <section className="relative min-h-[420px] w-full overflow-hidden bg-navy pb-14 pt-8 sm:pt-10 lg:min-h-[480px]">
+    // From lg the banner fills the screen below the sticky header (h-20
+    // there), the same as the home hero; phones and tablets keep the
+    // height they had.
+    <section className="relative min-h-[420px] w-full overflow-hidden bg-navy pb-14 pt-8 sm:pt-10 lg:flex lg:min-h-[calc(100svh-5rem)] lg:items-center lg:py-14">
       {/* Background photo + left-to-right gradient so the copy stays legible */}
       <div className="absolute inset-0 z-0">
         <Image
@@ -101,7 +104,7 @@ export default function PageHero({
       </div>
 
       <Container className="relative z-10">
-        <nav className="mb-6 flex items-center gap-2 text-xs text-white/60" aria-label="Breadcrumb">
+        <nav className="mb-6 flex items-center gap-2 text-xs text-white/60 lg:text-sm" aria-label="Breadcrumb">
           <Link href={localizePath("/", locale)} className="hover:text-white/90">
             {t.nav.home}
           </Link>
@@ -110,22 +113,22 @@ export default function PageHero({
         </nav>
 
         <Reveal className="max-w-2xl">
-          <h1 className="text-[32px] font-bold leading-[1.15] text-white sm:text-[40px] lg:text-[48px]">
+          <h1 className="text-[32px] font-bold leading-[1.15] text-white sm:text-[40px] lg:text-[60px] xl:text-[72px] 2xl:text-[80px] lg:[@media(max-height:820px)]:text-[48px]">
             {title}
             {titleAccent && <span className="text-brand-green"> {titleAccent}</span>}
           </h1>
-          <p className="mt-4 max-w-md text-lg leading-relaxed text-white/80 sm:text-xl">
+          <p className="mt-5 max-w-lg text-lg leading-relaxed text-white/80 sm:text-xl lg:mt-6 lg:max-w-xl lg:text-[26px] lg:leading-relaxed lg:[@media(max-height:820px)]:mt-4 lg:[@media(max-height:820px)]:text-xl">
             {description}
           </p>
           {cta && (
-            <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+            <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap lg:mt-9 lg:[@media(max-height:820px)]:mt-7">
               {cta.map((c, i) =>
                 c.inquiryType ? (
                   <InquiryButton
                     key={i}
                     type={c.inquiryType}
                     variant={i === 0 ? "primary" : "ghost-light"}
-                    className="h-12 w-full px-6 text-sm font-bold uppercase tracking-wider sm:w-auto"
+                    className="h-12 w-full px-6 text-sm font-bold uppercase tracking-wider sm:w-auto lg:h-14 lg:px-8 lg:text-base lg:[@media(max-height:820px)]:h-12 lg:[@media(max-height:820px)]:text-sm"
                   >
                     {c.label}
                     {CTA_ICONS[c.inquiryType]}
@@ -135,7 +138,7 @@ export default function PageHero({
                     key={i}
                     href={c.href!}
                     variant={i === 0 ? "primary" : "ghost-light"}
-                    className="h-12 w-full px-6 text-sm font-bold uppercase tracking-wider sm:w-auto"
+                    className="h-12 w-full px-6 text-sm font-bold uppercase tracking-wider sm:w-auto lg:h-14 lg:px-8 lg:text-base lg:[@media(max-height:820px)]:h-12 lg:[@media(max-height:820px)]:text-sm"
                   >
                     {c.label}
                     {HREF_CTA_ICON}

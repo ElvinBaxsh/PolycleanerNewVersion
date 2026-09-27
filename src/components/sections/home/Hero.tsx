@@ -1,13 +1,15 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { FlaskConical, ArrowRight, ChevronRight } from "lucide-react";
+import { FlaskConical, ArrowRight, ChevronRight, Play } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { clsx } from "clsx";
 import Image from "next/image";
 import Container from "@/components/ui/Container";
 import Reveal from "@/components/ui/Reveal";
 import InquiryButton from "@/components/inquiry/InquiryButton";
+import VideoModal from "./VideoModal";
+import HeroBackgroundVideo from "./HeroBackgroundVideo";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 import { TAROPAK_EVENT, AMI_EXPO_EVENT } from "@/lib/constants";
 
@@ -16,6 +18,7 @@ type EventTab = "taropak" | "amiExpo";
 export default function Hero() {
   const { t } = useLanguage();
   const [activeEvent, setActiveEvent] = useState<EventTab>("taropak");
+  const [videoOpen, setVideoOpen] = useState(false);
   const isTaropak = activeEvent === "taropak";
   const event = isTaropak ? TAROPAK_EVENT : AMI_EXPO_EVENT;
 
@@ -33,8 +36,17 @@ export default function Hero() {
   }, [activeEvent]);
 
   return (
-    <section className="relative min-h-[580px] w-full overflow-hidden bg-navy pb-16 pt-12 lg:pb-24 lg:pt-16">
-      {/* Background Image & Overlay */}
+    // From lg the banner fills what's left of the screen under the sticky
+    // header (h-20 there), so it opens as a full screen of its own, and on
+    // a short desktop screen the spacing tightens (the max-height variants
+    // below) so the event card still lands above the fold. Phones and
+    // tablets keep the layout they had. It's a minimum, not a cap: content
+    // that needs more room makes the section grow rather than be clipped.
+    <section className="relative min-h-[580px] w-full overflow-hidden bg-navy pb-16 pt-12 lg:flex lg:min-h-[calc(100svh-5rem)] lg:items-center lg:py-14 lg:[@media(max-height:820px)]:py-6">
+      {/* Background Image & Overlay
+          The image is the base layer and the video's fallback — the video
+          sits on top with the same image as its poster, so the hero looks
+          the same from the first paint and simply starts moving. */}
       <div className="absolute inset-0 z-0">
         <Image
           src="/images/hero-rpet-flakes.webp"
@@ -44,6 +56,8 @@ export default function Hero() {
           sizes="100vw"
           className="object-cover object-center"
         />
+
+        <HeroBackgroundVideo poster="/images/hero-rpet-flakes.webp" />
 
         <div className="absolute inset-0 bg-gradient-to-r from-navy/95 via-navy/80 to-navy/40 lg:from-navy/95 lg:via-navy/85 lg:to-navy/20" />
       </div>
@@ -60,7 +74,7 @@ export default function Hero() {
 
           {/* Heading */}
           <Reveal>
-            <h1 className="mt-2 text-3xl font-extrabold leading-tight text-white sm:text-4xl lg:text-[48px]">
+            <h1 className="mt-2 text-3xl font-extrabold leading-tight text-white sm:text-4xl lg:text-[48px] lg:[@media(max-height:820px)]:text-[40px]">
               {t.home.heroTitleLine1}{" "}
               <span className="text-brand-green">{t.home.heroTitleAccent}</span> {t.home.heroTitleLine2}{" "}
               <br className="hidden sm:inline" />
@@ -70,13 +84,13 @@ export default function Hero() {
 
           {/* Description */}
           <Reveal delay={0.1}>
-            <p className="mt-4 max-w-lg text-sm leading-relaxed text-white/75 sm:text-base">
+            <p className="mt-4 max-w-lg text-sm leading-relaxed text-white/75 sm:text-base lg:[@media(max-height:820px)]:mt-3">
               {t.home.heroDescription}
             </p>
           </Reveal>
 
           {/* Əsas Düymə və Taropak Bloku */}
-          <Reveal delay={0.2} className="mt-6 flex w-full max-w-[600px] flex-col gap-3">
+          <Reveal delay={0.2} className="mt-6 flex w-full max-w-[600px] flex-col gap-3 lg:[@media(max-height:820px)]:mt-4 lg:[@media(max-height:820px)]:gap-2">
             {/* Düymələr Sətiri */}
             <div className="flex w-full flex-col gap-2.5 sm:flex-row sm:items-center">
               <InquiryButton
@@ -191,31 +205,40 @@ export default function Hero() {
           </Reveal>
         </div>
 
-        {/* Sağ Tərəf - Video
-            Play düyməsi müvəqqəti gizlədilib — hələ real video faylımız
-            yoxdur. Video hazır olanda aşağıdakı bloku geri aç:
-
+        {/* Sağ Tərəf - Video */}
         <div className="relative flex items-center justify-center xl:col-span-6">
+          {/* A halo, the white disc and a label below it — the same on a
+              phone as on a desktop, only smaller. */}
           <button
             type="button"
-            aria-label="Play company video"
-            className="group flex flex-col items-center gap-3 transition-transform hover:scale-105"
+            onClick={() => setVideoOpen(true)}
+            aria-label={t.home.watchProcess}
+            className="group flex cursor-pointer flex-col items-center gap-4 transition-transform hover:scale-[1.03]"
           >
-            <span className="relative flex size-20 items-center justify-center sm:size-24">
-              <span className="absolute inset-0 rounded-full bg-white/30 animate-ping" />
-              <span className="absolute inset-0 rounded-full bg-white/10 animate-pulse" />
-              <span className="animate-float relative flex size-20 items-center justify-center rounded-full border-2 border-white bg-white text-brand-green shadow-2xl sm:size-24">
-                <Play className="ml-1 size-8 fill-current sm:size-10" />
+            <span className="relative flex size-28 items-center justify-center sm:size-36">
+              <span className="absolute inset-0 rounded-full bg-white/10 ring-1 ring-inset ring-white/20 backdrop-blur-[2px]" />
+              <span className="absolute inset-0 rounded-full bg-white/10 animate-ping" />
+              <span className="relative flex size-[72px] items-center justify-center rounded-full bg-white text-brand-green shadow-2xl transition-colors group-hover:bg-soft-gray sm:size-24">
+                <Play className="ml-1 size-7 fill-current sm:size-9" />
               </span>
             </span>
 
-            <span className="animate-float text-xs font-bold uppercase tracking-widest text-white [animation-delay:0.15s] [text-shadow:0_2px_4px_rgba(0,0,0,0.8)]">
-              Play Video
+            <span className="flex flex-col items-center gap-2">
+              <span className="rounded-full border border-white/20 bg-navy/50 px-5 py-2 text-xs font-bold uppercase tracking-widest text-white backdrop-blur-sm">
+                {t.home.watchProcess}
+              </span>
+              <span className="h-0.5 w-16 rounded-full bg-brand-green/80" />
             </span>
           </button>
         </div>
-        */}
       </Container>
+
+      <VideoModal
+        open={videoOpen}
+        onClose={() => setVideoOpen(false)}
+        title={t.home.videoTitle}
+        closeLabel={t.forms.closeLabel}
+      />
     </section>
   );
 }

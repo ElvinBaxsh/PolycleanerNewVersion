@@ -63,6 +63,8 @@ const en = {
     heroTitleLine3: "from Azerbaijan",
     heroDescription:
       "Poly Cleaner supplies consistently processed and fully documented rPET flakes for sheet, strap, fiber, food and non-food packaging applications.",
+    watchProcess: "Watch Our Process",
+    videoTitle: "Poly Cleaner company video",
     taropakMeetUs: (name: string) => `Meet us at ${name}`,
     taropakBannerTagline: "Discover our rPET flakes and build your next sustainable solution with us.",
     trustBar: [
@@ -767,6 +769,8 @@ const az = {
     heroTitleLine3: "",
     heroDescription:
       "Poly Cleaner MMC PET lövhə, qablaşdırma çəmbəri, polyester lif və qeyri-qida qablaşdırması üçün sabit emal olunmuş və tam sənədləşdirilmiş rPET fleks təchiz edir.",
+    watchProcess: "Prosesimizə baxın",
+    videoTitle: "Poly Cleaner şirkət videosu",
     taropakMeetUs: (name: string) => `${name}-da bizimlə görüşün`,
     taropakBannerTagline: "rPET flekslərimizi kəşf edin və növbəti dayanıqlı həllinizi bizimlə quraq.",
     trustBar: [
