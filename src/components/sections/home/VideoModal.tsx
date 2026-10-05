@@ -74,7 +74,7 @@ export default function VideoModal({
       {open && (
         <motion.div
           key="video-backdrop"
-          className="fixed inset-0 z-[110] flex items-center justify-center bg-[rgba(6,43,58,0.92)] p-4 pt-[max(1rem,env(safe-area-inset-top))]"
+          className="fixed inset-0 z-[110] flex items-center justify-center bg-[rgba(6,43,58,0.92)] p-5 pt-[max(1.25rem,env(safe-area-inset-top))]"
           onClick={onClose}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -92,14 +92,17 @@ export default function VideoModal({
             exit={{ opacity: 0, y: 14 }}
             transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
           >
-            {/* Above the frame, not on it: the player's own controls sit
-                along the bottom edge, and a corner button over the picture
-                would cover part of it. */}
+            {/* Straddling the top-right corner, half on the picture and
+                half off it, so it reads as the frame's own control without
+                taking a bite out of the picture. Pulled in a little on
+                phones, where the backdrop's padding is all it has to sit
+                in. Opaque, not translucent: over a moving picture a glassy
+                circle disappears whenever a bright frame passes under it. */}
             <button
               type="button"
               onClick={onClose}
               aria-label={closeLabel}
-              className="absolute -top-11 right-0 flex size-10 cursor-pointer items-center justify-center rounded-full bg-white/10 text-white backdrop-blur transition-colors hover:bg-white/20"
+              className="absolute -right-3 -top-3 z-10 flex size-10 cursor-pointer items-center justify-center rounded-full bg-navy text-white shadow-lg ring-1 ring-white/25 transition-colors hover:bg-brand-blue sm:-right-5 sm:-top-5"
             >
               <X className="size-5" />
             </button>
