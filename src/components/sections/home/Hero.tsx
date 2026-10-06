@@ -42,7 +42,11 @@ export default function Hero() {
     // below) so the event card still lands above the fold. Phones and
     // tablets keep the layout they had. It's a minimum, not a cap: content
     // that needs more room makes the section grow rather than be clipped.
-    <section className="relative min-h-[580px] w-full overflow-hidden bg-navy pb-16 pt-12 lg:flex lg:min-h-[calc(100svh-5rem)] lg:items-center lg:py-14 lg:[@media(max-height:820px)]:py-6">
+    // The bottom padding is the larger one because the trust bar below is
+    // pulled up over this section (-mt-14 there): without that allowance the
+    // event card ran straight into the white card, which is what happened in
+    // Azerbaijani, where the heading takes a fourth line.
+    <section className="relative min-h-[580px] w-full overflow-hidden bg-navy pb-16 pt-12 lg:flex lg:min-h-[calc(100svh-5rem)] lg:items-center lg:pb-28 lg:pt-14 lg:[@media(max-height:820px)]:pb-20 lg:[@media(max-height:820px)]:pt-6">
       {/* Background Image & Overlay
           The image is the base layer and the video's fallback — the video
           sits on top with the same image as its poster, so the hero looks
@@ -74,7 +78,7 @@ export default function Hero() {
 
           {/* Heading */}
           <Reveal>
-            <h1 className="mt-2 text-3xl font-extrabold leading-tight text-white sm:text-4xl lg:text-[48px] lg:[@media(max-height:820px)]:text-[40px]">
+            <h1 className="mt-2 text-3xl font-extrabold leading-tight text-white sm:text-4xl lg:text-[48px] lg:[@media(max-height:820px)]:text-[40px] lg:[@media(max-height:760px)]:text-[34px]!">
               {t.home.heroTitleLine1}{" "}
               <span className="text-brand-green">{t.home.heroTitleAccent}</span> {t.home.heroTitleLine2}{" "}
               <br className="hidden sm:inline" />
@@ -84,13 +88,13 @@ export default function Hero() {
 
           {/* Description */}
           <Reveal delay={0.1}>
-            <p className="mt-4 max-w-lg text-sm leading-relaxed text-white/75 sm:text-base lg:[@media(max-height:820px)]:mt-3">
+            <p className="mt-4 max-w-lg text-sm leading-relaxed text-white/75 sm:text-base lg:[@media(max-height:820px)]:mt-3 lg:[@media(max-height:760px)]:text-sm!">
               {t.home.heroDescription}
             </p>
           </Reveal>
 
           {/* Əsas Düymə və Taropak Bloku */}
-          <Reveal delay={0.2} className="mt-6 flex w-full max-w-[600px] flex-col gap-3 lg:[@media(max-height:820px)]:mt-4 lg:[@media(max-height:820px)]:gap-2">
+          <Reveal delay={0.2} className="mt-6 flex w-full max-w-[600px] flex-col gap-3 lg:[@media(max-height:820px)]:mt-4 lg:[@media(max-height:820px)]:gap-2 lg:[@media(max-height:760px)]:mt-3!">
             {/* Düymələr Sətiri */}
             <div className="flex w-full flex-col gap-2.5 sm:flex-row sm:items-center">
               <InquiryButton
