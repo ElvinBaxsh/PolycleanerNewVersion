@@ -25,7 +25,7 @@ export default function SustainabilityPage({ locale = "en" }: { locale?: Locale 
       <JsonLd
         data={pageBreadcrumbJsonLd("/sustainability", "sustainability", locale)}
       />
-      <PageHero pageKey="sustainability" image="/images/sustainabilityImg.jpg" imagePosition="right" />
+      <PageHero pageKey="sustainability" image="/images/factory/hero-sustainability.webp" />
       <SustainabilityTrustStrip />
       <ImpactCards />
       <BottleToFlakeStrip />

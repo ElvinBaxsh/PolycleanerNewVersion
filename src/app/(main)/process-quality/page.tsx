@@ -3,6 +3,7 @@ import type { Locale } from "@/lib/i18n/translations";
 import PageHero from "@/components/sections/PageHero";
 import FullProcessFlow from "@/components/sections/process/FullProcessFlow";
 import CapabilitiesAndQuality from "@/components/sections/process/CapabilitiesAndQuality";
+import PlantPhotosTeaser from "@/components/sections/process/PlantPhotosTeaser";
 import QAPillars from "@/components/sections/process/QAPillars";
 import KeySpecsStrip from "@/components/sections/process/KeySpecsStrip";
 import HowWeWork from "@/components/sections/process/HowWeWork";
@@ -24,9 +25,10 @@ export default function ProcessQualityPage({ locale = "en" }: { locale?: Locale 
       <JsonLd
         data={pageBreadcrumbJsonLd("/process-quality", "process", locale)}
       />
-      <PageHero pageKey="process" image="/images/ProcessQuality.jpg" />
+      <PageHero pageKey="process" image="/images/factory/hero-process.webp" />
       <FullProcessFlow />
       <CapabilitiesAndQuality />
+      <PlantPhotosTeaser />
       <QAPillars />
       <KeySpecsStrip />
       <HowWeWork />

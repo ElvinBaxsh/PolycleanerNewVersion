@@ -4,6 +4,7 @@ import Image from "next/image";
 import { MapPin, CalendarDays, Globe, type LucideIcon } from "lucide-react";
 import Container from "@/components/ui/Container";
 import Reveal from "@/components/ui/Reveal";
+import FactoryGalleryButton from "@/components/gallery/FactoryGallery";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 
 // All three are line icons from the same set, so they share one size and
@@ -26,13 +27,16 @@ export default function CompanyOverview() {
         <Reveal className="lg:col-span-5 w-full h-full">
           <div className="relative aspect-[4/3] w-full h-full overflow-hidden rounded-2xl shadow-xs lg:min-h-[380px]">
             <Image
-              src="/images/aboutImg.jpg"
+              src="/images/factory/about-facility.webp"
               alt="Poly Cleaner facility, Balakhani Industrial Park"
               fill
               className="object-cover"
               sizes="(min-width: 1024px) 40vw, 100vw"
               priority
             />
+            {/* Opens the plant photo gallery; sits on the photo so the
+                page doesn't need a section for it. */}
+            <FactoryGalleryButton className="absolute bottom-3 left-3 sm:bottom-4 sm:left-4" />
           </div>
         </Reveal>
 

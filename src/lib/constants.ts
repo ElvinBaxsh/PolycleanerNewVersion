@@ -182,23 +182,47 @@ export const PRODUCT_GRADES = [
     name: "Crushed PET Preform",
     description: "For sheet, strapping, thermoforming.",
     swatch: "#bfe1ea",
-    image: "/images/lightBlue.jpg",
+    image: "/images/factory/flakes-light-blue.webp",
   },
   {
     slug: "green",
     name: "Green",
     description: "For strap, sheet, general applications.",
     swatch: "#4caf1b",
-    image: "/images/green.jpg",
+    image: "/images/factory/flakes-green.webp",
   },
   {
     slug: "mixed-colors",
     name: "Mixed Colors",
     description: "For fiber, non-food packaging, others.",
     swatch: "#9aa7ad",
-    image: "/images/mixedColors.jpg",
+    image: "/images/factory/flakes-mixed.webp",
   },
 ];
+
+// Real photographs of the plant, shown in the gallery modal. These are the
+// frames the pages don't use as their own illustrations (the Process page's
+// teaser shows three of them as a way in). All are 3:2, so the grid and the
+// lightbox can assume one shape. Files: public/images/factory/gallery/
+// NN.webp (1920px) with a 640px copy under thumbs/. The order is the order
+// they appear in, and PlantPhotosTeaser picks its cards by position.
+export type FactoryPhotoCategory = "facility" | "sorting" | "equipment" | "material";
+
+const FACTORY_PHOTO_CATEGORIES: FactoryPhotoCategory[] = [
+  "facility", "facility", "facility", "facility",
+  "sorting", "sorting", "sorting", "sorting", "sorting", "sorting", "sorting", "sorting",
+  "equipment", "equipment", "equipment",
+  "material", "material", "material", "material",
+];
+
+export const FACTORY_GALLERY = FACTORY_PHOTO_CATEGORIES.map((category, i) => {
+  const file = `${String(i + 1).padStart(2, "0")}.webp`;
+  return {
+    src: `/images/factory/gallery/${file}`,
+    thumb: `/images/factory/gallery/thumbs/${file}`,
+    category,
+  };
+});
 
 export const PROCESS_STEPS = [
   { name: "Collection", description: "Post-consumer PET bottles are collected from trusted sources." },

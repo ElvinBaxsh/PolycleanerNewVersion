@@ -21,7 +21,7 @@ export default function ContactHero() {
     // height they had.
     <section className="relative min-h-[420px] overflow-hidden bg-navy pb-14 pt-8 sm:pt-10 lg:flex lg:min-h-[calc(100svh-5rem)] lg:items-center lg:py-14">
       <div className="absolute inset-0 z-0">
-        <Image src="/images/aboutUs.jpg" alt="Poly Cleaner facility" fill priority className="object-cover object-center" />
+        <Image src="/images/factory/hero-plant-interior.webp" alt="Poly Cleaner facility" fill priority className="object-cover object-center" />
         <div className="absolute inset-0 bg-gradient-to-r from-navy/95 via-navy/80 to-navy/30 lg:from-navy/95 lg:via-navy/80 lg:to-navy/10" />
       </div>
       <Container className="relative z-10">

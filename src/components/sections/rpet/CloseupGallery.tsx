@@ -9,10 +9,10 @@ import { useLanguage } from "@/lib/i18n/LanguageContext";
 
 const IMAGES = [
   "/images/transparent.jpg",
-  "/images/lightBlue.jpg",
-  "/images/green.jpg",
-  "/images/mixedColors.jpg",
-  "/images/closeUpViewLast.jpg",
+  "/images/factory/flakes-light-blue.webp",
+  "/images/factory/flakes-green.webp",
+  "/images/factory/flakes-mixed.webp",
+  "/images/factory/flakes-closeup.webp",
 ];
 
 export default function CloseupGallery() {

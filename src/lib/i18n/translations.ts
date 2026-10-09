@@ -288,12 +288,32 @@ const en = {
     { name: "Mixed Colors", description: "For fiber, non-food packaging, others." },
   ],
 
+  gallery: {
+    title: "Production Gallery",
+    open: "Production gallery",
+    count: (n: number) => `${n} photos`,
+    allPhotos: "All photos",
+    prev: "Previous photo",
+    next: "Next photo",
+    position: (i: number, n: number) => `${i} / ${n}`,
+    categories: {
+      facility: "Facility",
+      sorting: "Sorting line",
+      equipment: "Equipment",
+      material: "Material",
+    },
+    teaserTitle: "Our production capacity in real pictures",
+    teaserDescription: "Get to know our plant, production lines and quality control processes.",
+    allPlantPhotos: "Production gallery",
+    teaserCards: ["Production lines", "Plant grounds", "Sorting & inspection"],
+  },
+
   closeups: [
     { label: "Transparent/light blue flakes close-up" },
     { label: "Crushed PET preform close-up" },
     { label: "Green flakes close-up" },
     { label: "Mixed Colors flakes close-up" },
-    { label: "Flakes in hand" },
+    { label: "Flakes on the line" },
   ],
 
   applications: [
@@ -994,12 +1014,32 @@ const az = {
     { name: "Qarışıq Rənglər", description: "Polyester lif, qeyri-qida qablaşdırması və digər sənaye tətbiqləri üçün." },
   ],
 
+  gallery: {
+    title: "İstehsalat qalereyası",
+    open: "İstehsalat qalereyası",
+    count: (n: number) => `${n} foto`,
+    allPhotos: "Bütün fotolar",
+    prev: "Əvvəlki foto",
+    next: "Növbəti foto",
+    position: (i: number, n: number) => `${i} / ${n}`,
+    categories: {
+      facility: "Müəssisə",
+      sorting: "Çeşidləmə xətti",
+      equipment: "Avadanlıq",
+      material: "Material",
+    },
+    teaserTitle: "İstehsal gücümüz real görüntülərdə",
+    teaserDescription: "Zavodumuz, istehsal xətləri və keyfiyyətə nəzarət prosesləri ilə tanış olun.",
+    allPlantPhotos: "İstehsalat qalereyası",
+    teaserCards: ["İstehsal xətləri", "Zavod ərazisi", "Çeşidləmə və nəzarət"],
+  },
+
   closeups: [
     { label: "Şəffaf/açıq mavi fleksin yaxından görünüşü" },
     { label: "Doğranmış PET preformun yaxından görünüşü" },
     { label: "Yaşıl fleksin yaxından görünüşü" },
     { label: "Qarışıq rəngli fleksin yaxından görünüşü" },
-    { label: "Əldə fleks" },
+    { label: "Xətdə fleks" },
   ],
 
   applications: [

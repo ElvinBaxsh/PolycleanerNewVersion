@@ -2,12 +2,14 @@
 
 import type { ReactNode } from "react";
 import Image from "next/image";
+import { clsx } from "clsx";
 import Link from "next/link";
 import { ArrowRight, FlaskConical, FileText, Headset } from "lucide-react";
 import Container from "@/components/ui/Container";
 import Reveal from "@/components/ui/Reveal";
 import Button from "@/components/ui/Button";
 import InquiryButton from "@/components/inquiry/InquiryButton";
+import FactoryGalleryButton from "@/components/gallery/FactoryGallery";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 import { localizePath } from "@/lib/i18n/localizePath";
 
@@ -15,7 +17,7 @@ export type PageHeroKey = "about" | "rpet" | "process" | "sustainability" | "doc
 
 export default function PageHero({
   pageKey,
-  image = "/images/aboutUs.jpg",
+  image = "/images/factory/hero-plant-interior.webp",
   imageAlt,
   imagePosition = "center",
   extra,
@@ -29,6 +31,7 @@ export default function PageHero({
   extra?: ReactNode;
 }) {
   const { t, locale } = useLanguage();
+  const hasGallery = pageKey === "about" || pageKey === "process";
 
   const crumb = pageKey === "documents" ? t.documents.heroCrumb : t.nav[pageKey === "rpet" ? "rpet" : pageKey];
 
@@ -88,7 +91,16 @@ export default function PageHero({
     // From lg the banner fills the screen below the sticky header (h-20
     // there), the same as the home hero; phones and tablets keep the
     // height they had.
-    <section className="relative min-h-[420px] w-full overflow-hidden bg-navy pb-14 pt-8 sm:pt-10 lg:flex lg:min-h-[calc(100svh-5rem)] lg:items-center lg:py-14">
+    <section
+      className={clsx(
+        "relative min-h-[420px] w-full overflow-hidden bg-navy pb-14 pt-8 sm:pt-10 lg:flex lg:min-h-[calc(100svh-5rem)] lg:items-center lg:py-14",
+        // On a tablet the row of buttons reaches the corner the gallery card
+        // sits in, so it gets a strip of its own beneath them. A phone needs
+        // none (the card is an icon in the top corner there), and from lg
+        // the banner is a full screen and the corner is clear.
+        hasGallery && "sm:max-lg:pb-24",
+      )}
+    >
       {/* Background photo + left-to-right gradient so the copy stays legible */}
       <div className="absolute inset-0 z-0">
         <Image
@@ -150,6 +162,19 @@ export default function PageHero({
           {extra}
         </Reveal>
       </Container>
+
+      {/* The plant photo gallery, floating in the banner's bottom-right
+          corner on the two pages about the plant itself. In the corner
+          rather than in the copy column: the banner fills the screen from
+          lg, and that corner is otherwise empty. On a phone the bottom is
+          taken by full-width buttons, so it moves to the top-right corner,
+          level with the breadcrumb, as an icon alone. */}
+      {hasGallery && (
+        <FactoryGalleryButton
+          variant="hero"
+          className="absolute right-4 top-5 z-10 sm:bottom-5 sm:right-6 sm:top-auto lg:bottom-8 lg:right-10"
+        />
+      )}
     </section>
   );
 }

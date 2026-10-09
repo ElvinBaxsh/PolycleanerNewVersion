@@ -9,7 +9,7 @@ import { useLanguage } from "@/lib/i18n/LanguageContext";
 import { localizePath } from "@/lib/i18n/localizePath";
 
 const ICONS: LucideIcon[] = [Recycle, Trash2, ShieldCheck, Globe];
-const PHOTOS = ["/images/CircularEconomy.jpg", "/images/WasteReduction.jpg", "/images/ResponsibleOperations.jpg", "/images/LongTermImpact.jpg"];
+const PHOTOS = ["/images/factory/impact-circular.webp", "/images/factory/impact-waste.webp", "/images/factory/impact-operations.webp", "/images/LongTermImpact.jpg"];
 const HREFS = ["/sustainability#circular-economy", "/sustainability#impact", "/process-quality", "/sustainability#pillars"];
 
 export default function ImpactCards() {

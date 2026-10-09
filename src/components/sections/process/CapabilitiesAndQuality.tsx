@@ -38,7 +38,7 @@ export default function CapabilitiesAndQuality() {
             {/* Right Image */}
             <div className="relative md:col-span-5 h-48 sm:h-56 md:h-full min-h-[180px] w-full overflow-hidden rounded-xl border border-slate-100 shadow-xs">
               <Image
-                src="/images/processCapabilities.jpg"
+                src="/images/factory/process-sorting-line.webp"
                 alt="Sorting & washing line"
                 fill
                 className="object-cover"
