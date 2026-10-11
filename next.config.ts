@@ -6,6 +6,10 @@ import type { NextConfig } from "next";
 const isStaticPreview = process.env.STATIC_EXPORT === "1";
 const repoBasePath = "/PolycleanerNewVersion";
 
+// BUILD_STANDALONE=1 builds the self-contained server for the hosting
+// (.github/workflows/hosting-package.yml packs it into a zip).
+const isHostingBuild = process.env.BUILD_STANDALONE === "1";
+
 const nextConfig: NextConfig = isStaticPreview
   ? {
       output: "export",
@@ -16,6 +20,7 @@ const nextConfig: NextConfig = isStaticPreview
       distDir: ".next-static",
     }
   : {
+      ...(isHostingBuild ? { output: "standalone" as const } : {}),
       // The previous site had a /products page; Google still knows that URL.
       async redirects() {
         return [{ source: "/products", destination: "/rpet-flakes", permanent: true }];

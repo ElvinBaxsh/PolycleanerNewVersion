@@ -1,0 +1,43 @@
+name: Hosting package
+
+# Builds the site as a self-contained Node server and packs it into a zip
+# for the hosting. Run it by hand from the Actions tab.
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      - name: Build
+        run: npx next build
+        env:
+          BUILD_STANDALONE: "1"
+
+      # The standalone server needs the static files and public/ beside it.
+      # Copied as folder contents ("/."), so a folder the build already put
+      # there is filled in rather than nested.
+      - name: Assemble the package
+        run: |
+          mkdir -p package/app/.next/static package/app/public
+          cp -r .next/standalone/. package/app/
+          cp -r .next/static/. package/app/.next/static/
+          cp -r public/. package/app/public/
+          cp hosting/app.js package/app.js
+          cd package && zip -qr ../polycleaner-hosting.zip .
+          ls -lh ../polycleaner-hosting.zip
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: polycleaner-hosting
+          path: polycleaner-hosting.zip
+          retention-days: 14
