@@ -5,6 +5,7 @@ import "./globals.css";
 import { SITE_URL } from "@/lib/constants";
 import { organizationJsonLd, websiteJsonLd } from "@/lib/seo";
 import JsonLd from "@/components/seo/JsonLd";
+import CloudflareAnalytics from "@/components/seo/CloudflareAnalytics";
 
 const quicksand = Quicksand({
   variable: "--font-quicksand",
@@ -114,6 +115,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <JsonLd data={websiteJsonLd()} />
         <NextTopLoader color="#4caf1b" height={3} showSpinner={false} />
         {children}
+        <CloudflareAnalytics />
       </body>
     </html>
   );

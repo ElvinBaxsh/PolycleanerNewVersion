@@ -709,7 +709,7 @@ const en = {
   },
 
   cookies: {
-    text: "We use cookies to analyse site traffic and improve your experience. You can accept or decline them.",
+    text: "We use cookies to analyze site traffic and improve your experience on polycleaner.az. Click “Accept” to agree to our use of cookies, or “Decline” to refuse.",
     accept: "Accept",
     decline: "Decline",
     settings: "Cookie settings",
@@ -1442,7 +1442,7 @@ const az = {
   },
 
   cookies: {
-    text: "Sayt trafikini təhlil etmək və təcrübənizi yaxşılaşdırmaq üçün çərəzlərdən (cookie) istifadə edirik. Onları qəbul edə və ya onlardan imtina edə bilərsiniz.",
+    text: "polycleaner.az saytında trafiki təhlil etmək və təcrübənizi yaxşılaşdırmaq üçün çərəzlərdən (cookie) istifadə edirik. Çərəzlərdən istifadəyə razılıq üçün “Qəbul et”, imtina üçün “İmtina et” düyməsini basın.",
     accept: "Qəbul et",
     decline: "İmtina et",
     settings: "Çərəz ayarları",

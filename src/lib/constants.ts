@@ -1,6 +1,7 @@
 export const SITE_URL = "https://polycleaner.az";
 export const SITE_NAME = "Poly Cleaner";
 export const GA_MEASUREMENT_ID = "G-EY7MB4WL80";
+export const CLOUDFLARE_ANALYTICS_TOKEN = "a3d702c9d5ef459f840d0eaba70ed90f";
 
 export const COMPANY = {
   name: "Poly Cleaner",
