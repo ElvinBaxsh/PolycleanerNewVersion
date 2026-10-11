@@ -8,12 +8,7 @@ const VARIANTS: Variants = {
   visible: { opacity: 1, y: 0 },
 };
 
-/**
- * Fades + slides content in once it scrolls into view. `once: true` means
- * it never re-triggers on re-scroll, and MotionConfig (set at the app
- * root) makes this collapse to a plain opacity fade for users with
- * prefers-reduced-motion, so this needs no reduced-motion handling itself.
- */
+// Fades and slides content in once, when it scrolls into view.
 export default function Reveal({
   children,
   delay = 0,

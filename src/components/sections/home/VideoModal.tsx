@@ -4,20 +4,8 @@ import { useEffect, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { X } from "lucide-react";
 
-/**
- * The company video, played in an overlay instead of on the page.
- *
- * Nothing of the video is fetched until it opens: the <video> element only
- * exists while the modal is mounted, so the home page still loads with the
- * hero image alone. Two sources are listed, a 720p file for phones and the
- * 1080p one for everything else — the browser takes the first whose media
- * query matches, so a phone never pulls the larger file.
- *
- * Same modal shell conventions as SubmissionSuccessModal and PartnersModal:
- * the backdrop is the direct AnimatePresence child with a stable key, scroll
- * is locked while open with the scrollbar gap padded back in, and Escape
- * closes.
- */
+// The company video in a modal. Nothing is downloaded until it opens. Phones
+// get the 720p file.
 export default function VideoModal({
   open,
   onClose,
@@ -50,13 +38,8 @@ export default function VideoModal({
     };
   }, [open, onClose]);
 
-  // The video opens with sound, because it is opened by a deliberate click
-  // rather than played on arrival. Browsers only allow that from a user
-  // gesture, and a failed play() (a policy we didn't anticipate, or a file
-  // still loading) leaves the controls there to press.
-  // Closing stops it: the element survives the exit animation (and, on a
-  // route change, can outlive the modal entirely), so without this the
-  // sound carries on playing over the page that's left behind.
+  // Plays with sound on open. Stops and rewinds on close, otherwise the sound
+  // keeps playing.
   useEffect(() => {
     if (!open) return;
     const video = videoRef.current;
@@ -92,12 +75,8 @@ export default function VideoModal({
             exit={{ opacity: 0, y: 14 }}
             transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
           >
-            {/* Straddling the top-right corner, half on the picture and
-                half off it, so it reads as the frame's own control without
-                taking a bite out of the picture. Pulled in a little on
-                phones, where the backdrop's padding is all it has to sit
-                in. Opaque, not translucent: over a moving picture a glassy
-                circle disappears whenever a bright frame passes under it. */}
+            {/* Close button on the frame's corner, solid so it shows over
+                bright frames. */}
             <button
               type="button"
               onClick={onClose}

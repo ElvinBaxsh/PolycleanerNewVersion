@@ -8,7 +8,8 @@ import JsonLd from "@/components/seo/JsonLd";
 
 const quicksand = Quicksand({
   variable: "--font-quicksand",
-  subsets: ["latin"],
+  // latin-ext carries the Azerbaijani letters (ə, ş, ğ, ı).
+  subsets: ["latin", "latin-ext"],
   weight: ["400", "500", "600", "700"],
 });
 
@@ -30,11 +31,8 @@ export const metadata: Metadata = {
     "rPET flakes for fiber",
     "PET recycling Azerbaijan",
     "documented recycled PET supplier",
-    // Azərbaycan dilində SEO açar sözləri. Qeyd: Google `keywords` meta
-    // teqini sıralamada nəzərə almır — açar sözün təsiri səhifənin görünən
-    // mətnindən, başlığından və təsvirindən gəlir. Siyahı digər axtarış
-    // sistemləri üçün saxlanılır; həm "fleks" (saytın öz termini), həm də
-    // "lopa/qırıntı" (insanların axtardığı variantlar) burada var.
+    // Azərbaycan dilində açar sözlər. Google bu teqi nəzərə almır, digər
+    // axtarış sistemləri üçün saxlanılır.
     "rPET lopa təchizatçısı",
     "təkrar emal edilmiş PET lopa təchizatçısı",
     "isti yuyulmuş PET lopaları",

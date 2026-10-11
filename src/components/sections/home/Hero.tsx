@@ -26,31 +26,18 @@ export default function Hero() {
     setActiveEvent((prev) => (prev === "taropak" ? "amiExpo" : "taropak"));
   }
 
-  // Auto-rotates between the two exhibitions; the effect re-runs (and so
-  // restarts the wait) every time activeEvent changes — including a
-  // manual tab click — so clicking never gets immediately overridden by
-  // the timer.
+  // Switches between the two exhibitions every 6 seconds. A manual click
+  // restarts the timer.
   useEffect(() => {
     const id = setTimeout(advanceEvent, 6000);
     return () => clearTimeout(id);
   }, [activeEvent]);
 
   return (
-    // From lg the banner fills what's left of the screen under the sticky
-    // header (h-20 there), so it opens as a full screen of its own, and on
-    // a short desktop screen the spacing tightens (the max-height variants
-    // below) so the event card still lands above the fold. Phones and
-    // tablets keep the layout they had. It's a minimum, not a cap: content
-    // that needs more room makes the section grow rather than be clipped.
-    // The bottom padding is the larger one because the trust bar below is
-    // pulled up over this section (-mt-14 there): without that allowance the
-    // event card ran straight into the white card, which is what happened in
-    // Azerbaijani, where the heading takes a fourth line.
+    // Full screen under the header from lg, tighter on short screens. The
+    // bottom padding is larger because the trust bar overlaps this section.
     <section className="relative min-h-[580px] w-full overflow-hidden bg-navy pb-16 pt-12 lg:flex lg:min-h-[calc(100svh-5rem)] lg:items-center lg:pb-28 lg:pt-14 lg:[@media(max-height:820px)]:pb-20 lg:[@media(max-height:820px)]:pt-6">
-      {/* Background Image & Overlay
-          The image is the base layer and the video's fallback — the video
-          sits on top with the same image as its poster, so the hero looks
-          the same from the first paint and simply starts moving. */}
+      {/* Background image, with the video on top */}
       <div className="absolute inset-0 z-0">
         <Image
           src="/images/hero-rpet-flakes.webp"
@@ -115,8 +102,7 @@ export default function Hero() {
               </InquiryButton>
             </div>
 
-            {/* Sərgi Tab Keçidi — iki tədbir arasında seçim, kart öz
-                yerini saxlayır, yalnız məzmunu dəyişir. */}
+            {/* Sərgi Tab Keçidi */}
             <div className="flex gap-2" role="tablist" aria-label="Upcoming exhibitions">
               {(["taropak", "amiExpo"] as const).map((tab) => (
                 <button
@@ -137,10 +123,7 @@ export default function Hero() {
               ))}
             </div>
 
-            {/* Sərgi Kartı - Desktop və Mobil Dəqiq Düzülüş. Xarici
-                konteyner (haşiyə/blur) sabit qalır, yalnız içindəki
-                AnimatePresence bloku tab dəyişəndə (klik və ya avtomatik)
-                yumşaq fade+slide ilə keçir. */}
+            {/* Sərgi Kartı - tab dəyişəndə yalnız içi dəyişir */}
             <div className="relative flex w-full items-stretch overflow-hidden rounded-xl border border-white/25 bg-[#071824]/85 backdrop-blur-md">
               <AnimatePresence mode="wait">
                 <motion.div
@@ -162,11 +145,7 @@ export default function Hero() {
                     />
                   </div>
 
-                  {/* Mətn və Düymə Hissəsi — sətirdə düymə ilə yanaşı
-                      düzülüş yalnız `lg`-də (əvvəl `md`-də idi), belə ki
-                      aralıq enlərdə (məsələn tablet) mətn düymə ilə yer
-                      üçün əvvəlcədən rəqabət aparmasın, tam eninə sahib
-                      olub 2 sətirə rahat sığsın. */}
+                  {/* Mətn və Düymə Hissəsi - lg-dən yan-yana */}
                   <div className="flex min-w-0 flex-1 flex-col justify-between gap-3 p-3.5 lg:flex-row lg:items-center lg:gap-3 lg:px-4 lg:py-4">
                     <div className="min-w-0 flex-1 space-y-1">
                       <h4
@@ -195,8 +174,7 @@ export default function Hero() {
                 </motion.div>
               </AnimatePresence>
 
-              {/* Tab-lardan başqa, DocumentGrid-dəki bannerlə eyni "next"
-                  oxu — iki yerdə də eyni keçid mexanizmi olsun. */}
+              {/* Növbəti sərgiyə keçid */}
               <button
                 type="button"
                 onClick={advanceEvent}
@@ -211,8 +189,6 @@ export default function Hero() {
 
         {/* Sağ Tərəf - Video */}
         <div className="relative flex items-center justify-center xl:col-span-6">
-          {/* A halo, the white disc and a label below it — the same on a
-              phone as on a desktop, only smaller. */}
           <button
             type="button"
             onClick={() => setVideoOpen(true)}

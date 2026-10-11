@@ -20,7 +20,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "Invalid request body." }, { status: 400 });
   }
 
-  // Honeypot spam protection: real users never fill this hidden field.
+  // Honeypot: real users never fill this hidden field.
   if (body.website) {
     return NextResponse.json({ ok: true });
   }
@@ -72,19 +72,21 @@ export async function POST(request: NextRequest) {
     submittedAt: new Date().toISOString(),
     userLanguage: body.userLanguage || "EN",
     ip: request.headers.get("x-forwarded-for")?.split(",")[0]?.trim(),
-    // See /api/contact: the handle the sender sees on the confirmation.
+    // The reference the sender saw on screen.
     reference: typeof body.reference === "string" ? body.reference : undefined,
   };
 
   const { subject, html, text, inlineImages } = buildRequestOfferEmail(payload, meta);
 
-  console.log("[request-offer] New request:", { ...payload, ...meta });
-
   const result = await sendMail(SALES_EMAILS, subject, html, text, [], inlineImages);
 
+  // Without SMTP the server log is the only record of the request.
+  if (!result.sent && !("error" in result)) {
+    console.log("[request-offer] Not emailed:", { ...payload, ...meta });
+  }
+
   if (!result.sent && "error" in result) {
-    // SMTP was configured but the send itself failed — this is a real error,
-    // unlike the "not configured yet" dev-mode case which still returns ok.
+    // SMTP is set up but sending failed.
     return NextResponse.json(
       { error: "We couldn't send your request right now. Please try again or email us directly." },
       { status: 502 }

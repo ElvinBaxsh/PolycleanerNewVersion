@@ -22,12 +22,8 @@ import { newReference } from "@/lib/reference";
 
 type Status = "idle" | "submitting" | "success" | "error";
 
-/**
- * The buyer-document request form — shared by the Documents page sidebar
- * (rendered inline) and the "Can't find what you need?" / "Request Buyer
- * Pack" triggers elsewhere on the site (rendered inside the modal from
- * DocumentRequestModalProvider). One form, one place its fields are defined.
- */
+// The document request form, used inline on the Documents page and inside the
+// modal.
 export default function DocumentRequestForm({ onCancel }: { onCancel?: () => void }) {
   const { t, locale } = useLanguage();
   const f = t.documentRequestForm;
@@ -36,8 +32,6 @@ export default function DocumentRequestForm({ onCancel }: { onCancel?: () => voi
   const [errorMessage, setErrorMessage] = useState("");
   const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
 
-  // Document types need no value/label pairing: the chips submit the very
-  // label the visitor clicked (see the hidden documentType input below).
   const SUMMARY_FIELDS: SummaryField[] = [
     { name: "fullName", label: f.fullName, icon: User },
     { name: "company", label: f.company, icon: Building2 },

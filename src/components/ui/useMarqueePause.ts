@@ -2,23 +2,8 @@
 
 import { useRef, useState, type PointerEvent, type TouchEvent } from "react";
 
-/**
- * Pause-on-interaction for the CSS marquee strips (partners, process steps,
- * applications, close-ups).
- *
- * The strips used to pause on mouseenter/touchstart and resume 1.2s after
- * mouseleave/touchend. Both fire without the visitor meaning to touch the
- * strip: scrolling the page with the wheel slides the strip under a cursor
- * that never moved (the browser reports that as the mouse entering it), and
- * on a phone a vertical swipe that happens to start on the strip is a
- * touchstart. Either way the strip froze for a second or so mid-scroll.
- *
- * Now a mouse pauses the strip only by actually moving over it — a scroll
- * changes what is under the cursor, not the cursor's coordinates — and the
- * strip resumes as soon as the mouse leaves. A finger pauses it only with a
- * mostly-horizontal drag (dragging the strip itself); vertical page swipes
- * pass straight through.
- */
+// Pauses a marquee strip on real interaction: a mouse that actually moves over
+// it, or a horizontal finger drag. Scrolling the page doesn't pause it.
 const SWIPE_THRESHOLD_PX = 8;
 
 export function useMarqueePause(touchResumeDelayMs = 1200) {
@@ -36,8 +21,8 @@ export function useMarqueePause(touchResumeDelayMs = 1200) {
 
   function onPointerEnter(e: PointerEvent) {
     if (e.pointerType !== "mouse") return;
-    // Remember where the cursor is, but don't pause: an enter caused by the
-    // page scrolling arrives with the cursor exactly where it already was.
+    // Remember the position, but don't pause: scrolling the page also fires
+    // this.
     lastMouse.current = { x: e.clientX, y: e.clientY };
   }
 
@@ -78,8 +63,7 @@ export function useMarqueePause(touchResumeDelayMs = 1200) {
   function onTouchEnd() {
     touchStart.current = null;
     if (!paused) return;
-    // A short hold after a drag, so the item the visitor dragged to stays put
-    // long enough to read.
+    // Hold briefly after a drag.
     clearResume();
     resumeTimeout.current = setTimeout(() => setPaused(false), touchResumeDelayMs);
   }

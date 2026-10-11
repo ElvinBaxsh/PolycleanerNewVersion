@@ -24,16 +24,8 @@ export default function Footer() {
 
   return (
     <footer className="bg-navy text-white/80">
-      {/* The "Let's build a cleaner future together" CTA banner lives in
-          <FinalCta />, rendered by every page right before this Footer —
-          it used to be duplicated here too, showing the same banner twice
-          in a row on every single page. */}
-      {/* From xl, five columns; the first is wider than the link columns
-          because it holds the company description, which in Azerbaijani runs
-          long (at 1.4fr it wrapped to eight lines and hung below the rest).
-          Between 1024 and 1279px five columns don't fit — product and info
-          links wrapped onto two lines — so the logo and description take a
-          full-width row there, with the four link columns underneath. */}
+      {/* Five columns from xl. Between lg and xl the logo and description
+          take a full row above the links. */}
       <Container className="grid grid-cols-1 gap-10 pb-12 pt-9 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8 xl:grid-cols-[1.8fr_1fr_1fr_1fr_1.1fr]">
         <div className="lg:col-span-4 xl:col-span-1">
           <Logo size="large" />
@@ -81,10 +73,6 @@ export default function Footer() {
 
         <div>
           <h3 className="text-xs font-bold uppercase tracking-wider text-white">{t.footer.contactUs}</h3>
-          {/* Each line is the action someone wants from it: the address opens
-              the location on a map, the number dials, the address writes a
-              mail. Every row has the same padding, so the grouped phone and
-              mail rows below sit at the same spacing as the single ones. */}
           <ul className="mt-4 space-y-3 text-sm text-white/60">
             <li className="py-0.5">
               <a
@@ -97,10 +85,8 @@ export default function Footer() {
                 {t.common.address}
               </a>
             </li>
-            {/* The numbers and the addresses each share one icon, so it
-                isn't repeated down the column; every number still dials and
-                has its WhatsApp chat beside it, as in Contact Information on
-                the contact page. */}
+            {/* One icon for both numbers. Each number has its own WhatsApp
+                link. */}
             <li className="flex gap-2.5 py-0.5">
               <Phone className="size-4 shrink-0 mt-0.5 text-brand-green" aria-hidden />
               <ul className="space-y-1.5">
@@ -139,10 +125,7 @@ export default function Footer() {
               </ul>
             </li>
             <li className="py-0.5">
-              {/* The full address on purpose, not an internal link: this row
-                  shows the site's own domain, so it should land there even
-                  when the footer is being viewed on a preview deployment.
-                  Still locale-aware, so /az visitors stay in Azerbaijani. */}
+              {/* Full URL on purpose, so it always opens the real domain. */}
               <a
                 href={`${SITE_URL}${localizePath("/", locale)}`}
                 className="flex gap-2.5 transition-colors hover:text-white"
@@ -167,8 +150,7 @@ export default function Footer() {
 
       <div className="border-t border-white/10 py-5">
         <Container className="flex flex-col items-center justify-between gap-4 text-xs text-white/50 sm:flex-row">
-          {/* 2025 is the company's founding year, not a stale current year —
-              it is meant to stay 2025. Don't replace it with the clock. */}
+          {/* 2025 is the founding year, not the current year. */}
           <p>{t.footer.copyright(2025)}</p>
           <div className="flex flex-wrap items-center justify-center gap-4">
             <Link href={localizePath("/privacy-policy", locale)} className="hover:text-white/80">

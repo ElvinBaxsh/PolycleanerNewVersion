@@ -6,22 +6,16 @@ import { ArrowLeft, FileText, Hash, X, type LucideIcon } from "lucide-react";
 
 export type SummaryRow = { label: string; value: string; icon?: LucideIcon };
 
-/** One field of a form, for turning its submitted data into summary rows. */
+// One form field in the summary.
 export type SummaryField = {
   name: string;
   label: string;
-  /** Shown beside the row, so the list can be scanned by shape as well as read. */
   icon?: LucideIcon;
-  /** For a select: its submitted values and the labels the visitor saw.
-   *  The form posts the English constant (what the email and the server
-   *  expect); the summary shows the visitor's own language instead. */
+  /** For a select: the submitted values and the labels the visitor saw. */
   options?: readonly [readonly string[], readonly string[]];
 };
 
-/**
- * Rows for the "Inquiry Details" card, in the order `fields` lists them,
- * skipping anything left empty. File inputs collapse to their file names.
- */
+// Summary rows in field order, skipping empty ones.
 export function summarize(data: FormData, fields: SummaryField[]): SummaryRow[] {
   const rows: SummaryRow[] = [];
   for (const { name, label, icon, options } of fields) {
@@ -42,14 +36,7 @@ export function summarize(data: FormData, fields: SummaryField[]): SummaryRow[] 
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
-/**
- * What was sent, and what happens next — the contents of the confirmation
- * modal (see SubmissionSuccessModal, which supplies the overlay and close).
- *
- * Two columns from 32rem of its own width, stacked below that on a phone;
- * container queries measure the content box, so this panel's padding counts
- * against that threshold.
- */
+// The confirmation content: what was sent and what happens next.
 export default function SubmissionSuccess({
   title,
   subtitle,
@@ -67,8 +54,6 @@ export default function SubmissionSuccess({
   subtitle: string;
   sentBadge: string;
   referenceLabel: string;
-  /** Also written into the email (subject and body), so quoting it here
-   *  gives both ends the same handle for one enquiry. */
   reference: string;
   detailsTitle: string;
   rows: SummaryRow[];
@@ -79,9 +64,7 @@ export default function SubmissionSuccess({
 }) {
   const hasRows = rows.length > 0;
 
-  // The panel paints an opaque white base *under* its gradient: the
-  // gradient's first stop is a translucent green, so without that base the
-  // form behind the modal showed through the panel's top-left corner.
+  // White base under the gradient, so the form behind doesn't show through.
   return (
     <motion.div
       initial={{ opacity: 0, y: 12 }}
@@ -90,13 +73,7 @@ export default function SubmissionSuccess({
       className="@container/panel scrollbar-thin relative max-h-[90dvh] overflow-y-auto overflow-x-hidden rounded-3xl bg-white bg-gradient-to-br from-brand-green/10 via-white to-white p-5 shadow-2xl ring-1 ring-brand-green/15 sm:p-8 [@media(max-height:780px)]:!p-5"
       role="status"
     >
-      {/* The green wash the leaves sit on: a soft glow low on the left, with
-          a wider wedge fading up and to the right behind it.
-
-          Both sit in a clipping layer. The glow hangs ~96px below the panel's
-          bottom edge, and on a scrollable panel that overhang counts as
-          scrollable area — it, not the content, was the empty band you could
-          scroll into underneath everything. */}
+      {/* Green wash behind the leaves. Clipped, so it adds no scroll area. */}
       <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden rounded-3xl">
         <div className="absolute -bottom-24 -left-24 size-80 rounded-full bg-brand-green/25 blur-[72px]" />
         <div className="absolute bottom-0 left-0 h-56 w-2/3 bg-gradient-to-tr from-brand-green/20 via-brand-green/5 to-transparent" />
@@ -121,9 +98,7 @@ export default function SubmissionSuccess({
           </h3>
           <p className="mt-2 max-w-sm text-slate">{subtitle}</p>
 
-          {/* Label above the code, not beside it: the code's hyphens are
-              break opportunities, so a narrow column used to split it as
-              "PC-260912-" / "6344". nowrap keeps it whole. */}
+          {/* nowrap keeps the reference code on one line. */}
           <div className="mt-5 flex w-full max-w-sm items-center gap-3 rounded-2xl bg-brand-green/10 px-4 py-3">
             <span className="flex size-9 shrink-0 items-center justify-center rounded-xl bg-white/80 text-brand-green-dark">
               <Hash className="size-4" aria-hidden />
@@ -157,8 +132,7 @@ export default function SubmissionSuccess({
             </button>
           </div>
 
-          {/* Decoration, and the first thing to go: on a short window these
-              ~100px are what push the panel past the viewport. */}
+          {/* Decoration, hidden on short windows. */}
           {hasRows && <Leaves className="mt-6 hidden @lg:block [@media(max-height:780px)]:!hidden" />}
         </div>
 
@@ -176,10 +150,6 @@ export default function SubmissionSuccess({
               <h4 className="text-lg font-bold text-navy">{detailsTitle}</h4>
             </div>
 
-            {/* No cap and no scrollbar of its own: capping it here meant two
-                scrollbars — the card's and the modal's — and the card ended
-                mid-row while the panel below it sat empty. The list runs at
-                its natural height and the modal scrolls as one thing. */}
             <dl className="mt-3 divide-y divide-border">
               {rows.map((row, i) => {
                 const Icon = row.icon;

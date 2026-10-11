@@ -19,11 +19,7 @@ export default function InquiryModal({
   const { t } = useLanguage();
   const isOpen = options !== null;
 
-  // `options` flips to null the instant the modal starts closing, but the
-  // exit animation still needs a title/form to fade out — so keep the last
-  // real options around and only clear them once fully unmounted. Updating
-  // this during render (not in an effect) is the documented pattern for
-  // deriving state from a changing prop.
+  // Keep the last options while the modal animates out.
   const [renderOptions, setRenderOptions] = useState(options);
   if (options !== null && options !== renderOptions) {
     setRenderOptions(options);
@@ -35,9 +31,7 @@ export default function InquiryModal({
   useEffect(() => {
     if (!isOpen) return;
 
-    // Locking scroll via overflow:hidden removes the body's scrollbar, which
-    // shifts all fixed/centered content (including this modal) rightward by
-    // the scrollbar's width. Padding that gap back in keeps the page still.
+    // Hiding the scrollbar shifts the page, so pad the gap back.
     const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
     document.body.style.overflow = "hidden";
     if (scrollbarWidth > 0) document.body.style.paddingRight = `${scrollbarWidth}px`;
@@ -70,18 +64,11 @@ export default function InquiryModal({
   return (
     <AnimatePresence>
       {isOpen && (
-        // The backdrop IS the AnimatePresence direct child (a motion
-        // component with a stable key) — a plain wrapper <div> here would
-        // break exit-tracking entirely and leave the modal hanging open
-        // forever instead of animating closed. Each motion component gets
-        // its own explicit initial/animate/exit (no variant inheritance)
-        // since that's what reliably fires here.
+        // The backdrop must be the direct AnimatePresence child, or the exit
+        // animation never finishes.
         <motion.div
           key="inquiry-modal-backdrop"
-          // No backdrop-blur: animating opacity over a backdrop-filter forces
-          // the browser to re-blur the whole page every frame, which is what
-          // made the modal stutter/freeze on open. A plain tinted overlay is
-          // cheap to composite.
+          // No backdrop-blur: it makes the open animation stutter.
           className="fixed inset-0 z-[100] flex items-center justify-center bg-[rgba(6,43,58,0.72)] p-4 pt-[max(1rem,env(safe-area-inset-top))]"
           onClick={onClose}
           initial={{ opacity: 0 }}
@@ -94,9 +81,8 @@ export default function InquiryModal({
             aria-modal="true"
             aria-label={title}
             onClick={(e) => e.stopPropagation()}
-            // relative + no overflow clipping here (unlike the scrollable card
-            // below) so the close button can sit half outside the card's edge
-            // without being cut off by scroll clipping.
+            // No overflow clipping here, so the close button can sit over the
+            // edge.
             className="relative w-full max-w-[680px] will-change-[opacity,transform]"
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
@@ -112,11 +98,7 @@ export default function InquiryModal({
               <X className="size-5" />
             </button>
 
-            {/* dvh (not vh) — vh on mobile Safari is based on the viewport
-                with the address bar hidden, so a modal sized off 92vh can
-                render taller than what's actually visible, pushing the
-                close button above the top edge. dvh tracks the real,
-                currently-visible viewport. */}
+            {/* dvh, not vh: on mobile Safari vh ignores the address bar. */}
             <div className="scrollbar-thin max-h-[85dvh] overflow-y-auto rounded-2xl bg-white p-5 shadow-2xl sm:p-7">
               <h2 className="flex items-center gap-2 pr-10 text-2xl font-bold text-navy">
                 {isPartnerFlow && (

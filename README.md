@@ -35,7 +35,7 @@ src/
     layout.tsx, globals.css  global shell, fonts, color tokens
   components/
     layout/                 Header, Footer, Logo
-    ui/                     Button, Container, SectionHeading, IconBadge, PhotoPlaceholder...
+    ui/                     Button, Container, SectionHeading, Reveal, MaskIcon...
     inquiry/                global modal system (see below) — every CTA site-wide opens this
     forms/
       InquiryForm.tsx        generic form used by Sample/TAROPAK/Documents/Contact-Sales CTAs

@@ -37,7 +37,7 @@ export default function RequestOfferForm({
   onSuccess,
 }: {
   onCancel?: () => void;
-  /** See InquiryForm: lets the modal drop its instruction line. */
+  /** Called after a successful send. */
   onSuccess?: () => void;
 }) {
   const { t, locale } = useLanguage();
@@ -46,8 +46,7 @@ export default function RequestOfferForm({
   const [status, setStatus] = useState<Status>("idle");
   const [errorMessage, setErrorMessage] = useState("");
 
-  // In on-screen order. Selects carry their value/label pairs so the
-  // summary shows the option as the visitor saw it (see summarize()).
+  // Fields shown in the confirmation summary, in on-screen order.
   const SUMMARY_FIELDS: SummaryField[] = [
     { name: "fullName", label: f.fullName, icon: User },
     { name: "company", label: f.companyName, icon: Building2 },
@@ -69,9 +68,7 @@ export default function RequestOfferForm({
     const form = event.currentTarget;
     const data = new FormData(form);
 
-    // CustomSelect submits via a hidden input, which the browser's native
-    // required-field validation can't focus/scroll to — so the required
-    // dropdowns (country, product interest) are checked here instead.
+    // Dropdowns can't use the browser's `required`, so they are checked here.
     if (!data.get("country") || !data.get("productInterest")) {
       setStatus("error");
       setErrorMessage(f.requiredNote);
@@ -121,7 +118,7 @@ export default function RequestOfferForm({
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
-      {/* Honeypot field — hidden from real users, bots tend to fill every input */}
+      {/* Honeypot: hidden from people, bots fill it. */}
       <input
         type="text"
         name="website"

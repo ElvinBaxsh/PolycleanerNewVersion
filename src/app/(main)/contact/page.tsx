@@ -19,11 +19,8 @@ export default async function ContactPage({
   searchParams,
   locale = "en",
 }: PageProps<"/contact"> & { locale?: Locale }) {
-  // The GitHub Pages static preview has no server to resolve searchParams
-  // with, so it skips awaiting it entirely (reading it at all is what
-  // forces dynamic rendering, which `output: "export"` can't do) — the
-  // ?type=/&interest= prefill just doesn't apply there. The real
-  // (server-hosted) deployment still reads it normally.
+  // ?type= and ?interest= prefill the form. The static preview build has no
+  // server to read them, so it skips them.
   const params = process.env.STATIC_EXPORT === "1" ? {} : await searchParams;
   const type = typeof params.type === "string" ? params.type : undefined;
   const interest = typeof params.interest === "string" ? params.interest : undefined;

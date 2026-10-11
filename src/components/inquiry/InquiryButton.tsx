@@ -36,11 +36,7 @@ interface InquiryButtonProps {
   onClick?: () => void;
 }
 
-/**
- * Same look as <Button>, but opens the shared inquiry modal instead of
- * navigating to /contact. Used for every "Request Offer / Sample / Book
- * Meeting / Request Document Pack / Contact Sales" call to action.
- */
+// Looks like <Button>, but opens the inquiry modal.
 export default function InquiryButton({
   children,
   type,

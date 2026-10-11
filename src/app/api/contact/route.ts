@@ -9,7 +9,6 @@ import {
   hasAllowedUploadExtension,
 } from "@/lib/constants";
 
-
 function isValidEmail(value: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
 }
@@ -18,8 +17,7 @@ export async function POST(request: NextRequest) {
   let fields: Record<string, string>;
   let attachments: EmailAttachment[] = [];
 
-  // Only the Sample form's file field sends multipart/form-data — every
-  // other form on the site still posts plain JSON, so both are accepted.
+  // Only the sample form sends files (multipart). The rest post JSON.
   const isMultipart = (request.headers.get("content-type") || "").includes("multipart/form-data");
 
   if (isMultipart) {
@@ -43,9 +41,8 @@ export async function POST(request: NextRequest) {
     if (files.length > MAX_UPLOAD_FILES) {
       return NextResponse.json({ error: `You can attach up to ${MAX_UPLOAD_FILES} files.` }, { status: 400 });
     }
-    // Checked by extension, not by file.type — see the note on
-    // ALLOWED_UPLOAD_EXTENSIONS: browsers routinely report no MIME type at
-    // all for a valid .docx/.xlsx, and rejecting those would lose real leads.
+    // Checked by extension: browsers often report no MIME type for .docx and
+    // .xlsx.
     const invalidType = files.find((file) => !hasAllowedUploadExtension(file.name));
     if (invalidType) {
       return NextResponse.json(
@@ -77,18 +74,15 @@ export async function POST(request: NextRequest) {
     }
   }
 
-  // Honeypot spam protection: real users never fill this hidden field.
+  // Honeypot: real users never fill this hidden field.
   if (fields.website) {
     return NextResponse.json({ ok: true });
   }
 
   const isPartner = fields.inquiryType === "partner";
 
-  // The Partner form has its own shape: company is optional, and either an
-  // email or a phone number is enough — every other form still requires
-  // fullName/company/email as before (country/phone/message aren't
-  // collected by every form on the site either, e.g. the Documents page's
-  // compact request form only asks for name/company/email/document type).
+  // The partner form needs less: company is optional, and an email or a phone
+  // is enough.
   const required: (keyof ContactPayload)[] = isPartner ? ["fullName", "country", "city"] : ["fullName", "company", "email"];
   const missing = required.filter((field) => !fields[field]?.toString().trim());
 
@@ -139,37 +133,35 @@ export async function POST(request: NextRequest) {
     submittedAt: new Date().toISOString(),
     userLanguage: fields.userLanguage || "EN",
     ip: request.headers.get("x-forwarded-for")?.split(",")[0]?.trim(),
-    // Generated in the browser and shown to the sender, so the same handle
-    // appears on their screen and in this email (subject included).
+    // The reference the sender saw on screen.
     reference: fields.reference,
     attachmentFiles: attachments.map((a) => ({ name: a.filename, size: a.content?.length ?? 0 })),
   };
 
   const { subject, html, text, inlineImages } = buildContactEmail(payload, meta);
 
-  console.log("[contact-form] New inquiry:", {
-    ...payload,
-    sourcePage: meta.sourcePage,
-    attachments: meta.attachmentFiles.map((f) => f.name),
-  });
-
-  // The General/Contact form and Partner enquiries go to the office inbox —
-  // Sample, TAROPAK and Buyer Documents/Pack inquiries go to sales instead.
+  // General and partner enquiries go to the office inbox, the rest to sales.
   const OFFICE_INBOX_TYPES = ["general", "partner"];
   const recipients =
     !payload.inquiryType || OFFICE_INBOX_TYPES.includes(payload.inquiryType) ? COMPANY.email : SALES_EMAILS;
 
-  // A "Buyer Documents" request gets the actual PDF files attached,
-  // in addition to any customer-uploaded files (there normally aren't any
-  // on this particular form, but attachments still merge safely either way).
+  // A buyer-documents request gets the PDFs attached.
   const outgoingAttachments =
     payload.inquiryType === "documents" ? [...attachments, ...BUYER_DOCUMENT_ATTACHMENTS] : attachments;
 
   const result = await sendMail(recipients, subject, html, text, outgoingAttachments, inlineImages);
 
+  // Without SMTP the server log is the only record of the enquiry.
+  if (!result.sent && !("error" in result)) {
+    console.log("[contact-form] Not emailed:", {
+      ...payload,
+      sourcePage: meta.sourcePage,
+      attachments: meta.attachmentFiles.map((f) => f.name),
+    });
+  }
+
   if (!result.sent && "error" in result) {
-    // SMTP was configured but the send itself failed — this is a real error,
-    // unlike the "not configured yet" dev-mode case which still returns ok.
+    // SMTP is set up but sending failed.
     return NextResponse.json(
       { error: "We couldn't send your request right now. Please try again or email us directly." },
       { status: 502 }

@@ -35,9 +35,7 @@ export default function NumbersStrip() {
                 key={i}
                 className="flex items-start gap-2.5 rounded-2xl border border-slate-200/80 bg-white px-3 sm:px-3.5 py-4 shadow-xs"
               >
-                {/* Top-aligned, not centred: labels wrap to different line
-                    counts, and centring each card put the numbers of the row at
-                    different heights. */}
+                {/* Top-aligned, so the numbers line up when labels wrap. */}
                 {Icon ? (
                   <Icon 
                     className="size-[52px] sm:size-[58px] shrink-0 text-[#0F2A4A] stroke-[1.3]" 

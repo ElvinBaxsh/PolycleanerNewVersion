@@ -9,25 +9,8 @@ import { clsx } from "clsx";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 import { FACTORY_GALLERY } from "@/lib/constants";
 
-/**
- * The plant photographs, as a modal rather than a page of their own: a
- * button or a photo the page already shows opens it, so the pictures are
- * one click away.
- *
- * One dialog, two views. The grid shows every photo; choosing one swaps the
- * grid for that photo at full size, with arrows (and the arrow keys) to step
- * through the rest. Escape goes back a step — photo to grid, grid to closed
- * — which is what people expect from a lightbox.
- *
- * `useFactoryGallery` is the way in: it hands back the two ways to open the
- * dialog (on the grid, or straight on one photo) and the dialog itself to
- * render. Everything that opens the gallery goes through it, so there is one
- * implementation of the modal however many triggers a page has.
- *
- * Same modal shell conventions as VideoModal and SubmissionSuccessModal:
- * the backdrop is the direct AnimatePresence child with a stable key, and
- * scroll is locked while open with the scrollbar gap padded back in.
- */
+// Plant photos in a modal: a grid of all photos and a full-size view with
+// arrows. Escape goes back one step. Open it through useFactoryGallery().
 export function useFactoryGallery(): {
   openGrid: () => void;
   openAt: (index: number) => void;
@@ -36,8 +19,7 @@ export function useFactoryGallery(): {
   const [open, setOpen] = useState(false);
   // null = the grid; a number = that photo, full size.
   const [active, setActive] = useState<number | null>(null);
-  // Set by the first open, so the portal is only ever created in the browser
-  // — there is no document to attach it to on the server.
+  // The portal needs `document`, so it is created on first open.
   const [mounted, setMounted] = useState(false);
 
   const openGrid = useCallback(() => {
@@ -54,10 +36,8 @@ export function useFactoryGallery(): {
 
   const close = useCallback(() => setOpen(false), []);
 
-  // Portalled to <body>: triggers sit inside photos wrapped in a Reveal,
-  // whose transform makes it the containing block for anything
-  // position:fixed underneath it — rendered in place, the "full screen"
-  // backdrop was the size of the photo.
+  // Rendered in <body>: inside an animated wrapper, `fixed` would be relative
+  // to that wrapper.
   const modal = mounted
     ? createPortal(<GalleryModal open={open} active={active} onActiveChange={setActive} onClose={close} />, document.body)
     : null;
@@ -71,10 +51,8 @@ export default function FactoryGalleryButton({
 }: {
   className?: string;
   /**
-   * chip — label and count, for a large photo.
-   * hero — the floating card in a banner's corner: a green icon disc with
-   * the label and count beside it, large enough to be noticed on arrival.
-   * On a phone it is the disc alone.
+   * chip: label and count. hero: the card in a banner corner, icon only on
+   * phones.
    */
   variant?: "chip" | "hero";
 }) {
@@ -101,8 +79,6 @@ export default function FactoryGalleryButton({
             <span className="relative flex size-10 shrink-0 items-center justify-center rounded-full bg-brand-green transition-transform group-hover:scale-105 sm:size-11">
               <Images className="size-5" aria-hidden />
             </span>
-            {/* The label is for sm and up; a phone gets the icon alone (the
-                button's aria-label still names it). */}
             <span className="hidden flex-col leading-tight sm:flex">
               <span className="text-sm">{t.gallery.open}</span>
               <span className="text-xs font-semibold text-white/70">{t.gallery.count(total)}</span>
@@ -226,10 +202,7 @@ function GalleryModal({
 
             {photo ? (
               <div className="relative flex min-h-0 flex-1 items-center justify-center bg-navy">
-                {/* Plain <img>, not next/image: the file is already sized for
-                    this (1920px WebP), and a keyed element swaps cleanly
-                    between photos without the optimiser's layout wrapper
-                    fighting object-contain inside a flex box. */}
+                {/* Plain <img>: the file is already the right size. */}
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   key={photo.src}
@@ -255,8 +228,6 @@ function GalleryModal({
                 </button>
               </div>
             ) : (
-              // The scrollbar is hidden, not the scrolling: a visible track
-              // down the side of a photo grid reads as part of the picture.
               <ul className="scrollbar-none grid min-h-0 flex-1 grid-cols-2 gap-2 overflow-y-auto p-3 sm:grid-cols-3 sm:gap-3 sm:p-6 lg:grid-cols-4">
                 {FACTORY_GALLERY.map((item, i) => (
                   <li key={item.src}>

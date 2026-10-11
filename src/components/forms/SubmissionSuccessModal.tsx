@@ -5,20 +5,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { X } from "lucide-react";
 import SubmissionSuccess, { type SummaryRow } from "./SubmissionSuccess";
 
-/**
- * The confirmation as an overlay rather than a replacement for the form.
- *
- * In place, it inherited whatever width the form had — in the contact card
- * that is a ~585px column, which squeezed the details list into a narrow
- * strip. As a modal it gets the room the two-column layout was designed
- * for, and closing it leaves the (now empty) form exactly where it was, so
- * sending a second enquiry needs no navigation.
- *
- * Same modal shell conventions as InquiryModal and PartnersModal: the
- * backdrop is the direct AnimatePresence child with a stable key (a plain
- * wrapper would break exit-tracking), scroll is locked while open with the
- * scrollbar gap padded back in, and Escape closes.
- */
+// The confirmation, shown as a modal over the form.
 export default function SubmissionSuccessModal({
   open,
   onClose,
@@ -42,7 +29,6 @@ export default function SubmissionSuccessModal({
   reference: string;
   detailsTitle: string;
   rows: SummaryRow[];
-  /** "Send another" — closes the modal and hands back the blank form. */
   resetLabel: string;
   closeLabel: string;
   onReset: () => void;
@@ -89,9 +75,6 @@ export default function SubmissionSuccessModal({
             exit={{ opacity: 0, y: 14 }}
             transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
           >
-            {/* Inside the card, not hanging off its corner: this panel has a
-                painted background to its very edge, so an outside button
-                would sit on the backdrop instead of on the card. */}
             <button
               type="button"
               onClick={onClose}

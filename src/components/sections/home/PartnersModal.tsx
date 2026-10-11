@@ -7,16 +7,8 @@ import { useLanguage } from "@/lib/i18n/LanguageContext";
 import { PARTNERS } from "@/lib/constants";
 import { equalAreaFactors } from "@/lib/logoSize";
 
-/**
- * The homepage strip is a marquee — good for showing there are many
- * partners, bad for finding a specific one (you have to wait for it to
- * scroll past). This shows all of them at once in a static grid.
- *
- * Same modal shell conventions as InquiryModal: the backdrop is the
- * direct AnimatePresence child with a stable key (a plain wrapper would
- * break exit-tracking), scroll is locked while open with the scrollbar
- * gap padded back in, and Escape closes.
- */
+// All partners at once in a grid. The homepage strip only shows a few at a
+// time.
 export default function PartnersModal({ open, onClose }: { open: boolean; onClose: () => void }) {
   const { t } = useLanguage();
   const partnerText = t.partners;
@@ -63,10 +55,7 @@ export default function PartnersModal({ open, onClose }: { open: boolean; onClos
             exit={{ opacity: 0, y: 14 }}
             transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
           >
-            {/* Düymə kartın içindədir (kənarda "asılı" deyil) — modal
-                max-width-ə çatanda kənarda cəmi 2px boşluq qalırdı və
-                viewport-a dirənirdi. Başlığın `pr-10`-u üst-üstə düşməyə
-                imkan vermir. */}
+            {/* Bağlama düyməsi kartın içindədir */}
             <button
               type="button"
               onClick={onClose}
@@ -101,16 +90,14 @@ export default function PartnersModal({ open, onClose }: { open: boolean; onClos
                           decoding="async"
                           className="max-w-full object-contain [--logo-u:42px] sm:[--logo-u:44px]"
                           style={{
-                            // Same optical area for every logo — see equalAreaFactors.
+                            // Same optical area for every logo.
                             width: `calc(var(--logo-u) * ${equalAreaFactors(partner.ratio).width.toFixed(4)})`,
                             height: `calc(var(--logo-u) * ${equalAreaFactors(partner.ratio).height.toFixed(4)})`,
                           }}
                         />
                       </span>
-                      {/* The link icon hangs off the name's right edge instead of
-                          sitting beside it in the flow: invisible until hover, it
-                          still took 16px of width, which pushed every centred name
-                          8px left — and on touch screens it never appears at all. */}
+                      {/* The link icon sits outside the flow, so the name
+                          stays centred. */}
                       <span className="relative text-center text-xs font-semibold text-slate group-hover:text-navy">
                         {partnerText[i].name}
                         <ExternalLink className="absolute left-full top-1/2 ml-1 size-3 -translate-y-1/2 opacity-0 transition-opacity group-hover:opacity-60" aria-hidden />

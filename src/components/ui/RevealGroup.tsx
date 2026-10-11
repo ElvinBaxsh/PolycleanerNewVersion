@@ -13,11 +13,7 @@ const ITEM: Variants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] } },
 };
 
-/**
- * Wraps a grid/list of cards: the group fades in once, then children reveal
- * one after another (staggered) instead of all at once. Use RevealItem for
- * each direct child that should participate in the stagger.
- */
+// A group whose RevealItem children appear one after another.
 export function RevealGroup({ children, className }: { children: ReactNode; className?: string }) {
   return (
     <motion.div

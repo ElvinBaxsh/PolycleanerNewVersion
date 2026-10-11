@@ -8,19 +8,12 @@ import {
 } from "./SubmissionSuccessContext";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 
-/**
- * Holds the one confirmation modal for the whole site.
- *
- * It can't live inside a form: a form sent from the inquiry modal closes
- * that modal on success, which unmounts the form — and with it anything it
- * was rendering. Mounted here, above every other modal, the confirmation
- * survives its sender disappearing, and there is never more than one open.
- */
+// The one confirmation modal for the whole site. It sits above the other
+// modals, so it stays open when the inquiry modal closes.
 export default function SubmissionSuccessProvider({ children }: { children: ReactNode }) {
   const { t } = useLanguage();
   const [payload, setPayload] = useState<SubmissionSuccessPayload | null>(null);
-  // Kept while the exit animation plays, so the modal has something to fade
-  // out with — the same reason InquiryModal keeps its last options around.
+  // Kept while the exit animation plays.
   const [open, setOpen] = useState(false);
 
   const show = useCallback((next: SubmissionSuccessPayload) => {

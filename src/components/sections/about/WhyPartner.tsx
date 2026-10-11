@@ -16,11 +16,8 @@ const ICON_IMAGES = [
   "/images/icons/trimmed/customeFocused.png",
 ];
 
-// Dividers per item, because the grid changes shape: stacked on phones
-// (a line above each item), 2 × 2 from sm (a line above the second row and
-// left of the second column), one row from xl (a line between neighbours).
-// divide-x/y only knows DOM order, which drew a top line over the top-right
-// item in the 2 × 2 grid and no line between its columns.
+// Divider classes per item, because the grid changes shape: stacked, 2 × 2 from
+// sm, one row from xl.
 const DIVIDERS = [
   "",
   "border-t sm:border-t-0 sm:border-l",
@@ -40,8 +37,7 @@ export default function WhyPartner() {
           />
         </Reveal>
 
-        {/* Four across only from xl: at 1024px each card was too narrow and
-            the titles and descriptions wrapped into tall, cramped columns. */}
+        {/* Four across only from xl. */}
         <Reveal className="mt-8">
           <RevealGroup className="grid grid-cols-1 rounded-2xl border border-slate-200/80 bg-white p-2 shadow-xs sm:grid-cols-2 xl:grid-cols-4">
             {t.whyPartnerItems.map((item, i) => {

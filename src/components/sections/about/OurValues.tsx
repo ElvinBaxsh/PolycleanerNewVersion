@@ -27,17 +27,14 @@ export default function OurValues() {
           />
         </Reveal>
 
-        {/* Four across only from xl: at 1024px each card's text column was so
-            narrow that titles broke and descriptions ran to seven lines. */}
+        {/* Four across only from xl. */}
         <RevealGroup className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
           {t.companyValues.map((value, i) => (
             <RevealItem
               key={i}
               className="flex items-start gap-3.5 rounded-2xl border border-slate-200/80 bg-white p-4 sm:p-5 shadow-xs"
             >
-              {/* Top-aligned, not centred: descriptions wrap to different line
-                  counts (more so in Azerbaijani), and centring each card then
-                  left the icons and titles at different heights across the row. */}
+              {/* Top-aligned, so the icons line up when text wraps. */}
               <MaskIcon
                 src={ICONS[i]}
                 className="size-14 sm:size-16 shrink-0 text-[#258D2A] object-contain"

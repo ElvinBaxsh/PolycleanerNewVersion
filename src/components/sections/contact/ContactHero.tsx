@@ -16,9 +16,7 @@ const ICON_SRCS = [
 export default function ContactHero() {
   const { t, locale } = useLanguage();
   return (
-    // From lg the banner fills the screen below the sticky header (h-20
-    // there), the same as the home hero; phones and tablets keep the
-    // height they had.
+    // Full screen under the header from lg.
     <section className="relative min-h-[420px] overflow-hidden bg-navy pb-14 pt-8 sm:pt-10 lg:flex lg:min-h-[calc(100svh-5rem)] lg:items-center lg:py-14">
       <div className="absolute inset-0 z-0">
         <Image src="/images/factory/hero-plant-interior.webp" alt="Poly Cleaner facility" fill priority className="object-cover object-center" />
@@ -33,9 +31,7 @@ export default function ContactHero() {
           <span className="text-brand-green">{t.nav.contact}</span>
         </nav>
 
-        {/* Wider from lg than the copy above it: at 3xl the middle column
-            was narrow enough to break "Long-term Partnership" across two
-            lines, which pushed its description onto a third. */}
+        {/* Wider from lg, so each of the three items fits on two lines. */}
         <div className="max-w-3xl lg:max-w-5xl">
           <Reveal>
             <h1 className="text-[32px] font-bold leading-[1.15] text-white sm:text-[40px] lg:text-[60px] xl:text-[72px] 2xl:text-[80px] lg:[@media(max-height:820px)]:text-[48px]">

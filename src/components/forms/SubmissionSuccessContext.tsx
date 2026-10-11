@@ -3,13 +3,12 @@
 import { createContext, useContext } from "react";
 import type { SummaryRow } from "./SubmissionSuccess";
 
-/** Everything the confirmation needs, handed over by whichever form sent. */
+// What a form passes to the confirmation.
 export interface SubmissionSuccessPayload {
   title: string;
   subtitle: string;
   reference: string;
   rows: SummaryRow[];
-  /** "Send another" — closing the confirmation hands back the blank form. */
   resetLabel: string;
 }
 

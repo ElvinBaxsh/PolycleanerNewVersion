@@ -22,10 +22,7 @@ export default function PartnersSection() {
   const { paused, handlers: pauseHandlers } = useMarqueePause();
   const [modalOpen, setModalOpen] = useState(false);
   const scrollerRef = useRef<HTMLDivElement>(null);
-  // The strip sits well down the page, so a marquee started at page load
-  // would already be mid-run (logos clipped at both edges) by the time
-  // anyone scrolls to it. Hold it at the first partner until the section
-  // is actually on screen, then start from the beginning.
+  // The marquee starts only when the section scrolls into view.
   const [started, setStarted] = useState(false);
 
   useEffect(() => {
@@ -63,26 +60,19 @@ export default function PartnersSection() {
           <PartnersDiamond />
         </Reveal>
 
-        {/* Below desktop the wall doesn't fit, so partners run as a strip.
-            A static grid stopped fitting once the list grew past ~6 logos —
-            a single scrolling strip keeps the section a fixed, compact height
-            however many partners get added. Logos get equal optical area
-            (see equalAreaFactors) instead of one shared width. */}
+        {/* Below desktop: one scrolling strip of logos. */}
         <div
           ref={scrollerRef}
           {...pauseHandlers}
           className="scrollbar-none mt-10 overflow-x-auto [--logo-u:60px] sm:[--logo-u:70px] lg:hidden"
         >
-          {/* Yalnız uzun (longhand) animasiya xüsusiyyətləri: `animation`
-              qısaltması ilə `animationPlayState`-i eyni style obyektində
-              qarışdırmaq React-in "mixing shorthand and non-shorthand"
-              xətasını verirdi (hover-də pauza da etibarsız olurdu). */}
+          {/* Yalnız longhand animasiya xüsusiyyətləri: qısaltma ilə
+              animationPlayState birlikdə React xətası verir. */}
           <div
             className="flex w-max items-center gap-8 sm:gap-12"
             style={{
               animationName: started ? "partners-marquee" : "none",
-              // Scales with the partner count so the strip keeps the same
-              // speed as partners are added (it was tuned at 32s for 10).
+              // Scales with the partner count, to keep the same speed.
               animationDuration: `${PARTNERS.length * 3.2}s`,
               animationTimingFunction: "linear",
               animationIterationCount: "infinite",
@@ -100,8 +90,6 @@ export default function PartnersSection() {
                   aria-label={`Visit ${loopPartnerText[i].name} website`}
                   className="flex h-16 shrink-0 items-center justify-center transition-transform duration-300 hover:-translate-y-1 sm:h-24"
                 >
-                  {/* decoding="async" keeps a logo's first decode off the
-                      thread the page scrolls on. */}
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={partner.logo}
@@ -119,8 +107,7 @@ export default function PartnersSection() {
           </div>
         </div>
 
-        {/* The strip only ever shows a few logos at a time — this opens the
-            full list at once. The desktop wall already shows them all. */}
+        {/* Opens the full list. */}
         <div className="mt-6 flex justify-center lg:hidden">
           <button
             type="button"

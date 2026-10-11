@@ -42,10 +42,8 @@ export default function QAPillars() {
                 {Icon ? (
                   <Icon className="size-12 sm:size-14 shrink-0 stroke-[1.3] text-brand-green" aria-hidden />
                 ) : (
-                  // Plain <img> (not next/image): at this small a display size
-                  // Next's optimizer re-encodes to a tiny lossy thumbnail that
-                  // visibly darkens/desaturates fine linework like this badge —
-                  // a plain img lets the browser scale the full-res PNG itself.
+                  // Plain <img>: the optimizer blurs fine line art at this
+                  // size.
                   // eslint-disable-next-line @next/next/no-img-element
                   <img
                     src={iconSrc!}

@@ -2,27 +2,13 @@ import nodemailer from "nodemailer";
 import path from "path";
 import { BUYER_DOCUMENTS } from "./constants";
 
-// Embedded as a CID attachment (see sendMail) rather than linked by URL —
-// a linked <img src="https://..."> would only render once the site is
-// deployed and that path is publicly reachable; an embedded image travels
-// with the email itself and works immediately, regardless of deploy status.
+// Embedded in the email (cid:) rather than linked, so it always shows.
 const LOGO_CID = "polycleaner-logo";
 const LOGO_SRC = `cid:${LOGO_CID}`;
-// A mail-sized copy, not the site's own file: the original is 2149x732 and
-// 423KB, but the header renders it at 188x64. Embedding the full-size asset
-// added ~400KB to every single email for no visible gain — this is 376x128
-// (2x the display size, so still crisp on high-density screens) at ~21KB.
-// The site keeps using the original; only the email uses this one.
+// A small copy of the logo for email (376x128, about 21KB).
 const LOGO_PATH = path.join(process.cwd(), "public", "images", "mail", "polycleaner-logo.png");
 
-// Section badges use the site's own icon set rather than emoji, so the email
-// reads as part of the brand instead of a generic template — and so it looks
-// identical everywhere (emoji render full-colour in Gmail but flat and
-// differently shaped in Outlook). These are 64px copies of the site icons,
-// small enough to embed; the originals are ~500px and would be ~6x the weight
-// for a badge displayed at 20px. Travelling with the email (cid:) rather than
-// hotlinked also means they show before the domain is even live, and they are
-// not blocked by the "don't load remote images" default many clients ship.
+// Section icons: 64px copies of the site icons, embedded like the logo.
 const SECTION_ICONS = {
   lead: "corporate-building.png",
   product: "inventory.png",
@@ -38,10 +24,7 @@ const iconCid = (icon: SectionIcon) => `section-icon-${icon}`;
 const iconPath = (icon: SectionIcon) =>
   path.join(process.cwd(), "public", "images", "icons", "mail", SECTION_ICONS[icon]);
 
-// Same reasoning as the logo above: attaching the actual PDF files (rather
-// than linking to /PDF/... on the live site) means a "Buyer Documents"
-// request email works immediately, regardless of whether the site has
-// been deployed yet.
+// The PDFs are attached rather than linked.
 export const BUYER_DOCUMENT_ATTACHMENTS: EmailAttachment[] = BUYER_DOCUMENTS.map((doc) => ({
   filename: doc.file.split("/").pop()!,
   path: path.join(process.cwd(), "public", doc.file),
@@ -66,7 +49,7 @@ export interface RequestOfferMeta {
   submittedAt: string;
   userLanguage: string;
   ip?: string;
-  /** The handle shown to the sender on screen — see lib/reference.ts. */
+  /** The reference shown to the sender. */
   reference?: string;
 }
 
@@ -78,8 +61,7 @@ function escapeHtml(value: string) {
     .replace(/"/g, "&quot;");
 }
 
-// Table-based layout throughout (not flexbox/grid) so this renders correctly
-// in Outlook desktop's Word engine, not just modern webmail clients.
+// Table layout throughout, so it renders in Outlook.
 
 function formatBytes(bytes: number) {
   if (bytes < 1024) return `${bytes} B`;
@@ -96,12 +78,8 @@ function infoRow(label: string, value?: string) {
     </tr>`;
 }
 
-/**
- * Builds the section-card renderer for one email, recording which icons it
- * actually used. Only those get embedded: an unreferenced cid: image is shown
- * by some clients as a real attachment, which would clutter the very
- * attachment list this template is trying to keep readable.
- */
+// Renders section cards and records which icons were used, so only those get
+// embedded.
 function makeSectionRenderer() {
   const usedIcons = new Set<SectionIcon>();
 
@@ -127,7 +105,6 @@ function makeSectionRenderer() {
   </table>`;
   }
 
-  /** The embedded copies of exactly the icons this email referenced. */
   function inlineIcons(): EmailAttachment[] {
     return [...usedIcons].map((icon) => ({
       filename: SECTION_ICONS[icon],
@@ -262,12 +239,11 @@ export function buildRequestOfferEmail(payload: RequestOfferPayload, meta: Reque
 
 export interface ContactPayload {
   fullName: string;
-  // Optional — the Partner form's "Company / Organisation" field isn't required.
+  // Optional for the partner form.
   company?: string;
   country?: string;
   city?: string;
-  // Optional (not required) rather than string — the Partner form accepts
-  // either an email or a phone number, not necessarily both.
+  // Optional: the partner form takes an email or a phone.
   email?: string;
   phone?: string;
   productInterest?: string;
@@ -289,24 +265,21 @@ export interface ContactMeta {
   submittedAt: string;
   userLanguage?: string;
   ip?: string;
-  /** The handle shown to the sender on screen — see lib/reference.ts. */
+  /** The reference shown to the sender. */
   reference?: string;
-  /** Customer-uploaded files, with sizes so the email can show them without
-   *  the reader having to open each one to judge what arrived. */
+  /** Uploaded files with their sizes. */
   attachmentFiles?: { name: string; size: number }[];
 }
 
-/** A customer-uploaded file (e.g. a reference photo on the Sample form),
- * read fully into memory server-side and passed through to nodemailer. */
+// A file attached to the email.
 export interface EmailAttachment {
   filename: string;
-  /** In-memory content (customer file uploads) — mutually exclusive with `path`. */
+  /** File content in memory (uploads). */
   content?: Buffer;
-  /** A local file path (bundled assets, e.g. the buyer-document PDFs) — mutually exclusive with `content`. */
+  /** Path to a bundled file (the buyer PDFs). */
   path?: string;
   contentType?: string;
-  /** Set for images referenced from the HTML as `cid:<value>` — clients render
-   *  these inline instead of listing them as downloadable attachments. */
+  /** For images shown inline via cid:. */
   cid?: string;
 }
 
@@ -319,12 +292,7 @@ const INQUIRY_TYPE_LABELS: Record<string, string> = {
   partner: "Partnership Request",
 };
 
-/**
- * Covers every non-"Request Offer" form on the site (Request Sample, Book
- * TAROPAK Meeting, the Documents page's buyer-pack form, and the general
- * contact form) — one shared template since they're all a subset of the
- * same handful of fields, distinguished by `inquiryType`.
- */
+// One template for every form except Request Offer.
 export function buildContactEmail(payload: ContactPayload, meta: ContactMeta) {
   const { sectionCard, inlineIcons } = makeSectionRenderer();
   const kind = INQUIRY_TYPE_LABELS[payload.inquiryType ?? "general"] ?? "General Inquiry";
@@ -343,8 +311,6 @@ export function buildContactEmail(payload: ContactPayload, meta: ContactMeta) {
       ${infoRow("Phone / WhatsApp:", payload.phone)}
     </table>`;
 
-  // The Partner form doesn't collect Product Interest / Monthly Volume /
-  // Document Type — Partnership Interest is its own thing, own section.
   const partnershipDetails = isPartner
     ? `
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
@@ -352,9 +318,7 @@ export function buildContactEmail(payload: ContactPayload, meta: ContactMeta) {
     </table>`
     : "";
 
-  // Sample requests carry their own set of fields (sample type, application,
-  // delivery address, courier account) that don't apply to other inquiry
-  // types, so they get a dedicated section instead of the generic one below.
+  // Sample requests have their own fields.
   const sampleRequirements = isSample
     ? `
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
@@ -375,10 +339,7 @@ export function buildContactEmail(payload: ContactPayload, meta: ContactMeta) {
     </table>`;
   const hasOtherDetails = Boolean(payload.productInterest || payload.monthlyVolume || payload.documentType);
 
-  // The 4 buyer-document PDFs are attached to this email (see sendMail /
-  // BUYER_DOCUMENT_ATTACHMENTS) rather than linked — a cid: link in an <a
-  // href> isn't reliably clickable-to-open across email clients the way
-  // cid: works for inline <img>, so this is a plain list, not fake buttons.
+  // The PDFs are attached, so this is a plain list.
   const buyerDocumentsList = isDocuments
     ? `
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
@@ -408,9 +369,7 @@ export function buildContactEmail(payload: ContactPayload, meta: ContactMeta) {
       ${payload.consent !== undefined ? infoRow("Consent:", payload.consent ? "Granted (Privacy Policy Accepted)" : "Not granted") : ""}
     </table>`;
 
-  // The files the customer sent are the part of the email someone actually
-  // acts on, so they get their own card instead of being a comma-joined row
-  // buried under the IP address and the submission timestamp.
+  // Uploaded files get their own card.
   const uploadedFilesList = meta.attachmentFiles?.length
     ? `
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
@@ -517,8 +476,6 @@ export function buildContactEmail(payload: ContactPayload, meta: ContactMeta) {
     isPartner ? "Partnership Details" : null,
     isPartner && payload.partnershipInterest ? `Partnership Interest: ${payload.partnershipInterest}` : null,
     payload.message ? `\nMessage:\n${payload.message}` : null,
-    // Mirrors the HTML: the customer's files are their own block, above the
-    // technical metadata rather than a row buried inside it.
     meta.attachmentFiles?.length ? "" : null,
     meta.attachmentFiles?.length ? "Attachments (sent by the customer)" : null,
     ...(meta.attachmentFiles?.map((f) => `- ${f.name} (${formatBytes(f.size)})`) ?? []),
@@ -539,20 +496,15 @@ export function buildContactEmail(payload: ContactPayload, meta: ContactMeta) {
   return { subject, html, text, inlineImages: inlineIcons() };
 }
 
-/**
- * Sends via SMTP using env vars (SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS,
- * SMTP_FROM). Returns { sent: false } instead of throwing when SMTP isn't
- * configured yet, so local/dev submissions still succeed (logged to the
- * console) while the real send path is ready for production credentials.
- */
+// Sends via SMTP (SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS, SMTP_FROM).
+// Without them it returns { sent: false } instead of throwing.
 export async function sendMail(
   to: string | string[],
   subject: string,
   html: string,
   text: string,
   extraAttachments: EmailAttachment[] = [],
-  /** Images the HTML references as `cid:` — the section badges, from the
-   *  builder's `inlineImages`. Shown inline, not listed as attachments. */
+  /** Images referenced from the HTML as cid:. */
   inlineImages: EmailAttachment[] = []
 ) {
   const { SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS, SMTP_FROM } = process.env;
@@ -573,8 +525,6 @@ export async function sendMail(
   });
 
   try {
-    // nodemailer sets charset=utf-8 on the html/text MIME parts automatically
-    // whenever the content requires it — no extra options needed here.
     await transporter.sendMail({
       from: SMTP_FROM || SMTP_USER,
       to: Array.isArray(to) ? to.join(", ") : to,

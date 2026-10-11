@@ -58,13 +58,7 @@ html {
   }
 }
 
-/*
-  The header needs more room than the 1220px reading-width container: logo +
-  7 nav links + CTA button don't fit inside it, which was forcing labels like
-  "ABOUT US" and "PROCESS & QUALITY" to wrap onto a second line. Headers are
-  conventionally allowed to run wider than body copy, so give it its own,
-  wider max-width instead of shrinking the nav to fit the content container.
-*/
+/* The header is wider than the page content, so the nav fits on one line. */
 .container-header {
   width: 100%;
   max-width: 1440px;
@@ -116,8 +110,7 @@ html {
   background-color: var(--color-brand-blue);
 }
 
-/* Fully hides the scrollbar while keeping the element scrollable (mouse
-   drag, touch swipe, and programmatic scrollLeft all still work). */
+/* Hides the scrollbar. The element still scrolls. */
 .scrollbar-none {
   scrollbar-width: none;
   -ms-overflow-style: none;
@@ -132,20 +125,13 @@ html {
     transform: translateX(0);
   }
   to {
-    /* Exactly half the track's own width — since the track is the item
-       list duplicated once, this lands precisely on the start of the
-       second copy regardless of item widths or gap count. */
+    /* Half the track: the list is duplicated once. */
     transform: translateX(-50%);
   }
 }
 
 @keyframes card-fade-in {
-  /* Filtrlə dəyişən (scroll-triggered deyil, click-triggered) kart
-     siyahıları üçün — framer-motion-un whileInView + once:true
-     kombinasiyası artıq bir dəfə tetiklənmiş RevealGroup-a sonradan
-     əlavə olunan uşaqları animasiya etmir (əbədi opacity:0 qalır), ona
-     görə bu siyahılar RevealItem əvəzinə bu sadə CSS animasiyasını
-     istifadə edir. */
+  /* Filtrlə dəyişən kart siyahıları üçün sadə giriş animasiyası. */
   from {
     opacity: 0;
     transform: translateY(12px);

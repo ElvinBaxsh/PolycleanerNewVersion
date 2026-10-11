@@ -63,7 +63,7 @@ const CATEGORY_ICONS: Record<string, LucideIcon> = {
   Sustainability: Leaf,
 };
 
-/** "Download" that shows it's working — see useDownloadFeedback. */
+// A download link with visible feedback.
 function DocumentDownloadLink({ href }: { href: string }) {
   const { t } = useLanguage();
   const { state, start } = useDownloadFeedback();
@@ -146,13 +146,8 @@ export default function DocumentGrid() {
         <div className="mt-8 grid grid-cols-1 gap-8 lg:grid-cols-3 lg:items-stretch">
           {/* Left: document cards + info banner */}
           <div className="lg:col-span-2">
-            {/* key={active}: filtr dəyişəndə tam remount olunur ki, aşağıdakı
-                CSS animasiyası hər dəfə yenidən oynasın. RevealGroup/
-                RevealItem (framer-motion whileInView + viewport once:true)
-                bu sadə dinamik siyahı üçün uyğun deyildi — bir dəfə
-                tetiklənəndən sonra sonradan əlavə olunan uşaqları heç vaxt
-                göstərmirdi (əbədi opacity:0 qalırdı), filtr işləmirmiş kimi
-                görünürdü. */}
+            {/* key={active}: filtr dəyişəndə siyahı yenidən qurulur ki,
+                animasiya təkrar oynasın. */}
             <div key={active} className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               {visible.map((doc, i) => {
                 const Icon = DOC_ICONS[doc.icon];
@@ -179,8 +174,7 @@ export default function DocumentGrid() {
                           </button>
                         )}
                       </div>
-                      {/* İkon sağda, böyük — kartın hündürlüyünü artırmadan
-                          (mətn sütunundan ayrı, öz sırasında) daha iri görünür. */}
+                      {/* İkon sağda, böyük */}
                       <span className="flex size-18 shrink-0 items-center justify-center rounded-lg border border-border text-navy">
                         {Icon ? (
                           <Icon className="size-10 stroke-[1.4]" aria-hidden />
@@ -207,9 +201,8 @@ export default function DocumentGrid() {
             </Reveal>
 
             <Reveal delay={0.15}>
-              {/* Məzmun normal axındadır (absolute deyil) — belə olmasa
-                  uzun tərcümə (məsələn AZ-da 2 sətirlik başlıq) kartı
-                  böyüdə bilmir və overflow-hidden onu kəsir. */}
+              {/* Məzmun normal axındadır ki, uzun tərcümə kartı böyüdə
+                  bilsin. */}
               <div className="relative mt-4 w-full overflow-hidden rounded-2xl">
                 <AnimatePresence mode="wait">
                   <motion.div
@@ -228,13 +221,7 @@ export default function DocumentGrid() {
                       className="object-cover"
                     />
                     <div className="absolute inset-0 bg-gradient-to-r from-navy/95 via-navy/85 to-navy/50" />
-                    {/* Mətn və düymə eyni sətirdə (sm+) — düymə artıq
-                        tagline-in altına yığılıb kartdan kənara çıxmır,
-                        sağa "sürüşdürülüb". `items-start` (mərkəz əvəzinə)
-                        düyməni başlıqla eyni səviyyədə saxlayır — taglayn
-                        arxada "asılı" qalmır, təbii axan detal kimi görünür.
-                        Dar ekranda (mobil) hələ də alt-alta qalır, çünki
-                        yan-yana sığmaz. */}
+                    {/* sm-dən mətn və düymə eyni sətirdə, mobildə alt-alta. */}
                     <div className="relative z-10 flex w-full max-w-2xl flex-col gap-4 p-6 pb-8 pr-16 sm:flex-row sm:items-start sm:justify-between">
                       <div className="min-w-0">
                         <h3 className="text-xl font-bold text-white">{t.documents.taropakMeet(eventData.name)}</h3>
@@ -264,8 +251,7 @@ export default function DocumentGrid() {
                   </motion.div>
                 </AnimatePresence>
 
-                {/* Növbəti sərgiyə keçid — yalnız iki element olduğu üçün
-                    bir "next" oxu kifayətdir (həmişə digərinə keçir). */}
+                {/* Növbəti sərgiyə keçid */}
                 <button
                   type="button"
                   onClick={advanceEvent}
@@ -278,9 +264,7 @@ export default function DocumentGrid() {
             </Reveal>
           </div>
 
-          {/* Right: custom document package form — left sütunla eyni
-              hündürlükdə (items-stretch), aşağıdakı boşluq Additional
-              Notes sahəsinə paylanır. */}
+          {/* Right: document request form */}
           <Reveal delay={0.15} className="h-full">
             <DocumentRequestForm />
           </Reveal>

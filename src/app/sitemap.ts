@@ -7,10 +7,8 @@ const LEGAL_ROUTES = ["/privacy-policy", "/terms-of-use"];
 
 export const dynamic = "force-static";
 
-// A fixed date (not `new Date()`) keeps this route static — a request-time
-// timestamp is exactly what "force-static" rules out. Bump this when page
-// content actually changes meaningfully.
-const LAST_MODIFIED = new Date("2026-09-09");
+// A fixed date keeps the sitemap static. Update it when content changes.
+const LAST_MODIFIED = new Date("2026-10-11");
 
 function entriesFor(route: string, changeFrequency: MetadataRoute.Sitemap[number]["changeFrequency"], priority: number) {
   const enUrl = `${SITE_URL}${route}`;

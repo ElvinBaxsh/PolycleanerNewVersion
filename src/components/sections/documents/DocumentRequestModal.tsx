@@ -11,9 +11,7 @@ export default function DocumentRequestModal({ isOpen, onClose }: { isOpen: bool
   useEffect(() => {
     if (!isOpen) return;
 
-    // Locking scroll via overflow:hidden removes the body's scrollbar, which
-    // shifts all fixed/centered content (including this modal) rightward by
-    // the scrollbar's width. Padding that gap back in keeps the page still.
+    // Hiding the scrollbar shifts the page, so pad the gap back.
     const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
     document.body.style.overflow = "hidden";
     if (scrollbarWidth > 0) document.body.style.paddingRight = `${scrollbarWidth}px`;
@@ -47,9 +45,8 @@ export default function DocumentRequestModal({ isOpen, onClose }: { isOpen: bool
             aria-modal="true"
             aria-label={t.documentRequestForm.heading}
             onClick={(e) => e.stopPropagation()}
-            // relative + no overflow clipping here (unlike the scrollable card
-            // below) so the close button can sit half outside the card's edge
-            // without being cut off by scroll clipping.
+            // No overflow clipping here, so the close button can sit over the
+            // edge.
             className="relative w-full max-w-[480px] will-change-[opacity,transform]"
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
@@ -64,11 +61,7 @@ export default function DocumentRequestModal({ isOpen, onClose }: { isOpen: bool
             >
               <X className="size-5" />
             </button>
-            {/* dvh (not vh) — vh on mobile Safari is based on the viewport
-                with the address bar hidden, so a modal sized off 92vh can
-                render taller than what's actually visible, pushing the
-                close button above the top edge. dvh tracks the real,
-                currently-visible viewport. */}
+            {/* dvh, not vh: on mobile Safari vh ignores the address bar. */}
             <div className="scrollbar-thin max-h-[85dvh] overflow-y-auto rounded-2xl shadow-2xl">
               <DocumentRequestForm onCancel={onClose} />
             </div>

@@ -5,13 +5,6 @@ import Button from "@/components/ui/Button";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 import { localizePath } from "@/lib/i18n/localizePath";
 
-/**
- * The 404 body, shared by (main)/not-found.tsx and az/not-found.tsx — each
- * renders inside its own locale's AppShell/LanguageProvider, so this can
- * safely call useLanguage(). The true root src/app/not-found.tsx (reached
- * when a path matches no segment in either locale tree at all) can't use
- * this — it has no LanguageProvider ancestor.
- */
 export default function NotFoundContent() {
   const { t, locale } = useLanguage();
   return (

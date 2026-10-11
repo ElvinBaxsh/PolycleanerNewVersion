@@ -8,13 +8,9 @@ import { useLanguage } from "@/lib/i18n/LanguageContext";
 import { localizePath, delocalizePath } from "@/lib/i18n/localizePath";
 import type { Locale } from "@/lib/i18n/translations";
 
-// Self-hosted flag SVGs (not emoji flags — Windows fonts commonly lack the
-// regional-indicator glyphs and fall back to rendering the raw two-letter
-// code instead of a flag; a CDN-hosted flag was also unreliable to load).
+// SVG flags: emoji flags don't render on Windows.
 const OPTIONS: { locale: Locale; flagSrc: string; label: string }[] = [
   { locale: "en", flagSrc: "/images/flags/gb.svg", label: "English" },
-  // Labelled in English, not as the endonym "Azərbaycan": the site opens in
-  // English for everyone, so this menu is read by an English speaker first.
   { locale: "az", flagSrc: "/images/flags/az.svg", label: "Azerbaijan" },
 ];
 
@@ -24,14 +20,9 @@ export default function LanguageSwitcher({
   variant = "dropdown",
 }: {
   light?: boolean;
-  /** Opens the option list above the trigger instead of below — for
-      placements near the bottom of the viewport (e.g. the footer), where a
-      downward dropdown would spill past the page edge. */
+  /** Opens the list upwards, for use near the bottom of the page. */
   dropUp?: boolean;
-  /** "simple" renders a compact inline "🌐 AZ | EN" toggle — no popup, so
-      there's nothing to spill off-screen.
-      "flags" renders just the two flags side by side, no text — the active
-      one gets an underline. */
+  /** simple: an inline "AZ | EN" toggle. flags: two flags, no text. */
   variant?: "dropdown" | "simple" | "flags";
 }) {
   const { locale } = useLanguage();
@@ -42,24 +33,15 @@ export default function LanguageSwitcher({
 
   const current = OPTIONS.find((o) => o.locale === locale) ?? OPTIONS[0];
 
-  // Locale is now a URL concern (EN unprefixed, AZ under /az) rather than
-  // client state, so switching means navigating to the equivalent path in
-  // the other locale — not just flipping a value in place.
-  //
-  // usePathname() carries no query string, so the query and #anchor are read
-  // from the location at click time: without them /contact?type=sample came
-  // back as a bare /az/elaqe, and the form lost the enquiry type the visitor
-  // had arrived with. (useSearchParams would work too, but would force every
-  // page rendering the header behind a Suspense boundary.)
+  // Switching language means going to the same page in the other language. The
+  // query and #anchor are read at click time, so they are kept.
   function goToLocale(target: Locale) {
     if (target === locale) return;
     const { search, hash } = window.location;
     router.push(localizePath(delocalizePath(pathname) + search + hash, target));
   }
 
-  // Declared before the variant early-returns below (not conditionally
-  // after them) so the hook order stays stable across renders regardless
-  // of which variant is active.
+  // Before the early returns, to keep the hook order stable.
   useEffect(() => {
     if (!open) return;
     function onClickOutside(e: MouseEvent) {

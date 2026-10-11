@@ -18,12 +18,8 @@ const { lat, lng } = COMPANY.coordinates;
 const COORDS_PRECISE = `${lat.toFixed(6)}, ${lng.toFixed(6)}`;
 const COORDS_SHOWN = `${lat.toFixed(5)}, ${lng.toFixed(5)}`;
 
-// Each is the app's own universal link: on a phone it opens the installed
-// app straight into navigation, on a desktop it opens the web version.
-// Google Maps leads because it is what most visitors already use; Waze is
-// the other common choice for drivers in Baku; Apple Maps covers iPhones
-// with neither installed. (This replaces an OpenStreetMap link, which is
-// the map shown on the page but not an app anyone navigates with.)
+// Universal links: they open the app on a phone and the web version on a
+// desktop.
 const DIRECTIONS = [
   { name: "Google Maps", href: `https://www.google.com/maps/dir/?api=1&destination=${lat}%2C${lng}`, primary: true },
   { name: "Waze", href: `https://waze.com/ul?ll=${lat}%2C${lng}&navigate=yes`, primary: false },
@@ -33,13 +29,9 @@ const DIRECTIONS = [
 export default function MapAndActions() {
   const { t } = useLanguage();
   return (
-    // id="map": the address in Contact Information links here. scroll-mt keeps
-    // the section clear of the sticky header when the page jumps to it.
+    // The address in Contact Information links to #map.
     <section id="map" className="section-y scroll-mt-24 bg-soft-gray">
       <Container>
-        {/* Stretched to the map's height as a card of its own — centred
-            beside a tall map, the few lines of copy left a large empty
-            column on either side of them. */}
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:items-stretch">
           <Reveal className="flex h-full flex-col rounded-2xl border border-border bg-white p-6 sm:p-8">
             <h2 className="text-2xl font-bold text-navy">{t.contact.findUsTitle}</h2>
@@ -105,9 +97,7 @@ export default function MapAndActions() {
   );
 }
 
-/** Drivers and logistics partners often want the raw coordinates to paste
- *  into their own navigator or dispatch system. Copies the full-precision
- *  value; the page shows a rounded one (5 decimals ≈ 1 m, plenty to read). */
+// Copies the full-precision coordinates. The page shows them rounded.
 function CopyCoordinates({ copyLabel, copiedLabel }: { copyLabel: string; copiedLabel: string }) {
   const [copied, setCopied] = useState(false);
 
@@ -117,8 +107,7 @@ function CopyCoordinates({ copyLabel, copiedLabel }: { copyLabel: string; copied
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch {
-      // Clipboard access can be refused (permissions, non-secure context);
-      // the coordinates stay visible on the page to copy by hand.
+      // Clipboard access can be refused. The coordinates are still on the page.
     }
   }
 

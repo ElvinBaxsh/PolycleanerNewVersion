@@ -14,10 +14,7 @@ export default function PlasticCreditBanner() {
     <section className="bg-slate-50/50 py-8 lg:py-10">
       <Container className="max-w-[1140px]">
         <Reveal className="relative overflow-hidden rounded-2xl border border-slate-200/80 bg-white shadow-xs">
-          {/* Mobil/tabletdə (lg-dən aşağı) sağdakı ayrıca şəkil paneli
-              gizlənir (aşağıda), ona görə şəkil tamam yox olurdu — burada
-              bütün kartın arxasına solğun fon kimi əlavə edildi. lg+ da
-              gizlənir, çünki orda öz xüsusi paneli var. */}
+          {/* Mobil/tabletdə şəkil kartın arxasında solğun fon kimi görünür. */}
           <div className="absolute inset-0 lg:hidden">
             <Image
               src="/images/destination-warsaw-hero-banner-taropak.jpg"
@@ -47,9 +44,7 @@ export default function PlasticCreditBanner() {
               </Link>
             </div>
 
-            {/* Sağ Tərəf: Şəkil paneli — yalnız masaüstündə. Şəklin sol
-                kənarı ağ panelə enliyi geniş, tədricən itən (heç bir sərt
-                xətt olmadan) qradientlə həll olunur. */}
+            {/* Sağ Tərəf: Şəkil paneli - yalnız masaüstündə */}
             <div className="relative hidden min-h-[270px] flex-1 lg:block">
               <Image
                 src="/images/destination-warsaw-hero-banner-taropak.jpg"
@@ -62,8 +57,7 @@ export default function PlasticCreditBanner() {
             </div>
           </div>
 
-          {/* Tünd Mavi Kart — masaüstündə şəklin sağ tərəfində şaquli
-              mərkəzləşir, mobil/tabletdə mətndən sonra normal axında gəlir. */}
+          {/* Tünd Mavi Kart */}
           <div className="relative px-8 pb-8 sm:px-10 sm:pb-10 lg:absolute lg:right-6 lg:top-1/2 lg:-translate-y-1/2 lg:px-0 lg:pb-0 xl:right-8">
             <div className="w-full rounded-2xl bg-[#091E36] p-6 sm:w-[330px] text-white shadow-xl shadow-slate-900/20">
               {/* İkon və Başlıq */}

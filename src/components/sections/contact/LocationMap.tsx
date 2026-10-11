@@ -9,11 +9,8 @@ import { COMPANY } from "@/lib/constants";
 type View = "map" | "satellite";
 type Layers = Record<View, import("leaflet").Layer[]>;
 
-// Esri's public imagery service: no API key, no billing account — the same
-// reason the street layer is OpenStreetMap rather than Google Maps. Most
-// areas have native imagery down to about z18; past that Esri serves a
-// "map data not available" placeholder, so higher zooms upscale z18 tiles
-// instead (maxNativeZoom) rather than showing that placeholder.
+// Esri satellite imagery, no API key needed. Tiles exist up to z18; higher
+// zooms upscale them.
 const ESRI = "https://server.arcgisonline.com/ArcGIS/rest/services";
 const SATELLITE_NATIVE_MAX_ZOOM = 18;
 
@@ -22,26 +19,16 @@ function showView(map: import("leaflet").Map, layers: Layers, view: View) {
   for (const layer of layers[view]) layer.addTo(map);
 }
 
-/**
- * OpenStreetMap via Leaflet — not Google Maps, deliberately (no API key,
- * no billing account, no Google dependency for a page that just needs to
- * show one pin). A satellite toggle sits top-right: for a site visit or a
- * truck pickup, the aerial view of the yard is more recognisable than the
- * street map, which shows the industrial park only as grey blocks.
- */
+// OpenStreetMap via Leaflet (no API key), with a satellite toggle.
 export default function LocationMap() {
   const { t } = useLanguage();
   const containerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<import("leaflet").Map | null>(null);
   const layersRef = useRef<Layers | null>(null);
   const [view, setView] = useState<View>("map");
-  // Leaflet loads asynchronously, so a toggle clicked before it finishes has
-  // no map to act on yet — the init reads the latest choice from here.
+  // Leaflet loads async. The init reads the latest choice from this ref.
   const viewRef = useRef<View>(view);
-  // The pin's popup is built once, when the map is created. Read the
-  // localized address from a ref so the init effect keeps its empty deps
-  // (re-running it would tear the map down and build it again). The locale
-  // comes from the URL, so each language renders its own instance anyway.
+  // The popup is built once, so the address comes from a ref.
   const addressRef = useRef(t.common.address);
 
   useEffect(() => {
@@ -75,9 +62,7 @@ export default function LocationMap() {
             maxZoom: 19,
           }),
         ],
-        // Imagery alone has no names on it, which makes it hard to orient
-        // by — road and place labels are layered on top, like a "hybrid"
-        // view in the big map apps.
+        // Road and place labels over the imagery.
         satellite: [
           L.tileLayer(`${ESRI}/World_Imagery/MapServer/tile/{z}/{y}/{x}`, {
             attribution: esriCredit,
@@ -96,9 +81,8 @@ export default function LocationMap() {
       };
       showView(map, layersRef.current, viewRef.current);
 
-      // A plain divIcon instead of Leaflet's default marker image — the
-      // default marker's icon URLs are relative paths that bundlers like
-      // Turbopack/webpack don't resolve correctly without extra config.
+      // A divIcon: Leaflet's default marker images don't resolve with the
+      // bundler.
       const icon = L.divIcon({
         className: "",
         html: `<div style="width:34px;height:34px;border-radius:50% 50% 50% 0;background:#1688B5;border:3px solid white;box-shadow:0 2px 6px rgba(0,0,0,0.35);transform:rotate(-45deg);"></div>`,
@@ -111,11 +95,8 @@ export default function LocationMap() {
         .bindPopup(`<strong>${COMPANY.name}</strong><br/>${addressRef.current}`)
         .openPopup();
 
-      // The map's height now follows its row (see the container's classes),
-      // which can settle after Leaflet has already drawn — web fonts
-      // loading, the Reveal animation, a window resize. Leaflet measures its
-      // box only once, so without this it keeps the stale size and leaves
-      // grey untiled strips along the edge that grew.
+      // Leaflet measures its box once, so re-measure when the container
+      // resizes.
       resizeObserver = new ResizeObserver(() => map.invalidateSize());
       resizeObserver.observe(containerRef.current);
     });
@@ -131,14 +112,7 @@ export default function LocationMap() {
 
   return (
     <div className="relative h-full">
-      {/* relative + z-0 gives Leaflet's container its own stacking context —
-          without it, Leaflet's internal panes/controls (z-index up to 1000)
-          aren't contained and render above the site's sticky header instead
-          of staying inside this card. The toggle below sits outside that
-          context, which is what lets z-10 put it above the map.
-          Side by side (lg), the map fills the row height instead of keeping
-          a fixed 4:3 ratio, so it lines up with the info card next to it
-          rather than leaving a gap under whichever of the two is shorter. */}
+      {/* relative + z-0 keeps Leaflet's layers under the sticky header. */}
       <div
         ref={containerRef}
         className="relative z-0 aspect-[4/3] w-full overflow-hidden rounded-2xl border border-border lg:aspect-auto lg:h-full lg:min-h-[460px]"

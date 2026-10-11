@@ -6,12 +6,8 @@ import { diamondLogoFactors } from "@/lib/logoSize";
 
 const MAX_PER_ROW = 5;
 
-/**
- * Row lengths for the diamond wall, alternating one short and one long row
- * (4-5-4 for 13 partners) so the rows interlock. Tries starting with either
- * kind and keeps the one whose last row comes out complete; when neither
- * does, the last row simply holds whatever is left.
- */
+// Row lengths for the diamond wall. Short and long rows alternate (4-5-4 for
+// 13) so they interlock.
 function diamondRows(count: number, max: number): number[] {
   function build(startShort: boolean) {
     const rows: number[] = [];
@@ -33,13 +29,7 @@ function diamondRows(count: number, max: number): number[] {
   return shortFirst.lastFull || !longFirst.lastFull ? shortFirst.rows : longFirst.rows;
 }
 
-/**
- * Tile positions on a diamond lattice, in half-steps: a tile may sit only
- * where (column + row) has one fixed parity, which is what guarantees that
- * neighbouring diamonds interlock instead of overlapping — for any partner
- * count, including a short leftover row, which is nudged half a step when
- * centring it would break the parity.
- */
+// Tile positions on a diamond lattice, in half-steps, so neighbours interlock.
 function latticePositions(rows: number[], max: number) {
   const lastColumn = 2 * max - 2;
   const parity = (max - rows[0]) % 2;
@@ -54,21 +44,9 @@ function latticePositions(rows: number[], max: number) {
   return positions;
 }
 
-/**
- * Desktop partner wall: every partner visible at once as a tile in an
- * interlocking diamond pattern, with no animation to wait for.
- *
- * Each tile is two siblings in an upright cell. The link is the rotated
- * square itself, so its hit area is the diamond — not the cell, whose
- * corners overlap the neighbouring tiles. The logo is a separate upright
- * layer above it that ignores the pointer, sized to the same optical area as
- * every other logo (see diamondLogoFactors).
- *
- * The logo must not live inside the rotated link: browsers grow the
- * scrollable-overflow box at every rotated level, so a counter-rotated logo
- * layer nested in the link made the rightmost tile count as roughly half a
- * cell wider than it looks, and the whole page scrolled sideways.
- */
+// Desktop partner wall: all partners at once in a diamond pattern. The link is
+// the rotated square. The logo is a separate upright layer, because a logo
+// nested in the rotated link made the page scroll sideways.
 export default function PartnersDiamond() {
   const { t } = useLanguage();
   const rows = diamondRows(PARTNERS.length, MAX_PER_ROW);
@@ -102,7 +80,7 @@ export default function PartnersDiamond() {
               className="pointer-events-auto absolute inset-[14.645%] rotate-45 rounded-2xl bg-[#F8FAFB] ring-1 ring-slate-100 transition-[background-color,box-shadow] duration-300 hover:bg-white hover:shadow-xl hover:shadow-slate-900/10 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-green"
             />
             <span className="pointer-events-none absolute inset-0 flex items-center justify-center">
-              {/* Decorative here: the link beside it already carries the name. */}
+              {/* Decorative: the link beside it carries the name. */}
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={partner.logo}

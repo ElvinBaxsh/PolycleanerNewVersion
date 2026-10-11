@@ -9,15 +9,8 @@ import DocumentRequestModalProvider from "@/components/sections/documents/Docume
 import { LanguageProvider } from "@/lib/i18n/LanguageContext";
 import type { Locale } from "@/lib/i18n/translations";
 
-/**
- * The site chrome (Header/Footer/modals), parameterized by locale. Mounted
- * once per locale-tree layout (see src/app/(main)/layout.tsx and
- * src/app/az/layout.tsx) rather than the root layout, so that each locale
- * subtree gets its own LanguageProvider — Header/Footer render inside it
- * and pick up the right language, which wouldn't happen if this stayed at
- * the true root (siblings of {children}, not descendants of a per-route
- * provider).
- */
+// Header, footer and the modal providers for one language. Each language
+// tree mounts its own, so the header and footer follow the page's language.
 export default function AppShell({
   initialLocale,
   children,
@@ -28,16 +21,21 @@ export default function AppShell({
   return (
     <LanguageProvider initialLocale={initialLocale}>
       <MotionProvider>
-        {/* Outside the modal providers on purpose: a form sent from inside
-            the inquiry modal closes it, and the confirmation has to outlive
-            that unmount. */}
+        {/* Outside the modal providers: the confirmation must survive the
+            inquiry modal closing. */}
         <SubmissionSuccessProvider>
           <InquiryModalProvider>
             <DocumentRequestModalProvider>
-              <Header />
-              <main className="flex-1">{children}</main>
-              <Footer />
-              <ScrollToTopButton />
+              {/* lang here, because <html lang> is shared by both languages.
+                  It tells search engines the content's language and makes
+                  CSS uppercase turn "i" into "İ" in Azerbaijani. `contents`
+                  keeps the wrapper out of the page layout. */}
+              <div lang={initialLocale} className="contents">
+                <Header />
+                <main className="flex-1">{children}</main>
+                <Footer />
+                <ScrollToTopButton />
+              </div>
             </DocumentRequestModalProvider>
           </InquiryModalProvider>
         </SubmissionSuccessProvider>

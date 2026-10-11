@@ -15,8 +15,7 @@ const variants: Record<ButtonVariant, string> = {
     "bg-transparent text-navy border-2 border-border hover:bg-soft-gray",
   "ghost-light":
     "bg-transparent text-white border-2 border-white hover:bg-white hover:text-navy",
-  // Structural only — callers supply their own border/text color via className
-  // (e.g. border-white/40, border-[#22c55e]/60) depending on the background it sits on.
+  // Colours come from the caller's className.
   outline: "bg-transparent border-2",
 };
 

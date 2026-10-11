@@ -45,8 +45,7 @@ export default function InquiryForm({
   defaultType?: string;
   defaultInterest?: string;
   onCancel?: () => void;
-  /** Lets the surrounding modal or section know the form is gone, so it can
-   *  drop its "fill in the form below" line. */
+  /** Called after a successful send. */
   onSuccess?: () => void;
 }) {
   const { t, locale } = useLanguage();
@@ -54,10 +53,7 @@ export default function InquiryForm({
   const successModal = useSubmissionSuccess();
   const isSample = defaultType === "sample";
   const isPartner = defaultType === "partner";
-  // Every field any variant of this form can have, in on-screen order — the
-  // success summary shows whichever of them were filled in. Selects carry
-  // their value/label pairs so the summary shows the option the visitor
-  // picked in their language, not the English value that gets submitted.
+  // Fields shown in the confirmation summary, in on-screen order.
   const SUMMARY_FIELDS: SummaryField[] = [
     { name: "fullName", label: f.fullName, icon: User },
     { name: "company", label: isPartner ? f.companyOrganisation : f.companyName, icon: Building2 },
@@ -88,10 +84,7 @@ export default function InquiryForm({
     const form = event.currentTarget;
     const data = new FormData(form);
 
-    // File objects can't survive JSON.stringify, so the whole form now
-    // submits as multipart/form-data (the server accepts both that and
-    // plain JSON — see /api/contact) rather than switching on whether an
-    // attachment is actually present.
+    // Always multipart, so files can travel with the form.
     const files = data.getAll("attachments").filter((v): v is File => v instanceof File && v.size > 0);
     if (files.length > MAX_UPLOAD_FILES) {
       setStatus("error");
@@ -105,12 +98,7 @@ export default function InquiryForm({
       return;
     }
 
-    // The Partner form doesn't mark email/phone individually required (either
-    // one is enough), so that combined rule is enforced here instead.
-    // partnershipInterest is a CustomSelect (submits via a hidden input the
-    // browser's native `required` can't focus/validate), so — same
-    // established pattern as RequestOfferForm.tsx — it's checked manually
-    // here too rather than relying on the server's rejection alone.
+    // These can't use the browser's `required`, so they are checked here.
     if (isPartner) {
       const email = (data.get("email") as string | null)?.trim();
       const phone = (data.get("phone") as string | null)?.trim();
@@ -130,12 +118,11 @@ export default function InquiryForm({
     data.set("sourcePage", window.location.href);
     data.set("userLanguage", locale.toUpperCase());
 
-    // Travels with the email (subject and body) as well as being shown on
-    // the confirmation, so both ends can refer to the same enquiry.
+    // Shown on the confirmation and written into the email.
     const ref = newReference();
     data.set("reference", ref);
 
-    // Taken before the request (and before form.reset() clears the inputs).
+    // Read before the form is reset.
     const rows = summarize(data, SUMMARY_FIELDS);
 
     try {
@@ -149,9 +136,6 @@ export default function InquiryForm({
         throw new Error(body.error || f.genericError);
       }
 
-      // The confirmation lives above every modal (see
-      // SubmissionSuccessProvider), so it outlives onSuccess() closing
-      // the inquiry modal this form may be sitting in.
       successModal.show({
         title: f.thankYouInquiry,
         subtitle: f.thankYouInquirySub,
@@ -170,7 +154,7 @@ export default function InquiryForm({
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
-      {/* Honeypot field — hidden from real users, bots tend to fill every input */}
+      {/* Honeypot: hidden from people, bots fill it. */}
       <input
         type="text"
         name="website"
@@ -179,7 +163,7 @@ export default function InquiryForm({
         className="absolute left-[-9999px] h-0 w-0 opacity-0"
         aria-hidden="true"
       />
-      {/* Carries which CTA the visitor came from (Request Offer/Sample/TAROPAK/etc.) without showing a field for it */}
+      {/* Which button the visitor came from. */}
       <input type="hidden" name="inquiryType" value={defaultType ?? "general"} />
 
       {isPartner ? (

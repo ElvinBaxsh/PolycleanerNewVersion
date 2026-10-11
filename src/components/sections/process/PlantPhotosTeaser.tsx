@@ -9,20 +9,11 @@ import { useFactoryGallery } from "@/components/gallery/FactoryGallery";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 import { FACTORY_GALLERY } from "@/lib/constants";
 
-// Three frames out of the gallery, one per card, by their position in
-// FACTORY_GALLERY: the equipment hall, the plant from outside, and the
-// sorting line. A card opens the gallery on its own photo.
+// Which gallery photos the three cards show (positions in FACTORY_GALLERY).
 const CARD_PHOTOS = [12, 0, 8];
 
-/**
- * A preview of the plant photographs under the capabilities cards: three
- * large frames and a way into the rest. It is a teaser, not the gallery —
- * the full set still lives in the modal, so the page gains one row rather
- * than a wall of pictures.
- *
- * Shares the capabilities section's background and has no top padding, so
- * the two read as one block.
- */
+// Three large photos under the capabilities cards, with a button to the full
+// gallery.
 export default function PlantPhotosTeaser() {
   const { t } = useLanguage();
   const { openGrid, openAt, modal } = useFactoryGallery();
@@ -56,12 +47,8 @@ export default function PlantPhotosTeaser() {
           </div>
         </Reveal>
 
-        {/* On a phone the three cards sit in one row that scrolls sideways
-            and snaps card by card, rather than stacking into three screens
-            of photographs. The row bleeds to the screen edges (-mx-5/px-5
-            undoes the container's padding) so a card can slide out under
-            the edge, and each card is a little narrower than the screen so
-            the next one shows — that sliver is what says "there is more". */}
+        {/* On phones the cards scroll sideways and snap. The next card
+            peeks in. */}
         <RevealGroup className="scrollbar-none -mx-5 mt-7 flex snap-x snap-mandatory gap-3 overflow-x-auto px-5 sm:mx-0 sm:grid sm:grid-cols-3 sm:gap-5 sm:overflow-visible sm:px-0">
           {CARD_PHOTOS.map((photoIndex, i) => (
             <RevealItem key={photoIndex} className="w-[84%] shrink-0 snap-center sm:w-auto">
@@ -77,7 +64,6 @@ export default function PlantPhotosTeaser() {
                   sizes="(min-width: 640px) 33vw, 84vw"
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
                 />
-                {/* Darkens only the foot of the photo, where the caption sits. */}
                 <span className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-navy/90 to-transparent" aria-hidden />
                 <span className="absolute inset-x-0 bottom-0 p-4 sm:p-5">
                   <span className="block h-0.5 w-10 rounded-full bg-brand-green" aria-hidden />

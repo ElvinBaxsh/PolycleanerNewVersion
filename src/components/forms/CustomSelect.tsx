@@ -5,14 +5,8 @@ import { ChevronDown, Check, Search } from "lucide-react";
 import { clsx } from "clsx";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 
-/**
- * A styled dropdown that stands in for a native <select> in the site's
- * forms. Native selects hand rendering to the OS on mobile (a dark,
- * inconsistent-looking sheet on iOS/Android) which clashes with the rest
- * of the form — this renders entirely in-page instead, matching every
- * other breakpoint and theme. Submits via a hidden input so it works with
- * plain FormData the same way a real <select> would.
- */
+// A styled dropdown used instead of a native <select>. It submits through a
+// hidden input.
 export default function CustomSelect({
   name,
   label,
@@ -39,8 +33,7 @@ export default function CustomSelect({
   const rootRef = useRef<HTMLDivElement>(null);
   const searchInputRef = useRef<HTMLInputElement>(null);
 
-  // A type-to-filter box only earns its keep on longer lists (e.g. Country)
-  // — a handful of options is faster to just scan by eye.
+  // A search box only for long lists.
   const searchable = values.length > 6;
 
   useEffect(() => {
@@ -80,10 +73,8 @@ export default function CustomSelect({
         {label} {required && <span className="text-brand-green">*</span>}
       </label>
       <div ref={rootRef} className="relative">
-        {/* Deliberately not `required` — a hidden input can't be focused,
-            so the browser's native validation would silently block submit
-            with no visible feedback. Required CustomSelects are validated
-            manually in the parent form's submit handler instead. */}
+        {/* Not `required`: a hidden input can't be focused. The form checks
+            it on submit. */}
         <input type="hidden" name={name} value={value} />
         <button
           type="button"

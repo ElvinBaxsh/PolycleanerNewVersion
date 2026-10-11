@@ -13,8 +13,7 @@ import { CONTACT_INFO, CONTACT_EMAILS, CONTACT_PHONES, SITE_URL } from "@/lib/co
 const ICONS: LucideIcon[] = [Mail, Phone, MapPin, Globe, MessageCircle];
 
 const LINK = "text-base text-slate transition-colors hover:text-brand-blue";
-// Icon-only buttons as tall as the number's line and in the card's icon
-// colour, so they sit beside the number without competing with it.
+// Small round icon buttons beside a phone number.
 const ROUND =
   "inline-flex size-6 shrink-0 items-center justify-center rounded-full text-brand-blue transition-colors hover:bg-soft-gray focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-blue";
 
@@ -30,11 +29,6 @@ export default function ContactFormSection({
   return (
     <section id="form" className="section-y scroll-mt-24 bg-white">
       <Container className="grid grid-cols-1 gap-10 lg:grid-cols-[1.4fr_1fr] lg:items-stretch">
-        {/* A column, so whatever is below the heading can take the rest of
-            the card. The row is stretched to the taller of the two cards
-            (lg:items-stretch above), and after the form is sent the
-            confirmation is shorter than the form was — without this it left
-            a band of empty card under itself. */}
         <Reveal className="flex h-full flex-col rounded-2xl border border-border p-6 sm:p-8">
           <h2 className="text-2xl font-bold text-navy">{t.contact.formTitle}</h2>
           <p className="mt-1 text-sm text-slate">{t.contact.formIntro}</p>
@@ -43,8 +37,8 @@ export default function ContactFormSection({
           </div>
         </Reveal>
 
-        {/* Tighter on phones (smaller icon tiles, padding and gaps) so a number and
-            its call and WhatsApp buttons still fit on one line at 360px. */}
+        {/* Tighter on phones, so a number and its two buttons fit on one
+            line. */}
         <Reveal delay={0.1} className="flex h-full flex-col rounded-2xl border border-border p-4 sm:p-8">
           <h2 className="text-2xl font-bold text-navy">{t.contact.infoTitle}</h2>
           <ul className="mt-6 flex flex-1 flex-col justify-between gap-6">
@@ -90,12 +84,7 @@ export default function ContactFormSection({
   );
 }
 
-/**
- * Each row's value is the action someone wants from it: an address writes
- * a mail, a number offers both a call and a WhatsApp chat (people in the
- * region reach a supplier either way), the location scrolls down to the map
- * on this page, and the site name opens the site.
- */
+// Each row links to what it is for: mail, call or WhatsApp, the map, the site.
 function ContactValue({ index }: { index: number }) {
   const { t, locale } = useLanguage();
 

@@ -10,13 +10,7 @@ const SIZES = {
   large: "h-[84px] w-auto object-contain sm:h-[96px] lg:h-[104px] xl:h-[112px]",
 };
 
-// The widest each variant is ever drawn: its tallest height (xl) times the
-// file's 2149:732 ratio. Without `sizes`, next/image takes the intrinsic
-// width/height below as the display size and asks the optimizer for its
-// largest variant — w=3840 — for a logo that is ~200px wide on screen.
-// That request is pure waste even when it works, and in dev it was also
-// the one image the optimizer hung on, leaving every page stuck "loading"
-// with no logo in the header or footer.
+// Largest display width per variant, so next/image doesn't request a huge file.
 const DISPLAY_WIDTH = {
   default: "200px",
   large: "330px",

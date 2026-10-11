@@ -1,9 +1,5 @@
-// Central bilingual content dictionary. `en` mirrors the site's original
-// English copy; `az` is its Azerbaijani translation. Both share an identical
-// shape (enforced by `satisfies typeof en` on `az`) so every component can
-// index into either with the same path. Non-textual data (image paths,
-// hrefs, slugs, numeric spec values, emails/phone) stays in `lib/constants.ts`
-// and is zipped together with these arrays by index — this file holds text only.
+// All site text in both languages. `az` must have the same shape as `en`.
+// Images, links and numbers live in lib/constants.ts and are matched by index.
 
 export type Locale = "en" | "az";
 

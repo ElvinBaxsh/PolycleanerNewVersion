@@ -7,9 +7,6 @@ import Reveal from "@/components/ui/Reveal";
 import FactoryGalleryButton from "@/components/gallery/FactoryGallery";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 
-// All three are line icons from the same set, so they share one size and
-// stroke. The globe used to be a PNG that filled its whole box with a heavier
-// line, which made it read larger than the pin and calendar beside it.
 const ICONS: LucideIcon[] = [MapPin, CalendarDays, Globe];
 
 export default function CompanyOverview() {
@@ -34,8 +31,6 @@ export default function CompanyOverview() {
               sizes="(min-width: 1024px) 40vw, 100vw"
               priority
             />
-            {/* Opens the plant photo gallery; sits on the photo so the
-                page doesn't need a section for it. */}
             <FactoryGalleryButton className="absolute bottom-3 left-3 sm:bottom-4 sm:left-4" />
           </div>
         </Reveal>
@@ -61,9 +56,7 @@ export default function CompanyOverview() {
             </div>
           </div>
 
-          {/* Aşağı Faktlar Bölməsi. Top-aligned, not centred: the values wrap
-              to different line counts, and centring each item then pushed the
-              one-line value's heading and icon below the other two. */}
+          {/* Aşağı Faktlar Bölməsi */}
           <div className="mt-6 grid grid-cols-1 gap-4 border-t border-slate-100 pt-4 sm:grid-cols-3">
             {facts.map(({ label, value }, i) => {
               const Icon = ICONS[i];

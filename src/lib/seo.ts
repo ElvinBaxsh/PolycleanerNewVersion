@@ -3,10 +3,7 @@ import { SITE_URL, SITE_NAME, COMPANY } from "./constants";
 import { localizePath } from "./i18n/localizePath";
 import { translations, type Locale } from "./i18n/translations";
 
-// The preview card's image has its tagline baked into the pixels, so each
-// language gets its own file. The Azerbaijani one is the English design
-// with only the two text lines replaced, worded as on the site itself
-// (home hero + trust bar in translations.ts).
+// The share image has text in it, so each language has its own file.
 const OG_IMAGE: Record<Locale, string> = {
   en: "/images/og-image.png",
   az: "/images/og-image-az.png",
@@ -15,18 +12,9 @@ const OG_IMAGE_SIZE = { width: 1200, height: 630 };
 const OG_LOCALE: Record<Locale, string> = { en: "en_US", az: "az_AZ" };
 
 /**
- * The complete metadata for one page, built from its path and locale.
- *
- * Every page used to spell out its own title/description/alternates and
- * none set openGraph or twitter at all — so each one inherited the root
- * layout's, and a shared link to any page (in either language) previewed
- * as the English homepage: same title, same description, og:url pointing
- * at "/". Next merges metadata one key deep, so a page that sets openGraph
- * must set all of it; building it here keeps the social preview, the
- * <title>, the canonical and the hreflang pair from drifting apart.
- *
- * `path` is the English path ("/about"); the Azerbaijani one is derived.
- * `title` is the final <title> text — it bypasses the layout's template.
+ * All metadata for one page: title, description, canonical, hreflang and
+ * the social preview. `path` is the English path; the Azerbaijani URL is
+ * derived from it. `title` is used as-is, without the layout's template.
  */
 export function pageMetadata({
   path,
@@ -70,11 +58,8 @@ export function pageMetadata({
   };
 }
 
-/**
- * Structured data stays in English on both locales: it describes the one
- * organization, and search engines read it as data rather than as page
- * copy. A localized variant for /az is a possible follow-up, not a gap.
- */
+// Structured data is in English on both languages: it describes the company,
+// not the page text.
 
 export function organizationJsonLd() {
   return {
@@ -138,14 +123,7 @@ export function breadcrumbJsonLd(items: { name: string; path: string }[]) {
   };
 }
 
-/**
- * The Home › Page breadcrumb for a top-level page, in the page's language.
- * Names come from the nav labels and URLs from localizePath, so the /az
- * trail Google may show under a search result reads "Əsas › Haqqımızda" and
- * links to /az/haqqimizda — not the English names and English slugs the
- * pages used to hard-code. (The English labels are the same strings those
- * pages had, so the English output is unchanged.)
- */
+// "Home › Page" breadcrumb in the page's own language.
 export function pageBreadcrumbJsonLd(path: string, navKey: keyof (typeof translations)["en"]["nav"], locale: Locale) {
   const nav = translations[locale].nav;
   return breadcrumbJsonLd([

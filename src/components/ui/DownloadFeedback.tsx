@@ -6,17 +6,11 @@ import { Check } from "lucide-react";
 
 export type DownloadState = "idle" | "downloading" | "done";
 
-// The buyer PDFs are 70–210 KB, so the browser has the file well within
-// this window; it only has to be long enough for the drop animation to read.
+// Long enough for the animation to be seen.
 const DOWNLOADING_MS = 900;
 const DONE_MS = 2300;
 
-/**
- * Visible feedback for a plain <a download> link. Browsers give little or
- * none of their own — the file lands quietly in a downloads bar, if one is
- * shown at all — so clicking "Download" looked as if nothing happened. The
- * link still does the actual downloading; this only drives the animation.
- */
+// Visible feedback for a download link. The browser shows almost none.
 export function useDownloadFeedback() {
   const [state, setState] = useState<DownloadState>("idle");
   const timers = useRef<number[]>([]);
@@ -35,15 +29,8 @@ export function useDownloadFeedback() {
   return { state, start };
 }
 
-/**
- * The download glyph with three states: at rest; the arrow repeatedly
- * dropping into the tray while downloading; then a tick. Sized by the
- * caller (`className`, e.g. "size-3.5").
- */
+// Download icon with three states: idle, downloading, done.
 export function DownloadStatusIcon({ state, className = "" }: { state: DownloadState; className?: string }) {
-  // The two glyphs are stacked and cross-fade (no mode="wait"), so the tick
-  // appears the moment the state flips instead of waiting for the arrow's
-  // exit animation to finish first.
   return (
     <span className={`relative inline-flex shrink-0 ${className}`} aria-hidden>
       <AnimatePresence initial={false}>

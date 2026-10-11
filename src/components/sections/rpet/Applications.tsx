@@ -19,11 +19,8 @@ const ICON_IMAGES = [
 function Card({ name, description, iconSrc }: { name: string; description: string; iconSrc: string }) {
   return (
     <div className="flex h-full flex-col items-center gap-2.5 rounded-2xl border border-border bg-white p-4 text-center">
-      {/* Fixed height + auto width (plain img, not next/image fill):
-          every icon's actual ink ends up the same height regardless of
-          whether the source glyph is wide/flat (Sheet, Strap) or squarish
-          (Trading) — a fixed square box would've let the flat ones look
-          smaller. */}
+      {/* Fixed height, auto width, so flat and square icons look the same
+          size. */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src={iconSrc}
@@ -49,9 +46,7 @@ export default function Applications() {
           <SectionHeading title={t.rpet.applicationsTitle} description={t.rpet.applicationsDescription} />
         </Reveal>
 
-        {/* Mobile: "Partners" marquee texnikası — siyahı 2x təkrarlanıb CSS
-            animasiyası ilə sürüşür, həm avtomatik davam edir, həm də
-            toxunanda dayanıb əl ilə scroll oluna bilir. sm+: əvvəlki kimi
+        {/* Mobil: sürüşən zolaq (siyahı iki dəfə təkrarlanır). sm-dən
             statik grid. */}
         <div
           {...pauseHandlers}

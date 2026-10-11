@@ -30,9 +30,7 @@ export default function Header() {
     { label: t.nav.contact, href: localizePath(NAV_HREFS[6], locale) },
   ];
 
-  // The header is sticky/always-on-top, so once the footer (which repeats
-  // the logo and nav-like links) scrolls into view, the two visually
-  // clash. Slide the header away for as long as the footer is on screen.
+  // Hide the header while the footer is on screen.
   useEffect(() => {
     const footer = document.querySelector("footer");
     if (!footer) return;
@@ -45,9 +43,7 @@ export default function Header() {
     return () => observer.disconnect();
   }, []);
 
-  // Clicking anywhere outside the header (the inline mobile-menu panel has
-  // no backdrop of its own, unlike the modals elsewhere on the site) closes
-  // the open mobile menu.
+  // A click outside closes the mobile menu.
   useEffect(() => {
     if (!open) return;
     function onClickOutside(e: MouseEvent) {
@@ -62,9 +58,7 @@ export default function Header() {
       ref={headerRef}
       className={clsx(
         "sticky top-0 z-50 bg-navy transition-transform duration-300",
-        // Never slide the header away while the mobile menu is open — it
-        // carries the only close (X) button, so hiding it would strand the
-        // user with an open, unreachable menu once the footer comes into view.
+        // Keep the header visible while the mobile menu is open.
         hideForFooter && !open ? "-translate-y-full" : "translate-y-0"
       )}
     >

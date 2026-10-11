@@ -18,18 +18,8 @@ function formatSize(bytes: number) {
   return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
 }
 
-/**
- * A dropzone + reviewable file list standing in for a bare native
- * <input type="file"> — the native control only ever shows a single
- * "N files" summary with no way to see or remove what's selected, which
- * reads as broken even when multi-select is actually working.
- *
- * The real <input type="file"> stays in the DOM (hidden) so the parent
- * form's existing `new FormData(form)` submission logic keeps working
- * unmodified — selected files are synced into it via a DataTransfer
- * object on every add/remove, rather than relying on the input's own
- * (browser-only-writable) file picker state.
- */
+// Dropzone with a list of the chosen files. The real file input stays hidden
+// and in sync, so the form submits as usual.
 export default function FileUpload({
   name,
   label,
@@ -70,9 +60,7 @@ export default function FileUpload({
       return true;
     });
 
-    // The `accept` attribute only filters the OS file picker — a drag-and-drop
-    // ignores it entirely, so the same rule the server enforces runs here too,
-    // to fail immediately rather than after a submit round-trip.
+    // Drag and drop ignores `accept`, so the type is checked here too.
     const wrongType = deduped.find((f) => !hasAllowedUploadExtension(f.name));
     if (wrongType) {
       setError(wrongTypeMessage);
@@ -83,9 +71,8 @@ export default function FileUpload({
     const oversized = deduped.find((f) => f.size > MAX_UPLOAD_FILE_SIZE);
     if (oversized) {
       setError(tooLargeMessage);
-      // A native file picker selection always replaces the input's file
-      // list, even when we reject it here — put the last-known-good set
-      // back so a rejected pick can't slip into the form at submit time.
+      // A rejected pick still replaced the input's files. Put the previous ones
+      // back.
       syncInput(files);
       return;
     }
@@ -119,11 +106,7 @@ export default function FileUpload({
     <div>
       <label className="mb-1.5 block text-sm font-semibold text-navy">{label}</label>
 
-      {/* The real form field — hidden, its .files is overwritten via
-          syncInput() after every add/remove to hold the complete
-          accumulated set (native picker selection always REPLACES rather
-          than appends, so accumulation across multiple picker openings is
-          handled here in React state instead). */}
+      {/* The real field, hidden and kept in sync by syncInput(). */}
       <input
         ref={inputRef}
         type="file"

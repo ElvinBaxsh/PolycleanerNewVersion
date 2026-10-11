@@ -28,9 +28,7 @@ export default function CloseupGallery() {
           <h2 className="text-xl font-bold text-navy sm:text-2xl">{t.rpet.closeupTitle}</h2>
         </Reveal>
 
-        {/* Mobile: "Partners" marquee texnikası — siyahı 2x təkrarlanıb CSS
-            animasiyası ilə sola sürüşür, həm avtomatik davam edir, həm də
-            toxunanda dayanıb əl ilə scroll oluna bilir. sm+: əvvəlki kimi
+        {/* Mobil: sürüşən zolaq (siyahı iki dəfə təkrarlanır). sm-dən
             statik grid. */}
         <div
           {...pauseHandlers}

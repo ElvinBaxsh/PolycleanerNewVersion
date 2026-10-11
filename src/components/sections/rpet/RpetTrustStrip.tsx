@@ -11,11 +11,7 @@ export default function RpetTrustStrip() {
   return (
     <section className="relative z-10 -mt-8 sm:-mt-10">
       <Container className="max-w-[1400px]">
-        {/* Plain divs + CSS card-fade-in, not RevealGroup/RevealItem: this
-            strip overlaps the hero and is already visible on first paint, so
-            it needs no scroll-triggered reveal — see TrustBar.tsx for why
-            framer-motion's whileInView+once:true is unsafe here once the
-            text is reactive (language switch). */}
+        {/* Plain CSS fade-in: the strip is visible on first paint. */}
         <div className="grid grid-cols-1 divide-y divide-slate-100 rounded-2xl border border-slate-200/80 bg-white p-2 shadow-md sm:grid-cols-2 lg:grid-cols-4 lg:divide-x lg:divide-y-0">
           {t.rpet.trustStrip.map(({ label }, i) => {
             const Icon = ICONS[i];

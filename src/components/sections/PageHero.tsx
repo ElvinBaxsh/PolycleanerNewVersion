@@ -23,10 +23,10 @@ export default function PageHero({
   extra,
 }: {
   pageKey: PageHeroKey;
-  /** Full-bleed background photo (same treatment as the Home hero). */
+  /** Background photo. */
   image?: string;
   imageAlt?: string;
-  /** object-position for the background photo — e.g. "right" when the photo's main subject sits toward its right edge. */
+  /** object-position of the background photo. */
   imagePosition?: string;
   extra?: ReactNode;
 }) {
@@ -88,20 +88,15 @@ export default function PageHero({
   const HREF_CTA_ICON = <FileText className="ml-1.5 size-5 stroke-[1.8]" aria-hidden />;
 
   return (
-    // From lg the banner fills the screen below the sticky header (h-20
-    // there), the same as the home hero; phones and tablets keep the
-    // height they had.
+    // Full screen under the header from lg.
     <section
       className={clsx(
         "relative min-h-[420px] w-full overflow-hidden bg-navy pb-14 pt-8 sm:pt-10 lg:flex lg:min-h-[calc(100svh-5rem)] lg:items-center lg:py-14",
-        // On a tablet the row of buttons reaches the corner the gallery card
-        // sits in, so it gets a strip of its own beneath them. A phone needs
-        // none (the card is an icon in the top corner there), and from lg
-        // the banner is a full screen and the corner is clear.
+        // On tablets the gallery button needs its own strip under the buttons.
         hasGallery && "sm:max-lg:pb-24",
       )}
     >
-      {/* Background photo + left-to-right gradient so the copy stays legible */}
+      {/* Background photo with a gradient under the text */}
       <div className="absolute inset-0 z-0">
         <Image
           src={image}
@@ -163,12 +158,8 @@ export default function PageHero({
         </Reveal>
       </Container>
 
-      {/* The plant photo gallery, floating in the banner's bottom-right
-          corner on the two pages about the plant itself. In the corner
-          rather than in the copy column: the banner fills the screen from
-          lg, and that corner is otherwise empty. On a phone the bottom is
-          taken by full-width buttons, so it moves to the top-right corner,
-          level with the breadcrumb, as an icon alone. */}
+      {/* Gallery button: bottom-right corner, top-right as an icon on
+          phones. */}
       {hasGallery && (
         <FactoryGalleryButton
           variant="hero"

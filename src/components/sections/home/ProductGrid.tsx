@@ -15,11 +15,7 @@ export default function ProductGrid() {
   const { t, locale } = useLanguage();
   return (
     <section className="bg-white pt-12 pb-6 lg:pt-16 lg:pb-8">
-      {/* Intro beside the cards only from xl. Between 1024 and 1279px the
-          intro column left each card ~122px wide, too narrow for words like
-          "termoformalaşdırma" and "ŞƏFFAF/AÇIQ", which the card's rounded
-          overflow clip then cut off — so the intro sits above the cards
-          there, and the cards get the full width. */}
+      {/* Intro beside the cards only from xl, above them below that. */}
       <Container className="flex flex-col gap-8 xl:flex-row xl:items-start xl:justify-between">
         {/* Sol tərəf: Dizayndakı kimi daha geniş və yana yayılan mətn */}
         <Reveal className="flex flex-col items-start xl:max-w-[400px] xl:shrink-0">
@@ -39,8 +35,7 @@ export default function ProductGrid() {
           </Link>
         </Reveal>
 
-        {/* Sağ tərəf: 4-lü Məhsul Kartları — four across from md; at 640px four
-            columns were as narrow as the desktop problem above. */}
+        {/* Sağ tərəf: 4-lü Məhsul Kartları, md-dən dörd sütun */}
         <RevealGroup className="grid flex-1 grid-cols-2 gap-4 md:grid-cols-4 md:gap-5">
           {PRODUCT_GRADES.map((grade, i) => {
             const gradeText = t.productGrades[i];

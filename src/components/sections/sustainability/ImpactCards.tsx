@@ -35,10 +35,7 @@ export default function ImpactCards() {
                   />
                 </div>
                 <div className="flex flex-1 flex-col px-5 pb-5">
-                  {/* `relative` promotes the badge to the positioned-elements
-                      paint layer — without it, the absolutely-positioned
-                      (fill) photo above always paints over a plain in-flow
-                      sibling, regardless of DOM order, hiding the icon. */}
+                  {/* `relative`, or the photo above paints over the badge. */}
                   <span className="relative -mt-8 flex size-16 items-center justify-center rounded-full bg-white text-brand-green-dark shadow-md ring-1 ring-black/5">
                     <Icon className="size-8 stroke-[1.5]" />
                   </span>

@@ -1,18 +1,6 @@
-/**
- * The hero background as a silent, looping clip of the plant.
- *
- * Server-rendered, not mounted on the client: waiting for hydration meant
- * the still image sat there for the better part of a second before the
- * video appeared. In the HTML the browser starts fetching it with the page.
- *
- * It is visible from the first paint because its poster is the same image
- * that sits behind it — there is no swap to see, the picture simply starts
- * moving once enough of the file has arrived. Phones get a smaller file;
- * the <source> media queries pick one before anything is fetched.
- *
- * `motion-reduce:hidden` leaves the still image in place for anyone who
- * asked their system for less motion.
- */
+// Silent looping background video. It is in the HTML, so it starts loading with
+// the page, and its poster is the hero image, so nothing jumps. Phones get a
+// smaller file.
 export default function HeroBackgroundVideo({ poster }: { poster: string }) {
   return (
     <video

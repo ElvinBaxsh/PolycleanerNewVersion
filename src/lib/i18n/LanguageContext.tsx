@@ -19,15 +19,8 @@ export function LanguageProvider({
 }) {
   const locale = initialLocale;
 
-  // CSS `uppercase` (used all over — TrustBar, category pills, etc.) follows
-  // the Unicode default case-folding unless the document's `lang` says
-  // otherwise — under the default rules lowercase "i" uppercases to plain
-  // "I", not the dotted Azerbaijani "İ" ("Bizi" → "BIZI" instead of "BİZİ").
-  // Keeping `<html lang>` in sync with the chosen locale switches the
-  // browser to Turkic case-folding rules, where "i"↔"İ" and "ı"↔"I" fold
-  // correctly. The root `<html>` tag itself is still statically "en" (one
-  // shared root layout serves both locale trees) — this effect corrects it
-  // post-hydration until that's split into per-locale root layouts.
+  // <html lang> is rendered as "en" for both languages, so fix it on the
+  // client. Modals rendered outside the page wrapper rely on this.
   useEffect(() => {
     document.documentElement.lang = locale;
   }, [locale]);

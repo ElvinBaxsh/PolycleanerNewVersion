@@ -39,13 +39,9 @@ const ICON_MAP: Record<string, LucideIcon> = {
 const HOME_ICON_KEYS = ["milk", "boxes", "droplets", "waves", "clipboardCheck", "packageCheck"];
 const ABOUT_ICON_KEYS = ["truck", "layers", "settings", "droplet", "wind", "clipboardCheck", "packageCheck"];
 
-// The static one-row layout only from xl (1280px), where the content
-// container reaches its 1220px maximum; narrower screens use the scrolling
-// strip. The 6 home steps fit beside the 230px title there. About's 7 steps
-// never do — the container stops growing, so no larger breakpoint helps —
-// so that variant keeps its title above the row and gives the row the full
-// width. Complete class names per variant, because Tailwind only generates
-// classes it finds written out in the source.
+// One static row from xl, a scrolling strip below that. The About variant has
+// seven steps, so its title sits above the row. Class names are written out in
+// full so Tailwind can find them.
 const LAYOUT = {
   home: {
     container: "flex flex-col gap-8 xl:flex-row xl:items-center xl:justify-between",
@@ -103,9 +99,8 @@ export default function ProcessStrip({ variant = "home" }: { variant?: "home" | 
           </h2>
         </Reveal>
 
-        {/* Mobile: eyni "Partners" marquee texnikası (siyahı 2x təkrarlanır,
-            CSS animasiyası ilə sürüşür) — həm avtomatik davam edir, həm də
-            toxunanda/sürüşdürəndə dayanıb əl ilə scroll oluna bilir. */}
+        {/* Mobil: siyahı iki dəfə təkrarlanır və CSS ilə sürüşür, toxunanda
+            dayanır. */}
         <div
           {...pauseHandlers}
           className={layout.strip}
@@ -132,14 +127,8 @@ export default function ProcessStrip({ variant = "home" }: { variant?: "home" | 
           </div>
         </div>
 
-        {/* Wide screens: steps share the full width in one static row, from
-            xl (see LAYOUT). Every step gets an equal column with its icon
-            centred, and each arrow sits on the boundary between two columns at
-            icon height — so it is always the same distance from the icons on
-            either side. It used to be pushed to the end of each step's box,
-            which put it close to steps with long labels ("QABLAŞDIRMA VƏ
-            YÜKLƏMƏ") and far from short ones. Labels may wrap here to stay in
-            their column. */}
+        {/* Wide screens: one row, equal columns, an arrow on each column
+            boundary. */}
         <RevealGroup className={layout.row}>
           {steps.map((step, i) => (
             <RevealItem key={i} className={layout.item}>

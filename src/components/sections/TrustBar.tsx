@@ -21,24 +21,9 @@ export default function TrustBar() {
   return (
     <section className="relative z-20 -mt-10 sm:-mt-14">
       <Container>
-        {/*
-          A CSS grid with a fixed column count per breakpoint always lays
-          items out in complete, even rows (2/2/2 on mobile, 3/3 on tablet,
-          all 6 in one row on desktop). The previous flex-wrap approach let
-          the browser pack as many items as happened to fit per line, which
-          produced an uneven 2/3/1 split on narrow phones.
-
-          Plain divs + CSS card-fade-in (not RevealGroup/RevealItem): this
-          bar sits right at the fold and is already visible on first paint,
-          so it needs no scroll-triggered reveal — and since its text is
-          reactive (language switch), framer-motion's whileInView+once:true
-          would hit the same "never animates in children that mount after
-          the parent's viewport trigger already fired" issue documented on
-          DocumentGrid, leaving it stuck at opacity:0 after a language change.
-        */}
-        {/* Six columns only from xl: between 1024 and 1279px each column is
-            too narrow for the Azerbaijani labels, which wrapped to a third
-            line — the 3 + 3 tablet layout reads better there. */}
+        {/* Fixed column counts keep the rows even: 2 on phones, 3 on
+            tablets, 6 from xl. Plain CSS fade-in, because the bar is
+            visible on first paint. */}
         <div className="grid grid-cols-2 gap-x-2 gap-y-7 rounded-2xl border border-slate-200/80 bg-white px-4 py-7 shadow-2xl shadow-slate-900/15 sm:grid-cols-3 sm:gap-y-8 xl:grid-cols-6 xl:gap-y-0 xl:py-8">
           {items.map(({ label, sub }, i) => {
             const Icon = ICONS[i];
