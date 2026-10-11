@@ -8,8 +8,8 @@ import { RevealGroup, RevealItem } from "@/components/ui/RevealGroup";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 
 const IMAGES = [
-  "/images/transparent.jpg",
   "/images/factory/flakes-light-blue.webp",
+  "/images/factory/flakes-preform.webp",
   "/images/factory/flakes-green.webp",
   "/images/factory/flakes-mixed.webp",
   "/images/factory/flakes-closeup.webp",

@@ -175,14 +175,14 @@ export const PRODUCT_GRADES = [
     name: "Transparent/light blue",
     description: "For sheet, thermoforming and general applications.",
     swatch: "#eef2f2",
-    image: "/images/transparent.jpg",
+    image: "/images/factory/flakes-light-blue.webp",
   },
   {
     slug: "light-blue",
     name: "Crushed PET Preform",
     description: "For sheet, strapping, thermoforming.",
     swatch: "#bfe1ea",
-    image: "/images/factory/flakes-light-blue.webp",
+    image: "/images/factory/flakes-preform.webp",
   },
   {
     slug: "green",
