@@ -1,5 +1,6 @@
 export const SITE_URL = "https://polycleaner.az";
 export const SITE_NAME = "Poly Cleaner";
+export const GA_MEASUREMENT_ID = "G-EY7MB4WL80";
 
 export const COMPANY = {
   name: "Poly Cleaner",

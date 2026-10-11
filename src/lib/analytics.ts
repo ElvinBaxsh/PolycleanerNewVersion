@@ -1,12 +1,12 @@
 declare global {
   interface Window {
-    dataLayer?: Record<string, unknown>[];
+    gtag?: (...args: unknown[]) => void;
   }
 }
 
-// Pushes an event to the GTM dataLayer. Safe to call before GTM is installed.
+// Sends a custom event to Google Analytics. Does nothing when the tag isn't
+// loaded (local development, or a visitor who blocks it).
 export function trackEvent(event: string, params: Record<string, unknown> = {}) {
   if (typeof window === "undefined") return;
-  window.dataLayer = window.dataLayer || [];
-  window.dataLayer.push({ event, ...params });
+  window.gtag?.("event", event, params);
 }

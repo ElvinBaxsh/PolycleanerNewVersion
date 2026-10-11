@@ -8,6 +8,7 @@ import Container from "@/components/ui/Container";
 import LanguageSwitcher from "./LanguageSwitcher";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 import { localizePath } from "@/lib/i18n/localizePath";
+import { writeConsent } from "@/lib/consent";
 import {
   SITE_URL,
   NAV_LINKS,
@@ -159,6 +160,10 @@ export default function Footer() {
             <Link href={localizePath("/terms-of-use", locale)} className="hover:text-white/80">
               {t.footer.termsOfUse}
             </Link>
+            {/* Brings the cookie banner back, to change the choice. */}
+            <button type="button" onClick={() => writeConsent("undecided")} className="cursor-pointer hover:text-white/80">
+              {t.cookies.settings}
+            </button>
             <LanguageSwitcher variant="simple" />
           </div>
         </Container>

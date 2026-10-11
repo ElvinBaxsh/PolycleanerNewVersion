@@ -708,6 +708,13 @@ const en = {
     sampleTypeOptions: ["500g Sample", "1kg Sample", "2kg Sample", "5kg Sample", "Custom Quantity"],
   },
 
+  cookies: {
+    text: "We use cookies to analyse site traffic and improve your experience. You can accept or decline them.",
+    accept: "Accept",
+    decline: "Decline",
+    settings: "Cookie settings",
+  },
+
   notFound: {
     title: "Page not found",
     description: "The page you’re looking for doesn’t exist or may have moved.",
@@ -718,7 +725,7 @@ const en = {
     privacyParagraph1:
       "Poly Cleaner (“we”, “us”) respects your privacy. Information submitted through our contact and inquiry forms (name, company, email, phone, and message) is used solely to respond to your request and is not sold or shared with third parties for marketing purposes.",
     privacyParagraph2:
-      "We use essential cookies to operate this website and, where enabled, analytics cookies to understand site usage. You can control cookie preferences through your browser settings.",
+      "This website uses cookies. Essential cookies are required for the website to function. With your consent, we also use analytics cookies (Google Analytics) to understand how the website is used. You can accept or decline analytics cookies in the cookie banner and change your choice at any time through “Cookie settings” at the bottom of the page.",
     privacyContactPrefix: "For any questions about how your data is handled, contact us at",
     termsTitle: "Terms of Use",
     termsParagraph1:
@@ -1434,6 +1441,13 @@ const az = {
     sampleTypeOptions: ["500q Nümunə", "1kq Nümunə", "2kq Nümunə", "5kq Nümunə", "Fərdi Miqdar"],
   },
 
+  cookies: {
+    text: "Sayt trafikini təhlil etmək və təcrübənizi yaxşılaşdırmaq üçün çərəzlərdən (cookie) istifadə edirik. Onları qəbul edə və ya onlardan imtina edə bilərsiniz.",
+    accept: "Qəbul et",
+    decline: "İmtina et",
+    settings: "Çərəz ayarları",
+  },
+
   notFound: {
     title: "Səhifə tapılmadı",
     description: "Axtardığınız səhifə mövcud deyil və ya köçürülüb.",
@@ -1444,7 +1458,7 @@ const az = {
     privacyParagraph1:
       "Poly Cleaner (\"biz\") sizin məxfiliyinizə hörmət edir. Əlaqə və sorğu formaları vasitəsilə təqdim olunan məlumatlar (ad, şirkət, email, telefon və mesaj) yalnız sorğunuza cavab vermək üçün istifadə olunur və marketinq məqsədilə üçüncü tərəflərə satılmır və ya paylaşılmır.",
     privacyParagraph2:
-      "Bu saytı işlətmək üçün zəruri çərəzlərdən (cookie), aktiv olduqda isə sayt istifadəsini anlamaq üçün analitik çərəzlərdən istifadə edirik. Çərəz tərcihlərinizi brauzer parametrləriniz vasitəsilə idarə edə bilərsiniz.",
+      "Bu sayt çərəzlərdən (cookie) istifadə edir. Zəruri çərəzlər saytın işləməsi üçün tələb olunur. Razılığınızla, saytdan necə istifadə olunduğunu anlamaq üçün analitik çərəzlərdən (Google Analytics) də istifadə edirik. Analitik çərəzləri çərəz panelində qəbul edə və ya onlardan imtina edə, seçiminizi istənilən vaxt səhifənin aşağısındakı “Çərəz ayarları” vasitəsilə dəyişə bilərsiniz.",
     privacyContactPrefix: "Məlumatlarınızın necə idarə olunduğu barədə suallarınız varsa, bizimlə əlaqə saxlayın:",
     termsTitle: "İstifadə Şərtləri",
     termsParagraph1:

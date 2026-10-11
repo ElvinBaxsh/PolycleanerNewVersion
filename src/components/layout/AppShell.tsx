@@ -3,6 +3,7 @@ import MotionProvider from "@/components/layout/MotionProvider";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import ScrollToTopButton from "@/components/layout/ScrollToTopButton";
+import CookieConsent from "@/components/layout/CookieConsent";
 import InquiryModalProvider from "@/components/inquiry/InquiryModalProvider";
 import SubmissionSuccessProvider from "@/components/forms/SubmissionSuccessProvider";
 import DocumentRequestModalProvider from "@/components/sections/documents/DocumentRequestModalProvider";
@@ -35,6 +36,7 @@ export default function AppShell({
                 <main className="flex-1">{children}</main>
                 <Footer />
                 <ScrollToTopButton />
+                <CookieConsent />
               </div>
             </DocumentRequestModalProvider>
           </InquiryModalProvider>
