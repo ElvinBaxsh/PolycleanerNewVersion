@@ -26,7 +26,7 @@ export default function Logo({ size = "default" }: { size?: keyof typeof SIZES }
         width={2149}
         height={732}
         sizes={DISPLAY_WIDTH[size]}
-        priority
+        preload
         className={SIZES[size]}
       />
     </Link>

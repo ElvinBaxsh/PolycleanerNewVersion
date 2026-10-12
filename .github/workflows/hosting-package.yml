@@ -18,6 +18,9 @@ jobs:
 
       - run: npm ci
 
+      # Resized copies of the photos; the build picks them up from public/_img.
+      - run: node scripts/build-image-variants.mjs
+
       - name: Build
         run: npx next build
         env:

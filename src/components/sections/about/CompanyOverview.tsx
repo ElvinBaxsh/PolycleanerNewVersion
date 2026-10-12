@@ -29,7 +29,7 @@ export default function CompanyOverview() {
               fill
               className="object-cover"
               sizes="(min-width: 1024px) 40vw, 100vw"
-              priority
+              preload
             />
             <FactoryGalleryButton className="absolute bottom-3 left-3 sm:bottom-4 sm:left-4" />
           </div>

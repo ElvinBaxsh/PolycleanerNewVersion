@@ -1,10 +1,10 @@
 // Silent looping background video. It is in the HTML, so it starts loading with
-// the page, and its poster is the hero image, so nothing jumps. Phones get a
-// smaller file.
-export default function HeroBackgroundVideo({ poster }: { poster: string }) {
+// the page. It has no poster: until its first frame arrives it is see-through
+// and the hero image behind it shows, so that image is downloaded only once.
+// Phones get a smaller file.
+export default function HeroBackgroundVideo() {
   return (
     <video
-      poster={poster}
       autoPlay
       muted
       loop

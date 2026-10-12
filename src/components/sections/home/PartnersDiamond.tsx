@@ -2,7 +2,8 @@
 
 import { PARTNERS } from "@/lib/constants";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
-import { diamondLogoFactors } from "@/lib/logoSize";
+import { diamondLogoFactors, PARTNER_LOGO_WIDTH } from "@/lib/logoSize";
+import { imageVariant } from "@/lib/image-variants";
 
 const MAX_PER_ROW = 5;
 
@@ -83,7 +84,8 @@ export default function PartnersDiamond() {
               {/* Decorative: the link beside it carries the name. */}
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src={partner.logo}
+                src={imageVariant(partner.logo, PARTNER_LOGO_WIDTH)}
+                loading="lazy"
                 alt=""
                 decoding="async"
                 className="object-contain transition-transform duration-300 group-hover:scale-110 group-focus-within:scale-110"

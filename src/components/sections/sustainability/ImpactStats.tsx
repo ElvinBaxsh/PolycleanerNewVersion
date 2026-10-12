@@ -5,6 +5,7 @@ import Container from "@/components/ui/Container";
 import Reveal from "@/components/ui/Reveal";
 import { RevealGroup, RevealItem } from "@/components/ui/RevealGroup";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
+import { ICON_WIDTH, imageVariant } from "@/lib/image-variants";
 
 const ICONS: (LucideIcon | null)[] = [Leaf, Milk, Droplet, null, null];
 const ICON_SRCS = [null, null, null, "/images/icons/trimmed/power.png", "/images/icons/trimmed/workplace-culture.png"];
@@ -38,7 +39,7 @@ export default function ImpactStats() {
                   <Icon className="size-10 sm:size-11 shrink-0 stroke-[1.4] text-brand-green" aria-hidden />
                 ) : (
                   // eslint-disable-next-line @next/next/no-img-element
-                  <img src={iconSrc!} alt="" className="size-10 sm:size-11 shrink-0 object-contain" />
+                  <img src={imageVariant(iconSrc!, ICON_WIDTH)} alt="" className="size-10 sm:size-11 shrink-0 object-contain" />
                 )}
 
                 {/* Mətnlər */}

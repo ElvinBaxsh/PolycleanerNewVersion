@@ -2,6 +2,7 @@
 
 import { Clock, type LucideIcon } from "lucide-react";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
+import { ICON_WIDTH, imageVariant } from "@/lib/image-variants";
 
 const ICONS: (LucideIcon | null)[] = [null, Clock, null, null];
 const ICON_IMAGES = [
@@ -25,7 +26,7 @@ export default function DocumentsHeroTrust() {
               <Icon className="size-12 sm:size-14 text-white/95 stroke-[1.2]" aria-hidden />
             ) : (
               // eslint-disable-next-line @next/next/no-img-element
-              <img src={iconSrc!} alt="" className="size-12 sm:size-14 object-contain opacity-95" />
+              <img src={imageVariant(iconSrc!, ICON_WIDTH)} alt="" className="size-12 sm:size-14 object-contain opacity-95" />
             )}
             <p className="whitespace-pre-line text-xs sm:text-sm font-medium leading-snug text-white/90 max-w-[95px]">
               {label}

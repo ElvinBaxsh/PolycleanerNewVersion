@@ -6,6 +6,7 @@ import SectionHeading from "@/components/ui/SectionHeading";
 import Reveal from "@/components/ui/Reveal";
 import { RevealGroup, RevealItem } from "@/components/ui/RevealGroup";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
+import { ICON_WIDTH, imageVariant } from "@/lib/image-variants";
 import { APPLICATIONS } from "@/lib/constants";
 
 const ICON_IMAGES = [
@@ -23,7 +24,7 @@ function Card({ name, description, iconSrc }: { name: string; description: strin
           size. */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
-        src={iconSrc}
+        src={imageVariant(iconSrc, ICON_WIDTH)}
         alt=""
         className="h-auto max-h-14 w-auto max-w-[100px] object-contain sm:max-h-16 sm:max-w-[116px]"
       />

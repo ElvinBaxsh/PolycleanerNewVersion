@@ -22,6 +22,9 @@
 # production
 /build
 
+# resized photo copies, made by scripts/build-image-variants.mjs
+/public/_img/
+
 # misc
 .DS_Store
 *.pem

@@ -1,4 +1,6 @@
+import { existsSync } from "node:fs";
 import type { NextConfig } from "next";
+import imageSizes from "./src/lib/image-sizes.json";
 
 // STATIC_EXPORT=1 builds the GitHub Pages preview (scripts/build-static-preview.sh):
 // a plain `out/` folder served from /PolycleanerNewVersion/, with no server,
@@ -9,6 +11,14 @@ const repoBasePath = "/PolycleanerNewVersion";
 // BUILD_STANDALONE=1 builds the self-contained server for the hosting
 // (.github/workflows/hosting-package.yml packs it into a zip).
 const isHostingBuild = process.env.BUILD_STANDALONE === "1";
+
+// Photos are served as ready-made WebP copies (scripts/build-image-variants.mjs)
+// instead of being resized by the server: the hosting's CPU can't run the
+// optimizer. Without the copies, or in `next dev`, Next resizes as usual.
+const useImageVariants =
+  !isStaticPreview && process.env.NODE_ENV === "production" && existsSync("public/_img");
+
+const ONE_DAY = "public, max-age=86400";
 
 const nextConfig: NextConfig = isStaticPreview
   ? {
@@ -21,6 +31,24 @@ const nextConfig: NextConfig = isStaticPreview
     }
   : {
       ...(isHostingBuild ? { output: "standalone" as const } : {}),
+      images: {
+        ...imageSizes,
+        ...(useImageVariants
+          ? { loader: "custom" as const, loaderFile: "./src/lib/image-loader.ts" }
+          : {}),
+      },
+      env: { NEXT_PUBLIC_IMAGE_VARIANTS: useImageVariants ? "1" : "" },
+      async headers() {
+        return [
+          {
+            // The file name carries a hash of the photo, so it never changes.
+            source: "/_img/:path*",
+            headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }],
+          },
+          { source: "/images/:path*", headers: [{ key: "Cache-Control", value: ONE_DAY }] },
+          { source: "/video/:path*", headers: [{ key: "Cache-Control", value: ONE_DAY }] },
+        ];
+      },
       // The previous site had a /products page; Google still knows that URL.
       async redirects() {
         return [{ source: "/products", destination: "/rpet-flakes", permanent: true }];

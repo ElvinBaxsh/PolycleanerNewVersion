@@ -6,6 +6,7 @@ import SectionHeading from "@/components/ui/SectionHeading";
 import Reveal from "@/components/ui/Reveal";
 import { RevealGroup, RevealItem } from "@/components/ui/RevealGroup";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
+import { ICON_WIDTH, imageVariant } from "@/lib/image-variants";
 
 const ICONS: (LucideIcon | null)[] = [null, ShieldCheck, FileText, null];
 const ICON_IMAGES = [
@@ -42,11 +43,11 @@ export default function QAPillars() {
                 {Icon ? (
                   <Icon className="size-12 sm:size-14 shrink-0 stroke-[1.3] text-brand-green" aria-hidden />
                 ) : (
-                  // Plain <img>: the optimizer blurs fine line art at this
-                  // size.
+                  // Plain <img> with a larger copy: at the size next/image would
+                  // pick, fine line art turns blurry.
                   // eslint-disable-next-line @next/next/no-img-element
                   <img
-                    src={iconSrc!}
+                    src={imageVariant(iconSrc!, ICON_WIDTH)}
                     alt=""
                     className="size-12 sm:size-14 shrink-0 object-contain"
                   />

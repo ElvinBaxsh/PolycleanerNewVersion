@@ -5,6 +5,7 @@ import Container from "@/components/ui/Container";
 import Reveal from "@/components/ui/Reveal";
 import { useDocumentRequestModal } from "./DocumentRequestModalContext";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
+import { ICON_WIDTH, imageVariant } from "@/lib/image-variants";
 
 export default function BuyerPackCta() {
   const { open } = useDocumentRequestModal();
@@ -17,7 +18,7 @@ export default function BuyerPackCta() {
           <div className="flex flex-col items-center gap-4 sm:flex-row">
             <span className="flex size-24 shrink-0 items-center justify-center text-white sm:size-28">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/images/icons/trimmed/buyerPack.png" alt="" className="size-16 object-contain sm:size-20" />
+              <img src={imageVariant("/images/icons/trimmed/buyerPack.png", ICON_WIDTH)} alt="" className="size-16 object-contain sm:size-20" />
             </span>
             <div>
               <p className="text-lg font-bold text-white">{t.documents.buyerPackTitle}</p>

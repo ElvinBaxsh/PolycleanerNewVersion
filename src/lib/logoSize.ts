@@ -13,3 +13,6 @@ export function diamondLogoFactors(ratio: number, unit = 0.33, maxSpan = 0.82) {
   const k = Math.min(unit, maxSpan / (width + height));
   return { width: k * width, height: k * height };
 }
+
+// Partner logos are shown at most 200px wide; this copy also covers 2x screens.
+export const PARTNER_LOGO_WIDTH = 384;

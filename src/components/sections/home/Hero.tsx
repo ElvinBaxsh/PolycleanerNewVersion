@@ -43,12 +43,13 @@ export default function Hero() {
           src="/images/hero-rpet-flakes.webp"
           alt="Hot washed rPET flakes on the production line"
           fill
-          priority
+          preload
+          fetchPriority="high"
           sizes="100vw"
           className="object-cover object-center"
         />
 
-        <HeroBackgroundVideo poster="/images/hero-rpet-flakes.webp" />
+        <HeroBackgroundVideo />
 
         <div className="absolute inset-0 bg-gradient-to-r from-navy/95 via-navy/80 to-navy/40 lg:from-navy/95 lg:via-navy/85 lg:to-navy/20" />
       </div>
@@ -148,12 +149,12 @@ export default function Hero() {
                   {/* Mətn və Düymə Hissəsi - lg-dən yan-yana */}
                   <div className="flex min-w-0 flex-1 flex-col justify-between gap-3 p-3.5 lg:flex-row lg:items-center lg:gap-3 lg:px-4 lg:py-4">
                     <div className="min-w-0 flex-1 space-y-1">
-                      <h4
+                      <h2
                         className="line-clamp-2 min-h-[2.75em] cursor-default text-sm font-bold uppercase leading-snug text-white md:text-base lg:text-lg"
                         title={t.home.taropakMeetUs(event.name)}
                       >
                         {t.home.taropakMeetUs(event.name)}
-                      </h4>
+                      </h2>
                       <p className="text-sm font-medium text-white/90 md:text-base">
                         {event.dates}
                       </p>

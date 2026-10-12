@@ -6,6 +6,7 @@ import SectionHeading from "@/components/ui/SectionHeading";
 import Reveal from "@/components/ui/Reveal";
 import { RevealGroup, RevealItem } from "@/components/ui/RevealGroup";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
+import { ICON_WIDTH, imageVariant } from "@/lib/image-variants";
 
 const ICONS: (LucideIcon | null)[] = [null, null, Users, null, FileText];
 const ICON_IMAGES = [
@@ -38,7 +39,7 @@ export default function SustainabilityPillars() {
                     <Icon className="size-10 stroke-[1.5]" />
                   ) : (
                     // eslint-disable-next-line @next/next/no-img-element
-                    <img src={iconSrc!} alt="" className="size-10 object-contain" />
+                    <img src={imageVariant(iconSrc!, ICON_WIDTH)} alt="" className="size-10 object-contain" />
                   )}
                 </span>
                 <h3 className="mt-4 text-sm font-bold uppercase tracking-wide text-navy">{item.title}</h3>

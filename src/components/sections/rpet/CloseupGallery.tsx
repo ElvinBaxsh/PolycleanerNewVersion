@@ -6,6 +6,7 @@ import { useMarqueePause } from "@/components/ui/useMarqueePause";
 import Reveal from "@/components/ui/Reveal";
 import { RevealGroup, RevealItem } from "@/components/ui/RevealGroup";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
+import { imageVariant } from "@/lib/image-variants";
 
 const IMAGES = [
   "/images/factory/flakes-light-blue.webp",
@@ -48,7 +49,7 @@ export default function CloseupGallery() {
               // eslint-disable-next-line @next/next/no-img-element
               <img
                 key={`${item.label}-${i}`}
-                src={item.image}
+                src={imageVariant(item.image, 640)}
                 alt={item.label}
                 className="aspect-[16/10] w-56 shrink-0 rounded-xl border border-slate-100 object-cover shadow-xs"
               />

@@ -6,6 +6,7 @@ import { ArrowRight } from "lucide-react";
 import Container from "@/components/ui/Container";
 import Reveal from "@/components/ui/Reveal";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
+import { ICON_WIDTH, imageVariant } from "@/lib/image-variants";
 import { localizePath } from "@/lib/i18n/localizePath";
 
 export default function PlasticCreditBanner() {
@@ -64,7 +65,7 @@ export default function PlasticCreditBanner() {
               <div className="flex items-center gap-4">
                 <div className="shrink-0">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src="/images/icons/trimmed/recycle.png" alt="" className="size-10 object-contain" />
+                  <img src={imageVariant("/images/icons/trimmed/recycle.png", ICON_WIDTH)} alt="" className="size-10 object-contain" />
                 </div>
                 <p className="whitespace-pre-line text-lg sm:text-xl font-extrabold uppercase tracking-wider leading-snug text-white">
                   {t.sustainability.plasticCreditBadgeTitle}

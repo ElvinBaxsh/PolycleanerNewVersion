@@ -102,7 +102,8 @@ export default function PageHero({
           src={image}
           alt={imageAlt ?? `${title} ${titleAccent ?? ""}`.trim()}
           fill
-          priority
+          preload
+          fetchPriority="high"
           sizes="100vw"
           className="object-cover"
           style={{ objectPosition: imagePosition }}

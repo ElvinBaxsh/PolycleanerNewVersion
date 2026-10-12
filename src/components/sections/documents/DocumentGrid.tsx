@@ -27,6 +27,7 @@ import { useDocumentRequestModal } from "./DocumentRequestModalContext";
 import { useDownloadFeedback, DownloadStatusIcon } from "@/components/ui/DownloadFeedback";
 import DocumentRequestForm from "./DocumentRequestForm";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
+import { ICON_WIDTH, imageVariant } from "@/lib/image-variants";
 import { DOCUMENT_LIST, TAROPAK_EVENT, AMI_EXPO_EVENT } from "@/lib/constants";
 
 type EventTab = "taropak" | "amiExpo";
@@ -180,7 +181,7 @@ export default function DocumentGrid() {
                           <Icon className="size-10 stroke-[1.4]" aria-hidden />
                         ) : (
                           // eslint-disable-next-line @next/next/no-img-element
-                          <img src={iconSrc} alt="" className="size-11 object-contain" />
+                          <img src={imageVariant(iconSrc, ICON_WIDTH)} alt="" className="size-11 object-contain" />
                         )}
                       </span>
                     </div>

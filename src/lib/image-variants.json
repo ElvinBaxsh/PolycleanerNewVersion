@@ -1,0 +1,582 @@
+{
+ "/images/DSC09234.JPG": [
+  "4f72860d",
+  4240
+ ],
+ "/images/LongTermImpact.jpg": [
+  "057fdd73",
+  900
+ ],
+ "/images/controlDocumention.jpg": [
+  "8604c936",
+  1200
+ ],
+ "/images/cre-expo-icon.png": [
+  "db3c2ffa",
+  453
+ ],
+ "/images/destination-frankfurt-hero-banner-ami.jpg": [
+  "c0d6417d",
+  2880
+ ],
+ "/images/destination-warsaw-hero-banner-taropak.jpg": [
+  "445e2db9",
+  2880
+ ],
+ "/images/factory/about-facility.webp": [
+  "a51082af",
+  1600
+ ],
+ "/images/factory/flakes-closeup.webp": [
+  "b5bd8307",
+  1200
+ ],
+ "/images/factory/flakes-green.webp": [
+  "24236573",
+  1200
+ ],
+ "/images/factory/flakes-light-blue.webp": [
+  "2f0904fc",
+  1200
+ ],
+ "/images/factory/flakes-mixed.webp": [
+  "ea2575b4",
+  1200
+ ],
+ "/images/factory/flakes-preform.webp": [
+  "3bb989ca",
+  1000
+ ],
+ "/images/factory/gallery/01.webp": [
+  "fb8505ba",
+  1920
+ ],
+ "/images/factory/gallery/02.webp": [
+  "3e08cd88",
+  1920
+ ],
+ "/images/factory/gallery/03.webp": [
+  "617cc6c3",
+  1920
+ ],
+ "/images/factory/gallery/04.webp": [
+  "03a3c0ad",
+  1920
+ ],
+ "/images/factory/gallery/05.webp": [
+  "65763556",
+  1920
+ ],
+ "/images/factory/gallery/06.webp": [
+  "f52a52c6",
+  1920
+ ],
+ "/images/factory/gallery/07.webp": [
+  "e93a52e5",
+  1920
+ ],
+ "/images/factory/gallery/08.webp": [
+  "c2c7fad8",
+  1920
+ ],
+ "/images/factory/gallery/09.webp": [
+  "ddf4bf33",
+  1920
+ ],
+ "/images/factory/gallery/10.webp": [
+  "34e3e66e",
+  1920
+ ],
+ "/images/factory/gallery/11.webp": [
+  "abfa4896",
+  1920
+ ],
+ "/images/factory/gallery/12.webp": [
+  "c1920b0c",
+  1920
+ ],
+ "/images/factory/gallery/13.webp": [
+  "9b1ec565",
+  1920
+ ],
+ "/images/factory/gallery/14.webp": [
+  "d0e13e2a",
+  1920
+ ],
+ "/images/factory/gallery/15.webp": [
+  "d4894ceb",
+  1920
+ ],
+ "/images/factory/gallery/16.webp": [
+  "ca70888a",
+  1920
+ ],
+ "/images/factory/gallery/17.webp": [
+  "bd948530",
+  1920
+ ],
+ "/images/factory/gallery/18.webp": [
+  "798d29c3",
+  1920
+ ],
+ "/images/factory/gallery/19.webp": [
+  "73553a73",
+  1920
+ ],
+ "/images/factory/gallery/thumbs/01.webp": [
+  "b7856627",
+  640
+ ],
+ "/images/factory/gallery/thumbs/02.webp": [
+  "0d0e0d5d",
+  640
+ ],
+ "/images/factory/gallery/thumbs/03.webp": [
+  "136a31f9",
+  640
+ ],
+ "/images/factory/gallery/thumbs/04.webp": [
+  "7507e452",
+  640
+ ],
+ "/images/factory/gallery/thumbs/05.webp": [
+  "8216ed8c",
+  640
+ ],
+ "/images/factory/gallery/thumbs/06.webp": [
+  "2192b376",
+  640
+ ],
+ "/images/factory/gallery/thumbs/07.webp": [
+  "0597afca",
+  640
+ ],
+ "/images/factory/gallery/thumbs/08.webp": [
+  "56016980",
+  640
+ ],
+ "/images/factory/gallery/thumbs/09.webp": [
+  "d9aed973",
+  640
+ ],
+ "/images/factory/gallery/thumbs/10.webp": [
+  "bc3815c5",
+  640
+ ],
+ "/images/factory/gallery/thumbs/11.webp": [
+  "4e5dad29",
+  640
+ ],
+ "/images/factory/gallery/thumbs/12.webp": [
+  "7f62237d",
+  640
+ ],
+ "/images/factory/gallery/thumbs/13.webp": [
+  "58a8ddb5",
+  640
+ ],
+ "/images/factory/gallery/thumbs/14.webp": [
+  "46da94f5",
+  640
+ ],
+ "/images/factory/gallery/thumbs/15.webp": [
+  "bd0691b9",
+  640
+ ],
+ "/images/factory/gallery/thumbs/16.webp": [
+  "4aa680ac",
+  640
+ ],
+ "/images/factory/gallery/thumbs/17.webp": [
+  "4ce1f927",
+  640
+ ],
+ "/images/factory/gallery/thumbs/18.webp": [
+  "0ecbce39",
+  640
+ ],
+ "/images/factory/gallery/thumbs/19.webp": [
+  "99d9acae",
+  640
+ ],
+ "/images/factory/hero-plant-interior.webp": [
+  "20f4c33c",
+  1920
+ ],
+ "/images/factory/hero-process.webp": [
+  "d8493000",
+  1920
+ ],
+ "/images/factory/hero-sustainability.webp": [
+  "87838401",
+  1920
+ ],
+ "/images/factory/impact-circular.webp": [
+  "ffe0bbd5",
+  1200
+ ],
+ "/images/factory/impact-operations.webp": [
+  "63d10e36",
+  1200
+ ],
+ "/images/factory/impact-waste.webp": [
+  "e01b4b65",
+  1200
+ ],
+ "/images/factory/process-sorting-line.webp": [
+  "018046cc",
+  1200
+ ],
+ "/images/hero-rpet-flakes.webp": [
+  "cf044227",
+  2093
+ ],
+ "/images/icons/AppicilationFiber.png": [
+  "201b5b91",
+  512
+ ],
+ "/images/icons/AppicilationSheet.png": [
+  "5f653036",
+  512
+ ],
+ "/images/icons/AppicilationStrep.png": [
+  "7224a231",
+  512
+ ],
+ "/images/icons/TraceabilityN.png": [
+  "9875d876",
+  512
+ ],
+ "/images/icons/bar-chart.png": [
+  "8d132ffd",
+  512
+ ],
+ "/images/icons/buyerPack.png": [
+  "1526bf7c",
+  512
+ ],
+ "/images/icons/cargo-ship.png": [
+  "2e101948",
+  512
+ ],
+ "/images/icons/collection2-bg.png": [
+  "de87162f",
+  500
+ ],
+ "/images/icons/consistentQuality.png": [
+  "4fc633dd",
+  1836
+ ],
+ "/images/icons/corporate-building.png": [
+  "7c311e5a",
+  512
+ ],
+ "/images/icons/customeFocused.png": [
+  "d9ca02b6",
+  1254
+ ],
+ "/images/icons/distribution-network.png": [
+  "066c8205",
+  512
+ ],
+ "/images/icons/drying.png": [
+  "0efb4153",
+  1536
+ ],
+ "/images/icons/ecology.png": [
+  "a1e62b43",
+  512
+ ],
+ "/images/icons/flexibleSloutions1.png": [
+  "1df3acae",
+  1254
+ ],
+ "/images/icons/globus.png": [
+  "b7d6e661",
+  1254
+ ],
+ "/images/icons/handshake.png": [
+  "f32e3769",
+  512
+ ],
+ "/images/icons/inquiry.png": [
+  "30edbe7e",
+  512
+ ],
+ "/images/icons/inventory.png": [
+  "ea6a3d7d",
+  512
+ ],
+ "/images/icons/nonFoodPacking.png": [
+  "d4ff2ff9",
+  512
+ ],
+ "/images/icons/packing.png": [
+  "5ee1282d",
+  1265
+ ],
+ "/images/icons/power.png": [
+  "0e59b434",
+  512
+ ],
+ "/images/icons/processTransparency.png": [
+  "84a78e43",
+  1890
+ ],
+ "/images/icons/producerTrader.png": [
+  "44e7b070",
+  1254
+ ],
+ "/images/icons/productionFacility.png": [
+  "34c6bd25",
+  1254
+ ],
+ "/images/icons/productionQC.png": [
+  "ebc495c4",
+  512
+ ],
+ "/images/icons/recycle.png": [
+  "b1dcadb9",
+  512
+ ],
+ "/images/icons/reliability.png": [
+  "e737b060",
+  1254
+ ],
+ "/images/icons/sorting.png": [
+  "d5793dac",
+  1536
+ ],
+ "/images/icons/sustainability.png": [
+  "d6c88ba4",
+  1536
+ ],
+ "/images/icons/traceability.png": [
+  "d9501d9a",
+  1269
+ ],
+ "/images/icons/trimmed/TraceabilityN.png": [
+  "bcc566d2",
+  511
+ ],
+ "/images/icons/trimmed/bar-chart.png": [
+  "8a74c221",
+  512
+ ],
+ "/images/icons/trimmed/buyerPack.png": [
+  "5ed40c4d",
+  496
+ ],
+ "/images/icons/trimmed/cargo-ship.png": [
+  "58fb93fc",
+  512
+ ],
+ "/images/icons/trimmed/collection2-bg.png": [
+  "581e064e",
+  512
+ ],
+ "/images/icons/trimmed/consistentQuality-white.png": [
+  "bb8dbab3",
+  477
+ ],
+ "/images/icons/trimmed/consistentQuality.png": [
+  "07429594",
+  477
+ ],
+ "/images/icons/trimmed/corporate-building.png": [
+  "1241e117",
+  481
+ ],
+ "/images/icons/trimmed/customeFocused.png": [
+  "9ef58f06",
+  512
+ ],
+ "/images/icons/trimmed/drying.png": [
+  "0e5845e1",
+  512
+ ],
+ "/images/icons/trimmed/ecology.png": [
+  "f71c96a5",
+  494
+ ],
+ "/images/icons/trimmed/fiber.png": [
+  "8c884de7",
+  392
+ ],
+ "/images/icons/trimmed/flexibleSloutions.png": [
+  "66551a03",
+  512
+ ],
+ "/images/icons/trimmed/globus-1B365D.png": [
+  "572eba63",
+  512
+ ],
+ "/images/icons/trimmed/globus-green.png": [
+  "3d470472",
+  777
+ ],
+ "/images/icons/trimmed/globus-white.png": [
+  "bc8972e9",
+  777
+ ],
+ "/images/icons/trimmed/globus.png": [
+  "9416c013",
+  512
+ ],
+ "/images/icons/trimmed/handshake-blue.png": [
+  "d91672f0",
+  486
+ ],
+ "/images/icons/trimmed/handshake.png": [
+  "8dd0a142",
+  486
+ ],
+ "/images/icons/trimmed/inquiry.png": [
+  "8f045299",
+  496
+ ],
+ "/images/icons/trimmed/inventory.png": [
+  "20c5ccfd",
+  498
+ ],
+ "/images/icons/trimmed/nonFoodPacking.png": [
+  "8e7fda8b",
+  436
+ ],
+ "/images/icons/trimmed/packing.png": [
+  "0def929f",
+  512
+ ],
+ "/images/icons/trimmed/power.png": [
+  "b297a9df",
+  250
+ ],
+ "/images/icons/trimmed/processTransparency.png": [
+  "38e7fd26",
+  520
+ ],
+ "/images/icons/trimmed/producerTrader.png": [
+  "87a85005",
+  512
+ ],
+ "/images/icons/trimmed/productionFacility.png": [
+  "343d8acb",
+  512
+ ],
+ "/images/icons/trimmed/productionQC.png": [
+  "05e9824c",
+  512
+ ],
+ "/images/icons/trimmed/recycle.png": [
+  "560cf455",
+  482
+ ],
+ "/images/icons/trimmed/reliability-white.png": [
+  "579a9b25",
+  766
+ ],
+ "/images/icons/trimmed/reliability.png": [
+  "e5c957ec",
+  512
+ ],
+ "/images/icons/trimmed/sheet.png": [
+  "05a9d7ad",
+  470
+ ],
+ "/images/icons/trimmed/sorting.png": [
+  "90a3c25d",
+  512
+ ],
+ "/images/icons/trimmed/strap.png": [
+  "c7a57aad",
+  512
+ ],
+ "/images/icons/trimmed/sustainability.png": [
+  "8196c6de",
+  512
+ ],
+ "/images/icons/trimmed/traceability.png": [
+  "8cc476a5",
+  512
+ ],
+ "/images/icons/trimmed/trading.png": [
+  "006c73de",
+  464
+ ],
+ "/images/icons/trimmed/valueWaste.png": [
+  "212db2be",
+  512
+ ],
+ "/images/icons/trimmed/workplace-culture.png": [
+  "672d813b",
+  472
+ ],
+ "/images/icons/valueWaste.png": [
+  "7f6fad4c",
+  1672
+ ],
+ "/images/icons/workplace-culture.png": [
+  "684ab9c4",
+  512
+ ],
+ "/images/og-image-az.png": [
+  "87c733fd",
+  1200
+ ],
+ "/images/og-image.png": [
+  "90360b20",
+  1200
+ ],
+ "/images/partners/Sirab-logo.png": [
+  "e0e809c7",
+  778
+ ],
+ "/images/partners/agl-partners.png": [
+  "cfe2ab42",
+  1050
+ ],
+ "/images/partners/auxilium.png": [
+  "c15e5c7d",
+  1200
+ ],
+ "/images/partners/ecohub-partners.png": [
+  "9f7e803d",
+  1090
+ ],
+ "/images/partners/ekologiyaTebii-partners.png": [
+  "cbde3143",
+  600
+ ],
+ "/images/partners/inanTech-partners.png": [
+  "392504b0",
+  678
+ ],
+ "/images/partners/kehrizSu-partnersLogo.png": [
+  "ff9d7954",
+  600
+ ],
+ "/images/partners/mooge-partners.jpg": [
+  "8b4a548b",
+  114
+ ],
+ "/images/partners/onurAmbalaj-partners.png": [
+  "a25f070d",
+  782
+ ],
+ "/images/partners/slavyanka-partnersLogo.png": [
+  "9101c28b",
+  600
+ ],
+ "/images/partners/temizSheher-partnersLogo.png": [
+  "4b921f63",
+  600
+ ],
+ "/images/polycleaner-logonew.png": [
+  "256303d9",
+  2149
+ ],
+ "/images/taropak-logo.webp": [
+  "9974df79",
+  1304
+ ]
+}

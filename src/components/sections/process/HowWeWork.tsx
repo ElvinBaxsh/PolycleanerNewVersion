@@ -6,6 +6,7 @@ import SectionHeading from "@/components/ui/SectionHeading";
 import Reveal from "@/components/ui/Reveal";
 import { RevealGroup, RevealItem } from "@/components/ui/RevealGroup";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
+import { ICON_WIDTH, imageVariant } from "@/lib/image-variants";
 
 const ICONS: (LucideIcon | null)[] = [null, FileText, ClipboardList, null, null, null];
 const ICON_IMAGES = [
@@ -39,7 +40,7 @@ export default function HowWeWork() {
                     <Icon className="size-9 stroke-[1.5]" aria-hidden />
                   ) : (
                     // eslint-disable-next-line @next/next/no-img-element
-                    <img src={iconSrc!} alt="" className="size-9 object-contain" />
+                    <img src={imageVariant(iconSrc!, ICON_WIDTH)} alt="" className="size-9 object-contain" />
                   )}
                 </span>
                 <p className="text-sm font-bold text-navy">{step.title}</p>

@@ -11,7 +11,8 @@ import PartnersModal from "./PartnersModal";
 import PartnersDiamond from "./PartnersDiamond";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 import { PARTNERS } from "@/lib/constants";
-import { equalAreaFactors } from "@/lib/logoSize";
+import { equalAreaFactors, PARTNER_LOGO_WIDTH } from "@/lib/logoSize";
+import { imageVariant } from "@/lib/image-variants";
 
 const LOOP_PARTNERS = [...PARTNERS, ...PARTNERS];
 
@@ -92,7 +93,8 @@ export default function PartnersSection() {
                 >
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
-                    src={partner.logo}
+                    src={imageVariant(partner.logo, PARTNER_LOGO_WIDTH)}
+                    loading="lazy"
                     alt={loopPartnerText[i].name}
                     decoding="async"
                     className="max-w-[150px] object-contain sm:max-w-[200px]"

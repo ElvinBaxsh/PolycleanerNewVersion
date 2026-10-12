@@ -5,7 +5,8 @@ import { AnimatePresence, motion } from "framer-motion";
 import { X, ExternalLink } from "lucide-react";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 import { PARTNERS } from "@/lib/constants";
-import { equalAreaFactors } from "@/lib/logoSize";
+import { equalAreaFactors, PARTNER_LOGO_WIDTH } from "@/lib/logoSize";
+import { imageVariant } from "@/lib/image-variants";
 
 // All partners at once in a grid. The homepage strip only shows a few at a
 // time.
@@ -85,7 +86,7 @@ export default function PartnersModal({ open, onClose }: { open: boolean; onClos
                       <span className="flex h-16 w-full items-center justify-center">
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
-                          src={partner.logo}
+                          src={imageVariant(partner.logo, PARTNER_LOGO_WIDTH)}
                           alt={partnerText[i].name}
                           decoding="async"
                           className="max-w-full object-contain [--logo-u:42px] sm:[--logo-u:44px]"
