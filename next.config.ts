@@ -19,6 +19,7 @@ const useImageVariants =
   !isStaticPreview && process.env.NODE_ENV === "production" && existsSync("public/_img");
 
 const ONE_DAY = "public, max-age=86400";
+const ONE_YEAR = "public, max-age=31536000, immutable";
 
 const nextConfig: NextConfig = isStaticPreview
   ? {
@@ -43,10 +44,11 @@ const nextConfig: NextConfig = isStaticPreview
           {
             // The file name carries a hash of the photo, so it never changes.
             source: "/_img/:path*",
-            headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }],
+            headers: [{ key: "Cache-Control", value: ONE_YEAR }],
           },
           { source: "/images/:path*", headers: [{ key: "Cache-Control", value: ONE_DAY }] },
-          { source: "/video/:path*", headers: [{ key: "Cache-Control", value: ONE_DAY }] },
+          // The video URLs carry a version (videoUrl in src/lib/constants.ts).
+          { source: "/video/:path*", headers: [{ key: "Cache-Control", value: ONE_YEAR }] },
         ];
       },
       // The previous site had a /products page; Google still knows that URL.

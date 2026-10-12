@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { X } from "lucide-react";
+import { videoUrl } from "@/lib/constants";
 
 // The company video in a modal. Nothing is downloaded until it opens. Phones
 // get the 720p file.
@@ -91,11 +92,11 @@ export default function VideoModal({
               controls
               playsInline
               preload="auto"
-              poster="/video/poly-cleaner-poster.webp"
+              poster={videoUrl("poly-cleaner-poster.webp")}
               className="aspect-video w-full rounded-xl bg-black shadow-2xl"
             >
-              <source src="/video/poly-cleaner-720p.mp4" type="video/mp4" media="(max-width: 768px)" />
-              <source src="/video/poly-cleaner.mp4" type="video/mp4" />
+              <source src={videoUrl("poly-cleaner-720p.mp4")} type="video/mp4" media="(max-width: 768px)" />
+              <source src={videoUrl("poly-cleaner.mp4")} type="video/mp4" />
             </video>
           </motion.div>
         </motion.div>
