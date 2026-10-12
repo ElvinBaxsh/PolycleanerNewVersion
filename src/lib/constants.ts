@@ -8,7 +8,7 @@ export const COMPANY = {
   tagline: "From Waste to Value",
   email: "office@polycleaner.az",
   phone: "+994 55 257 54 54",
-  whatsappNumber: "994552575454",
+  whatsappNumber: "994558582695",
   address: "Balakhani Industrial Park, 1th zone",
   // Facility location — FW63+JX, Baku, Azerbaijan.
   coordinates: { lat: 40.46201514558341, lng: 49.905589297413826 },
