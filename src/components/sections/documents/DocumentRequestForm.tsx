@@ -184,8 +184,8 @@ export default function DocumentRequestForm({ onCancel }: { onCancel?: () => voi
             disabled={status === "submitting"}
             className={
               onCancel
-                ? "inline-flex h-11 w-full cursor-pointer items-center justify-center gap-2 rounded-lg bg-brand-green text-xs font-bold uppercase tracking-wider text-white transition-colors hover:bg-brand-green-dark disabled:opacity-70 sm:w-auto sm:flex-1"
-                : "mt-5 inline-flex h-11 w-full cursor-pointer items-center justify-center gap-2 rounded-lg bg-brand-green text-xs font-bold uppercase tracking-wider text-white transition-colors hover:bg-brand-green-dark disabled:opacity-70"
+                ? "inline-flex h-11 w-full cursor-pointer items-center justify-center gap-2 rounded-lg bg-brand-green-dark text-xs font-bold uppercase tracking-wider text-white transition-colors hover:bg-brand-green-darker disabled:opacity-70 sm:w-auto sm:flex-1"
+                : "mt-5 inline-flex h-11 w-full cursor-pointer items-center justify-center gap-2 rounded-lg bg-brand-green-dark text-xs font-bold uppercase tracking-wider text-white transition-colors hover:bg-brand-green-darker disabled:opacity-70"
             }
           >
             {status === "submitting" ? <Loader2 className="size-4 animate-spin" /> : <Send className="size-4" />}

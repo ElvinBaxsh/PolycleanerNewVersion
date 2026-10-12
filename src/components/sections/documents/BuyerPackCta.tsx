@@ -32,7 +32,7 @@ export default function BuyerPackCta() {
             <button
               type="button"
               onClick={open}
-              className="inline-flex h-12 cursor-pointer items-center gap-2 rounded-lg bg-brand-green px-7 text-sm font-bold uppercase tracking-wider text-white transition-colors hover:bg-brand-green-dark"
+              className="inline-flex h-12 cursor-pointer items-center gap-2 rounded-lg bg-brand-green-dark px-7 text-sm font-bold uppercase tracking-wider text-white transition-colors hover:bg-brand-green-darker"
             >
               <Package className="size-5" aria-hidden />
               {t.documents.buyerPackButton}

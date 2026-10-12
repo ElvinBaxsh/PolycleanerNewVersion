@@ -41,7 +41,7 @@ export default function CookieConsent() {
         {t.cookies.text}{" "}
         <Link
           href={localizePath("/privacy-policy", locale)}
-          className="font-semibold text-brand-blue underline underline-offset-2"
+          className="font-semibold text-brand-blue-dark underline underline-offset-2"
         >
           {t.footer.privacyPolicy}
         </Link>
@@ -50,7 +50,7 @@ export default function CookieConsent() {
         <button
           type="button"
           onClick={() => writeConsent("granted")}
-          className="h-10 flex-1 cursor-pointer rounded-lg bg-brand-green px-4 text-sm font-bold text-white transition-colors hover:bg-brand-green-dark"
+          className="h-10 flex-1 cursor-pointer rounded-lg bg-brand-green-dark px-4 text-sm font-bold text-white transition-colors hover:bg-brand-green-darker"
         >
           {t.cookies.accept}
         </button>

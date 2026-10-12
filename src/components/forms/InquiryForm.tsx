@@ -310,8 +310,8 @@ export default function InquiryForm({
           disabled={status === "submitting"}
           className={
             onCancel
-              ? "inline-flex h-12 w-full cursor-pointer items-center justify-center gap-2 rounded-lg bg-brand-green text-sm font-semibold text-white transition-colors hover:bg-brand-green-dark disabled:opacity-70 sm:w-auto sm:flex-1"
-              : "inline-flex h-12 w-full cursor-pointer items-center justify-center gap-2 rounded-lg bg-brand-green text-sm font-semibold text-white transition-colors hover:bg-brand-green-dark disabled:opacity-70 sm:w-auto sm:px-8"
+              ? "inline-flex h-12 w-full cursor-pointer items-center justify-center gap-2 rounded-lg bg-brand-green-dark text-sm font-semibold text-white transition-colors hover:bg-brand-green-darker disabled:opacity-70 sm:w-auto sm:flex-1"
+              : "inline-flex h-12 w-full cursor-pointer items-center justify-center gap-2 rounded-lg bg-brand-green-dark text-sm font-semibold text-white transition-colors hover:bg-brand-green-darker disabled:opacity-70 sm:w-auto sm:px-8"
           }
         >
           {status === "submitting" ? (

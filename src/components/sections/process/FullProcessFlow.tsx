@@ -18,7 +18,7 @@ export default function FullProcessFlow() {
             const Icon = ICONS[i];
             return (
               <RevealItem key={i} className="relative flex flex-col items-center gap-3 text-center">
-                <span className="absolute -top-2 -right-1 flex size-5 items-center justify-center rounded-full bg-brand-green text-[10px] font-bold text-white sm:right-2">
+                <span className="absolute -top-2 -right-1 flex size-5 items-center justify-center rounded-full bg-brand-green-dark text-[10px] font-bold text-white sm:right-2">
                   {i + 1}
                 </span>
                 <span className="flex size-24 items-center justify-center rounded-full border border-border bg-soft-gray text-brand-green">

@@ -32,7 +32,7 @@ export default function FinalCta({
               href={`https://wa.me/${COMPANY.whatsappNumber}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-lg bg-brand-green px-5 text-sm font-semibold text-white hover:bg-brand-green-dark sm:w-auto"
+              className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-lg bg-brand-green-dark px-5 text-sm font-semibold text-white hover:bg-brand-green-darker sm:w-auto"
             >
               <MessageCircle className="size-4" aria-hidden />
               {t.common.chatOnWhatsapp}

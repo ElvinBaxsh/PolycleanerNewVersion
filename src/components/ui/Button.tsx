@@ -10,7 +10,7 @@ const base =
   "inline-flex items-center justify-center gap-2 rounded-lg font-semibold transition-colors duration-200 whitespace-nowrap";
 
 const variants: Record<ButtonVariant, string> = {
-  primary: "bg-brand-green text-white hover:bg-brand-green-dark",
+  primary: "bg-brand-green-dark text-white hover:bg-brand-green-darker",
   secondary:
     "bg-transparent text-navy border-2 border-border hover:bg-soft-gray",
   "ghost-light":

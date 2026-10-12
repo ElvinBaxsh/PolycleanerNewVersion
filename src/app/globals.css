@@ -4,8 +4,10 @@
   --color-navy: #062b3a;
   --color-teal: #073342;
   --color-green: #4caf1b;
-  --color-green-dark: #378a16;
+  --color-green-dark: #3a8515;
+  --color-green-darker: #2f6d11;
   --color-blue: #1688b5;
+  --color-blue-dark: #147ba4;
   --color-charcoal: #1f2323;
   --color-slate: #334155;
   --color-soft-gray: #f4f7f8;
@@ -21,7 +23,9 @@
   --color-teal: var(--color-teal);
   --color-brand-green: var(--color-green);
   --color-brand-green-dark: var(--color-green-dark);
+  --color-brand-green-darker: var(--color-green-darker);
   --color-brand-blue: var(--color-blue);
+  --color-brand-blue-dark: var(--color-blue-dark);
   --color-charcoal: var(--color-charcoal);
   --color-slate: var(--color-slate);
   --color-soft-gray: var(--color-soft-gray);

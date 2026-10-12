@@ -87,7 +87,7 @@ export default function Hero() {
             <div className="flex w-full flex-col gap-2.5 sm:flex-row sm:items-center">
               <InquiryButton
                 type="offer"
-                className="h-11 w-full justify-center rounded-lg bg-brand-green px-4 text-xs font-bold uppercase tracking-wider text-white hover:bg-brand-green-dark sm:flex-[1.4]"
+                className="h-11 w-full justify-center rounded-lg bg-brand-green-dark px-4 text-xs font-bold uppercase tracking-wider text-white hover:bg-brand-green-darker sm:flex-[1.4]"
               >
                 {t.common.requestRpetOffer}
                 <ArrowRight className="ml-1.5 size-4 stroke-[2.5]" />

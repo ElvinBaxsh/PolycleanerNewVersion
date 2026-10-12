@@ -119,7 +119,7 @@ export default function SubmissionSuccess({
               <button
                 type="button"
                 onClick={onReset}
-                className="inline-flex h-12 cursor-pointer items-center gap-2 rounded-full bg-brand-green px-6 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-brand-green-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-green"
+                className="inline-flex h-12 cursor-pointer items-center gap-2 rounded-full bg-brand-green-dark px-6 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-brand-green-darker focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-green"
               >
                 <ArrowLeft className="size-4" aria-hidden />
                 {resetLabel}

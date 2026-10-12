@@ -32,7 +32,7 @@ export default function HowWeWork() {
             const iconSrc = ICON_IMAGES[i];
             return (
               <RevealItem key={i} className="relative flex flex-col items-center gap-2 text-center">
-                <span className="absolute -top-2 -right-1 flex size-5 items-center justify-center rounded-full bg-brand-green text-[10px] font-bold text-white sm:right-2">
+                <span className="absolute -top-2 -right-1 flex size-5 items-center justify-center rounded-full bg-brand-green-dark text-[10px] font-bold text-white sm:right-2">
                   {String(i + 1).padStart(2, "0")}
                 </span>
                 <span className="flex size-20 items-center justify-center rounded-full bg-white text-brand-blue">
