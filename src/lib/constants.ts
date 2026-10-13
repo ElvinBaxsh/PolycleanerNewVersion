@@ -2,6 +2,8 @@ export const SITE_URL = "https://polycleaner.az";
 export const SITE_NAME = "Poly Cleaner";
 export const GA_MEASUREMENT_ID = "G-EY7MB4WL80";
 export const CLOUDFLARE_ANALYTICS_TOKEN = "a3d702c9d5ef459f840d0eaba70ed90f";
+// Proves to Google Search Console that the site is ours (HTML tag method).
+export const GOOGLE_SITE_VERIFICATION = "KiCUKoJIMaHF7QhhjBrIuS62FmQvTFeii2VXF0cHQL8";
 
 // Browsers keep the videos for a year (next.config.ts), so the version is
 // part of their URL. Raise it whenever a file in public/video is replaced.

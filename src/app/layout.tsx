@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Quicksand } from "next/font/google";
 import NextTopLoader from "nextjs-toploader";
 import "./globals.css";
-import { SITE_URL } from "@/lib/constants";
+import { SITE_URL, GOOGLE_SITE_VERIFICATION } from "@/lib/constants";
 import { organizationJsonLd, websiteJsonLd } from "@/lib/seo";
 import JsonLd from "@/components/seo/JsonLd";
 import CloudflareAnalytics from "@/components/seo/CloudflareAnalytics";
@@ -16,6 +16,7 @@ const quicksand = Quicksand({
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
+  verification: { google: GOOGLE_SITE_VERIFICATION },
   title: {
     default: "Poly Cleaner | Hot Washed rPET Flakes Supplier from Azerbaijan",
     template: "%s | Poly Cleaner",
