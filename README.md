@@ -2,7 +2,7 @@
 
 Corporate website for Poly Cleaner, a producer and exporter of rPET flakes.
 
-**Live demo:** https://polycleaner-new.vercel.app
+**Live demo:** https://polycleaner.az/
 
 ## Features
 
@@ -21,6 +21,6 @@ Next.js (App Router) · TypeScript · Tailwind CSS · Nodemailer · Lucide icons
 
 ```bash
 npm install
-npm run dev     # http://localhost:3000
+npm run dev     
 npm run build
 ```
